@@ -9,7 +9,7 @@ void main() {
       const GetMaterialApp(
         debugShowCheckedModeBanner: false,
     home: Scaffold(
-      resizeToAvoidBottomInset : true,
+      resizeToAvoidBottomInset : false,
       // extendBodyBehindAppBar: true,
       body: Register(),
     ),
@@ -46,9 +46,10 @@ class _RegisterState extends State<Register> {
       decoration: const InputDecoration(
         // prefixIcon: Icon(Icons.email_outlined),
         errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
-        border: OutlineInputBorder(),
+        border: InputBorder.none,
         hintText: 'Enter Your Email',
-        labelText: 'Email',
+          hintStyle: TextStyle(fontSize: 12)
+        // labelText: 'Email',
       ),
       controller: emailController,
       onChanged: (value) {
@@ -78,7 +79,8 @@ class _RegisterState extends State<Register> {
         // prefixIcon: Icon(Icons.drive_file_rename_outline),
         errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
         border: InputBorder.none,
-        // hintText: 'Enter Your Name',
+        hintText: 'Enter Your Name',
+        hintStyle: TextStyle(fontSize: 12)
         // labelText: 'Name',
       ),
       controller: nameController,
@@ -107,11 +109,12 @@ class _RegisterState extends State<Register> {
         return null;
       },
       decoration: const InputDecoration(
-        prefixIcon: Icon(Icons.phone_android_outlined),
+        // prefixIcon: Icon(Icons.phone_android_outlined),
         errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
-        border: OutlineInputBorder(),
+        border:  InputBorder.none,
         hintText: 'Enter Your Number',
-        labelText: 'Number',
+          hintStyle: TextStyle(fontSize: 12)
+        // labelText: 'Number',
       ),
       controller: phoneNumberController,
       onChanged: (value) {
@@ -174,109 +177,328 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                   // width: double.infinity,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 35),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children:  [
-                            Container(
-                              height: 100,
-                              // color: Colors.amberAccent,
-                              alignment: Alignment.center,
-                              child: CircleAvatar(
-                                backgroundColor: Colors.blue[900],
-                                maxRadius: 50,
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(40)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black26,
-                                          blurRadius: 10,
-                                          spreadRadius: 0,
-                                          offset:  Offset(
-                                            5.0,
-                                            5.0,
-                                          ),
-                                        ),]
-                                  ),
-                                  child: const CircleAvatar(
-                                    maxRadius: 47,
-                                    backgroundColor: Colors.white,
-                                   child: Icon(
-                                     Icons.person_rounded,
-                                     size: 40,
-                                   ),
+                  child: SingleChildScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 35),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:  [
+                              Container(
+                                height: 100,
+                                // color: Colors.amberAccent,
+                                alignment: Alignment.center,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.blue[900],
+                                  maxRadius: 50,
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            blurRadius: 10,
+                                            spreadRadius: 0,
+                                            offset:  Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                          ),]
+                                    ),
+                                    child: const CircleAvatar(
+                                      maxRadius: 47,
+                                      backgroundColor: Colors.white,
+                                     child: Icon(
+                                       Icons.person_rounded,
+                                       size: 40,
+                                     ),
 
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 100,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                                        elevation: 2,
-                                        primary: Colors.blue,
-                                        onPrimary: Colors.white,
-                                        textStyle: const TextStyle(
-                                          fontFamily: 'Ubuntu',
-                                          fontSize: 12,
+                              SizedBox(
+                                height: 100,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ElevatedButton(
+                                        onPressed: () {},
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                          elevation: 2,
+                                          primary: Colors.blue,
+                                          onPrimary: Colors.white,
+                                          textStyle: const TextStyle(
+                                            fontFamily: 'Ubuntu',
+                                            fontSize: 12,
+                                          ),
                                         ),
-                                      ),
-                                      child: const Text('Upload Profile'),),
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                                        elevation: 2,
-                                        primary: Colors.blue,
-                                        onPrimary: Colors.white,
-                                        textStyle: const TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: 'Ubuntu',
+                                        child: const Text('Upload Profile'),),
+                                    ElevatedButton(
+                                        onPressed: () {},
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                          elevation: 2,
+                                          primary: Colors.blue,
+                                          onPrimary: Colors.white,
+                                          textStyle: const TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'Ubuntu',
+                                          ),
                                         ),
-                                      ),
-                                      child: const Text('Upload Jathagam'),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+                                        child: const Text('Upload Jathagam'),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            // color: Colors.amberAccent,
-                            width: 300,
-                            child: Column(
-                              children: [
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: const Text('Full name', style: TextStyle(
-                                    fontFamily: 'Ubuntu',
-                                    fontSize: 15
-                                  ),),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 20,
+                                        spreadRadius: 5,
+                                        offset:  Offset(
+                                          2.0,
+                                          2.0,
+                                        ),
+                                      ),]
                                 ),
-                                Container(
-                                  // color: Colors.pinkAccent,
-                                  child: _buildName(),
+                                padding: const EdgeInsets.only(left: 15, top: 5),
+
+                                width: 150,
+                                height: 60,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: const Text(
+                                        'Full name',
+                                        style: TextStyle(
+                                        fontFamily: 'Ubuntu',
+                                        fontSize: 15,
+                                          color: Colors.blue,
+                                      ),),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      // color: Colors.pinkAccent,
+                                      child: _buildName(),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(left: 15, top: 5),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 20,
+                                        spreadRadius: 5,
+                                        offset:  Offset(
+                                          2.0,
+                                          2.0,
+                                        ),
+                                      ),]
+                                ),
+                                width: 150,
+                                height: 60,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: const Text('Mobile', style: TextStyle(
+                                        fontFamily: 'Ubuntu',
+                                        fontSize: 15,
+                                        color: Colors.blue,
+                                      ),),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      // color: Colors.pinkAccent,
+                                      child: _buildphonenumber(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 20,
+                                  spreadRadius: 5,
+                                  offset:  Offset(
+                                    2.0,
+                                    2.0,
+                                  ),
+                                ),]
+                          ),
+
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.only(left: 15, top: 5),
+                                color: Colors.white,
+                                height: 60,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: const Text('Email', style: TextStyle(
+                                        fontFamily: 'Ubuntu',
+                                        fontSize: 15,
+                                        color: Colors.blue,
+                                      ),),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      // color: Colors.pinkAccent,
+                                      child: _buildEmail(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 20,
+                                        spreadRadius: 5,
+                                        offset:  Offset(
+                                          2.0,
+                                          2.0,
+                                        ),
+                                      ),]
+                                ),
+                                padding: const EdgeInsets.only(left: 15, top: 5),
+
+                                width: 150,
+                                height: 60,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: const Text(
+                                        'Password',
+                                        style: TextStyle(
+                                          fontFamily: 'Ubuntu',
+                                          fontSize: 15,
+                                          color: Colors.blue,
+                                        ),),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      // color: Colors.pinkAccent,
+                                      child: _buildName(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(left: 15, top: 5),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 20,
+                                        spreadRadius: 5,
+                                        offset:  Offset(
+                                          2.0,
+                                          2.0,
+                                        ),
+                                      ),]
+                                ),
+                                width: 150,
+                                height: 60,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: const Text('Confirm Password',
+                                        style: TextStyle(
+                                        fontFamily: 'Ubuntu',
+                                        fontSize: 15,
+                                        color: Colors.blue,
+                                      ),),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      // color: Colors.pinkAccent,
+                                      child: _buildphonenumber(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 50,
+                          margin: const EdgeInsets.only(top: 20, left: 20, right: 20, ),
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              elevation: 2,
+                              primary: Colors.blue,
+                              onPrimary: Colors.white,
+                              textStyle: const TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontSize: 12,
+                              ),
                             ),
-                          )
-                        ],
-                      )
-                    ],
+                            child: const Text('Register'),),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 25),
+                          child: const Text('Already have an Account', style: TextStyle(
+                          )),
+                        )
+                      ],
+                    ),
                   )
                 ),
               ),

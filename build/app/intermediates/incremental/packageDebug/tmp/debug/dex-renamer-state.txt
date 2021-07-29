@@ -1,4 +1,4 @@
-#Thu Jul 29 08:58:56 IST 2021
+#Thu Jul 29 12:54:36 IST 2021
 base.0=C\:\\Users\\jass0\\StudioProjects\\astrology_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
