@@ -1,6 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:astrology_app/screens/otpscreen.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -15,66 +17,22 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
 
+  List<String> getCountryCodes = [
+    'India (+91)',
+    'Demo (+638)',
+    'Demo (+423)',
+    'Demo (+95)',
+    'Demo (+683)',
+  ];
+
 
   String? fullname;
   String? email;
   String? query;
   String? phoneNumber;
   bool validation = false;
-
-  Widget _buildEmail() {
-    return TextFormField(
-      inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
-      // ignore: deprecated_member_use
-      autovalidate: validation,
-      validator: (value) =>
-      EmailValidator.validate(value!) ? null : "please enter a valid email",
-      decoration: const InputDecoration(
-        // prefixIcon: Icon(Icons.email_outlined),
-          errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
-          border: InputBorder.none,
-          hintText: 'Enter Your Email',
-          hintStyle: TextStyle(fontSize: 12)
-        // labelText: 'Email',
-      ),
-      controller: emailController,
-      onChanged: (value) {
-        email = value;
-      },
-    );
-  }
-
-  Widget _buildName() {
-    return TextFormField(
-      // ignore: deprecated_member_use
-      autovalidate: validation,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s")),
-        LengthLimitingTextInputFormatter(40),
-      ],
-      // autovalidate: _autoValidate,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'name is required';
-        } else if (value.length < 3) {
-          return 'character should be morethan 2';
-        }
-        return null;
-      },
-      decoration: const InputDecoration(
-        // prefixIcon: Icon(Icons.drive_file_rename_outline),
-          errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
-          border: InputBorder.none,
-          hintText: 'Enter Your Name',
-          hintStyle: TextStyle(fontSize: 12)
-        // labelText: 'Name',
-      ),
-      controller: nameController,
-      onChanged: (value) {
-        fullname = value;
-      },
-    );
-  }
+  String countryCode = 'India (+91)';
+  // var getCountryCodes;
 
   Widget _buildphonenumber() {
     return TextFormField(
@@ -109,229 +67,102 @@ class _LoginState extends State<Login> {
     );
   }
 
+   getDropdown() {
+    List<DropdownMenuItem<String>> dropList = [];
+    for (var getCountryCode in getCountryCodes) {
+      var newList = DropdownMenuItem(
+        child: Text(getCountryCode),
+        value: getCountryCode,
+      );
+      dropList.add(newList);
+    }
+    return dropList;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        decoration: const BoxDecoration(
-          image:  DecorationImage(
-              image:  AssetImage("images/background_image.png"),
-              fit: BoxFit.cover,
-              alignment: Alignment.center
+      child: Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            // image:  DecorationImage(
+            //     image:  AssetImage("images/background_image.png"),
+            //     fit: BoxFit.cover,
+            //     alignment: Alignment.center
+            // ),
           ),
-        ),
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          children: [
-            Container(
-              color: Colors.black26,
-              height: 80,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.keyboard_arrow_left,
-                      color: Colors.white,
-                      size: 30,
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            children: [
+              Container(
+                // color: Colors.black26,
+                height: 250,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                     Column(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         Container(
+                             margin: EdgeInsets.symmetric(vertical: 10),
+                           alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width,
+                          child: CircleAvatar(
+                            backgroundColor: Colors.black12,
+                            radius: 50,
+                            child: Icon(
+                              Icons.phonelink_lock,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                          )
                     ),
-                  ),
-                  const Spacer(),
-                  const SizedBox(
-                    width: 110,
-                    child: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontWeight: FontWeight.w300,
-                        color: Colors.white,
-                        fontSize: 20,
+                         Container(
+                           margin: EdgeInsets.symmetric(vertical: 10),
+                           child:  const Text(
+                             'Mobile Number',
+                             style: TextStyle(
+                               fontWeight: FontWeight.w900,
+                               fontFamily: 'Ubuntu',
+                               fontSize: 15,
+                               color: Colors.white,
+                             ),),
+                         ),
+                         Container(
+                           child:  const Text(
+                             'We need to send OTP to authenticate your number',
+                             style: TextStyle(
+                               fontWeight: FontWeight.w500,
+                               fontFamily: 'Ubuntu',
+                               fontSize: 12,
+                               color: Colors.white,
+                             ),),
+                         ),
+                       ],
+                     ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        // topRight: Radius.circular(30),
                       ),
                     ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                  ),
-                  // width: double.infinity,
-                  child: SingleChildScrollView(
-                    physics: const ClampingScrollPhysics(),
+                    // width: double.infinity,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 35),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:  [
-                              Container(
-                                height: 100,
-                                // color: Colors.amberAccent,
-                                alignment: Alignment.center,
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.blue[900],
-                                  maxRadius: 50,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(40)),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            blurRadius: 10,
-                                            spreadRadius: 0,
-                                            offset:  Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                          ),]
-                                    ),
-                                    child: const CircleAvatar(
-                                      maxRadius: 47,
-                                      backgroundColor: Colors.white,
-                                      child: Icon(
-                                        Icons.person_rounded,
-                                        size: 40,
-                                      ),
-
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 100,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                                        elevation: 2,
-                                        primary: Colors.blue,
-                                        onPrimary: Colors.white,
-                                        textStyle: const TextStyle(
-                                          fontFamily: 'Ubuntu',
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      child: const Text('Upload Profile'),),
-                                    ElevatedButton(
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                                        elevation: 2,
-                                        primary: Colors.blue,
-                                        onPrimary: Colors.white,
-                                        textStyle: const TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: 'Ubuntu',
-                                        ),
-                                      ),
-                                      child: const Text('Upload Jathagam'),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 20,
-                                        spreadRadius: 5,
-                                        offset:  Offset(
-                                          2.0,
-                                          2.0,
-                                        ),
-                                      ),]
-                                ),
-                                padding: const EdgeInsets.only(left: 15, top: 5),
-                                width: 150,
-                                height: 60,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: const Text(
-                                        'Full name',
-                                        style: TextStyle(
-                                          fontFamily: 'Ubuntu',
-                                          fontSize: 15,
-                                          color: Colors.blue,
-                                        ),),
-                                    ),
-                                    Container(
-                                      height: 30,
-                                      // color: Colors.pinkAccent,
-                                      child: _buildName(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: const EdgeInsets.only(left: 15, top: 5),
-                                decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 20,
-                                        spreadRadius: 5,
-                                        offset:  Offset(
-                                          2.0,
-                                          2.0,
-                                        ),
-                                      ),]
-                                ),
-                                width: 150,
-                                height: 60,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: const Text('Mobile', style: TextStyle(
-                                        fontFamily: 'Ubuntu',
-                                        fontSize: 15,
-                                        color: Colors.blue,
-                                      ),),
-                                    ),
-                                    Container(
-                                      height: 30,
-                                      // color: Colors.pinkAccent,
-                                      child: _buildphonenumber(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                          padding: const EdgeInsets.only(left: 15, top: 5),
                           decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -346,117 +177,64 @@ class _LoginState extends State<Login> {
                                   ),
                                 ),]
                           ),
-
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(left: 15, top: 5),
-                                color: Colors.white,
-                                height: 60,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: const Text('Email', style: TextStyle(
-                                        fontFamily: 'Ubuntu',
-                                        fontSize: 15,
-                                        color: Colors.blue,
-                                      ),),
-                                    ),
-                                    Container(
-                                      height: 30,
-                                      // color: Colors.pinkAccent,
-                                      child: _buildEmail(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          width: double.infinity,
+                          height: 60,
+                          child: DropdownButtonFormField<String>(
+                            // ignore: deprecated_member_use
+                            autovalidate: validation,
+                            validator: (value) {
+                              if (value == 'Select') {
+                                return 'enquiry is required';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                  color: Colors.redAccent, fontSize: 12),
+                              border: InputBorder.none,
+                            ),
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Ubuntu',
+                                color: Colors.black54),
+                            value: countryCode,
+                            items: getDropdown(),
+                            onChanged: (value) {
+                              setState(() {
+                                countryCode = value!;
+                              });
+                              print(value);
+                            },
                           ),
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
+                          padding: const EdgeInsets.only(left: 15, top: 5),
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 20,
+                                  spreadRadius: 5,
+                                  offset:  Offset(
+                                    2.0,
+                                    2.0,
+                                  ),
+                                ),]
+                          ),
+                          width: double.infinity,
+                          height: 60,
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 20,
-                                        spreadRadius: 5,
-                                        offset:  Offset(
-                                          2.0,
-                                          2.0,
-                                        ),
-                                      ),]
-                                ),
-                                padding: const EdgeInsets.only(left: 15, top: 5),
 
-                                width: 150,
-                                height: 60,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: const Text(
-                                        'Password',
-                                        style: TextStyle(
-                                          fontFamily: 'Ubuntu',
-                                          fontSize: 15,
-                                          color: Colors.blue,
-                                        ),),
-                                    ),
-                                    Container(
-                                      height: 30,
-                                      // color: Colors.pinkAccent,
-                                      child: _buildName(),
-                                    ),
-                                  ],
-                                ),
-                              ),
                               Container(
-                                padding: const EdgeInsets.only(left: 15, top: 5),
-                                decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 20,
-                                        spreadRadius: 5,
-                                        offset:  Offset(
-                                          2.0,
-                                          2.0,
-                                        ),
-                                      ),]
-                                ),
-                                width: 150,
-                                height: 60,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: const Text('Confirm Password',
-                                        style: TextStyle(
-                                          fontFamily: 'Ubuntu',
-                                          fontSize: 15,
-                                          color: Colors.blue,
-                                        ),),
-                                    ),
-                                    Container(
-                                      height: 30,
-                                      // color: Colors.pinkAccent,
-                                      child: _buildphonenumber(),
-                                    ),
-                                  ],
-                                ),
+                                height: 50,
+                                // color: Colors.pinkAccent,
+                                child: _buildphonenumber(),
                               ),
                             ],
                           ),
@@ -466,7 +244,11 @@ class _LoginState extends State<Login> {
                           height: 50,
                           margin: const EdgeInsets.only(top: 25, left: 20, right: 20, ),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(() => OTP(), transition: Transition.rightToLeft,
+                                  curve: Curves.easeInToLinear,
+                                  duration: Duration(milliseconds: 600));
+                            },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                               elevation: 2,
@@ -477,36 +259,14 @@ class _LoginState extends State<Login> {
                                 fontSize: 15,
                               ),
                             ),
-                            child: const Text('Register'),),
+                            child: const Text('Next'),),
                         ),
-                        Container(
-                          // color: Colors.blue,
-                          alignment: Alignment.center,
-                          width: double.infinity,
-                          margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text('Already have an Account? ',
-                                  style: TextStyle(
-                                    fontFamily: 'Ubuntu',
-                                    fontSize: 13,
-                                  )),
-                              TextButton(onPressed: () {}, child: Text('Sign In',
-                                  style: TextStyle(
-                                      fontFamily: 'Ubuntu',
-                                      color: Colors.blue,
-                                      fontSize: 15
-                                  ))),
-                            ],
-                          ),
-                        )
                       ],
-                    ),
-                  )
+                    )
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
