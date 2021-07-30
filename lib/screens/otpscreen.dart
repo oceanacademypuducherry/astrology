@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
+import 'package:countdown_flutter/countdown_flutter.dart';
 
 class OTP extends StatefulWidget {
   String? phoneNumber;
@@ -19,7 +20,7 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 
 class _OTPState extends State<OTP> {
   final BoxDecoration pinPutDecoration = BoxDecoration(
-    color: const Color.fromRGBO(43, 46, 66, 1),
+    color: Colors.white,
     borderRadius: BorderRadius.circular(10.0),
     border: Border.all(
       color: const Color.fromRGBO(126, 203, 224, 1),
@@ -36,7 +37,7 @@ class _OTPState extends State<OTP> {
   String? query;
   bool validation = false;
   String countryCode = 'India (+91)';
-  int start = 30;
+  int start = 120;
   bool wait = false;
   String buttonName = "Send";
   String verificationIdFinal = "";
@@ -47,11 +48,11 @@ class _OTPState extends State<OTP> {
     // TODO: implement initState
     super.initState();
     print('==================${widget.phoneNumber}');
-    verifyPhoneNumber("${widget.phoneNumber}");
+    // _verifyPhone();
   }
 
   void startTimer() {
-    const onsec = Duration(seconds: 1);
+    const onsec = Duration(minutes: 2);
     Timer _timer = Timer.periodic(onsec, (timer) {
       if (start == 0) {
         setState(() {
@@ -74,11 +75,6 @@ class _OTPState extends State<OTP> {
         body: Container(
           decoration: BoxDecoration(
             color: Colors.blue,
-            // image:  DecorationImage(
-            //     image:  AssetImage("images/background_image.png"),
-            //     fit: BoxFit.cover,
-            //     alignment: Alignment.center
-            // ),
           ),
           width: double.infinity,
           height: double.infinity,
@@ -145,43 +141,90 @@ class _OTPState extends State<OTP> {
                   ],
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: PinPut(
-                    fieldsCount: 6,
-                    withCursor: true,
-                    textStyle:
-                        const TextStyle(fontSize: 25.0, color: Colors.white),
-                    eachFieldWidth: 40.0,
-                    eachFieldHeight: 55.0,
-                    // onSubmit: (String pin) => _showSnackBar(pin),
-                    focusNode: _pinPutFocusNode,
-                    controller: _pinPutController,
-                    submittedFieldDecoration: pinPutDecoration,
-                    selectedFieldDecoration: pinPutDecoration,
-                    followingFieldDecoration: pinPutDecoration,
-                    pinAnimationType: PinAnimationType.fade,
-                    onSubmit: (pin) async {
-                      try {
-                        await _auth
-                            .signInWithCredential(PhoneAuthProvider.credential(
-                                verificationId: verificationIdFinal,
-                                smsCode: smsCode))
-                            .then((value) async {
-                          if (value.user != null) {
-                            Get.to(() => HomeScreen(),
-                                transition: Transition.rightToLeft,
-                                curve: Curves.easeInToLinear,
-                                duration: Duration(milliseconds: 600));
-                          }
-                        });
-                      } catch (e) {
-                        /// todosnakbar
-                        print("Invalid Creadentials");
-                      }
-                    },
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: PinPut(
+                  fieldsCount: 6,
+                  withCursor: true,
+                  textStyle:
+                      const TextStyle(fontSize: 25.0, color: Colors.black),
+                  eachFieldWidth: 40.0,
+                  eachFieldHeight: 55.0,
+                  // onSubmit: (String pin) => _showSnackBar(pin),
+                  focusNode: _pinPutFocusNode,
+                  controller: _pinPutController,
+                  submittedFieldDecoration: pinPutDecoration,
+                  selectedFieldDecoration: pinPutDecoration,
+                  followingFieldDecoration: pinPutDecoration,
+                  pinAnimationType: PinAnimationType.fade,
+                  onSubmit: (pin) async {
+                    print(pin);
+                    try {
+                      await FirebaseAuth.instance
+                          .signInWithCredential(PhoneAuthProvider.credential(
+                              verificationId: verificationIdFinal,
+                              smsCode: pin))
+                          .then((value) async {
+                        if (value.user != null) {
+                          Get.to(() => HomeScreen(),
+                              transition: Transition.rightToLeft,
+                              curve: Curves.easeInToLinear,
+                              duration: Duration(milliseconds: 600));
+                        }
+                      });
+                    } catch (e) {
+                      print("invalid");
+                    }
+                  },
+                ),
+              ),
+              RichText(
+                  text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: "Send OTP again in ",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
+                  TextSpan(
+                    text: "00:$start",
+                    style: TextStyle(fontSize: 16, color: Colors.pinkAccent),
+                  ),
+                  TextSpan(
+                    text: " sec ",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ],
+              )),
+              Container(
+                width: double.infinity,
+                height: 50,
+                margin: const EdgeInsets.only(
+                  top: 25,
+                  left: 20,
+                  right: 20,
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _verifyPhone();
+                    });
+                    Get.to(() => HomeScreen(),
+                        transition: Transition.rightToLeft,
+                        curve: Curves.easeInToLinear,
+                        duration: Duration(milliseconds: 600));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    elevation: 2,
+                    primary: Colors.white,
+                    onPrimary: Colors.blue,
+                    textStyle: const TextStyle(
+                      fontFamily: 'Ubuntu',
+                      fontSize: 15,
+                    ),
+                  ),
+                  child: const Text('Next'),
                 ),
               ),
             ],
@@ -191,41 +234,33 @@ class _OTPState extends State<OTP> {
     );
   }
 
-  Future<void> verifyPhoneNumber(String phoneNumber) async {
-    PhoneVerificationCompleted verificationCompleted =
-        (PhoneAuthCredential phoneAuthCredential) async {
-      print("Verification Completed");
-      _auth.signInWithCredential(phoneAuthCredential).then((value) async {
-        if (value.user != null) {
-          print("user lOgged in");
-        }
-      });
-    };
-    PhoneVerificationFailed verificationFailed =
-        (FirebaseAuthException exception) {
-      // showSnackBar(context, exception.toString());
-      print("Verification error ${exception.toString()}");
-    };
+  _verifyPhone() async {
     PhoneCodeSent codeSent = (String verificationId, [int? resendToken]) {
       verificationIdFinal = verificationId;
     };
-    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
-        (String verificationID) {
-      print("Verification Code send to an phone");
-      verificationIdFinal = verificationID;
-      // showSnackBar(context, "Time out");
-    };
-    try {
-      await _auth.verifyPhoneNumber(
-          timeout: Duration(seconds: 60),
-          phoneNumber: phoneNumber,
-          verificationCompleted: verificationCompleted,
-          verificationFailed: verificationFailed,
-          codeSent: codeSent,
-          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
-    } catch (e) {
-      // showSnackBar(context, e.toString());
-      print("error ${e.toString()}");
-    }
+    await _auth.verifyPhoneNumber(
+        phoneNumber: '${widget.phoneNumber}',
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          print("Verification  Before Completed");
+          await FirebaseAuth.instance
+              .signInWithCredential(credential)
+              .then((value) async {
+            if (value.user != null) {
+              print("user lOgged in");
+            }
+          });
+          print("Verification After  Completed");
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print('${e.message}Verification error');
+        },
+        codeSent: codeSent,
+        codeAutoRetrievalTimeout: (String verificationID) {
+          setState(() {
+            verificationIdFinal = verificationID;
+          });
+          print("Verification Code send to an phone");
+        },
+        timeout: Duration(seconds: 120));
   }
 }
