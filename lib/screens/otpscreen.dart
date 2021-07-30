@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
-// import 'package:countdown_flutter/countdown_flutter.dart';
+import 'package:countdown_flutter/countdown_flutter.dart';
 
 class OTP extends StatefulWidget {
   String? phoneNumber;
@@ -176,6 +176,25 @@ class _OTPState extends State<OTP> {
                   },
                 ),
               ),
+              Countdown(
+                seconds: 600,
+                build: (BuildContext context, double time) => Text(
+                  '${(time ~/ 60).toString().length == 1 ? "0" + (time ~/ 60).toString() : (time ~/ 60)} : ${(time % 60).toString().length == 1 ? "0" + (time % 60).toString() : (time % 60)}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 23.0,
+                  ),
+                ),
+                onFinished: () {
+                  // Provider.of<Routing>(context,
+                  //         listen: false)
+                  //     .updateRouting(widget: LogIn());
+                  // Provider.of<MenuBar>(context,
+                  //         listen: false)
+                  //     .updateMenu(
+                  //         widget: NavbarRouting());
+                },
+              ),
               RichText(
                   text: TextSpan(
                 children: [
@@ -202,20 +221,13 @@ class _OTPState extends State<OTP> {
                   right: 20,
                 ),
                 child: ElevatedButton(
-                  onPressed: wait
-                      ? null
-                      : () async {
-                          setState(() {
-                            start = 60;
-                            wait = true;
-                            buttonName = "Resend";
-                          });
-                          await _verifyPhone();
-                          Get.to(() => HomeScreen(),
-                              transition: Transition.rightToLeft,
-                              curve: Curves.easeInToLinear,
-                              duration: Duration(milliseconds: 600));
-                        },
+                  onPressed: () async {
+                    await _verifyPhone();
+                    Get.to(() => HomeScreen(),
+                        transition: Transition.rightToLeft,
+                        curve: Curves.easeInToLinear,
+                        duration: Duration(milliseconds: 600));
+                  },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
@@ -237,7 +249,7 @@ class _OTPState extends State<OTP> {
     );
   }
 
-  _verifyPhone() async {
+  Future<void> _verifyPhone() async {
     PhoneCodeSent codeSent = (String verificationId, [int? resendToken]) {
       verificationIdFinal = verificationId;
     };
