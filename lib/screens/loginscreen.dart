@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -11,11 +12,12 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+FirebaseAuth _auth = FirebaseAuth.instance;
 
+class _LoginState extends State<Login> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
-  final phoneNumberController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
 
   List<String> getCountryCodes = [
     'India (+91)',
@@ -24,7 +26,6 @@ class _LoginState extends State<Login> {
     'Demo (+95)',
     'Demo (+683)',
   ];
-
 
   String? fullname;
   String? email;
@@ -53,13 +54,13 @@ class _LoginState extends State<Login> {
         return null;
       },
       decoration: const InputDecoration(
-        // prefixIcon: Icon(Icons.phone_android_outlined),
+          // prefixIcon: Icon(Icons.phone_android_outlined),
           errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
-          border:  InputBorder.none,
+          border: InputBorder.none,
           hintText: 'Enter Your Number',
           hintStyle: TextStyle(fontSize: 12)
-        // labelText: 'Number',
-      ),
+          // labelText: 'Number',
+          ),
       controller: phoneNumberController,
       onChanged: (value) {
         phoneNumber = value;
@@ -67,7 +68,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-   getDropdown() {
+  getDropdown() {
     List<DropdownMenuItem<String>> dropList = [];
     for (var getCountryCode in getCountryCodes) {
       var newList = DropdownMenuItem(
@@ -102,46 +103,47 @@ class _LoginState extends State<Login> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     Column(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Container(
-                             margin: EdgeInsets.symmetric(vertical: 10),
-                           alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.black12,
-                            radius: 50,
-                            child: Icon(
-                              Icons.phonelink_lock,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.black12,
+                              radius: 50,
+                              child: Icon(
+                                Icons.phonelink_lock,
+                                color: Colors.white,
+                                size: 40,
+                              ),
+                            )),
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: const Text(
+                            'Mobile Number',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Ubuntu',
+                              fontSize: 15,
                               color: Colors.white,
-                              size: 40,
                             ),
-                          )
+                          ),
+                        ),
+                        Container(
+                          child: const Text(
+                            'We need to send OTP to authenticate your number',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'Ubuntu',
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                         Container(
-                           margin: EdgeInsets.symmetric(vertical: 10),
-                           child:  const Text(
-                             'Mobile Number',
-                             style: TextStyle(
-                               fontWeight: FontWeight.w900,
-                               fontFamily: 'Ubuntu',
-                               fontSize: 15,
-                               color: Colors.white,
-                             ),),
-                         ),
-                         Container(
-                           child:  const Text(
-                             'We need to send OTP to authenticate your number',
-                             style: TextStyle(
-                               fontWeight: FontWeight.w500,
-                               fontFamily: 'Ubuntu',
-                               fontSize: 12,
-                               color: Colors.white,
-                             ),),
-                         ),
-                       ],
-                     ),
                   ],
                 ),
               ),
@@ -161,22 +163,24 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 20),
                           padding: const EdgeInsets.only(left: 15, top: 5),
                           decoration: const BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black12,
                                   blurRadius: 20,
                                   spreadRadius: 5,
-                                  offset:  Offset(
+                                  offset: Offset(
                                     2.0,
                                     2.0,
                                   ),
-                                ),]
-                          ),
+                                ),
+                              ]),
                           width: double.infinity,
                           height: 60,
                           child: DropdownButtonFormField<String>(
@@ -213,24 +217,24 @@ class _LoginState extends State<Login> {
                           padding: const EdgeInsets.only(left: 15, top: 5),
                           decoration: const BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black12,
                                   blurRadius: 20,
                                   spreadRadius: 5,
-                                  offset:  Offset(
+                                  offset: Offset(
                                     2.0,
                                     2.0,
                                   ),
-                                ),]
-                          ),
+                                ),
+                              ]),
                           width: double.infinity,
                           height: 60,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-
                               Container(
                                 height: 50,
                                 // color: Colors.pinkAccent,
@@ -242,15 +246,21 @@ class _LoginState extends State<Login> {
                         Container(
                           width: double.infinity,
                           height: 50,
-                          margin: const EdgeInsets.only(top: 25, left: 20, right: 20, ),
+                          margin: const EdgeInsets.only(
+                            top: 25,
+                            left: 20,
+                            right: 20,
+                          ),
                           child: ElevatedButton(
                             onPressed: () {
-                              Get.to(() => OTP(), transition: Transition.rightToLeft,
+                              Get.to(() => OTP(),
+                                  transition: Transition.rightToLeft,
                                   curve: Curves.easeInToLinear,
                                   duration: Duration(milliseconds: 600));
                             },
                             style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
                               elevation: 2,
                               primary: Colors.blue,
                               onPrimary: Colors.white,
@@ -259,16 +269,49 @@ class _LoginState extends State<Login> {
                                 fontSize: 15,
                               ),
                             ),
-                            child: const Text('Next'),),
+                            child: const Text('Next'),
+                          ),
                         ),
                       ],
-                    )
-                ),
+                    )),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> verifyPhoneNumber(
+      String phoneNumber, BuildContext context, Function setData) async {
+    PhoneVerificationCompleted verificationCompleted =
+        (PhoneAuthCredential phoneAuthCredential) async {
+      showSnackBar(context, "Verification Completed");
+    };
+    PhoneVerificationFailed verificationFailed =
+        (FirebaseAuthException exception) {
+      showSnackBar(context, exception.toString());
+    };
+    PhoneCodeSent codeSent =
+        (String verificationID, [int forceResnedingtoken]) {
+      showSnackBar(context, "Verification Code sent on the phone number");
+      setData(verificationID);
+    };
+
+    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
+        (String verificationID) {
+      showSnackBar(context, "Time out");
+    };
+    try {
+      await _auth.verifyPhoneNumber(
+          timeout: Duration(seconds: 60),
+          phoneNumber: phoneNumber,
+          verificationCompleted: verificationCompleted,
+          verificationFailed: verificationFailed,
+          codeSent: codeSent,
+          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
   }
 }
