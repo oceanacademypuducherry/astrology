@@ -35,8 +35,6 @@ class _OTPState extends State<OTP> {
   String? fullname;
   String? email;
   String? query;
-  bool validation = false;
-  String countryCode = 'India (+91)';
   int start = 120;
   bool wait = false;
   String buttonName = "Send";
@@ -204,15 +202,20 @@ class _OTPState extends State<OTP> {
                   right: 20,
                 ),
                 child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _verifyPhone();
-                    });
-                    Get.to(() => HomeScreen(),
-                        transition: Transition.rightToLeft,
-                        curve: Curves.easeInToLinear,
-                        duration: Duration(milliseconds: 600));
-                  },
+                  onPressed: wait
+                      ? null
+                      : () async {
+                          setState(() {
+                            start = 60;
+                            wait = true;
+                            buttonName = "Resend";
+                          });
+                          await _verifyPhone();
+                          Get.to(() => HomeScreen(),
+                              transition: Transition.rightToLeft,
+                              curve: Curves.easeInToLinear,
+                              duration: Duration(milliseconds: 600));
+                        },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
@@ -263,4 +266,11 @@ class _OTPState extends State<OTP> {
         },
         timeout: Duration(seconds: 120));
   }
+  void setData(String verificationId) {
+    setState(() {
+      verificationIdFinal = verificationId;
+    });
+    startTimer();
+  }
+}
 }
