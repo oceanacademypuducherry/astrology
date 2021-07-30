@@ -41,7 +41,7 @@ dependencies:
   timer_count_down: ^2.2.0
   country_code_picker: ^2.0.2
   pinput: ^1.2.0
-  countdown_flutter: ^0.1.2
+
 
 dev_dependencies:
   flutter_test:

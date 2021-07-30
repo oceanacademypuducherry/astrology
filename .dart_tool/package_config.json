@@ -38,12 +38,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "countdown_flutter",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/countdown_flutter-0.1.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.1"
-    },
-    {
       "name": "country_code_picker",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/country_code_picker-2.0.2",
       "packageUri": "lib/",
@@ -266,7 +260,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-07-30T09:16:29.234441Z",
+  "generated": "2021-07-30T09:26:52.391900Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

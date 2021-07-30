@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:astrology_app/widgets/countrycode.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ class _LoginState extends State<Login> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
+  int start = 120;
 
   String countryCode = '+91';
   List countries = codes;
@@ -66,6 +69,23 @@ class _LoginState extends State<Login> {
       getCountryCode.add(country['code']);
     }
     return getCountryCode;
+  }
+
+  bool wait = false;
+  void startTimer() {
+    const onsec = Duration(minutes: 2);
+    Timer _timer = Timer.periodic(onsec, (_timer) {
+      if (start == 0) {
+        setState(() {
+          _timer.cancel();
+          wait = false;
+        });
+      } else {
+        setState(() {
+          start--;
+        });
+      }
+    });
   }
 
   @override
@@ -242,7 +262,10 @@ class _LoginState extends State<Login> {
                             right: 20,
                           ),
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              setState(() {
+                                startTimer();
+                              });
                               number =
                                   '${countryCode.toString()} ${phoneNumberController.text}';
                               print(number);

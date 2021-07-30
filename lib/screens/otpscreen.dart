@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
-import 'package:countdown_flutter/countdown_flutter.dart';
 
 class OTP extends StatefulWidget {
   String? phoneNumber;
@@ -26,15 +25,14 @@ class _OTPState extends State<OTP> {
       color: const Color.fromRGBO(126, 203, 224, 1),
     ),
   );
-  final _pinPutController = TextEditingController();
+  TextEditingController _pinPutController = TextEditingController();
   final _pinPutFocusNode = FocusNode();
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final phoneNumberController = TextEditingController();
 
   String? fullname;
   String? email;
   String? query;
+  bool validation = false;
+  String countryCode = 'India (+91)';
   int start = 120;
   bool wait = false;
   String buttonName = "Send";
@@ -176,25 +174,6 @@ class _OTPState extends State<OTP> {
                   },
                 ),
               ),
-              Countdown(
-                seconds: 600,
-                build: (BuildContext context, double time) => Text(
-                  '${(time ~/ 60).toString().length == 1 ? "0" + (time ~/ 60).toString() : (time ~/ 60)} : ${(time % 60).toString().length == 1 ? "0" + (time % 60).toString() : (time % 60)}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 23.0,
-                  ),
-                ),
-                onFinished: () {
-                  // Provider.of<Routing>(context,
-                  //         listen: false)
-                  //     .updateRouting(widget: LogIn());
-                  // Provider.of<MenuBar>(context,
-                  //         listen: false)
-                  //     .updateMenu(
-                  //         widget: NavbarRouting());
-                },
-              ),
               RichText(
                   text: TextSpan(
                 children: [
@@ -221,12 +200,14 @@ class _OTPState extends State<OTP> {
                   right: 20,
                 ),
                 child: ElevatedButton(
-                  onPressed: () async {
-                    await _verifyPhone();
-                    Get.to(() => HomeScreen(),
-                        transition: Transition.rightToLeft,
-                        curve: Curves.easeInToLinear,
-                        duration: Duration(milliseconds: 600));
+                  onPressed: () {
+                    setState(() {
+                      _verifyPhone();
+                    });
+                    // Get.to(() => HomeScreen(),
+                    //     transition: Transition.rightToLeft,
+                    //     curve: Curves.easeInToLinear,
+                    //     duration: Duration(milliseconds: 600));
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -249,7 +230,7 @@ class _OTPState extends State<OTP> {
     );
   }
 
-  Future<void> _verifyPhone() async {
+  _verifyPhone() async {
     PhoneCodeSent codeSent = (String verificationId, [int? resendToken]) {
       verificationIdFinal = verificationId;
     };
@@ -277,12 +258,5 @@ class _OTPState extends State<OTP> {
           print("Verification Code send to an phone");
         },
         timeout: Duration(seconds: 120));
-  }
-
-  void setData(String verificationId) {
-    setState(() {
-      verificationIdFinal = verificationId;
-    });
-    startTimer();
   }
 }
