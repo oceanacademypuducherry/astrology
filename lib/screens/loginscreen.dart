@@ -1,5 +1,5 @@
-import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:astrology_app/widgets/countrycode.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,28 +12,20 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-FirebaseAuth _auth = FirebaseAuth.instance;
-
 class _LoginState extends State<Login> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
+  final phoneNumberController = TextEditingController();
 
-  List<String> getCountryCodes = [
-    'India (+91)',
-    'Demo (+638)',
-    'Demo (+423)',
-    'Demo (+95)',
-    'Demo (+683)',
-  ];
+  String countryCode = '+91';
+  List countries = codes;
 
   String? fullname;
   String? email;
   String? query;
   String? phoneNumber;
   bool validation = false;
-  String countryCode = 'India (+91)';
-  // var getCountryCodes;
+  String? number;
 
   Widget _buildphonenumber() {
     return TextFormField(
@@ -68,16 +60,12 @@ class _LoginState extends State<Login> {
     );
   }
 
-  getDropdown() {
-    List<DropdownMenuItem<String>> dropList = [];
-    for (var getCountryCode in getCountryCodes) {
-      var newList = DropdownMenuItem(
-        child: Text(getCountryCode),
-        value: getCountryCode,
-      );
-      dropList.add(newList);
+  List getCountryCode() {
+    List<String> getCountryCode = [];
+    for (var country in countries) {
+      getCountryCode.add(country['code']);
     }
-    return dropList;
+    return getCountryCode;
   }
 
   @override
@@ -87,11 +75,6 @@ class _LoginState extends State<Login> {
         body: Container(
           decoration: BoxDecoration(
             color: Colors.blue,
-            // image:  DecorationImage(
-            //     image:  AssetImage("images/background_image.png"),
-            //     fit: BoxFit.cover,
-            //     alignment: Alignment.center
-            // ),
           ),
           width: double.infinity,
           height: double.infinity,
@@ -183,33 +166,40 @@ class _LoginState extends State<Login> {
                               ]),
                           width: double.infinity,
                           height: 60,
-                          child: DropdownButtonFormField<String>(
-                            // ignore: deprecated_member_use
-                            autovalidate: validation,
-                            validator: (value) {
-                              if (value == 'Select') {
-                                return 'enquiry is required';
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              errorStyle: TextStyle(
-                                  color: Colors.redAccent, fontSize: 12),
-                              border: InputBorder.none,
+                          child: CountryCodePicker(
+                            favorite: ['+91', '+54', 'US'],
+                            textStyle: TextStyle(
+                              fontFamily: 'Ubuntu',
+                              color: Colors.black54,
+                              fontWeight: FontWeight.normal,
                             ),
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Ubuntu',
-                                color: Colors.black54),
-                            value: countryCode,
-                            items: getDropdown(),
-                            onChanged: (value) {
-                              setState(() {
-                                countryCode = value!;
-                              });
-                              print(value);
+                            backgroundColor: Colors.transparent,
+                            onChanged: (object) {
+                              print('object $object');
+                              countryCode = object.toString();
                             },
+                            // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                            initialSelection: getCountryCode()[
+                                getCountryCode().indexOf('IN')],
+                            // countryFilter: getCountryCode(),
+                            showFlagDialog: true,
+                            showDropDownButton: true,
+                            dialogBackgroundColor: Colors.white,
+
+                            hideSearch: false,
+                            dialogSize: Size(double.infinity, double.infinity),
+                            onInit: (code) {
+                              // countryCode = code.toString();
+
+                              print(
+                                  '${countryCode.toString()} countryCode.toString()');
+                            },
+
+                            dialogTextStyle: TextStyle(color: Colors.white),
+                            enabled: true,
+                            boxDecoration: BoxDecoration(
+                              color: Colors.blue,
+                            ),
                           ),
                         ),
                         Container(
@@ -253,7 +243,14 @@ class _LoginState extends State<Login> {
                           ),
                           child: ElevatedButton(
                             onPressed: () {
-                              Get.to(() => OTP(),
+                              number =
+                                  '${countryCode.toString()} ${phoneNumberController.text}';
+                              print(number);
+                              Get.to(
+                                  () => OTP(
+                                        phoneNumber: number,
+                                      ),
+                                  arguments: number,
                                   transition: Transition.rightToLeft,
                                   curve: Curves.easeInToLinear,
                                   duration: Duration(milliseconds: 600));
@@ -280,38 +277,5 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
-  }
-
-  Future<void> verifyPhoneNumber(
-      String phoneNumber, BuildContext context, Function setData) async {
-    PhoneVerificationCompleted verificationCompleted =
-        (PhoneAuthCredential phoneAuthCredential) async {
-      showSnackBar(context, "Verification Completed");
-    };
-    PhoneVerificationFailed verificationFailed =
-        (FirebaseAuthException exception) {
-      showSnackBar(context, exception.toString());
-    };
-    PhoneCodeSent codeSent =
-        (String verificationID, [int forceResnedingtoken]) {
-      showSnackBar(context, "Verification Code sent on the phone number");
-      setData(verificationID);
-    };
-
-    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
-        (String verificationID) {
-      showSnackBar(context, "Time out");
-    };
-    try {
-      await _auth.verifyPhoneNumber(
-          timeout: Duration(seconds: 60),
-          phoneNumber: phoneNumber,
-          verificationCompleted: verificationCompleted,
-          verificationFailed: verificationFailed,
-          codeSent: codeSent,
-          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
-    } catch (e) {
-      showSnackBar(context, e.toString());
-    }
   }
 }

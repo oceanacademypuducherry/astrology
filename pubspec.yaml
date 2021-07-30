@@ -38,6 +38,9 @@ dependencies:
   email_validator: ^2.0.1
   firebase_auth: ^3.0.1
   firebase_core: ^1.4.0
+  timer_count_down: ^2.2.0
+  country_code_picker: ^2.0.2
+  pinput: ^1.2.0
 
 dev_dependencies:
   flutter_test:
