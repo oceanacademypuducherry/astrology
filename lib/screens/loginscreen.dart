@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:astrology_app/widgets/countrycode.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:astrology_app/screens/otpscreen.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -18,6 +20,8 @@ class _LoginState extends State<Login> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  String verificationIdFinal = "";
   int start = 120;
 
   String countryCode = '+91';
@@ -263,17 +267,16 @@ class _LoginState extends State<Login> {
                           ),
                           child: ElevatedButton(
                             onPressed: () async {
-                              setState(() {
-                                startTimer();
-                              });
+                              await _getOtp();
+                              startTimer();
                               number =
                                   '${countryCode.toString()} ${phoneNumberController.text}';
-                              print(number);
+                              print(verificationIdFinal);
                               Get.to(
                                   () => OTP(
-                                        phoneNumber: number,
+                                        verificationId: verificationIdFinal,
                                       ),
-                                  arguments: number,
+                                  arguments: verificationIdFinal,
                                   transition: Transition.rightToLeft,
                                   curve: Curves.easeInToLinear,
                                   duration: Duration(milliseconds: 600));
@@ -300,5 +303,35 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  _getOtp() async {
+    PhoneCodeSent codeSent = (String verificationId, [int? resendToken]) {
+      verificationIdFinal = verificationId;
+    };
+    await _auth.verifyPhoneNumber(
+        phoneNumber: '${number}',
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          print("Verification  Before Completed");
+          await FirebaseAuth.instance
+              .signInWithCredential(credential)
+              .then((value) async {
+            if (value.user != null) {
+              print("user lOgged in");
+            }
+          });
+          print("Verification After  Completed");
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print('${e.message}Verification error');
+        },
+        codeSent: codeSent,
+        codeAutoRetrievalTimeout: (String verificationID) {
+          setState(() {
+            verificationIdFinal = verificationID;
+          });
+          print("Verification Code send to an phone");
+        },
+        timeout: Duration(seconds: 120));
   }
 }

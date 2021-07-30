@@ -41,6 +41,7 @@ dependencies:
   timer_count_down: ^2.2.0
   country_code_picker: ^2.0.2
   pinput: ^1.2.0
+  slide_countdown_clock: ^1.0.3
 
 
 dev_dependencies:

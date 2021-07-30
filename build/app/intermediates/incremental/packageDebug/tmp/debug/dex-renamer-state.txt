@@ -1,4 +1,4 @@
-#Fri Jul 30 15:49:07 IST 2021
+#Fri Jul 30 16:37:19 IST 2021
 base.0=C\:\\Users\\kjaya\\Documents\\flutter\\astrology\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.1=classes2.dex
 renamed.1=classes2.dex
