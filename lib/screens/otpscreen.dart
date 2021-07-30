@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
-import 'package:countdown_flutter/countdown_flutter.dart';
+// import 'package:countdown_flutter/countdown_flutter.dart';
 
 class OTP extends StatefulWidget {
   String? phoneNumber;
@@ -266,11 +266,11 @@ class _OTPState extends State<OTP> {
         },
         timeout: Duration(seconds: 120));
   }
+
   void setData(String verificationId) {
     setState(() {
       verificationIdFinal = verificationId;
     });
     startTimer();
   }
-}
 }
