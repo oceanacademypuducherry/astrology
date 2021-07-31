@@ -45,6 +45,8 @@ dependencies:
   firebase_storage: ^10.0.1
 #  file_picker: ^3.0.0
   otp_text_field: ^1.1.1
+  carousel_slider: ^4.0.0
+  font_awesome_flutter: ^9.1.0
 
 
 
@@ -72,7 +74,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/background_image.png
+    - images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

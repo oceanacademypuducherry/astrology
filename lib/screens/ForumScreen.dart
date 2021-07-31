@@ -8,7 +8,7 @@ class ForumScreen extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.red,
+      color: Colors.white,
       child: Text('Forum Screen'),
     );
   }

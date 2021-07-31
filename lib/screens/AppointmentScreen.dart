@@ -9,7 +9,7 @@ class AppointmentScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: Colors.red,
+        color: Colors.white,
         child: Center(child: Text('Appointment Screen')),
       ),
     );
