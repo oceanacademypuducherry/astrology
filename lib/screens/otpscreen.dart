@@ -1,22 +1,24 @@
 import 'dart:async';
 
 import 'package:astrology_app/screens/HomeScreen.dart';
+import 'package:astrology_app/screens/registerscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
-// import 'package:countdown_flutter/countdown_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OTP extends StatefulWidget {
-  String? phoneNumber;
-  OTP({this.phoneNumber});
+  String? verificationId;
+  String? userNumber;
+  OTP({this.verificationId, this.userNumber});
 
   @override
   State<OTP> createState() => _OTPState();
 }
 
 FirebaseAuth _auth = FirebaseAuth.instance;
+FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class _OTPState extends State<OTP> {
   final BoxDecoration pinPutDecoration = BoxDecoration(
@@ -26,11 +28,8 @@ class _OTPState extends State<OTP> {
       color: const Color.fromRGBO(126, 203, 224, 1),
     ),
   );
-  final _pinPutController = TextEditingController();
+  TextEditingController _pinPutController = TextEditingController();
   final _pinPutFocusNode = FocusNode();
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final phoneNumberController = TextEditingController();
 
   String? fullname;
   String? email;
@@ -40,36 +39,46 @@ class _OTPState extends State<OTP> {
   int start = 120;
   bool wait = false;
   String buttonName = "Send";
-  String verificationIdFinal = "";
+
   String smsCode = "";
+  var validate;
   // var getCountryCodes;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print('==================${widget.phoneNumber}');
+    print('==================${widget.verificationId}');
+    // startTimer();
+
     // _verifyPhone();
   }
 
-  void startTimer() {
-    const onsec = Duration(minutes: 2);
-    Timer _timer = Timer.periodic(onsec, (timer) {
-      if (start == 0) {
-        setState(() {
-          timer.cancel();
-          wait = false;
-        });
-      } else {
-        setState(() {
-          start--;
-        });
-      }
-    });
-  }
+  late Timer _timer;
+  int _start = 120;
+
+  // void startTimer() {
+  //   print("++++++++++++++++++++++");
+  //   const oneSec = const Duration(seconds: 1);
+  //   _timer = new Timer.periodic(
+  //     oneSec,
+  //     (Timer timer) {
+  //       if (_start == 0) {
+  //         setState(() {
+  //           timer.cancel();
+  //         });
+  //       } else {
+  //         setState(() {
+  //           _start--;
+  //         });
+  //       }
+  //     },
+  //   );
+  // }
+
+  var userSession;
 
   @override
   Widget build(BuildContext context) {
-    print(widget.phoneNumber);
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -125,17 +134,6 @@ class _OTPState extends State<OTP> {
                             ),
                           ),
                         ),
-                        Container(
-                          child: Text(
-                            '${widget.phoneNumber}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Ubuntu',
-                              fontSize: 12,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ],
@@ -158,23 +156,8 @@ class _OTPState extends State<OTP> {
                   followingFieldDecoration: pinPutDecoration,
                   pinAnimationType: PinAnimationType.fade,
                   onSubmit: (pin) async {
-                    print(pin);
-                    try {
-                      await FirebaseAuth.instance
-                          .signInWithCredential(PhoneAuthProvider.credential(
-                              verificationId: verificationIdFinal,
-                              smsCode: pin))
-                          .then((value) async {
-                        if (value.user != null) {
-                          Get.to(() => HomeScreen(),
-                              transition: Transition.rightToLeft,
-                              curve: Curves.easeInToLinear,
-                              duration: Duration(milliseconds: 600));
-                        }
-                      });
-                    } catch (e) {
-                      print("invalid");
-                    }
+                    print(pin.runtimeType);
+                    validate = pin;
                   },
                 ),
               ),
@@ -186,7 +169,7 @@ class _OTPState extends State<OTP> {
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                   TextSpan(
-                    text: "00:$start",
+                    text: "00:$_start",
                     style: TextStyle(fontSize: 16, color: Colors.pinkAccent),
                   ),
                   TextSpan(
@@ -204,14 +187,48 @@ class _OTPState extends State<OTP> {
                   right: 20,
                 ),
                 child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _verifyPhone();
-                    });
-                    Get.to(() => HomeScreen(),
-                        transition: Transition.rightToLeft,
-                        curve: Curves.easeInToLinear,
-                        duration: Duration(milliseconds: 600));
+                  onPressed: () async {
+                    print(validate);
+                    print(validate.runtimeType);
+                    print(
+                        "++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                    print(widget.verificationId);
+                    print("===========================");
+                    try {
+                      await _auth
+                          .signInWithCredential(PhoneAuthProvider.credential(
+                              verificationId: '${widget.verificationId}',
+                              smsCode: validate.toString().trim()))
+                          .then((value) async {
+                        print("inner if");
+                        // userSession = await _firestore
+                        //     .collection('newusers')
+                        //     .doc('${widget.userNumber}')
+                        //     .get();
+                        // print(userSession);
+                        print('session');
+                        if ((value.user != null) &&
+                            (userSession.data() != null)) {
+                          print(value.user);
+                          Get.to(() => HomeScreen(),
+                              transition: Transition.rightToLeft,
+                              curve: Curves.easeInToLinear,
+                              duration: Duration(milliseconds: 600));
+                          print("+++++++ddddddddddddddd+++++++++");
+                        } else {
+                          Get.to(
+                              () => Register(
+                                    userNumber: widget.userNumber,
+                                  ),
+                              transition: Transition.rightToLeft,
+                              curve: Curves.easeInToLinear,
+                              duration: Duration(milliseconds: 600));
+                          print("+++++++ddddddddddddddd+++++++++");
+                        }
+                      });
+                    } catch (e) {
+                      print("$e invalid");
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -234,33 +251,33 @@ class _OTPState extends State<OTP> {
     );
   }
 
-  _verifyPhone() async {
-    PhoneCodeSent codeSent = (String verificationId, [int? resendToken]) {
-      verificationIdFinal = verificationId;
-    };
-    await _auth.verifyPhoneNumber(
-        phoneNumber: '${widget.phoneNumber}',
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          print("Verification  Before Completed");
-          await FirebaseAuth.instance
-              .signInWithCredential(credential)
-              .then((value) async {
-            if (value.user != null) {
-              print("user lOgged in");
-            }
-          });
-          print("Verification After  Completed");
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          print('${e.message}Verification error');
-        },
-        codeSent: codeSent,
-        codeAutoRetrievalTimeout: (String verificationID) {
-          setState(() {
-            verificationIdFinal = verificationID;
-          });
-          print("Verification Code send to an phone");
-        },
-        timeout: Duration(seconds: 120));
-  }
+  // _verifyPhone() async {
+  //   PhoneCodeSent codeSent = (String verificationId, [int? resendToken]) {
+  //     verificationIdFinal = verificationId;
+  //   };
+  //   await _auth.verifyPhoneNumber(
+  //       phoneNumber: '${widget.phoneNumber}',
+  //       verificationCompleted: (PhoneAuthCredential credential) async {
+  //         print("Verification  Before Completed");
+  //         await FirebaseAuth.instance
+  //             .signInWithCredential(credential)
+  //             .then((value) async {
+  //           if (value.user != null) {
+  //             print("user lOgged in");
+  //           }
+  //         });
+  //         print("Verification After  Completed");
+  //       },
+  //       verificationFailed: (FirebaseAuthException e) {
+  //         print('${e.message}Verification error');
+  //       },
+  //       codeSent: codeSent,
+  //       codeAutoRetrievalTimeout: (String verificationID) {
+  //         setState(() {
+  //           verificationIdFinal = verificationID;
+  //         });
+  //         print("Verification Code send to an phone");
+  //       },
+  //       timeout: Duration(seconds: 120));
+  // }
 }
