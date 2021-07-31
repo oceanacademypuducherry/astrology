@@ -1,23 +1,24 @@
 import 'dart:async';
 
 import 'package:astrology_app/screens/HomeScreen.dart';
+import 'package:astrology_app/screens/registerscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import 'package:slide_countdown_clock/slide_countdown_clock.dart';
-
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OTP extends StatefulWidget {
   String? verificationId;
-  OTP({this.verificationId});
+  String? userNumber;
+  OTP({this.verificationId, this.userNumber});
 
   @override
   State<OTP> createState() => _OTPState();
 }
 
 FirebaseAuth _auth = FirebaseAuth.instance;
+FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class _OTPState extends State<OTP> {
   final BoxDecoration pinPutDecoration = BoxDecoration(
@@ -47,9 +48,34 @@ class _OTPState extends State<OTP> {
     // TODO: implement initState
     super.initState();
     print('==================${widget.verificationId}');
+    // startTimer();
 
     // _verifyPhone();
   }
+
+  late Timer _timer;
+  int _start = 120;
+
+  // void startTimer() {
+  //   print("++++++++++++++++++++++");
+  //   const oneSec = const Duration(seconds: 1);
+  //   _timer = new Timer.periodic(
+  //     oneSec,
+  //     (Timer timer) {
+  //       if (_start == 0) {
+  //         setState(() {
+  //           timer.cancel();
+  //         });
+  //       } else {
+  //         setState(() {
+  //           _start--;
+  //         });
+  //       }
+  //     },
+  //   );
+  // }
+
+  var userSession;
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +169,7 @@ class _OTPState extends State<OTP> {
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                   TextSpan(
-                    text: "00:$start",
+                    text: "00:$_start",
                     style: TextStyle(fontSize: 16, color: Colors.pinkAccent),
                   ),
                   TextSpan(
@@ -162,17 +188,38 @@ class _OTPState extends State<OTP> {
                 ),
                 child: ElevatedButton(
                   onPressed: () async {
+                    print(validate);
+                    print(validate.runtimeType);
+                    print(
+                        "++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     print(widget.verificationId);
                     print("===========================");
                     try {
                       await _auth
                           .signInWithCredential(PhoneAuthProvider.credential(
                               verificationId: '${widget.verificationId}',
-                              smsCode: '111111'))
+                              smsCode: validate.toString().trim()))
                           .then((value) async {
                         print("inner if");
-                        if (value.user != null) {
+                        // userSession = await _firestore
+                        //     .collection('newusers')
+                        //     .doc('${widget.userNumber}')
+                        //     .get();
+                        // print(userSession);
+                        print('session');
+                        if ((value.user != null) &&
+                            (userSession.data() != null)) {
+                          print(value.user);
                           Get.to(() => HomeScreen(),
+                              transition: Transition.rightToLeft,
+                              curve: Curves.easeInToLinear,
+                              duration: Duration(milliseconds: 600));
+                          print("+++++++ddddddddddddddd+++++++++");
+                        } else {
+                          Get.to(
+                              () => Register(
+                                    userNumber: widget.userNumber,
+                                  ),
                               transition: Transition.rightToLeft,
                               curve: Curves.easeInToLinear,
                               duration: Duration(milliseconds: 600));

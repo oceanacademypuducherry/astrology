@@ -1,3 +1,4 @@
+import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
 import 'package:astrology_app/screens/otpscreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +10,8 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const GetMaterialApp(
+  Get.put(OtpController());
+  runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     home: Scaffold(
       backgroundColor: Colors.blue,

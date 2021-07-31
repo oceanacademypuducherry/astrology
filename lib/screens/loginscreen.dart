@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:astrology_app/screens/HomeScreen.dart';
+import 'package:astrology_app/screens/phone_auth.dart';
+import 'package:astrology_app/widgets/auth_service.dart';
 import 'package:astrology_app/widgets/countrycode.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:astrology_app/screens/otpscreen.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/otp_field_style.dart';
+import 'package:otp_text_field/style.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 class Login extends StatefulWidget {
@@ -17,14 +23,19 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  AuthClass authClass = AuthClass();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
+  int start = 100;
+  bool wait = false;
+  String buttonName = "Send";
   String verificationIdFinal = "";
-  int start = 120;
+  String smsCode = "";
 
   String countryCode = '+91';
+  bool isClick = false;
   List countries = codes;
 
   String? fullname;
@@ -75,13 +86,12 @@ class _LoginState extends State<Login> {
     return getCountryCode;
   }
 
-  bool wait = false;
   void startTimer() {
-    const onsec = Duration(minutes: 2);
-    Timer _timer = Timer.periodic(onsec, (_timer) {
+    const onsec = Duration(seconds: 1);
+    Timer _timer = Timer.periodic(onsec, (timer) {
       if (start == 0) {
         setState(() {
-          _timer.cancel();
+          timer.cancel();
           wait = false;
         });
       } else {
@@ -227,36 +237,50 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20),
-                          padding: const EdgeInsets.only(left: 15, top: 5),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 20,
-                                  spreadRadius: 5,
-                                  offset: Offset(
-                                    2.0,
-                                    2.0,
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.only(left: 15, top: 5),
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 20,
+                                    spreadRadius: 5,
+                                    offset: Offset(
+                                      2.0,
+                                      2.0,
+                                    ),
                                   ),
-                                ),
-                              ]),
-                          width: double.infinity,
-                          height: 60,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                height: 50,
-                                // color: Colors.pinkAccent,
-                                child: _buildphonenumber(),
-                              ),
-                            ],
-                          ),
+                                ]),
+                            width: double.infinity,
+                            height: 60,
+                            child: textField()),
+                        SizedBox(
+                          height: 20.0,
                         ),
+                        otpField(),
+                        RichText(
+                            text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Send OTP again in ",
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.black),
+                            ),
+                            TextSpan(
+                              text: '00:$start',
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.pinkAccent),
+                            ),
+                            TextSpan(
+                              text: " sec ",
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.black),
+                            ),
+                          ],
+                        )),
                         Container(
                           width: double.infinity,
                           height: 50,
@@ -266,21 +290,14 @@ class _LoginState extends State<Login> {
                             right: 20,
                           ),
                           child: ElevatedButton(
-                            onPressed: () async {
-                              await _getOtp();
-                              startTimer();
-                              number =
-                                  '${countryCode.toString()} ${phoneNumberController.text}';
-                              print(verificationIdFinal);
-                              Get.to(
-                                  () => OTP(
-                                        verificationId: verificationIdFinal,
-                                      ),
-                                  arguments: verificationIdFinal,
-                                  transition: Transition.rightToLeft,
-                                  curve: Curves.easeInToLinear,
-                                  duration: Duration(milliseconds: 600));
-                            },
+                            onPressed: isClick
+                                ? () {
+                                    authClass.signInwithPhoneNumber(
+                                      verificationIdFinal,
+                                      smsCode,
+                                    );
+                                  }
+                                : null,
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5)),
@@ -292,7 +309,7 @@ class _LoginState extends State<Login> {
                                 fontSize: 15,
                               ),
                             ),
-                            child: const Text('Next'),
+                            child: Text('Next'),
                           ),
                         ),
                       ],
@@ -305,33 +322,109 @@ class _LoginState extends State<Login> {
     );
   }
 
-  _getOtp() async {
-    PhoneCodeSent codeSent = (String verificationId, [int? resendToken]) {
-      verificationIdFinal = verificationId;
-    };
-    await _auth.verifyPhoneNumber(
-        phoneNumber: '${number}',
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          print("Verification  Before Completed");
-          await FirebaseAuth.instance
-              .signInWithCredential(credential)
-              .then((value) async {
-            if (value.user != null) {
-              print("user lOgged in");
-            }
-          });
-          print("Verification After  Completed");
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          print('${e.message}Verification error');
-        },
-        codeSent: codeSent,
-        codeAutoRetrievalTimeout: (String verificationID) {
-          setState(() {
-            verificationIdFinal = verificationID;
-          });
-          print("Verification Code send to an phone");
-        },
-        timeout: Duration(seconds: 120));
+  Widget textField() {
+    return TextFormField(
+      controller: phoneNumberController,
+      style: TextStyle(color: Colors.black, fontSize: 17),
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        hintText: "Enter your phone Number",
+        hintStyle: TextStyle(color: Colors.black, fontSize: 17),
+        contentPadding: const EdgeInsets.symmetric(vertical: 19, horizontal: 8),
+        // prefixIcon: Padding(
+        //   padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 15),
+        //   child: Text(
+        //     " (+91) ",
+        //     style: TextStyle(color: Colors.black, fontSize: 17),
+        //   ),
+        // ),
+        suffixIcon: InkWell(
+          onTap: wait
+              ? null
+              : () async {
+                  startTimer();
+                  setState(() {
+                    start = 100;
+                    wait = true;
+                    buttonName = "Resend";
+                  });
+                  number =
+                      '${countryCode.toString()} ${phoneNumberController.text}';
+                  await authClass.verifyPhoneNumber("${number}", setData);
+                  isClick = true;
+                },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+            child: Text(
+              buttonName,
+              style: TextStyle(
+                color: wait ? Colors.blue : Colors.black,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
+
+  Widget otpField() {
+    return OTPTextField(
+      length: 6,
+      width: MediaQuery.of(context).size.width,
+      fieldWidth: 35,
+      otpFieldStyle: OtpFieldStyle(
+        backgroundColor: Color(0xff1d1d1d),
+        borderColor: Colors.white,
+      ),
+      style: TextStyle(fontSize: 17, color: Colors.white),
+      textFieldAlignment: MainAxisAlignment.spaceEvenly,
+      fieldStyle: FieldStyle.underline,
+      onCompleted: (pin) {
+        print("Completed: " + pin);
+        setState(() {
+          smsCode = pin;
+        });
+      },
+    );
+  }
+
+  void setData(String verificationId) {
+    setState(() {
+      verificationIdFinal = verificationId;
+    });
+    startTimer();
+  }
+
+  // _getOtp() async {
+  //   PhoneCodeSent codeSent = (String verificationId, [int? resendToken]) {
+  //     verificationIdFinal = verificationId;
+  //   };
+  //   await _auth.verifyPhoneNumber(
+  //       phoneNumber: '${number}',
+  //       verificationCompleted: (PhoneAuthCredential credential) async {
+  //         print("Verification  Before Completed");
+  //         await FirebaseAuth.instance
+  //             .signInWithCredential(credential)
+  //             .then((value) async {
+  //           if (value.user != null) {
+  //             print("user lOgged in");
+  //           }
+  //         });
+  //         print("Verification After  Completed");
+  //       },
+  //       verificationFailed: (FirebaseAuthException e) {
+  //         print('${e.message}Verification error');
+  //       },
+  //       codeSent: codeSent,
+  //       codeAutoRetrievalTimeout: (String verificationID) {
+  //         setState(() {
+  //           verificationIdFinal = verificationID;
+  //         });
+  //         print("Verification Code send to an phone");
+  //       },
+  //       timeout: Duration(seconds: 60));
+  // }
 }

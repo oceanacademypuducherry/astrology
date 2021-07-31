@@ -41,7 +41,11 @@ dependencies:
   timer_count_down: ^2.2.0
   country_code_picker: ^2.0.2
   pinput: ^1.2.0
-  slide_countdown_clock: ^1.0.3
+  cloud_firestore: ^2.4.0
+  firebase_storage: ^10.0.1
+#  file_picker: ^3.0.0
+  otp_text_field: ^1.1.1
+
 
 
 dev_dependencies:
