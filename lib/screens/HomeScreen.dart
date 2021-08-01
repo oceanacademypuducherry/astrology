@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
         slivers: [
           SliverAppBar(
             floating: true,
-            expandedHeight: 250,
+            expandedHeight: 220,
             // automaticallyImplyLeading: true,
             // toolbarHeight: 100,
             // stretch: true,
