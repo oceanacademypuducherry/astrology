@@ -131,33 +131,6 @@ class _PhoneAuthState extends State<PhoneAuth> {
                   ],
                 ),
               ),
-              // ElevatedButton(
-              //   style: ElevatedButton.styleFrom(
-              //     shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(5)),
-              //     elevation: 2,
-              //     primary: Colors.white,
-              //     onPrimary: Colors.blue,
-              //     textStyle: const TextStyle(
-              //       fontFamily: 'Ubuntu',
-              //       fontSize: 15,
-              //     ),
-              //   ),
-              //   child: Text(
-              //     "${buttonName}",
-              //   ),
-              //   onPressed: wait
-              //       ? null
-              //       : () async {
-              //
-              //           startTimer();
-              //           setState(() {
-              //             start = 60;
-              //             wait = true;
-              //             buttonName = "Resend";
-              //           });
-              //         },
-              // ),
               otpField(),
               Obx(
                 () => RichText(

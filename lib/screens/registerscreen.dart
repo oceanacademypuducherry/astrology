@@ -1,13 +1,17 @@
+import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
+import 'package:image_picker/image_picker.dart';
 // import 'package:file_picker/file_picker.dart';
+
 import 'dart:typed_data';
 
 class Register extends StatefulWidget {
@@ -32,6 +36,25 @@ class _RegisterState extends State<Register> {
   String? query;
   String? phoneNumber;
   bool validation = false;
+
+  String? getId;
+  void user_id() async {
+    print("---------------------------");
+
+    await for (var snapshot in _firestore
+        .collection('newusers')
+
+        ///todo LogIn.registerNumber
+        .where("PhoneNumber", isEqualTo: widget.userNumber)
+        .snapshots(includeMetadataChanges: true)) {
+      for (var message in snapshot.docs) {
+        getId = message.id;
+        print('${getId} testingggggggggggggggggggggggggggggggggggg');
+      }
+    }
+
+    print("---------------------------");
+  }
 
   Widget _buildEmail() {
     return TextFormField(
@@ -232,12 +255,17 @@ class _RegisterState extends State<Register> {
                                         // FilePickerResult? result =
                                         //     await FilePicker.platform.pickFiles(
                                         //         type: FileType.image);
+
+                                        // FilePickerResult? result =
+                                        //     await FilePicker.platform.pickFiles(
+                                        //         type: FileType.image);
                                         // if (result != null) {
                                         //   uploadFile =
                                         //       result.files.single.bytes;
                                         //   fileName = basename(
                                         //       result.files.single.name);
                                         //   print(fileName);
+                                        //   uploadJadhagam(context);
                                         //   setState(() {
                                         //     uploadJadhagam(context);
                                         //   });
@@ -444,100 +472,6 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 20,
-                                        spreadRadius: 5,
-                                        offset: Offset(
-                                          2.0,
-                                          2.0,
-                                        ),
-                                      ),
-                                    ]),
-                                padding:
-                                    const EdgeInsets.only(left: 15, top: 5),
-                                width: 150,
-                                height: 60,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: const Text(
-                                        'Password',
-                                        style: TextStyle(
-                                          fontFamily: 'Ubuntu',
-                                          fontSize: 15,
-                                          color: Colors.blue,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 30,
-                                      // color: Colors.pinkAccent,
-                                      child: _buildName(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding:
-                                    const EdgeInsets.only(left: 15, top: 5),
-                                decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 20,
-                                        spreadRadius: 5,
-                                        offset: Offset(
-                                          2.0,
-                                          2.0,
-                                        ),
-                                      ),
-                                    ]),
-                                width: 150,
-                                height: 60,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: const Text(
-                                        'Confirm Password',
-                                        style: TextStyle(
-                                          fontFamily: 'Ubuntu',
-                                          fontSize: 15,
-                                          color: Colors.blue,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 30,
-                                      // color: Colors.pinkAccent,
-                                      child: _buildphonenumber(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
                           width: double.infinity,
                           height: 50,
                           margin: const EdgeInsets.only(
@@ -547,15 +481,18 @@ class _RegisterState extends State<Register> {
                           ),
                           child: ElevatedButton(
                             onPressed: () {
-                              _firestore
-                                  .collection("newusers")
-                                  .doc('${widget.userNumber}')
-                                  .set({
+                              print(widget.userNumber);
+                              _firestore.collection("newusers").add({
                                 "name": nameController.text,
-                                "mobile": phoneNumberController.text,
-                                "jadhagam": jadhagamLink,
-                                'profile': profilePictureLink
+                                "email": emailController.text,
+                                "jadhagam": 'jadhagamLink',
+                                'profile': 'profilePictureLink',
+                                'PhoneNumber': widget.userNumber
                               });
+                              Get.to(() => HomeScreen(),
+                                  transition: Transition.rightToLeft,
+                                  curve: Curves.easeInToLinear,
+                                  duration: Duration(milliseconds: 600));
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(

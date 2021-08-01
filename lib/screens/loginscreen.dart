@@ -1,19 +1,19 @@
 import 'dart:async';
-
+import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
-import 'package:astrology_app/screens/phone_auth.dart';
+import 'package:astrology_app/screens/registerscreen.dart';
 import 'package:astrology_app/widgets/auth_service.dart';
 import 'package:astrology_app/widgets/countrycode.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:astrology_app/screens/otpscreen.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
-import 'package:timer_count_down/timer_count_down.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -22,13 +22,16 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
+FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 class _LoginState extends State<Login> {
+  final otp_controller = Get.find<OtpController>();
   AuthClass authClass = AuthClass();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
-  int start = 100;
+  int start = 60;
   bool wait = false;
   String buttonName = "Send";
   String verificationIdFinal = "";
@@ -44,6 +47,22 @@ class _LoginState extends State<Login> {
   String? phoneNumber;
   bool validation = false;
   String? number;
+  var userSession;
+  String? getId;
+  void user_id(String user) async {
+    print("---------------------------");
+    await for (var snapshot in _firestore
+        .collection('newusers')
+        .where("PhoneNumber", isEqualTo: user)
+        .snapshots(includeMetadataChanges: true)) {
+      for (var message in snapshot.docs) {
+        getId = message.id;
+        print('${getId} testingggggggggggggggggggggggggggggggggggg');
+      }
+    }
+
+    print("---------------------------");
+  }
 
   Widget _buildphonenumber() {
     return TextFormField(
@@ -91,8 +110,10 @@ class _LoginState extends State<Login> {
     Timer _timer = Timer.periodic(onsec, (timer) {
       if (start == 0) {
         setState(() {
+          print('cancel');
           timer.cancel();
           wait = false;
+          buttonName = 'Send';
         });
       } else {
         setState(() {
@@ -100,6 +121,21 @@ class _LoginState extends State<Login> {
         });
       }
     });
+  }
+
+  session() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user', number!);
+    // await prefs.setBool('isSession', true);
+
+    print("${number!} ssssssssssssss");
+    print('Otp Submited');
+  }
+
+  Future<void> userNumberToAUth(String number) async {
+    print('geting user number...........................');
+    otp_controller.setUserNumber(number);
+    print(number);
   }
 
   @override
@@ -292,10 +328,14 @@ class _LoginState extends State<Login> {
                           child: ElevatedButton(
                             onPressed: isClick
                                 ? () {
-                                    authClass.signInwithPhoneNumber(
+                                    signInwithPhoneNumber(
                                       verificationIdFinal,
                                       smsCode,
                                     );
+
+                                    print(
+                                        '=============================================');
+                                    print('${verificationIdFinal}sowthri');
                                   }
                                 : null,
                             style: ElevatedButton.styleFrom(
@@ -332,32 +372,33 @@ class _LoginState extends State<Login> {
         hintText: "Enter your phone Number",
         hintStyle: TextStyle(color: Colors.black, fontSize: 17),
         contentPadding: const EdgeInsets.symmetric(vertical: 19, horizontal: 8),
-        // prefixIcon: Padding(
-        //   padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 15),
-        //   child: Text(
-        //     " (+91) ",
-        //     style: TextStyle(color: Colors.black, fontSize: 17),
-        //   ),
-        // ),
         suffixIcon: InkWell(
           onTap: wait
-              ? null
+              ? () async {
+                  number =
+                      '${countryCode.toString()} ${phoneNumberController.text}';
+                  user_id(number!);
+                  await authClass.verifyPhoneNumber("${number}", setData);
+                }
               : () async {
                   startTimer();
                   setState(() {
-                    start = 100;
+                    start = 60;
                     wait = true;
                     buttonName = "Resend";
                   });
                   number =
                       '${countryCode.toString()} ${phoneNumberController.text}';
+                  // userNumberToAUth(number!);
+                  user_id(number!);
                   await authClass.verifyPhoneNumber("${number}", setData);
+
                   isClick = true;
                 },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
             child: Text(
-              buttonName,
+              wait ? 'Resend' : 'Send',
               style: TextStyle(
                 color: wait ? Colors.blue : Colors.black,
                 fontSize: 17,
@@ -391,40 +432,58 @@ class _LoginState extends State<Login> {
     );
   }
 
+  Future<void> signInwithPhoneNumber(
+    String verificationId,
+    String smsCode,
+  ) async {
+    // try {
+    //   AuthCredential credential = PhoneAuthProvider.credential(
+    //       verificationId: verificationId, smsCode: smsCode);
+    //
+    //   await _auth.signInWithCredential(credential).then((value) async {
+    //     if (value.user != null) {
+    //       Get.to(() => HomeScreen(),
+    //           transition: Transition.rightToLeft,
+    //           curve: Curves.easeInToLinear,
+    //           duration: Duration(milliseconds: 600));
+    //     }
+    //   });
+    // }
+    try {
+      AuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: smsCode);
+
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+      // storeTokenAndData(userCredential);
+      print('${verificationId}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+      userSession = await _firestore.collection('newusers').doc(getId).get();
+      print(userCredential.credential);
+      print('$getId kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+      print(userSession.data());
+      if (userSession.data() != null) {
+        Get.to(() => HomeScreen(),
+            transition: Transition.rightToLeft,
+            curve: Curves.easeInToLinear,
+            duration: Duration(milliseconds: 600));
+      } else {
+        Get.to(
+            () => Register(
+                  userNumber: number,
+                ),
+            transition: Transition.rightToLeft,
+            curve: Curves.easeInToLinear,
+            duration: Duration(milliseconds: 600));
+      }
+    } catch (e) {
+      print('error ${e.toString()}');
+    }
+  }
+
   void setData(String verificationId) {
     setState(() {
       verificationIdFinal = verificationId;
     });
     startTimer();
   }
-
-  // _getOtp() async {
-  //   PhoneCodeSent codeSent = (String verificationId, [int? resendToken]) {
-  //     verificationIdFinal = verificationId;
-  //   };
-  //   await _auth.verifyPhoneNumber(
-  //       phoneNumber: '${number}',
-  //       verificationCompleted: (PhoneAuthCredential credential) async {
-  //         print("Verification  Before Completed");
-  //         await FirebaseAuth.instance
-  //             .signInWithCredential(credential)
-  //             .then((value) async {
-  //           if (value.user != null) {
-  //             print("user lOgged in");
-  //           }
-  //         });
-  //         print("Verification After  Completed");
-  //       },
-  //       verificationFailed: (FirebaseAuthException e) {
-  //         print('${e.message}Verification error');
-  //       },
-  //       codeSent: codeSent,
-  //       codeAutoRetrievalTimeout: (String verificationID) {
-  //         setState(() {
-  //           verificationIdFinal = verificationID;
-  //         });
-  //         print("Verification Code send to an phone");
-  //       },
-  //       timeout: Duration(seconds: 60));
-  // }
 }
