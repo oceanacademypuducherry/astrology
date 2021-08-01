@@ -462,6 +462,7 @@ class _LoginState extends State<Login> {
       print('$getId kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
       print(userSession.data());
       if (userSession.data() != null) {
+        session();
         Get.to(() => HomeScreen(),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
