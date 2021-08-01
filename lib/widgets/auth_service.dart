@@ -1,3 +1,4 @@
+import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class AuthClass {
+  final otp_controller = Get.find<OtpController>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   // final GoogleSignIn _googleSignIn = GoogleSignIn(
   //   scopes: [
@@ -67,6 +69,40 @@ class AuthClass {
   //   return await storage.read(key: "token");
   // }
 
+  // Future<void> updatePhone(String phoneNumber, Function setData) async {
+  //   PhoneVerificationFailed verificationFailed =
+  //       (FirebaseAuthException exception) {
+  //     // showSnackBar(context, exception.toString());
+  //     print(exception.toString());
+  //   };
+  //   PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
+  //       (String verificationID) {
+  //     // showSnackBar(context, "Time out");
+  //     print('time out');
+  //   };
+  //   try {
+  //     _auth
+  //       ..verifyPhoneNumber(
+  //           phoneNumber: phoneNumber,
+  //           timeout: const Duration(minutes: 2),
+  //           verificationCompleted: (credential) async {
+  //             await (await _auth.currentUser!).updatePhoneNumber(credential);
+  //             // either this occurs or the user needs to manually enter the SMS code
+  //           },
+  //           verificationFailed: verificationFailed,
+  //           codeSent: (verificationId, [forceResendingToken]) async {
+  //             String smsCode;
+  //             // get the SMS code from the user somehow (probably using a text field)
+  //             final AuthCredential credential = PhoneAuthProvider.credential(
+  //                 verificationId: verificationId, smsCode: '11111');
+  //             await (await _auth.currentUser!).updatePhoneNumber(credential);
+  //           },
+  //           codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
+
   Future<void> verifyPhoneNumber(String phoneNumber, Function setData) async {
     PhoneVerificationCompleted verificationCompleted =
         (PhoneAuthCredential phoneAuthCredential) async {
@@ -77,9 +113,10 @@ class AuthClass {
       // showSnackBar(context, exception.toString());
       print(exception.toString());
     };
-    PhoneCodeSent codeSent =
-        (String verificationID, [int? forceResnedingtoken]) {
+    PhoneCodeSent codeSent = (String verificationID, int? forceResendingtoken) {
       // showSnackBar(context, "Verification Code sent on the phone number");
+
+      print(forceResendingtoken);
       print("Verification Code sent on the phone number");
       setData(verificationID);
     };
@@ -103,41 +140,45 @@ class AuthClass {
     }
   }
 
+  // void storeTokenAndData(UserCredential userCredential) async {
+  //   print("storing token and data");
+  //   await storage.write(
+  //       key: "token", value: userCredential.credential.token.toString());
+  //   await storage.write(
+  //       key: "usercredential", value: userCredential.toString());
+  // }
+
   Future<void> signInwithPhoneNumber(
     String verificationId,
     String smsCode,
   ) async {
+    // try {
+    //   AuthCredential credential = PhoneAuthProvider.credential(
+    //       verificationId: verificationId, smsCode: smsCode);
+    //
+    //   await _auth.signInWithCredential(credential).then((value) async {
+    //     if (value.user != null) {
+    //       Get.to(() => HomeScreen(),
+    //           transition: Transition.rightToLeft,
+    //           curve: Curves.easeInToLinear,
+    //           duration: Duration(milliseconds: 600));
+    //     }
+    //   });
+    // }
     try {
       AuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: smsCode);
 
-      await _auth.signInWithCredential(credential).then((value) async {
-        if (value.user != null) {
-          Get.to(() => HomeScreen(),
-              transition: Transition.rightToLeft,
-              curve: Curves.easeInToLinear,
-              duration: Duration(milliseconds: 600));
-        }
-      });
-
-      // Get.to(() => HomeScreen(),
-      //     transition: Transition.rightToLeft,
-      //     curve: Curves.easeInToLinear,
-      //     duration: Duration(milliseconds: 600));
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
       // storeTokenAndData(userCredential);
-      // Navigator.pushAndRemoveUntil(
-      //     context,
-      //     MaterialPageRoute(builder: (builder) => HomePage()),
-      //         (route) => false);
-
-      // showSnackBar(context, "logged In");
+      print('${verificationId}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+      Get.to(() => HomeScreen(),
+          transition: Transition.rightToLeft,
+          curve: Curves.easeInToLinear,
+          duration: Duration(milliseconds: 600));
     } catch (e) {
       print('error ${e.toString()}');
     }
-  }
-
-  void showSnackBar(BuildContext context, String text) {
-    final snackBar = SnackBar(content: Text(text));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
