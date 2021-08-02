@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
+import 'package:astrology_app/services/storage_service.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
@@ -10,8 +13,7 @@ import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
-import 'package:image_picker/image_picker.dart';
-// import 'package:file_picker/file_picker.dart';
+import 'package:file_picker/file_picker.dart';
 
 import 'dart:typed_data';
 
@@ -28,8 +30,8 @@ class _RegisterState extends State<Register> {
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  Uint8List? uploadFile;
-  String? fileName;
+  UploadTask? task;
+  File? file;
   String? profilePictureLink;
   String? jadhagamLink;
   String? fullname;
@@ -146,6 +148,8 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    final fileName = file != null ? basename(file!.path) : 'No File Selected';
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -251,29 +255,7 @@ class _RegisterState extends State<Register> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     ElevatedButton(
-                                      onPressed: () async {
-                                        print('up++++++++++++');
-                                        // FilePickerResult? result =
-                                        //     await FilePicker.platform.pickFiles(
-                                        //         type: FileType.image);
-
-                                        // FilePickerResult? result =
-                                        //     await FilePicker.platform.pickFiles(
-                                        //         type: FileType.image);
-                                        // if (result != null) {
-                                        //   uploadFile =
-                                        //       result.files.single.bytes;
-                                        //   fileName = basename(
-                                        //       result.files.single.name);
-                                        //   print(fileName);
-                                        //   uploadJadhagam(context);
-                                        //   setState(() {
-                                        //     uploadJadhagam(context);
-                                        //   });
-                                        // } else {
-                                        //   print('pick image');
-                                        // }
-                                      },
+                                      onPressed: selectJadhagamFile,
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -289,24 +271,7 @@ class _RegisterState extends State<Register> {
                                       child: const Text('Upload Jadhagam'),
                                     ),
                                     ElevatedButton(
-                                      onPressed: () async {
-                                        print("up--------------");
-                                        // FilePickerResult? result =
-                                        //     await FilePicker.platform.pickFiles(
-                                        //         type: FileType.image);
-                                        // if (result != null) {
-                                        //   uploadFile =
-                                        //       result.files.single.bytes;
-                                        //   fileName = basename(
-                                        //       result.files.single.name);
-                                        //   print(fileName);
-                                        //   setState(() {
-                                        //     uploadProfilePicture(context);
-                                        //   });
-                                        // } else {
-                                        //   print('pick image');
-                                        // }
-                                      },
+                                      onPressed: selectProfileFile,
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -486,8 +451,8 @@ class _RegisterState extends State<Register> {
                               _firestore.collection("newusers").add({
                                 "name": nameController.text,
                                 "email": emailController.text,
-                                "jadhagam": 'jadhagamLink',
-                                'profile': 'profilePictureLink',
+                                "jadhagam": jadhagamLink,
+                                'profile': profilePictureLink,
                                 'PhoneNumber': widget.userNumber
                               });
                               Get.to(() => BottomNavigation(),
@@ -548,45 +513,71 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Future uploadProfilePicture(BuildContext context) async {
-    Reference firebaseStorageRef =
-        FirebaseStorage.instance.ref().child(fileName!);
-    UploadTask uploadTask = firebaseStorageRef.putData(uploadFile!);
-    // SnakBar Message
-    TaskSnapshot taskSnapShot = await uploadTask.whenComplete(() {
-      setState(() {
-        print('Profile Picuter Upload Complete');
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Profile picture Uploaded')));
-        // get Link
-        uploadTask.snapshot.ref.getDownloadURL().then((value) {
-          setState(() {
-            profilePictureLink = value;
-          });
-          print("${profilePictureLink}profilePictureLink1111111111111");
-        });
-      });
+  Future selectJadhagamFile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path!;
+    setState(() => file = File(path));
+    setState(() {
+      uploadJadhagam();
     });
   }
 
-  Future uploadJadhagam(BuildContext context) async {
-    Reference firebaseStorageRef =
-        FirebaseStorage.instance.ref().child(fileName!);
-    UploadTask uploadTask = firebaseStorageRef.putData(uploadFile!);
-    // SnakBar Message
-    TaskSnapshot taskSnapShot = await uploadTask.whenComplete(() {
-      setState(() {
-        print('Profile Picuter Upload Complete');
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Profile picture Uploaded')));
-        // get Link
-        uploadTask.snapshot.ref.getDownloadURL().then((value) {
-          setState(() {
-            jadhagamLink = value;
-          });
-          print("${jadhagamLink}JadhagamLink11111111111");
-        });
-      });
+  Future uploadJadhagam() async {
+    if (file == null) return;
+
+    final fileName = basename(file!.path);
+    final destination = 'jadhagam/$fileName';
+
+    task = FirebaseApi.uploadFile(destination, file!);
+    setState(() {});
+
+    if (task == null) return;
+
+    final snapshot = await task!.whenComplete(() {
+      print('profile picture uploaded');
     });
+    final urlDownload = await snapshot.ref.getDownloadURL();
+
+    setState(() {
+      jadhagamLink = urlDownload;
+    });
+
+    print('Download-Link: $urlDownload');
+  }
+
+  Future selectProfileFile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path!;
+    setState(() => file = File(path));
+    setState(() {
+      uploadProfile();
+    });
+  }
+
+  Future uploadProfile() async {
+    if (file == null) return;
+
+    final fileName = basename(file!.path);
+    final destination = 'profile/$fileName';
+
+    task = FirebaseApi.uploadFile(destination, file!);
+    setState(() {});
+
+    if (task == null) return;
+
+    final snapshot = await task!.whenComplete(() {
+      print('profile picture uploaded');
+
+      ///Todo snakbar upload
+    });
+    final urlDownload = await snapshot.ref.getDownloadURL();
+
+    setState(() {
+      profilePictureLink = urlDownload;
+    });
+
+    print('Download-Link: $urlDownload');
   }
 }
