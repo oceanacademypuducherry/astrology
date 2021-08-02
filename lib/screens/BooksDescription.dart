@@ -1,26 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+// import 'package:flutter/services.dart';
+// import 'package:syncfusion_flutter_pdf/pdf.dart';
+// import 'package:translator/translator.dart';
 
 class BooksDescription extends StatefulWidget {
-  const BooksDescription({Key? key}) : super(key: key);
+  String bookImage;
+  String bookName;
+  String bookType;
+  String description;
+  String pdfLink;
+  BooksDescription(
+      {required this.bookImage,
+      required this.bookName,
+      required this.description,
+      required this.bookType,
+      required this.pdfLink});
 
   @override
   _BooksDescriptionState createState() => _BooksDescriptionState();
 }
 
 class _BooksDescriptionState extends State<BooksDescription> {
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
+  bool isOpen = false;
   @override
   Widget build(BuildContext context) {
     final FlutterTts flutterTts = FlutterTts();
-    // Future speak() async {
-    //   print(await BooksDescription.flutterTts.getLanguages);
-    //   await BooksDescription.flutterTts.setLanguage('ta');
-    //   await BooksDescription.flutterTts.setPitch(1);
-    //   print(await BooksDescription.flutterTts.getVoices);
-    //   await BooksDescription.flutterTts.speak("காலை வணக்கம்");
-    // }
-
+    // final translator = GoogleTranslator();
     Future _speak() async {
       await flutterTts.setLanguage('ta');
       var result = await flutterTts.speak("காலை வணக்கம்");
@@ -32,6 +41,29 @@ class _BooksDescriptionState extends State<BooksDescription> {
       var result = await flutterTts.stop();
       if (result == 1) setState(() => result = result.stopped);
     }
+
+    // Future<List<int>> _readDocumentData(String name) async {
+    //   final ByteData data = await rootBundle.load('assets/$name');
+    //   return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    // }
+    //
+    // Future<void> _extractAllText() async {
+    //   //Load the existing PDF document.
+    //   PdfDocument document = PdfDocument(
+    //       inputBytes: await _readDocumentData('pdf_succinctly.pdf'));
+    //
+    //   //Create the new instance of the PdfTextExtractor.
+    //   PdfTextExtractor extractor = PdfTextExtractor(document);
+    //
+    //   //Extract all the text from the document.
+    //   String text = extractor.extractText();
+    //
+    //   //Display the text.
+    //   // print('Translated: ${await text.translate(to: 'ta')}');
+    //   String language = "${await text.translate(to: 'ta')}";
+    //   print(language);
+    //   _showResult(language);
+    // }
 
     return Scaffold(
       body: SafeArea(
@@ -74,8 +106,8 @@ class _BooksDescriptionState extends State<BooksDescription> {
                               child: Container(
                                 height: 180,
                                 width: 130,
-                                child: Image.asset(
-                                  'images/books/book2.jpg',
+                                child: Image.network(
+                                  widget.bookImage,
                                   fit: BoxFit.cover,
 
                                   // alignment: Alignment.center,
@@ -96,7 +128,7 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                   Container(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      'The Broken Circle ',
+                                      widget.bookName,
                                       style: TextStyle(
                                         color: Colors.black.withOpacity(0.7),
                                         fontSize: 14,
@@ -129,7 +161,7 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                   Container(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      'Free',
+                                      widget.bookType,
                                       style: TextStyle(
                                         color: Colors.blue,
                                         fontSize: 10,
@@ -150,6 +182,15 @@ class _BooksDescriptionState extends State<BooksDescription> {
                             OutlinedButton(
                                 onPressed: () => _stop(),
                                 child: Text('PreView')),
+                            OutlinedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isOpen = true;
+                                  });
+                                  _pdfViewerKey.currentState
+                                      ?.openBookmarkView();
+                                },
+                                child: Text('View Pdf')),
                           ],
                         ),
                         Spacer(),
@@ -159,18 +200,7 @@ class _BooksDescriptionState extends State<BooksDescription> {
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 10),
                     child: Text(
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has"
-                      " been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley "
-                      "of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also "
-                      "the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with "
-                      "the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software "
-                      "like Aldus PageMaker including versions of Lorem Ipsum."
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has"
-                      " been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley "
-                      "of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also "
-                      "the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with "
-                      "the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software "
-                      "like Aldus PageMaker including versions of Lorem Ipsum.",
+                      widget.description,
                       style: TextStyle(
                         color: Colors.black.withOpacity(0.6),
                         fontSize: 14,
@@ -179,6 +209,19 @@ class _BooksDescriptionState extends State<BooksDescription> {
                         // fontStyle: FontStyle.italic,
                         fontFamily: "Ubuntu",
                         letterSpacing: 0.6,
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: isOpen,
+                    child: SingleChildScrollView(
+                      child: Container(
+                        /// TO make correct height
+                        height: 100,
+                        child: SfPdfViewer.network(
+                          '${widget.pdfLink}',
+                          key: _pdfViewerKey,
+                        ),
                       ),
                     ),
                   )

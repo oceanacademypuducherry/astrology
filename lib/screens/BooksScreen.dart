@@ -1,10 +1,15 @@
 import 'package:astrology_app/screens/BooksDescription.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-Widget? BottomSheet() {
+FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+Widget? BottomSheet(String imageLink, String description, String bookName,
+    String pdfLink, String type) {
   Get.bottomSheet(
     Container(
       padding: EdgeInsets.symmetric(
@@ -14,11 +19,6 @@ Widget? BottomSheet() {
       width: double.infinity,
       height: 170,
       color: Colors.white,
-      // decoration: BoxDecoration(
-      //     borderRadius: BorderRadius.only(
-      //   topLeft: Radius.circular(30),
-      //   topRight: Radius.circular(30),
-      // )),
       child: Row(
         children: [
           Column(
@@ -28,11 +28,9 @@ Widget? BottomSheet() {
                 child: Container(
                   height: 120,
                   width: 100,
-                  child: Image.asset(
-                    'images/books/book2.jpg',
+                  child: Image.network(
+                    imageLink,
                     fit: BoxFit.cover,
-
-                    // alignment: Alignment.center,
                   ),
                 ),
               ),
@@ -50,7 +48,7 @@ Widget? BottomSheet() {
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'The Broken Circle ',
+                        bookName,
                         style: TextStyle(
                           color: Colors.black.withOpacity(0.7),
                           fontSize: 14,
@@ -83,7 +81,7 @@ Widget? BottomSheet() {
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Free',
+                        type,
                         style: TextStyle(
                           color: Colors.blue,
                           fontSize: 10,
@@ -100,7 +98,13 @@ Widget? BottomSheet() {
               ),
               OutlinedButton(
                   onPressed: () {
-                    Get.to(BooksDescription());
+                    Get.to(BooksDescription(
+                      description: description,
+                      bookImage: imageLink,
+                      bookType: type,
+                      bookName: bookName,
+                      pdfLink: pdfLink,
+                    ));
                   },
                   child: Text('PreView'))
             ],
@@ -216,920 +220,47 @@ class _BooksScreenState extends State<BooksScreen> {
                       spacing: 40,
                       children: [
                         //books
-                        GestureDetector(
-                          onTap: () {
-                            BottomSheet();
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                    height: 180,
-                                    width: 135,
-                                    child: Image.asset(
-                                      'images/books/book2.jpg',
-                                      fit: BoxFit.cover,
+                        StreamBuilder<QuerySnapshot>(
+                          stream: _firestore.collection('books').snapshots(),
+                          // ignore: missing_return
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return Text("Loading...");
+                            } else {
+                              final messages = snapshot.data!.docs;
+                              List<BooksDb> Books = [];
 
-                                      // alignment: Alignment.center,
-                                    ),
-                                  ),
+                              for (var message in messages) {
+                                final booksLink = message['bookLink'];
+                                final bookType = message['type'];
+                                final bookName = message['bookName'];
+                                final bookDescription = message['description'];
+                                final pdfLink = message['link'];
+                                print(bookName);
+                                print(pdfLink);
+                                final items = BooksDb(
+                                  bookImage: booksLink,
+                                  bookName: bookName,
+                                  bookType: bookType,
+                                  description: bookDescription,
+                                  pdfLink: pdfLink,
+
+                                  // collegeLogoImage: logoImage,
+                                );
+                                Books.add(items);
+                              }
+                              return Container(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                child: Wrap(
+                                  alignment: WrapAlignment.center,
+                                  spacing: 70.0,
+                                  runSpacing: 30,
+                                  children: Books,
                                 ),
-                                SizedBox(height: 8),
-                                Container(
-                                  height: 55,
-                                  width: 135,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'The Broken Circle',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.7),
-                                            fontSize: 13,
-                                            height: 1.3,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'BY GURUJI',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 10,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                            height: 1,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                              );
+                            }
+                          },
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.bottomSheet(
-                              Container(
-                                  height: 150,
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 20,
-                                            child: Image.asset(
-                                              'images/razorpay.png',
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                                alignment: Alignment.center,
-                                                color: Colors.blue,
-                                                width: 120,
-                                                height: 50,
-                                                child: Text('Payment Amount')),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.blue,
-                                              width: 120,
-                                              height: 50,
-                                              child: Text('₹ 12,000'),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              barrierColor: Colors.transparent,
-                              isDismissible: true,
-                              shape: RoundedRectangleBorder(
-                                // borderRadius: BorderRadius.only(topLeft: 1),
-                                side: BorderSide(
-                                  width: 0.1,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              enableDrag: true,
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Container(
-                                    height: 180,
-                                    width: 135,
-                                    child: Image.asset(
-                                      'images/books/book5.jpg',
-                                      fit: BoxFit.cover,
-
-                                      // alignment: Alignment.center,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  height: 55,
-                                  width: 135,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'Astrology Crystal Shadow',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.7),
-                                            fontSize: 13,
-                                            height: 1.3,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'BY GURUJI',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 10,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                            height: 1,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.bottomSheet(
-                              Container(
-                                  height: 150,
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 20,
-                                            child: Image.asset(
-                                              'images/razorpay.png',
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                                alignment: Alignment.center,
-                                                color: Colors.blue,
-                                                width: 120,
-                                                height: 50,
-                                                child: Text('Payment Amount')),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.blue,
-                                              width: 120,
-                                              height: 50,
-                                              child: Text('₹ 12,000'),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              barrierColor: Colors.transparent,
-                              isDismissible: true,
-                              shape: RoundedRectangleBorder(
-                                // borderRadius: BorderRadius.only(topLeft: 1),
-                                side: BorderSide(
-                                  width: 0.1,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              enableDrag: true,
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                    height: 180,
-                                    width: 135,
-                                    child: Image.asset(
-                                      'images/books/book6.jpg',
-                                      fit: BoxFit.cover,
-
-                                      // alignment: Alignment.center,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  height: 55,
-                                  width: 135,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'Your Personal Horoscopes',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.7),
-                                            fontSize: 13,
-                                            height: 1.3,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'BY GURUJI',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 10,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                            height: 1,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.bottomSheet(
-                              Container(
-                                  height: 150,
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 20,
-                                            child: Image.asset(
-                                              'images/razorpay.png',
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                                alignment: Alignment.center,
-                                                color: Colors.blue,
-                                                width: 120,
-                                                height: 50,
-                                                child: Text('Payment Amount')),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.blue,
-                                              width: 120,
-                                              height: 50,
-                                              child: Text('₹ 12,000'),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              barrierColor: Colors.transparent,
-                              isDismissible: true,
-                              shape: RoundedRectangleBorder(
-                                // borderRadius: BorderRadius.only(topLeft: 1),
-                                side: BorderSide(
-                                  width: 0.1,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              enableDrag: true,
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                    height: 180,
-                                    width: 135,
-                                    child: Image.asset(
-                                      'images/books/book7.jpg',
-                                      fit: BoxFit.cover,
-
-                                      // alignment: Alignment.center,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  height: 55,
-                                  width: 135,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'Know My Name Chanel Miller',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.7),
-                                            fontSize: 13,
-                                            height: 1.3,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'BY GURUJI',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 10,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                            height: 1,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.bottomSheet(
-                              Container(
-                                  height: 150,
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 20,
-                                            child: Image.asset(
-                                              'images/razorpay.png',
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                                alignment: Alignment.center,
-                                                color: Colors.blue,
-                                                width: 120,
-                                                height: 50,
-                                                child: Text('Payment Amount')),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.blue,
-                                              width: 120,
-                                              height: 50,
-                                              child: Text('₹ 12,000'),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              barrierColor: Colors.transparent,
-                              isDismissible: true,
-                              shape: RoundedRectangleBorder(
-                                // borderRadius: BorderRadius.only(topLeft: 1),
-                                side: BorderSide(
-                                  width: 0.1,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              enableDrag: true,
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                    height: 180,
-                                    width: 135,
-                                    child: Image.asset(
-                                      'images/books/book8.jpg',
-                                      fit: BoxFit.cover,
-
-                                      // alignment: Alignment.center,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  height: 55,
-                                  width: 135,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'After Life',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.7),
-                                            fontSize: 13,
-                                            height: 1.3,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'BY GURUJI',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 10,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                            height: 1,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.bottomSheet(
-                              Container(
-                                  height: 150,
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 20,
-                                            child: Image.asset(
-                                              'images/razorpay.png',
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                                alignment: Alignment.center,
-                                                color: Colors.blue,
-                                                width: 120,
-                                                height: 50,
-                                                child: Text('Payment Amount')),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.blue,
-                                              width: 120,
-                                              height: 50,
-                                              child: Text('₹ 12,000'),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              barrierColor: Colors.transparent,
-                              isDismissible: true,
-                              shape: RoundedRectangleBorder(
-                                // borderRadius: BorderRadius.only(topLeft: 1),
-                                side: BorderSide(
-                                  width: 0.1,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              enableDrag: true,
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                    height: 180,
-                                    width: 135,
-                                    child: Image.asset(
-                                      'images/books/book10.jpg',
-                                      fit: BoxFit.cover,
-
-                                      // alignment: Alignment.center,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  height: 55,
-                                  width: 135,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'Love Your Life',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.7),
-                                            fontSize: 13,
-                                            height: 1.3,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'BY GURUJI',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 10,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                            height: 1,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.bottomSheet(
-                              Container(
-                                  height: 150,
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 20,
-                                            child: Image.asset(
-                                              'images/razorpay.png',
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                                alignment: Alignment.center,
-                                                color: Colors.blue,
-                                                width: 120,
-                                                height: 50,
-                                                child: Text('Payment Amount')),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.blue,
-                                              width: 120,
-                                              height: 50,
-                                              child: Text('₹ 12,000'),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              barrierColor: Colors.transparent,
-                              isDismissible: true,
-                              shape: RoundedRectangleBorder(
-                                // borderRadius: BorderRadius.only(topLeft: 1),
-                                side: BorderSide(
-                                  width: 0.1,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              enableDrag: true,
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                    height: 180,
-                                    width: 135,
-                                    child: Image.asset(
-                                      'images/books/book11.jpg',
-                                      fit: BoxFit.cover,
-
-                                      // alignment: Alignment.center,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  height: 55,
-                                  width: 135,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'The 7 Key To Success',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.7),
-                                            fontSize: 13,
-                                            height: 1.3,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'BY GURUJI',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 10,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                            height: 1,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.bottomSheet(
-                              Container(
-                                  height: 150,
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 20,
-                                            child: Image.asset(
-                                              'images/razorpay.png',
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                                alignment: Alignment.center,
-                                                color: Colors.blue,
-                                                width: 120,
-                                                height: 50,
-                                                child: Text('Payment Amount')),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              color: Colors.blue,
-                                              width: 120,
-                                              height: 50,
-                                              child: Text('₹ 12,000'),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              barrierColor: Colors.transparent,
-                              isDismissible: true,
-                              shape: RoundedRectangleBorder(
-                                // borderRadius: BorderRadius.only(topLeft: 1),
-                                side: BorderSide(
-                                  width: 0.1,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              enableDrag: true,
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                    height: 180,
-                                    width: 135,
-                                    child: Image.asset(
-                                      'images/books/book12.jpg',
-                                      fit: BoxFit.cover,
-
-                                      // alignment: Alignment.center,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  height: 55,
-                                  width: 135,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'The Art Success',
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.7),
-                                            fontSize: 13,
-                                            height: 1.3,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'BY GURUJI',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 10,
-                                            fontFamily: "Ubuntu",
-                                            letterSpacing: 0.4,
-                                            height: 1,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
                       ],
                     ),
                   ),
@@ -1137,6 +268,91 @@ class _BooksScreenState extends State<BooksScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class BooksDb extends StatelessWidget {
+  String bookImage;
+  String bookName;
+  String bookType;
+  String description;
+  String pdfLink;
+  BooksDb(
+      {required this.bookImage,
+      required this.bookName,
+      required this.description,
+      required this.bookType,
+      required this.pdfLink});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: GestureDetector(
+        onTap: () {
+          BottomSheet(bookImage, description, bookName, pdfLink, bookType);
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  height: 180,
+                  width: 135,
+                  child: Image.network(
+                    bookImage,
+                    fit: BoxFit.cover,
+
+                    // alignment: Alignment.center,
+                  ),
+                ),
+              ),
+              SizedBox(height: 8),
+              Container(
+                height: 55,
+                width: 135,
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        bookName,
+                        style: TextStyle(
+                          color: Colors.black.withOpacity(0.7),
+                          fontSize: 13,
+                          height: 1.3,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "Ubuntu",
+                          letterSpacing: 0.4,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'BY GURUJI',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 10,
+                          fontFamily: "Ubuntu",
+                          letterSpacing: 0.4,
+                          height: 1,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
