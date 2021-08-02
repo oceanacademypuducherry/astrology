@@ -44,6 +44,7 @@ dependencies:
   cloud_firestore: ^2.4.0
   firebase_storage: ^10.0.1
 #  file_picker: ^3.0.4
+  flutter_tts: ^3.2.2
   otp_text_field: ^1.1.1
   flutter_tts: ^3.2.2
   shared_preferences: ^2.0.6
