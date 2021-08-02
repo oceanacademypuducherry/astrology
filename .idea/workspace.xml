@@ -25,23 +25,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="updated">
-      <change afterPath="$PROJECT_DIR$/images/books/book1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book13.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/books/book9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/screens/BooksDescription.dart" afterDir="false" />
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="updated BooksScreen.dart">
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
@@ -59,10 +46,12 @@
       <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/BooksScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BooksScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/BooksDescription.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BooksDescription.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/loginscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/loginscreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
@@ -222,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627801251961</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="updated BooksScreen.dart">
+      <created>1627834127360</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1627834127360</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -249,7 +245,8 @@
     <MESSAGE value="auth is finished" />
     <MESSAGE value="updated books screen" />
     <MESSAGE value="updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated" />
+    <MESSAGE value="updated BooksScreen.dart" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated BooksScreen.dart" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1627637081729">
@@ -272,30 +269,34 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1865" height="203" key="GridCell.Tab.0.bottom" timestamp="1627829817307">
+    <state width="1865" height="202" key="GridCell.Tab.0.bottom" timestamp="1627876720746">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="203" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1627829817307" />
-    <state width="1865" height="203" key="GridCell.Tab.0.center" timestamp="1627829817307">
+    <state width="1865" height="202" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1627876720746" />
+    <state width="1865" height="202" key="GridCell.Tab.0.center" timestamp="1627876720746">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="203" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1627829817307" />
-    <state width="1865" height="203" key="GridCell.Tab.0.left" timestamp="1627829817307">
+    <state width="1865" height="202" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1627876720746" />
+    <state width="1865" height="202" key="GridCell.Tab.0.left" timestamp="1627876720746">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="203" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1627829817307" />
-    <state width="1865" height="203" key="GridCell.Tab.0.right" timestamp="1627829817307">
+    <state width="1865" height="202" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1627876720746" />
+    <state width="1865" height="202" key="GridCell.Tab.0.right" timestamp="1627876720746">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="203" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1627829817307" />
+    <state width="1865" height="202" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1627876720746" />
+    <state x="508" y="219" key="MultipleFileMergeDialog" timestamp="1627834269402">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="508" y="219" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627834269402" />
     <state x="336" y="77" key="SettingsEditor" timestamp="1627717639509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1627717639509" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1627801275214">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1627834277936">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1627801275214" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1627834277936" />
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1627640290603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

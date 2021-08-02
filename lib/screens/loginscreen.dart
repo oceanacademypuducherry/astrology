@@ -152,7 +152,7 @@ class _LoginState extends State<Login> {
             children: [
               Container(
                 // color: Colors.black26,
-                height: 250,
+                height: 230,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -165,7 +165,7 @@ class _LoginState extends State<Login> {
                             width: MediaQuery.of(context).size.width,
                             child: CircleAvatar(
                               backgroundColor: Colors.black12,
-                              radius: 50,
+                              radius: 40,
                               child: Icon(
                                 Icons.phonelink_lock,
                                 color: Colors.white,
@@ -201,159 +201,173 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Expanded(
-                child: Container(
-                    width: double.infinity,
+                child: SingleChildScrollView(
+                  reverse: true,
+                  child: Container(
                     height: double.infinity,
                     decoration: const BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.red,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(50),
                         // topRight: Radius.circular(30),
                       ),
                     ),
                     // width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          padding: const EdgeInsets.only(left: 15, top: 5),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 20,
-                                  spreadRadius: 5,
-                                  offset: Offset(
-                                    2.0,
-                                    2.0,
+                    child: Container(
+                      color: Colors.blueGrey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 20),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 20,
+                                        spreadRadius: 5,
+                                        offset: Offset(
+                                          2.0,
+                                          2.0,
+                                        ),
+                                      ),
+                                    ]),
+                                width: 120,
+                                height: 60,
+                                child: CountryCodePicker(
+                                  favorite: ['+91', '+54', 'US'],
+                                  textStyle: TextStyle(
+                                    fontFamily: 'Ubuntu',
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.normal,
                                   ),
-                                ),
-                              ]),
-                          width: double.infinity,
-                          height: 60,
-                          child: CountryCodePicker(
-                            favorite: ['+91', '+54', 'US'],
-                            textStyle: TextStyle(
-                              fontFamily: 'Ubuntu',
-                              color: Colors.black54,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            backgroundColor: Colors.transparent,
-                            onChanged: (object) {
-                              print('object $object');
-                              countryCode = object.toString();
-                            },
-                            // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                            initialSelection: getCountryCode()[
-                                getCountryCode().indexOf('IN')],
-                            // countryFilter: getCountryCode(),
-                            showFlagDialog: true,
-                            showDropDownButton: true,
-                            dialogBackgroundColor: Colors.white,
+                                  backgroundColor: Colors.transparent,
+                                  onChanged: (object) {
+                                    print('object $object');
+                                    countryCode = object.toString();
+                                  },
+                                  // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                                  initialSelection: getCountryCode()[
+                                      getCountryCode().indexOf('IN')],
+                                  // countryFilter: getCountryCode(),
+                                  showFlagDialog: true,
+                                  showDropDownButton: true,
+                                  dialogBackgroundColor: Colors.white,
 
-                            hideSearch: false,
-                            dialogSize: Size(double.infinity, double.infinity),
-                            onInit: (code) {
-                              // countryCode = code.toString();
-
-                              print(
-                                  '${countryCode.toString()} countryCode.toString()');
-                            },
-
-                            dialogTextStyle: TextStyle(color: Colors.white),
-                            enabled: true,
-                            boxDecoration: BoxDecoration(
-                              color: Colors.blue,
-                            ),
-                          ),
-                        ),
-                        Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 20),
-                            padding: const EdgeInsets.only(left: 15, top: 5),
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 20,
-                                    spreadRadius: 5,
-                                    offset: Offset(
-                                      2.0,
-                                      2.0,
-                                    ),
-                                  ),
-                                ]),
-                            width: double.infinity,
-                            height: 60,
-                            child: textField()),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        otpField(),
-                        RichText(
-                            text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "Send OTP again in ",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.black),
-                            ),
-                            TextSpan(
-                              text: '00:$start',
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.pinkAccent),
-                            ),
-                            TextSpan(
-                              text: " sec ",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.black),
-                            ),
-                          ],
-                        )),
-                        Container(
-                          width: double.infinity,
-                          height: 50,
-                          margin: const EdgeInsets.only(
-                            top: 25,
-                            left: 20,
-                            right: 20,
-                          ),
-                          child: ElevatedButton(
-                            onPressed: isClick
-                                ? () {
-                                    signInwithPhoneNumber(
-                                      verificationIdFinal,
-                                      smsCode,
-                                    );
+                                  hideSearch: false,
+                                  dialogSize:
+                                      Size(double.infinity, double.infinity),
+                                  onInit: (code) {
+                                    // countryCode = code.toString();
 
                                     print(
-                                        '=============================================');
-                                    print('${verificationIdFinal}sowthri');
-                                  }
-                                : null,
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              elevation: 2,
-                              primary: Colors.blue,
-                              onPrimary: Colors.white,
-                              textStyle: const TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 15,
+                                        '${countryCode.toString()} countryCode.toString()');
+                                  },
+
+                                  dialogTextStyle:
+                                      TextStyle(color: Colors.white),
+                                  enabled: true,
+                                  boxDecoration: BoxDecoration(
+                                    color: Colors.blue,
+                                  ),
+                                ),
                               ),
-                            ),
-                            child: Text('Next'),
+                              Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 20,
+                                        spreadRadius: 5,
+                                        offset: Offset(
+                                          2.0,
+                                          2.0,
+                                        ),
+                                      ),
+                                    ]),
+                                width: 150,
+                                height: 60,
+                                child: textField(),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    )),
+                          SizedBox(height: 20.0),
+                          otpField(),
+                          RichText(
+                              text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "Send OTP again in ",
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black),
+                              ),
+                              TextSpan(
+                                text: '00:$start',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.pinkAccent),
+                              ),
+                              TextSpan(
+                                text: " sec ",
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black),
+                              ),
+                            ],
+                          )),
+                          Container(
+                            width: double.infinity,
+                            height: 50,
+                            margin: const EdgeInsets.only(
+                              top: 25,
+                              left: 20,
+                              right: 20,
+                            ),
+                            child: ElevatedButton(
+                              onPressed: isClick
+                                  ? () {
+                                      signInwithPhoneNumber(
+                                        verificationIdFinal,
+                                        smsCode,
+                                      );
+
+                                      print(
+                                          '=============================================');
+                                      print('${verificationIdFinal}sowthri');
+                                    }
+                                  : null,
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)),
+                                elevation: 2,
+                                primary: Colors.blue,
+                                onPrimary: Colors.white,
+                                textStyle: const TextStyle(
+                                  fontFamily: 'Ubuntu',
+                                  fontSize: 15,
+                                ),
+                              ),
+                              child: Text('Next'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
