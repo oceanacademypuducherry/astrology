@@ -257,6 +257,7 @@ class _LoginState extends State<Login> {
             curve: Curves.easeInToLinear,
             duration: Duration(milliseconds: 600));
       } else {
+        session();
         Get.to(
             () => Register(
                   userNumber: number,

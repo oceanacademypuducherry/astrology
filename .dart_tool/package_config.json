@@ -116,6 +116,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "file_picker",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-3.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "firebase_auth",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.0.1",
       "packageUri": "lib/",
@@ -518,7 +524,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-08-02T08:05:56.581886Z",
+  "generated": "2021-08-02T11:05:18.522851Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }
