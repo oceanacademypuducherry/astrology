@@ -1,5 +1,6 @@
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
+import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 // import 'package:file_picker/file_picker.dart';
@@ -489,7 +490,7 @@ class _RegisterState extends State<Register> {
                                 'profile': 'profilePictureLink',
                                 'PhoneNumber': widget.userNumber
                               });
-                              Get.to(() => HomeScreen(),
+                              Get.to(() => BottomNavigation(),
                                   transition: Transition.rightToLeft,
                                   curve: Curves.easeInToLinear,
                                   duration: Duration(milliseconds: 600));

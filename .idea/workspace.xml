@@ -25,7 +25,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="auth is finished">
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="home is completed">
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
@@ -43,10 +43,11 @@
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/ArticleDescription.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/ArticleDescription.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/SeeAllArticle.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/SeeAllArticle.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/loginscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/loginscreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/registerscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/registerscreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
@@ -75,6 +76,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="eu.ydp.idea.ts.spec.generator.settings.spec.template" value="import {$ClassName$} from '$TestsRelativePath$../src/$classRelativePath$/$ClassName$';&#10;&#10;describe('$ClassName$', () =&gt; {&#10;  let $ObjName$:$ClassName$;&#10;&#10;  beforeEach(() =&gt; {&#10;    $ObjName$ = new $ClassName$();&#10;  });&#10;&#10;  describe('', () =&gt; {&#10;    it('', () =&gt; {&#10;      // given&#10;&#10;      // when&#10;&#10;      // then&#10;    });&#10;  });&#10;});&#10;" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/images" />
@@ -201,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627733202158</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="home is completed">
+      <created>1627877226934</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1627877226934</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -227,7 +236,8 @@
     <MESSAGE value="checking......" />
     <MESSAGE value="auth is finished" />
     <MESSAGE value="updated books screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated books screen" />
+    <MESSAGE value="home is completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="home is completed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1627637081729">
@@ -250,30 +260,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="155" key="GridCell.Tab.0.bottom" timestamp="1627877074146">
+    <state width="1860" height="297" key="GridCell.Tab.0.bottom" timestamp="1627879317037">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="155" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1627877074146" />
-    <state width="1860" height="155" key="GridCell.Tab.0.center" timestamp="1627877074146">
+    <state width="1860" height="297" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1627879317037" />
+    <state width="1860" height="297" key="GridCell.Tab.0.center" timestamp="1627879317036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="155" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1627877074146" />
-    <state width="1860" height="155" key="GridCell.Tab.0.left" timestamp="1627877074146">
+    <state width="1860" height="297" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1627879317036" />
+    <state width="1860" height="297" key="GridCell.Tab.0.left" timestamp="1627879317036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="155" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1627877074146" />
-    <state width="1860" height="155" key="GridCell.Tab.0.right" timestamp="1627877074146">
+    <state width="1860" height="297" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1627879317036" />
+    <state width="1860" height="297" key="GridCell.Tab.0.right" timestamp="1627879317036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="155" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1627877074146" />
+    <state width="1860" height="297" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1627879317036" />
+    <state x="184" y="86" key="MergeDialog" timestamp="1627877343117">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="184" y="86" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627877343117" />
+    <state x="591" y="281" key="MultipleFileMergeDialog" timestamp="1627877343125">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627877343125" />
     <state x="336" y="77" key="SettingsEditor" timestamp="1627717639509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1627717639509" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1627834241645">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1627877375653">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1627834241645" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1627877375653" />
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1627640290603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -298,11 +316,6 @@
           <url>file://$PROJECT_DIR$/lib/main.dart</url>
           <line>25</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/SeeAllArticle.dart</url>
-          <line>54</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

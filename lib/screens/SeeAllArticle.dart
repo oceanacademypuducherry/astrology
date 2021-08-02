@@ -1,10 +1,11 @@
 import 'package:astrology_app/screens/ArticleDescription.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SeeAllArticle extends StatelessWidget {
-  const SeeAllArticle({Key? key}) : super(key: key);
-
+  // const SeeAllArticle({Key? key}) : super(key: key);
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,159 +51,45 @@ class SeeAllArticle extends StatelessWidget {
                   (BuildContext context, int index) {
                     return Column(
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            // Get.to(ArticleDescription(d));
+                        StreamBuilder<QuerySnapshot>(
+                          stream: _firestore.collection('articles').snapshots(),
+                          // ignore: missing_return
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return Text("Loading...");
+                            } else {
+                              final messages = snapshot.data!.docs;
+                              List<SeeAllArticlesDb> seeArticles = [];
+
+                              for (var message in messages) {
+                                final articleImage = message['articleImage'];
+                                final articleName = message['articleName'];
+                                final articleDescription = message['content'];
+                                final articles = SeeAllArticlesDb(
+                                  articleImage: articleImage,
+                                  articleName: articleName,
+                                  description: articleDescription,
+                                  onpress: () {
+                                    Get.to(
+                                        () => ArticleDescription(
+                                              description: articleDescription,
+                                            ),
+                                        transition: Transition.rightToLeft,
+                                        curve: Curves.easeInToLinear,
+                                        duration: Duration(milliseconds: 600));
+                                  },
+                                );
+                                // Text('$messageText from $messageSender');
+                                seeArticles.add(articles);
+                              }
+                              return Container(
+                                padding: EdgeInsets.symmetric(horizontal: 70),
+                                child: Column(
+                                  children: seeArticles,
+                                ),
+                              );
+                            }
                           },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 20),
-                            height: 200,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black45,
-                                  offset: const Offset(
-                                    5.0,
-                                    5.0,
-                                  ),
-                                  blurRadius: 10.0,
-                                  spreadRadius: 2.0,
-                                ), //BoxShadow
-                              ],
-                              color: Colors.black45,
-                            ),
-                            child: Image.asset(
-                              "images/article2.jpg",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 50),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          height: 200,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black45,
-                                offset: const Offset(
-                                  5.0,
-                                  5.0,
-                                ),
-                                blurRadius: 10.0,
-                                spreadRadius: 2.0,
-                              ), //BoxShadow
-                            ],
-                            color: Colors.black45,
-                          ),
-                          child: Image.asset(
-                            "images/article5.jpg",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(height: 50),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          height: 200,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black45,
-                                offset: const Offset(
-                                  5.0,
-                                  5.0,
-                                ),
-                                blurRadius: 10.0,
-                                spreadRadius: 2.0,
-                              ), //BoxShadow
-                            ],
-                            color: Colors.black45,
-                          ),
-                          child: Image.asset(
-                            "images/article5.jpg",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(height: 50),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          height: 200,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black45,
-                                offset: const Offset(
-                                  5.0,
-                                  5.0,
-                                ),
-                                blurRadius: 10.0,
-                                spreadRadius: 2.0,
-                              ), //BoxShadow
-                            ],
-                            color: Colors.black45,
-                          ),
-                          child: Image.asset(
-                            "images/article5.jpg",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(height: 50),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          height: 200,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black45,
-                                offset: const Offset(
-                                  5.0,
-                                  5.0,
-                                ),
-                                blurRadius: 10.0,
-                                spreadRadius: 2.0,
-                              ), //BoxShadow
-                            ],
-                            color: Colors.black45,
-                          ),
-                          child: Image.asset(
-                            "images/article5.jpg",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(height: 50),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          height: 200,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black45,
-                                offset: const Offset(
-                                  5.0,
-                                  5.0,
-                                ),
-                                blurRadius: 10.0,
-                                spreadRadius: 2.0,
-                              ), //BoxShadow
-                            ],
-                            color: Colors.black45,
-                          ),
-                          child: Image.asset(
-                            "images/article5.jpg",
-                            fit: BoxFit.cover,
-                          ),
                         ),
                       ],
                     );
@@ -218,66 +105,43 @@ class SeeAllArticle extends StatelessWidget {
   }
 }
 
-// GridView.count(
-// // Create a grid with 2 columns. If you change the scrollDirection to
-// // horizontal, this produces 2 rows.
-// crossAxisCount: 1,
-// children: [
-// Container(
-// margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-// height: 30,
-// decoration: BoxDecoration(
-// boxShadow: [
-// BoxShadow(
-// color: Colors.black45,
-// offset: const Offset(
-// 5.0,
-// 5.0,
-// ),
-// blurRadius: 10.0,
-// spreadRadius: 2.0,
-// ), //BoxShadow
-// BoxShadow(
-// color: Colors.white,
-// offset: const Offset(0.0, 0.0),
-// blurRadius: 0.0,
-// spreadRadius: 0.0,
-// ), //BoxShadow
-// ],
-// color: Colors.black45,
-// ),
-// child: Image.asset(
-// "images/article5.jpg",
-// fit: BoxFit.cover,
-// ),
-// ),
-// Container(
-// margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-// height: 30,
-// decoration: BoxDecoration(
-// boxShadow: [
-// BoxShadow(
-// color: Colors.black45,
-// offset: const Offset(
-// 5.0,
-// 5.0,
-// ),
-// blurRadius: 10.0,
-// spreadRadius: 2.0,
-// ), //BoxShadow
-// BoxShadow(
-// color: Colors.white,
-// offset: const Offset(0.0, 0.0),
-// blurRadius: 0.0,
-// spreadRadius: 0.0,
-// ), //BoxShadow
-// ],
-// color: Colors.black45,
-// ),
-// child: Image.asset(
-// "images/article5.jpg",
-// fit: BoxFit.cover,
-// ),
-// ),
-// ],
-// ),
+class SeeAllArticlesDb extends StatelessWidget {
+  String articleImage;
+  String articleName;
+  VoidCallback onpress;
+  String description;
+  SeeAllArticlesDb(
+      {required this.articleImage,
+      required this.onpress,
+      required this.articleName,
+      required this.description});
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onpress,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        height: 200,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black45,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 10.0,
+              spreadRadius: 2.0,
+            ), //BoxShadow
+          ],
+          color: Colors.black45,
+        ),
+        child: Image.network(
+          articleImage,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}

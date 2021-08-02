@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/registerscreen.dart';
+import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:astrology_app/widgets/auth_service.dart';
 import 'package:astrology_app/widgets/countrycode.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,7 +32,7 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
-  int start = 60;
+  int start = 30;
   bool wait = false;
   String buttonName = "Send";
   String verificationIdFinal = "";
@@ -383,7 +384,7 @@ class _LoginState extends State<Login> {
               : () async {
                   startTimer();
                   setState(() {
-                    start = 60;
+                    start = 30;
                     wait = true;
                     buttonName = "Resend";
                   });
@@ -463,7 +464,7 @@ class _LoginState extends State<Login> {
       print(userSession.data());
       if (userSession.data() != null) {
         session();
-        Get.to(() => HomeScreen(),
+        Get.to(() => BottomNavigation(),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
             duration: Duration(milliseconds: 600));
