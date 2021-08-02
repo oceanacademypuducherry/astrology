@@ -23,8 +23,7 @@ class _BooksDescriptionState extends State<BooksDescription> {
 
     Future _speak() async {
       await flutterTts.setLanguage('ta');
-      var result = await flutterTts.speak(
-          "காலை வணக்கம் காலை வணக்கம் காலை வணக்கம் காலை வணக்கம் காலை வணக்கம்");
+      var result = await flutterTts.speak("காலை வணக்கம்");
       print('$result  playing///////////////////////////////////');
       if (result == 1) setState(() => result = result.playing);
     }
