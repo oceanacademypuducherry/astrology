@@ -1,7 +1,13 @@
+import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
+import 'package:astrology_app/screens/loginscreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -92,7 +98,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.only(bottom: 10),
-                      height: 420,
+                      height: 600,
                       color: Colors.grey[200],
                       child: Column(
                         children: [
@@ -110,7 +116,14 @@ class HomeScreen extends StatelessWidget {
                                       fontFamily: 'Ubuntu'),
                                 ),
                                 TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Get.to(
+                                        () => SeeAllArticle(),
+                                        transition: Transition.rightToLeft,
+                                        curve: Curves.easeInToLinear,
+                                        duration: Duration(milliseconds: 600),
+                                      );
+                                    },
                                     child: Text(
                                       'See All',
                                       style: TextStyle(
@@ -121,98 +134,109 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          CarouselSlider(
-                            items: [
-                              GestureDetector(
-                                onTap: () {
-                                  print('ontap');
-                                  Get.to(SeeAllArticle());
+                          // Row(
+                          //   children: [
+                          //     StreamBuilder<QuerySnapshot>(
+                          //       stream: _firestore
+                          //           .collection('articles')
+                          //           .snapshots(),
+                          //       // ignore: missing_return
+                          //       builder: (context, snapshot) {
+                          //         if (!snapshot.hasData) {
+                          //           return Text("Loading...");
+                          //         } else {
+                          //           print('db enter');
+                          //           final messages = snapshot.data;
+                          //           print(messages);
+                          //           List<ArticleFromDb> articleList = [];
+                          //
+                          //           for (var message in messages!.docs) {
+                          //             final articleImage =
+                          //                 message['articleImage'];
+                          //
+                          //             final articleName =
+                          //                 message['articleName'];
+                          //             final articleDescription =
+                          //                 message['content'];
+                          //             final articles = ArticleFromDb(
+                          //               articleDescription: articleDescription,
+                          //               articleImage: articleImage,
+                          //               articleName: articleName,
+                          //               onpress: () {},
+                          //             );
+                          //             articleList.add(articles);
+                          //           }
+                          //           return Row(children: articleList);
+                          //         }
+                          //       },
+                          //     ),
+                          //   ],
+                          // ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              StreamBuilder<QuerySnapshot>(
+                                stream: _firestore
+                                    .collection('articles')
+                                    .snapshots(),
+                                // ignore: missing_return
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData) {
+                                    return Text("Loading...");
+                                  } else {
+                                    final messages = snapshot.data!.docs;
+                                    // ignore: non_constant_identifier_names
+                                    List<GestureDetector> DBUpcoming = [];
+                                    for (var message in messages) {
+                                      final images = message['articleImage'];
+                                      final articleName =
+                                          message['articleName'];
+                                      final articleDescription =
+                                          message['content'];
+
+                                      GestureDetector messageContent =
+                                          GestureDetector(
+                                              child: Container(
+                                                margin: EdgeInsets.all(10.0),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  image: DecorationImage(
+                                                    image: NetworkImage(images),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              onTap: () {
+                                                print('jaya');
+                                                Get.to(
+                                                    () => ArticleDescription(
+                                                          description:
+                                                              articleDescription,
+                                                        ),
+                                                    transition:
+                                                        Transition.rightToLeft,
+                                                    curve:
+                                                        Curves.easeInToLinear,
+                                                    duration: Duration(
+                                                        milliseconds: 600));
+                                              });
+
+                                      DBUpcoming.add(messageContent);
+                                    }
+                                    return Row(
+                                      children: [
+                                        ArticleFromDb(
+                                          articleImage: DBUpcoming,
+                                        ),
+                                      ],
+                                    );
+                                  }
                                 },
-                                child: Container(
-                                  margin: EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    image: DecorationImage(
-                                      image: AssetImage("images/article1.jpg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  print('ontap');
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    image: DecorationImage(
-                                      image: AssetImage("images/article2.jpg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  print('ontap');
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    image: DecorationImage(
-                                      image: AssetImage("images/article3.jpg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  print('ontap');
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    image: DecorationImage(
-                                      image: AssetImage("images/article4.jpeg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  print('ontap');
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    image: DecorationImage(
-                                      image: AssetImage("images/article5.jpg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
                               ),
                             ],
-                            //Slider Container properties
-                            options: CarouselOptions(
-                              height: 320.0,
-                              enlargeCenterPage: true,
-                              autoPlay: false,
-                              aspectRatio: 16 / 9,
-                              autoPlayCurve: Curves.fastOutSlowIn,
-                              enableInfiniteScroll: true,
-                              autoPlayAnimationDuration:
-                                  Duration(milliseconds: 800),
-                              viewportFraction: 0.8,
-                            ),
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -233,7 +257,15 @@ class HomeScreen extends StatelessWidget {
                                     fontFamily: 'Ubuntu'),
                               ),
                               TextButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    // SharedPreferences prefs =
+                                    //     await SharedPreferences.getInstance();
+                                    // await prefs.clear();
+                                    // Get.to(() => Login(),
+                                    //     transition: Transition.rightToLeft,
+                                    //     curve: Curves.easeInToLinear,
+                                    //     duration: Duration(milliseconds: 600));
+                                  },
                                   child: Text(
                                     'See All',
                                     style: TextStyle(
@@ -390,6 +422,34 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       )),
+    );
+  }
+}
+
+class ArticleFromDb extends StatelessWidget {
+  List<Widget> articleImage = [];
+
+  ArticleFromDb({required this.articleImage});
+  @override
+  Widget build(BuildContext context) {
+    // print(articleName);
+    return Container(
+      color: Colors.grey[100],
+      height: 400,
+      width: 350,
+      child: CarouselSlider(
+        items: articleImage,
+        options: CarouselOptions(
+          height: 280.0,
+          enlargeCenterPage: true,
+          autoPlay: false,
+          aspectRatio: 16 / 9,
+          autoPlayCurve: Curves.fastOutSlowIn,
+          enableInfiniteScroll: false,
+          autoPlayAnimationDuration: Duration(milliseconds: 800),
+          viewportFraction: 0.7,
+        ),
+      ),
     );
   }
 }
