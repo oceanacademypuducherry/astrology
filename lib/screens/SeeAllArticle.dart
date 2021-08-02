@@ -52,7 +52,7 @@ class SeeAllArticle extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Get.to(ArticleDescription());
+                            // Get.to(ArticleDescription(d));
                           },
                           child: Container(
                             margin: EdgeInsets.symmetric(
