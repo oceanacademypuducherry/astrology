@@ -93,11 +93,14 @@ class _LoginState extends State<Login> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
             child: Text(
-              wait ? 'Resend' : 'Send',
+              wait ? 'RESEND' : 'SEND',
               style: TextStyle(
-                color: wait ? Colors.blue : Colors.black,
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
+                color: wait ? Colors.pinkAccent : Colors.black,
+                fontSize: 14,
+                height: 1.3,
+                fontWeight: FontWeight.w400,
+                fontFamily: "Ubuntu",
+                letterSpacing: 0.6,
               ),
             ),
           ),
@@ -138,12 +141,19 @@ class _LoginState extends State<Login> {
       width: MediaQuery.of(context).size.width,
       fieldWidth: 35,
       otpFieldStyle: OtpFieldStyle(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey.shade300,
         borderColor: Colors.white,
       ),
-      style: TextStyle(fontSize: 17, color: Colors.white),
+      style: TextStyle(
+        color: Colors.black.withOpacity(0.7),
+        fontSize: 14,
+        height: 1.3,
+        fontWeight: FontWeight.w600,
+        fontFamily: "Ubuntu",
+        letterSpacing: 0.6,
+      ),
       textFieldAlignment: MainAxisAlignment.spaceEvenly,
-      fieldStyle: FieldStyle.underline,
+      fieldStyle: FieldStyle.box,
       onCompleted: (pin) {
         print("Completed: " + pin);
         setState(() {
@@ -360,7 +370,7 @@ class _LoginState extends State<Login> {
       child: Scaffold(
         body: Container(
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Color(0xff045de9),
           ),
           child: SingleChildScrollView(
             physics: NeverScrollableScrollPhysics(),
@@ -382,7 +392,7 @@ class _LoginState extends State<Login> {
                               width: MediaQuery.of(context).size.width,
                               child: CircleAvatar(
                                 backgroundColor: Colors.black12,
-                                radius: 30,
+                                radius: 50,
                                 child: Icon(
                                   Icons.phonelink_lock,
                                   color: Colors.white,
@@ -396,7 +406,7 @@ class _LoginState extends State<Login> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w900,
                                 fontFamily: 'Ubuntu',
-                                fontSize: 15,
+                                fontSize: 16,
                                 color: Colors.white,
                               ),
                             ),
@@ -418,17 +428,17 @@ class _LoginState extends State<Login> {
                   ),
                 ), //content1
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 30),
+                  padding: EdgeInsets.symmetric(vertical: 20),
                   height: MediaQuery.of(context).size.height - m,
                   decoration: BoxDecoration(
-                    color: Colors.grey[200],
+                    color: Colors.grey[100],
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(0),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 10),
@@ -457,7 +467,7 @@ class _LoginState extends State<Login> {
                                     ),
                                   ]),
                               width: MediaQuery.of(context).size.width - 50,
-                              height: 60,
+                              height: 55,
                               child: CountryCodePicker(
                                 favorite: ['+91', '+54', 'US'],
                                 textStyle: TextStyle(
@@ -502,7 +512,7 @@ class _LoginState extends State<Login> {
                             Container(
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 20),
-                              padding: const EdgeInsets.only(left: 15, top: 5),
+                              padding: const EdgeInsets.only(left: 15),
                               decoration: const BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
@@ -519,7 +529,7 @@ class _LoginState extends State<Login> {
                                     ),
                                   ]),
                               width: MediaQuery.of(context).size.width - 50,
-                              height: 60,
+                              height: 55,
                               child: _buildphonenumber(),
                             ),
                           ],
@@ -531,16 +541,36 @@ class _LoginState extends State<Login> {
                         children: [
                           TextSpan(
                             text: "Send OTP again in ",
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.7),
+                              fontSize: 14,
+                              height: 1.3,
+                              fontWeight: FontWeight.normal,
+                              fontFamily: "Ubuntu",
+                              letterSpacing: 0.6,
+                            ),
                           ),
                           TextSpan(
                             text: '00:$start',
                             style: TextStyle(
-                                fontSize: 16, color: Colors.pinkAccent),
+                              color: Colors.pinkAccent.withOpacity(0.7),
+                              fontSize: 14,
+                              height: 1.3,
+                              fontWeight: FontWeight.normal,
+                              fontFamily: "Ubuntu",
+                              letterSpacing: 0.6,
+                            ),
                           ),
                           TextSpan(
                             text: " sec ",
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.7),
+                              fontSize: 14,
+                              height: 1.3,
+                              fontWeight: FontWeight.normal,
+                              fontFamily: "Ubuntu",
+                              letterSpacing: 0.6,
+                            ),
                           ),
                         ],
                       )),
@@ -574,9 +604,10 @@ class _LoginState extends State<Login> {
                             textStyle: const TextStyle(
                               fontFamily: 'Ubuntu',
                               fontSize: 15,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          child: Text('Send OTP'),
+                          child: Text('SEND OTP'),
                         ),
                       ),
                     ],

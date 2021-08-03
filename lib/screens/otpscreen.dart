@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/registerscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,19 +7,19 @@ import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class OTP extends StatefulWidget {
+class OTPScreen extends StatefulWidget {
   String? verificationId;
   String? userNumber;
-  OTP({this.verificationId, this.userNumber});
+  OTPScreen({this.verificationId, this.userNumber});
 
   @override
-  State<OTP> createState() => _OTPState();
+  State<OTPScreen> createState() => _OTPScreenState();
 }
 
 FirebaseAuth _auth = FirebaseAuth.instance;
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-class _OTPState extends State<OTP> {
+class _OTPScreenState extends State<OTPScreen> {
   final BoxDecoration pinPutDecoration = BoxDecoration(
     color: Colors.white,
     borderRadius: BorderRadius.circular(10.0),
@@ -79,6 +78,7 @@ class _OTPState extends State<OTP> {
 
   @override
   Widget build(BuildContext context) {
+    var getOtp = Get.arguments;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -244,6 +244,7 @@ class _OTPState extends State<OTP> {
                   child: const Text('Next'),
                 ),
               ),
+              Text(getOtp),
             ],
           ),
         ),
