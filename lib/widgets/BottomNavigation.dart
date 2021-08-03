@@ -30,7 +30,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         elevation: 10,
-        selectedLabelStyle: TextStyle(fontFamily: 'Ubuntu', fontSize: 11),
+        selectedLabelStyle: TextStyle(
+          fontFamily: 'Ubuntu',
+          fontSize: 11,
+        ),
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         showSelectedLabels: true,

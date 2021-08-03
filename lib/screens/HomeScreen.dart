@@ -1,4 +1,5 @@
 import 'package:astrology_app/screens/ArticleDescription.dart';
+import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
           body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            floating: true,
+            floating: false,
             expandedHeight: 220,
             // automaticallyImplyLeading: true,
             // toolbarHeight: 100,
@@ -265,6 +266,7 @@ class HomeScreen extends StatelessWidget {
                                     //     transition: Transition.rightToLeft,
                                     //     curve: Curves.easeInToLinear,
                                     //     duration: Duration(milliseconds: 600));
+                                    Get.to(QueryScreen());
                                   },
                                   child: Text(
                                     'See All',
