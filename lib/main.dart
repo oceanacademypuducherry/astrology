@@ -1,6 +1,7 @@
 import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
+import 'package:astrology_app/screens/ouery_fetch.dart';
 import 'package:astrology_app/screens/registerscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: Scaffold(body: Login()),
     ),
   );
 }

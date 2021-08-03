@@ -103,8 +103,11 @@ class _LoginState extends State<Login> {
           ),
           onTap: wait
               ? () async {
-                  number =
-                      '${countryCode.toString()} ${phoneNumberController.text}';
+                  setState(() {
+                    number =
+                        '${countryCode.toString()} ${phoneNumberController.text}';
+                  });
+
                   user_id(number!);
                   await authClass.verifyPhoneNumber("${number}", setData);
                 }
@@ -119,6 +122,7 @@ class _LoginState extends State<Login> {
                       '${countryCode.toString()} ${phoneNumberController.text}';
                   // userNumberToAUth(number!);
                   user_id(number!);
+                  print(getId);
                   await authClass.verifyPhoneNumber("${number}", setData);
 
                   isClick = true;
@@ -181,6 +185,8 @@ class _LoginState extends State<Login> {
             )),
             ElevatedButton(
               onPressed: () {
+                print(
+                    '$number nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn');
                 signInwithPhoneNumber(
                   verificationIdFinal,
                   smsCode,
@@ -225,19 +231,6 @@ class _LoginState extends State<Login> {
     String verificationId,
     String smsCode,
   ) async {
-    // try {
-    //   AuthCredential credential = PhoneAuthProvider.credential(
-    //       verificationId: verificationId, smsCode: smsCode);
-    //
-    //   await _auth.signInWithCredential(credential).then((value) async {
-    //     if (value.user != null) {
-    //       Get.to(() => HomeScreen(),
-    //           transition: Transition.rightToLeft,
-    //           curve: Curves.easeInToLinear,
-    //           duration: Duration(milliseconds: 600));
-    //     }
-    //   });
-    // }
     try {
       AuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: smsCode);
@@ -258,6 +251,8 @@ class _LoginState extends State<Login> {
             duration: Duration(milliseconds: 600));
       } else {
         session();
+        print(
+            '$number aaaaaaaaaaaaaaaaaaattttttttttttttttttttttttssssssssssseeeeeeeee');
         Get.to(
             () => Register(
                   userNumber: number,

@@ -148,7 +148,8 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    final fileName = file != null ? basename(file!.path) : 'No File Selected';
+    print(widget.userNumber);
+    // final fileName = file != null ? basename(file!.path) : 'No File Selected';
 
     return SafeArea(
       child: Scaffold(
@@ -237,13 +238,11 @@ class _RegisterState extends State<Register> {
                                             ),
                                           ),
                                         ]),
-                                    child: const CircleAvatar(
+                                    child: CircleAvatar(
                                       maxRadius: 47,
                                       backgroundColor: Colors.white,
-                                      child: Icon(
-                                        Icons.person_rounded,
-                                        size: 40,
-                                      ),
+                                      backgroundImage:
+                                          NetworkImage("${profilePictureLink}"),
                                     ),
                                   ),
                                 ),
