@@ -309,22 +309,27 @@ class HomeScreen extends StatelessWidget {
                                   ))
                             ],
                           ),
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                              vertical: 10,
-                              horizontal: 10,
-                            ),
-                            width: double.infinity,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("images/askquery.jpg"),
-                                fit: BoxFit.cover,
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(QueryScreen());
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 10,
                               ),
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                width: 2,
-                                color: Colors.blue,
+                              width: double.infinity,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("images/askquery.jpg"),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  width: 2,
+                                  color: Colors.blue,
+                                ),
                               ),
                             ),
                           ),
