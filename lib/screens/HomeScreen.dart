@@ -271,9 +271,12 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      height: 310,
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      height: 300,
+                      // color: Colors.blue,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -308,13 +311,20 @@ class HomeScreen extends StatelessWidget {
                           ),
                           Container(
                             margin: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 10),
+                              vertical: 10,
+                              horizontal: 10,
+                            ),
                             width: double.infinity,
                             height: 200,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage("images/anyquestion.jpg"),
+                                image: AssetImage("images/askquery.jpg"),
                                 fit: BoxFit.cover,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                width: 2,
+                                color: Colors.blue,
                               ),
                             ),
                           ),
@@ -322,6 +332,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
+                      margin: EdgeInsets.symmetric(vertical: 20),
                       padding: EdgeInsets.only(bottom: 10),
                       color: Colors.grey[200],
                       child: Column(
