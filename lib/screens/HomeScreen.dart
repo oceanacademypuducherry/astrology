@@ -238,7 +238,7 @@ class HomeScreen extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   print('ontap');
-                                  Get.to(() => VedioPlayer(),
+                                  Get.to(() => PortraitLandscapePlayerPage(),
                                       // transition: Transition.cupertinoDialog,
                                       fullscreenDialog: true,
                                       curve: Curves.easeInToLinear,
