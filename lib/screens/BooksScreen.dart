@@ -219,7 +219,7 @@ class _BooksScreenState extends State<BooksScreen> {
                       runSpacing: 10,
                       spacing: 40,
                       children: [
-                        //books
+                        //books StreamBuilder
                         StreamBuilder<QuerySnapshot>(
                           stream: _firestore.collection('books').snapshots(),
                           // ignore: missing_return
@@ -250,11 +250,12 @@ class _BooksScreenState extends State<BooksScreen> {
                                 Books.add(items);
                               }
                               return Container(
+                                // color: Colors.indigo,
                                 padding: EdgeInsets.symmetric(horizontal: 10),
                                 child: Wrap(
-                                  alignment: WrapAlignment.center,
-                                  spacing: 70.0,
-                                  runSpacing: 30,
+                                  alignment: WrapAlignment.start,
+                                  spacing: 50.0,
+                                  runSpacing: 0,
                                   children: Books,
                                 ),
                               );
@@ -313,20 +314,30 @@ class BooksDb extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin:
-                        EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
-                    decoration: BoxDecoration(color: Colors.blueGrey),
-                    padding: EdgeInsets.all(5.0),
-                    height: 23,
-                    width: 45,
                     child: bookType == 'free'
-                        ? Text(
-                            'FREE',
-                            style: TextStyle(color: Colors.white),
+                        ? Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 5.0, horizontal: 5.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: EdgeInsets.all(5.0),
+                            height: 23,
+                            width: 40,
+                            child: Text(
+                              'FREE',
+                              style: TextStyle(
+                                color: Colors.blue.withOpacity(0.8),
+                                fontSize: 12,
+                                fontFamily: 'Ubuntu',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           )
-                        : Text(
-                            'PAID',
-                            style: TextStyle(color: Colors.white),
+                        : CircleAvatar(
+                            radius: 10,
+                            child: Icon(Icons.lock),
                           ),
                   ),
                 ],
@@ -379,6 +390,8 @@ class BooksDb extends StatelessWidget {
     );
   }
 }
+
+//Icon Gradients
 
 class GradientIcon extends StatelessWidget {
   GradientIcon(
