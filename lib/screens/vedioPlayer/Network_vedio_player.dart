@@ -1,5 +1,6 @@
 import 'package:astrology_app/screens/vedioPlayer/VedioPlayer_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 // class VedioPlayer extends StatefulWidget {
@@ -78,7 +79,9 @@ class _PortraitLandscapePlayerPageState
   @override
   void dispose() {
     controller.dispose();
-
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     super.dispose();
   }
 

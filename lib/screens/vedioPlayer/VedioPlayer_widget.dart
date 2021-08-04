@@ -25,7 +25,6 @@ class _VideoPlayerBothWidgetState extends State<VideoPlayerBothWidget> {
   @override
   void initState() {
     super.initState();
-
     // NativeDeviceOrientationCommunicator()
     //     .onOrientationChanged(useSensor: true)
     //     .listen((event) {
