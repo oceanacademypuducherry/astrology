@@ -297,18 +297,39 @@ class BooksDb extends StatelessWidget {
           margin: EdgeInsets.symmetric(vertical: 10),
           child: Column(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  height: 180,
-                  width: 135,
-                  child: Image.network(
-                    bookImage,
-                    fit: BoxFit.cover,
+              Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      height: 180,
+                      width: 135,
+                      child: Image.network(
+                        bookImage,
+                        fit: BoxFit.fill,
 
-                    // alignment: Alignment.center,
+                        // alignment: Alignment.center,
+                      ),
+                    ),
                   ),
-                ),
+                  Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+                    decoration: BoxDecoration(color: Colors.blueGrey),
+                    padding: EdgeInsets.all(5.0),
+                    height: 23,
+                    width: 40,
+                    child: bookType == 'free'
+                        ? Text(
+                            'FREE',
+                            style: TextStyle(color: Colors.white),
+                          )
+                        : Text(
+                            'PAID',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                  ),
+                ],
               ),
               SizedBox(height: 8),
               Container(
@@ -408,57 +429,3 @@ class IconSample extends StatelessWidget {
     );
   }
 }
-
-// Get.bottomSheet(
-// Container(
-// height: 150,
-// color: Colors.white,
-// child: Column(
-// children: [
-// Row(
-// mainAxisAlignment: MainAxisAlignment.start,
-// children: [
-// Container(
-// height: 20,
-// child: Image.asset(
-// 'images/razorpay.png',
-// fit: BoxFit.cover,
-// ),
-// ),
-// ],
-// ),
-// Container(
-// margin: EdgeInsets.symmetric(horizontal: 15),
-// child: Row(
-// mainAxisAlignment:
-// MainAxisAlignment.spaceBetween,
-// children: [
-// Container(
-// alignment: Alignment.center,
-// color: Colors.blue,
-// width: 120,
-// height: 50,
-// child: Text('Payment Amount')),
-// Container(
-// alignment: Alignment.center,
-// color: Colors.blue,
-// width: 120,
-// height: 50,
-// child: Text('₹ 12,000'),
-// )
-// ],
-// ),
-// ),
-// ],
-// )),
-// barrierColor: Colors.transparent,
-// isDismissible: true,
-// shape: RoundedRectangleBorder(
-// // borderRadius: BorderRadius.only(topLeft: 1),
-// side: BorderSide(
-// width: 0.1,
-// color: Colors.black,
-// ),
-// ),
-// enableDrag: true,
-// );
