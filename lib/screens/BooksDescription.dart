@@ -1,4 +1,5 @@
 import 'package:astrology_app/screens/PdfView.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -29,6 +30,8 @@ class BooksDescription extends StatefulWidget {
 
 class _BooksDescriptionState extends State<BooksDescription> {
   late Razorpay _razorpay;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  String? getId;
 
   @override
   void initState() {
@@ -37,6 +40,22 @@ class _BooksDescriptionState extends State<BooksDescription> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    book_id();
+  }
+
+  void book_id() async {
+    print("---------------------------");
+    await for (var snapshot in _firestore
+        .collection('books')
+        .where("bookLink", isEqualTo: widget.bookImage)
+        .snapshots(includeMetadataChanges: true)) {
+      for (var message in snapshot.docs) {
+        getId = message.id;
+        print('${getId} testingggggggggggggggggggggggggggggggggggg');
+      }
+    }
+
+    print("---------------------------");
   }
 
   @override
@@ -82,7 +101,6 @@ class _BooksDescriptionState extends State<BooksDescription> {
     }
   }
 
-  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
   bool isOpen = false;
   @override
   Widget build(BuildContext context) {
@@ -258,7 +276,11 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                         //     ?.openBookmarkView();
                                       }
                                     : () {
-                                        openCheckout();
+                                        _firestore
+                                            .collection('books')
+                                            .doc(getId)
+                                            .update({'type': 'free'});
+                                        // openCheckout();
                                       },
                                 child: widget.bookType == 'free'
                                     ? Text('View Pdf')
