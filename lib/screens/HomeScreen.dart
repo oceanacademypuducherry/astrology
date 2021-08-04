@@ -1,4 +1,5 @@
 import 'package:astrology_app/screens/ArticleDescription.dart';
+import 'package:astrology_app/screens/FreeVideos.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
@@ -376,7 +377,8 @@ class HomeScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8.0),
                                     image: DecorationImage(
-                                      image: AssetImage("images/freevideo.jpg"),
+                                      image:
+                                          AssetImage("images/premiumlock.png"),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -385,13 +387,20 @@ class HomeScreen extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   print('ontap');
+                                  Get.to(() => FreeVideos(),
+                                      transition: Transition.topLevel,
+                                      // fullscreenDialog: true,
+                                      curve: Curves.easeInToLinear,
+                                      duration: Duration(milliseconds: 600));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.all(10.0),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8.0),
                                     image: DecorationImage(
-                                      image: AssetImage("images/article3.jpg"),
+                                      image: AssetImage(
+                                        "images/freevideo.png",
+                                      ),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
