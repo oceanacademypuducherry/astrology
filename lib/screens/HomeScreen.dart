@@ -1,6 +1,7 @@
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
+import 'package:astrology_app/screens/SubscribeVideo.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -364,13 +365,18 @@ class HomeScreen extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   print('ontap');
+                                  Get.to(() => SubscribeVideoScreen(),
+                                      // transition: Transition.cupertinoDialog,
+                                      fullscreenDialog: true,
+                                      curve: Curves.easeInToLinear,
+                                      duration: Duration(milliseconds: 600));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.all(10.0),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8.0),
                                     image: DecorationImage(
-                                      image: AssetImage("images/article2.jpg"),
+                                      image: AssetImage("images/freevideo.jpg"),
                                       fit: BoxFit.cover,
                                     ),
                                   ),

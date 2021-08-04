@@ -141,13 +141,13 @@ class _LoginState extends State<Login> {
       width: MediaQuery.of(context).size.width,
       fieldWidth: 35,
       otpFieldStyle: OtpFieldStyle(
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.white,
         borderColor: Colors.white,
       ),
       style: TextStyle(
         color: Colors.black.withOpacity(0.7),
         fontSize: 14,
-        height: 1.3,
+        height: 1,
         fontWeight: FontWeight.w600,
         fontFamily: "Ubuntu",
         letterSpacing: 0.6,
