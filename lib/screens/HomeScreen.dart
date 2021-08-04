@@ -4,6 +4,7 @@ import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
+import 'package:astrology_app/screens/vedioPlayer/Network_vedio_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -17,37 +18,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          // drawer: Drawer(
-          //   // Add a ListView to the drawer. This ensures the user can scroll
-          //   // through the options in the drawer if there isn't enough vertical
-          //   // space to fit everything.
-          //   child: ListView(
-          //     // Important: Remove any padding from the ListView.
-          //     padding: EdgeInsets.zero,
-          //     children: [
-          //       const DrawerHeader(
-          //         decoration: BoxDecoration(
-          //           color: Colors.blue,
-          //         ),
-          //         child: Text('Drawer Header'),
-          //       ),
-          //       ListTile(
-          //         title: const Text('Favorite'),
-          //         onTap: () {
-          //           // Update the state of the app.
-          //           // ...
-          //         },
-          //       ),
-          //       ListTile(
-          //         title: const Text('Item 2'),
-          //         onTap: () {
-          //           // Update the state of the app.
-          //           // ...
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // ),
           body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -62,66 +32,6 @@ class HomeScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            // title: Container(
-            //   // color: Colors.pinkAccent,
-            //   // width: 200,
-            //   // height: MediaQuery.of(context).size.height,
-            //   child: Container(
-            //     margin: EdgeInsets.only(top: 20),
-            //     child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.start,
-            //       children: [
-            //         Container(
-            //           padding: EdgeInsets.all(6),
-            //           decoration: BoxDecoration(
-            //             color: Colors.blue,
-            //             border: Border.all(color: Colors.white, width: 4),
-            //             borderRadius: BorderRadius.circular(45),
-            //             boxShadow: [
-            //               new BoxShadow(
-            //                   color: Colors.white70,
-            //                   blurRadius: 40.0,
-            //                   spreadRadius: 4),
-            //             ],
-            //           ),
-            //           child: CircleAvatar(
-            //             radius: 28,
-            //             // backgroundColor: Colors.blue,
-            //             child: CircleAvatar(
-            //               radius: 34,
-            //               backgroundColor: Colors.white,
-            //               child: Icon(
-            //                 Icons.person_rounded,
-            //                 color: Colors.grey[300],
-            //                 size: 50,
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //         SizedBox(height: 10),
-            //         Container(
-            //           child: Text(
-            //             'GOOD MORNING, IJASS',
-            //             style: TextStyle(
-            //                 color: Colors.white,
-            //                 fontSize: 20,
-            //                 fontFamily: "Ubuntu"),
-            //           ),
-            //         ),
-            //         SizedBox(height: 10),
-            //         Container(
-            //           child: Text(
-            //             'Free Article are available explore for the Day',
-            //             style: TextStyle(
-            //                 color: Colors.white,
-            //                 fontSize: 12,
-            //                 fontFamily: "Ubuntu"),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -166,44 +76,6 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          // Row(
-                          //   children: [
-                          //     StreamBuilder<QuerySnapshot>(
-                          //       stream: _firestore
-                          //           .collection('articles')
-                          //           .snapshots(),
-                          //       // ignore: missing_return
-                          //       builder: (context, snapshot) {
-                          //         if (!snapshot.hasData) {
-                          //           return Text("Loading...");
-                          //         } else {
-                          //           print('db enter');
-                          //           final messages = snapshot.data;
-                          //           print(messages);
-                          //           List<ArticleFromDb> articleList = [];
-                          //
-                          //           for (var message in messages!.docs) {
-                          //             final articleImage =
-                          //                 message['articleImage'];
-                          //
-                          //             final articleName =
-                          //                 message['articleName'];
-                          //             final articleDescription =
-                          //                 message['content'];
-                          //             final articles = ArticleFromDb(
-                          //               articleDescription: articleDescription,
-                          //               articleImage: articleImage,
-                          //               articleName: articleName,
-                          //               onpress: () {},
-                          //             );
-                          //             articleList.add(articles);
-                          //           }
-                          //           return Row(children: articleList);
-                          //         }
-                          //       },
-                          //     ),
-                          //   ],
-                          // ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -366,7 +238,7 @@ class HomeScreen extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   print('ontap');
-                                  Get.to(() => SubscribeVideoScreen(),
+                                  Get.to(() => VedioPlayer(),
                                       // transition: Transition.cupertinoDialog,
                                       fullscreenDialog: true,
                                       curve: Curves.easeInToLinear,

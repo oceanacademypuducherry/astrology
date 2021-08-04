@@ -55,6 +55,7 @@ dependencies:
   file_picker: ^3.0.0
   razorpay_flutter: ^1.2.7
   fluttertoast: ^8.0.8
+  video_player: ^2.1.12
 
 
 

@@ -318,7 +318,7 @@ class BooksDb extends StatelessWidget {
                     decoration: BoxDecoration(color: Colors.blueGrey),
                     padding: EdgeInsets.all(5.0),
                     height: 23,
-                    width: 40,
+                    width: 45,
                     child: bookType == 'free'
                         ? Text(
                             'FREE',
