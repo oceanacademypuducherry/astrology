@@ -57,8 +57,9 @@ dependencies:
   razorpay_flutter: ^1.2.7
   fluttertoast: ^8.0.8
   video_player: ^2.1.12
-  wakelock: ^0.5.2
-  native_device_orientation: ^1.0.0
+  better_player: ^0.0.72
+  youtube_player_flutter: ^8.0.0
+
 
 
 

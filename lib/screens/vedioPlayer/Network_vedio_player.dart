@@ -55,14 +55,12 @@ import 'package:video_player/video_player.dart';
 //   }
 // }
 
-class PortraitLandscapePlayerPage extends StatefulWidget {
+class NativeVedioScreen extends StatefulWidget {
   @override
-  _PortraitLandscapePlayerPageState createState() =>
-      _PortraitLandscapePlayerPageState();
+  _NativeVedioScreenState createState() => _NativeVedioScreenState();
 }
 
-class _PortraitLandscapePlayerPageState
-    extends State<PortraitLandscapePlayerPage> {
+class _NativeVedioScreenState extends State<NativeVedioScreen> {
   late VideoPlayerController controller;
 
   @override
