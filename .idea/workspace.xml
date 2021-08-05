@@ -25,9 +25,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="updated books screen video screen">
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="checking vedio">
+      <change afterPath="$PROJECT_DIR$/lib/screens/NativeVedioScreen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/PaidVedios.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/vedioPlayer/custom_control_buttons.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/vedioPlayer/youtubeScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
@@ -46,9 +51,17 @@
       <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/FreeVideos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/FreeVideos.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/SubscribeVideo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/SubscribeVideo.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/vedioPlayer/Network_vedio_player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/vedioPlayer/Network_vedio_player.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/vedioPlayer/VedioPlayer_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/vedioPlayer/VedioPlayer_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/vedioPlayer/overlayWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/vedioPlayer/overlayWidget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,14 +96,14 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\jass0\Desktop\astrology\images" />
-      <recent name="C:\Users\kjaya\Documents\flutter\astrology\android\app" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jass0\Desktop\astrology\images" />
       <recent name="C:\Users\jass0\StudioProjects\astrology_app\images" />
       <recent name="C:\Users\jass0\StudioProjects\astrology_app\fonts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jass0\Desktop\astrology\images" />
+      <recent name="C:\Users\kjaya\Documents\flutter\astrology\android\app" />
     </key>
   </component>
   <component name="RunManager">
@@ -99,7 +112,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -265,14 +278,28 @@
       <option name="project" value="LOCAL" />
       <updated>1627991164271</updated>
     </task>
-    <task id="LOCAL-00023" summary="updated books screen video screen">
-      <created>1628061874018</created>
+    <task id="LOCAL-00023" summary="vedio half completed">
+      <created>1628057286377</created>
       <option name="number" value="00023" />
       <option name="presentableId" value="LOCAL-00023" />
       <option name="project" value="LOCAL" />
-      <updated>1628061874018</updated>
+      <updated>1628057286377</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="vedio not complete">
+      <created>1628061766052</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1628061766052</updated>
+    </task>
+    <task id="LOCAL-00025" summary="checking vedio">
+      <created>1628061838606</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1628061838606</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,8 +334,10 @@
     <MESSAGE value="commit 1" />
     <MESSAGE value="pdf to next page" />
     <MESSAGE value="query completed" />
-    <MESSAGE value="updated books screen video screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated books screen video screen" />
+    <MESSAGE value="vedio half completed" />
+    <MESSAGE value="vedio not complete" />
+    <MESSAGE value="checking vedio" />
+    <option name="LAST_COMMIT_MESSAGE" value="checking vedio" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1627881964327">
@@ -331,50 +360,54 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1865" height="255" key="GridCell.Tab.0.bottom" timestamp="1628062342484">
+    <state width="1860" height="324" key="GridCell.Tab.0.bottom" timestamp="1628133306089">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628062342484" />
-    <state width="1865" height="255" key="GridCell.Tab.0.center" timestamp="1628062342484">
+    <state width="1860" height="324" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628133306089" />
+    <state width="1860" height="324" key="GridCell.Tab.0.center" timestamp="1628133306089">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="255" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628062342484" />
-    <state width="1865" height="255" key="GridCell.Tab.0.left" timestamp="1628062342484">
+    <state width="1860" height="324" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628133306089" />
+    <state width="1860" height="324" key="GridCell.Tab.0.left" timestamp="1628133306088">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="255" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628062342484" />
-    <state width="1865" height="255" key="GridCell.Tab.0.right" timestamp="1628062342484">
+    <state width="1860" height="324" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628133306088" />
+    <state width="1860" height="324" key="GridCell.Tab.0.right" timestamp="1628133306089">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="255" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628062342484" />
-    <state x="184" y="86" key="MergeDialog" timestamp="1627991253687">
+    <state width="1860" height="324" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628133306089" />
+    <state x="184" y="86" key="MergeDialog" timestamp="1628062860316">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="184" y="86" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627991253687" />
-    <state x="591" y="281" key="MultipleFileMergeDialog" timestamp="1628061893970">
+    <state x="184" y="86" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628062860316" />
+    <state x="591" y="281" key="MultipleFileMergeDialog" timestamp="1628061804358">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628061893970" />
+    <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628061804358" />
     <state x="336" y="77" key="SettingsEditor" timestamp="1627717639509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1627717639509" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628061899463">
+    <state x="747" y="236" key="VCS.ChangeListViewerDialog" timestamp="1628061925817">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628061899463" />
+    <state x="747" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628061925817" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628061846524">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628061846524" />
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1627640290603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627640290603" />
-    <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1627989959242">
+    <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1628064024434">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1627989959242" />
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1628061913440">
+    <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1628064024434" />
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1628062806016">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628061913440" />
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628062806016" />
     <state x="416" y="126" key="new project wizard" timestamp="1627575717306">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -405,6 +438,16 @@
           <url>file://$PROJECT_DIR$/lib/screens/loginscreen.dart</url>
           <line>601</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/vedioPlayer/youtubeScreen.dart</url>
+          <line>6</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/vedioPlayer/youtubeScreen.dart</url>
+          <line>88</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

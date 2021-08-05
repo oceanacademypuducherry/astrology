@@ -1,4 +1,6 @@
+import 'package:astrology_app/screens/PaidVedios.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SubscribeVideoScreen extends StatelessWidget {
   const SubscribeVideoScreen({Key? key}) : super(key: key);
@@ -75,7 +77,13 @@ class SubscribeVideoScreen extends StatelessWidget {
                         margin: EdgeInsets.symmetric(vertical: 10),
                         width: 250,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(() => PaidVedios(),
+                                // transition: Transition.cupertinoDialog,
+                                fullscreenDialog: true,
+                                curve: Curves.easeInToLinear,
+                                duration: Duration(milliseconds: 600));
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

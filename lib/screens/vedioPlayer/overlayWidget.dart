@@ -23,9 +23,10 @@ class AdvancedOverlayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
+        onTap: () {
+          controller.value.isPlaying ? controller.pause() : controller.play();
+        },
         behavior: HitTestBehavior.opaque,
-        onTap: () =>
-            controller.value.isPlaying ? controller.pause() : controller.play(),
         child: Stack(
           children: <Widget>[
             buildPlay(),
@@ -88,7 +89,42 @@ class AdvancedOverlayWidget extends StatelessWidget {
       );
 
   Widget buildPlay() => controller.value.isPlaying
-      ? Container()
+      ? Container(
+          // color: Colors.black26,
+          // child: Center(
+          //     child: Row(
+          //   children: [
+          //     IconButton(
+          //       icon: Icon(
+          //         Icons.fast_rewind,
+          //         size: 70,
+          //       ),
+          //       color: Colors.white,
+          //       onPressed: () {},
+          //     ),
+          //     IconButton(
+          //       icon: Icon(
+          //         Icons.play_arrow,
+          //         size: 70,
+          //       ),
+          //       color: Colors.white,
+          //       onPressed: () {
+          //         controller.value.isPlaying
+          //             ? controller.pause()
+          //             : controller.play();
+          //       },
+          //     ),
+          //     IconButton(
+          //       icon: Icon(
+          //         Icons.fast_forward,
+          //         size: 70,
+          //       ),
+          //       color: Colors.white,
+          //       onPressed: () {},
+          //     ),
+          //   ],
+          // )),
+          )
       : Container(
           color: Colors.black26,
           child: Center(
@@ -97,6 +133,38 @@ class AdvancedOverlayWidget extends StatelessWidget {
               color: Colors.white,
               size: 70,
             ),
+            //     Row(
+            //   children: [
+            //     IconButton(
+            //       icon: Icon(
+            //         Icons.fast_rewind,
+            //         size: 70,
+            //       ),
+            //       color: Colors.white,
+            //       onPressed: () {},
+            //     ),
+            //     IconButton(
+            //       icon: Icon(
+            //         Icons.play_arrow,
+            //         size: 70,
+            //       ),
+            //       color: Colors.white,
+            //       onPressed: () {
+            //         controller.value.isPlaying
+            //             ? controller.pause()
+            //             : controller.play();
+            //       },
+            //     ),
+            //     IconButton(
+            //       icon: Icon(
+            //         Icons.fast_forward,
+            //         size: 70,
+            //       ),
+            //       color: Colors.white,
+            //       onPressed: () {},
+            //     ),
+            //   ],
+            // ),
           ),
         );
 }

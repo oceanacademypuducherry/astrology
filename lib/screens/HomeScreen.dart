@@ -5,6 +5,7 @@ import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
 import 'package:astrology_app/screens/vedioPlayer/Network_vedio_player.dart';
+import 'package:astrology_app/screens/vedioPlayer/youtubeScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -253,7 +254,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               GestureDetector(
                                 onTap: () {
                                   print('ontap');
-                                  Get.to(() => PortraitLandscapePlayerPage(),
+                                  Get.to(() => SubscribeVideoScreen(),
                                       // transition: Transition.cupertinoDialog,
                                       fullscreenDialog: true,
                                       curve: Curves.easeInToLinear,

@@ -1,12 +1,10 @@
 import 'dart:async';
 
+import 'package:astrology_app/screens/vedioPlayer/custom_control_buttons.dart';
 import 'package:astrology_app/screens/vedioPlayer/overlayWidget.dart';
 import 'package:auto_orientation/auto_orientation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:native_device_orientation/native_device_orientation.dart';
 import 'package:video_player/video_player.dart';
-import 'package:wakelock/wakelock.dart';
 
 class VideoPlayerBothWidget extends StatefulWidget {
   final VideoPlayerController controller;
@@ -20,36 +18,10 @@ class VideoPlayerBothWidget extends StatefulWidget {
 }
 
 class _VideoPlayerBothWidgetState extends State<VideoPlayerBothWidget> {
-  late Orientation target;
-
   @override
   void initState() {
     super.initState();
-    // NativeDeviceOrientationCommunicator()
-    //     .onOrientationChanged(useSensor: true)
-    //     .listen((event) {
-    //   final isPortrait = event == NativeDeviceOrientation.portraitUp;
-    //   final isLandscape = event == NativeDeviceOrientation.landscapeLeft ||
-    //       event == NativeDeviceOrientation.landscapeRight;
-    //   final isTargetPortrait = target == Orientation.portrait;
-    //   final isTargetLandscape = target == Orientation.landscape;
-    //
-    //   if (isPortrait && isTargetPortrait || isLandscape && isTargetLandscape) {
-    //     // target = '';
-    //     SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-    //   }
-    // });
   }
-
-  // void setOrientation(bool isPortrait) {
-  //   if (isPortrait) {
-  //     Wakelock.disable();
-  //     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-  //   } else {
-  //     Wakelock.enable();
-  //     SystemChrome.setEnabledSystemUIOverlays([]);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) =>
@@ -63,26 +35,30 @@ class _VideoPlayerBothWidgetState extends State<VideoPlayerBothWidget> {
 
           // setOrientation(isPortrait);
 
-          return Stack(
-            fit: isPortrait ? StackFit.loose : StackFit.expand,
-            children: <Widget>[
-              buildVideoPlayer(),
-              Positioned.fill(
-                child: AdvancedOverlayWidget(
-                  controller: widget.controller,
-                  onClickedFullScreen: () {
-                    // target = isPortrait
-                    //     ? Orientation.landscape
-                    //     : Orientation.portrait;
-
-                    if (isPortrait) {
-                      AutoOrientation.landscapeRightMode();
-                    } else {
-                      AutoOrientation.portraitUpMode();
-                    }
-                  },
-                ),
+          return Column(
+            children: [
+              Stack(
+                fit: isPortrait ? StackFit.loose : StackFit.expand,
+                children: <Widget>[
+                  buildVideoPlayer(),
+                  Positioned.fill(
+                    child: AdvancedOverlayWidget(
+                      controller: widget.controller,
+                      onClickedFullScreen: () {
+                        if (isPortrait) {
+                          AutoOrientation.landscapeRightMode();
+                        } else {
+                          AutoOrientation.portraitUpMode();
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
+              SizedBox(
+                height: 30,
+              ),
+              CustomControlsWidget(controller: widget.controller)
             ],
           );
         },
