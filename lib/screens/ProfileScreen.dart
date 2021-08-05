@@ -1,8 +1,16 @@
+import 'package:astrology_app/screens/HomeScreen.dart';
+import 'package:astrology_app/services/storage_service.dart';
+import 'package:astrology_app/widgets/BottomNavigation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:path/path.dart';
+import 'dart:io';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -11,8 +19,14 @@ class ProfileScreen extends StatefulWidget {
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
+FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 class _ProfileScreenState extends State<ProfileScreen> {
-  String? email;
+  UploadTask? task;
+  File? file;
+  String? email = 'thamizh';
+  String? updatedProfile;
+  String? updatedJadhagam;
 
   String? phoneNumber;
 
@@ -20,9 +34,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   bool validation = false;
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController? emailController = TextEditingController();
+  TextEditingController? nameController = TextEditingController();
+  TextEditingController? phoneNumberController = TextEditingController();
+  var getName;
+  var getMobileNumber;
+  var getEmail;
+  // var getProfile;
+  // var getJadhagam;
+  // var profileLink;
+
+  // void edit_profile() async {
+  //   print("---------------------------");
+  //   await for (var snapshot in _firestore
+  //       .collection('newusers')
+  //       .where("PhoneNumber", isEqualTo: '+91 1234567890')
+  //       .snapshots(includeMetadataChanges: true)) {
+  //     for (var message in snapshot.docs) {
+  //       getName = message.data()['name'];
+  //       getMobileNumber = message.data()['PhoneNumber'];
+  //       getEmail = message.data()['email'];
+  //       getProfile = message.data()['profile'];
+  //       getJadhagam = message.data()['jadhagam'];
+  //     }
+  //     print('++++++++++++++++++');
+  //     setState(() {
+  //       nameController =
+  //           TextEditingController(text: getName == null ? '' : getName);
+  //       emailController =
+  //           TextEditingController(text: getEmail == null ? '' : getEmail);
+  //       phoneNumberController = TextEditingController(
+  //           text: getMobileNumber == null ? '' : getMobileNumber);
+  //       profileLink = getProfile;
+  //       jadhagamLink = getJadhagam;
+  //     });
+  //   }
+  //
+  //   print("---------------------------");
+  // }
 
   Widget _buildEmail() {
     return TextFormField(
@@ -39,6 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           hintStyle: TextStyle(fontSize: 12)
           // labelText: 'Email',
           ),
+      readOnly: true,
       controller: emailController,
       onChanged: (value) {
         email = value;
@@ -105,10 +155,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
           // labelText: 'Number',
           ),
       controller: phoneNumberController,
+      readOnly: true,
       onChanged: (value) {
         phoneNumber = value;
       },
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // edit_profile();
   }
 
   @override
@@ -131,15 +189,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   collapsedHeight: 50,
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
-                    // title: Text(
-                    //   'Edit Profile',
-                    //   style: TextStyle(
-                    //     color: Colors.blue,
-                    //     fontSize: 15,
-                    //     fontFamily: 'Ubuntu',
-                    //     fontWeight: FontWeight.w600,
-                    //   ),
-                    // ),
                     background: Image.asset(
                       'images/profile1.jpg',
                       fit: BoxFit.cover,
@@ -151,406 +200,540 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     (BuildContext context, int index) {
                       return Column(
                         children: [
-                          Container(
-                            // color: Colors.grey[200],
-                            margin: EdgeInsets.symmetric(
-                              vertical: 20,
-                            ),
-                            width: MediaQuery.of(context).size.width,
-                            child: Column(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundImage:
-                                                AssetImage("images/p.jpg"),
-                                            radius: 50,
-                                          ),
-                                          Positioned(
-                                            right: 5,
-                                            bottom: 5,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    offset: Offset(0.5, 0.5),
-                                                    color: Colors.grey,
-                                                  )
-                                                ],
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                              ),
-                                              width: 25,
-                                              height: 25,
-                                              child: Icon(
-                                                Icons.add,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 25),
-                                        height: 80,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              child: Text(
-                                                'Mohamed Ijass',
-                                                style: TextStyle(
-                                                  letterSpacing: 0.4,
-                                                  color: Colors.black54,
-                                                  fontSize: 21,
-                                                  fontFamily: 'Ubuntu',
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(top: 5),
-                                              child: Text(
-                                                'jass07rtr@gmail.com',
-                                                style: TextStyle(
-                                                  color: Colors.black54,
-                                                  fontSize: 13,
-                                                  fontFamily: 'Ubuntu',
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(top: 5),
-                                              child: Text(
-                                                '9952727521',
-                                                style: TextStyle(
-                                                  color: Colors.black54,
-                                                  fontSize: 13,
-                                                  fontFamily: 'Ubuntu',
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                                textAlign: TextAlign.start,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Spacer(),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      right: 20, left: 20, top: 30),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Text(
-                                          'Full Name',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 15,
-                                            fontFamily: 'Ubuntu',
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      _buildName(),
-                                    ],
-                                  ),
-                                ),
-                                Divider(
-                                  color: Colors.black54,
-                                  thickness: 0.2,
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Text(
-                                          'Mobile Phone',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 15,
-                                            fontFamily: 'Ubuntu',
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      _buildphonenumber(),
-                                    ],
-                                  ),
-                                ),
-                                Divider(
-                                  color: Colors.black54,
-                                  thickness: 0.2,
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Text(
-                                          'Email',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 15,
-                                            fontFamily: 'Ubuntu',
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      _buildEmail(),
-                                    ],
-                                  ),
-                                ),
-                                Divider(
-                                  color: Colors.black54,
-                                  thickness: 0.2,
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: ElevatedButton(
-                                            onPressed: () {},
-                                            style: ElevatedButton.styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5))),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 10, bottom: 10),
-                                              child: Text(
-                                                'Update Jadhagam',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                  fontFamily: 'Ubuntu',
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                            )),
-                                      ),
-                                      Stack(
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundImage:
-                                                AssetImage("images/p.jpg"),
-                                            radius: 50,
-                                          ),
-                                          Positioned(
-                                            right: 5,
-                                            bottom: 5,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    offset: Offset(0.5, 0.5),
-                                                    color: Colors.grey,
-                                                  )
-                                                ],
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                              ),
-                                              width: 25,
-                                              height: 25,
-                                              child: Icon(
-                                                Icons.add,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Divider(
-                                  color: Colors.black54,
-                                  thickness: 0.2,
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        alignment: Alignment.centerLeft,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Text(
-                                          'History of Appointment',
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 15,
-                                            fontFamily: 'Ubuntu',
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Container(
-                                          alignment: Alignment.centerLeft,
+                          StreamBuilder<QuerySnapshot>(
+                            stream:
+                                _firestore.collection('newusers').snapshots(),
+                            // ignore: missing_return
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                print(
+                                    'SSSSSSSSSSSSPPPPPPPPPPPPPPPSSSSSSSSSSSSSSSSSSSSSSSS');
+                                return Text("Loading...");
+                              } else {
+                                final messages = snapshot.data!.docs;
+                                for (var message in messages) {
+                                  nameController!.text = message['name'];
+                                  phoneNumberController!.text =
+                                      message['PhoneNumber'];
+                                  emailController!.text = message['email'];
+
+                                  final profilePicture = message['profile'];
+                                  final jadhagamLink = message['jadhagam'];
+                                  getName = nameController!.text;
+                                  getEmail = emailController!.text;
+                                  getMobileNumber = phoneNumberController!.text;
+
+                                  return Container(
+                                    // color: Colors.grey[200],
+                                    margin: EdgeInsets.symmetric(
+                                      vertical: 20,
+                                    ),
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 10),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 20),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.1, 0.2),
-                                                    )
-                                                  ],
-                                                  color: Colors.grey[100],
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                height: 40,
-                                                width: 100,
-                                                child: Text(
-                                                  'Wed 1 Jul',
-                                                  style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 13,
-                                                    fontFamily: 'Ubuntu',
-                                                    fontWeight:
-                                                        FontWeight.normal,
+                                              Stack(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: selectProfileFile,
+                                                    child: CircleAvatar(
+                                                      backgroundImage: NetworkImage(
+                                                          updatedProfile == null
+                                                              ? '${profilePicture}'
+                                                              : '${updatedProfile}'),
+                                                      radius: 50,
+                                                    ),
                                                   ),
-                                                ),
+                                                  Positioned(
+                                                    right: 5,
+                                                    bottom: 5,
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            offset: Offset(
+                                                                0.5, 0.5),
+                                                            color: Colors.grey,
+                                                          )
+                                                        ],
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15),
+                                                      ),
+                                                      width: 25,
+                                                      height: 25,
+                                                      child: IconButton(
+                                                        icon: Icon(
+                                                          Icons.add,
+                                                        ),
+                                                        onPressed: () {},
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                               Container(
                                                 margin: EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 20),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.1, 0.2),
-                                                    )
+                                                    horizontal: 25),
+                                                height: 80,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      child: Text(
+                                                        getName,
+                                                        style: TextStyle(
+                                                          letterSpacing: 0.4,
+                                                          color: Colors.black54,
+                                                          fontSize: 21,
+                                                          fontFamily: 'Ubuntu',
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 5),
+                                                      child: Text(
+                                                        '${getEmail}',
+                                                        style: TextStyle(
+                                                          color: Colors.black54,
+                                                          fontSize: 13,
+                                                          fontFamily: 'Ubuntu',
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 5),
+                                                      child: Text(
+                                                        '${getMobileNumber}',
+                                                        style: TextStyle(
+                                                          color: Colors.black54,
+                                                          fontSize: 13,
+                                                          fontFamily: 'Ubuntu',
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                      ),
+                                                    ),
                                                   ],
-                                                  color: Colors.grey[100],
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
                                                 ),
-                                                height: 40,
-                                                width: 100,
+                                              ),
+                                              Spacer(),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              right: 20, left: 20, top: 30),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
                                                 child: Text(
-                                                  'Wed 1 Jul',
+                                                  'Full Name',
                                                   style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 13,
+                                                    color: Colors.blue,
+                                                    fontSize: 15,
                                                     fontFamily: 'Ubuntu',
-                                                    fontWeight:
-                                                        FontWeight.normal,
+                                                    fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
                                               ),
+                                              _buildName(),
+                                            ],
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.black54,
+                                          thickness: 0.2,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 10),
+                                          child: Column(
+                                            children: [
                                               Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 20),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.1, 0.2),
-                                                    )
-                                                  ],
-                                                  color: Colors.grey[100],
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                height: 40,
-                                                width: 100,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
                                                 child: Text(
-                                                  'Wed 1 Jul',
+                                                  'Mobile Phone',
                                                   style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 13,
+                                                    color: Colors.blue,
+                                                    fontSize: 15,
                                                     fontFamily: 'Ubuntu',
-                                                    fontWeight:
-                                                        FontWeight.normal,
+                                                    fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
                                               ),
+                                              _buildphonenumber(),
+                                            ],
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.black54,
+                                          thickness: 0.2,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 10),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                child: Text(
+                                                  'Email',
+                                                  style: TextStyle(
+                                                    color: Colors.blue,
+                                                    fontSize: 15,
+                                                    fontFamily: 'Ubuntu',
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ),
+                                              _buildEmail(),
+                                            ],
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.black54,
+                                          thickness: 0.2,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
                                               Container(
                                                 margin: EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 20),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.1, 0.2),
-                                                    )
-                                                  ],
-                                                  color: Colors.grey[100],
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                height: 40,
-                                                width: 100,
+                                                    horizontal: 15),
+                                                child: ElevatedButton(
+                                                    onPressed: () {
+                                                      _firestore
+                                                          .collection(
+                                                              "newusers")
+                                                          .doc(
+                                                              '96tbzTBfqZnwEHCzYhM6')
+                                                          .set({
+                                                        "name": nameController!
+                                                            .text,
+                                                        "email":
+                                                            emailController!
+                                                                .text,
+                                                        "jadhagam":
+                                                            updatedJadhagam,
+                                                        'profile':
+                                                            updatedProfile,
+                                                        'PhoneNumber':
+                                                            phoneNumberController!
+                                                                .text
+                                                      });
+                                                      print(
+                                                          'Updated Successfully');
+                                                      Get.to(() => BottomNavigation(),
+                                                          transition: Transition
+                                                              .rightToLeft,
+                                                          curve: Curves
+                                                              .easeInToLinear,
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  600));
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5))),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 10,
+                                                              bottom: 10),
+                                                      child: Text(
+                                                        'update',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 15,
+                                                          fontFamily: 'Ubuntu',
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                      ),
+                                                    )),
+                                              ),
+                                              Stack(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: selectJadhagamFile,
+                                                    child: CircleAvatar(
+                                                      backgroundImage: NetworkImage(
+                                                          updatedJadhagam ==
+                                                                  null
+                                                              ? '${jadhagamLink}'
+                                                              : '${updatedJadhagam}'),
+                                                      radius: 50,
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                    right: 5,
+                                                    bottom: 5,
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            offset: Offset(
+                                                                0.5, 0.5),
+                                                            color: Colors.grey,
+                                                          )
+                                                        ],
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15),
+                                                      ),
+                                                      width: 25,
+                                                      height: 25,
+                                                      child: Icon(
+                                                        Icons.add,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.black54,
+                                          thickness: 0.2,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 10),
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                alignment: Alignment.centerLeft,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
                                                 child: Text(
-                                                  'Wed 1 Jul',
+                                                  'History of Appointment',
                                                   style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 13,
+                                                    color: Colors.blue,
+                                                    fontSize: 15,
                                                     fontFamily: 'Ubuntu',
-                                                    fontWeight:
-                                                        FontWeight.normal,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ),
+                                              SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Container(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 20),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.1, 0.2),
+                                                            )
+                                                          ],
+                                                          color:
+                                                              Colors.grey[100],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        height: 40,
+                                                        width: 100,
+                                                        child: Text(
+                                                          'Wed 1 Jul',
+                                                          style: TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize: 13,
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 20),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.1, 0.2),
+                                                            )
+                                                          ],
+                                                          color:
+                                                              Colors.grey[100],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        height: 40,
+                                                        width: 100,
+                                                        child: Text(
+                                                          'Wed 1 Jul',
+                                                          style: TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize: 13,
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 20),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.1, 0.2),
+                                                            )
+                                                          ],
+                                                          color:
+                                                              Colors.grey[100],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        height: 40,
+                                                        width: 100,
+                                                        child: Text(
+                                                          'Wed 1 Jul',
+                                                          style: TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize: 13,
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 20),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.1, 0.2),
+                                                            )
+                                                          ],
+                                                          color:
+                                                              Colors.grey[100],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        height: 40,
+                                                        width: 100,
+                                                        child: Text(
+                                                          'Wed 1 Jul',
+                                                          style: TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize: 13,
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                                return Container(
+                                    child: Text('jayalathahahjgj'));
+                              }
+                            },
                           ),
                         ],
                       );
@@ -564,5 +747,78 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  Future selectJadhagamFile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path!;
+    setState(() => file = File(path));
+    setState(() {
+      uploadJadhagam();
+    });
+  }
+
+  Future uploadJadhagam() async {
+    if (file == null) return;
+
+    final fileName = basename(file!.path);
+    final destination = 'jadhagam/$fileName';
+
+    task = FirebaseApi.uploadFile(destination, file!);
+    setState(() {});
+
+    if (task == null) return;
+
+    final snapshot = await task!.whenComplete(() {
+      print('profile picture uploaded');
+    });
+    final urlDownload = await snapshot.ref.getDownloadURL();
+
+    setState(() {
+      updatedJadhagam = urlDownload;
+    });
+
+    print('Download-Link: $urlDownload');
+  }
+
+  Future selectProfileFile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path!;
+    setState(() => file = File(path));
+    setState(() {
+      uploadProfile();
+    });
+  }
+
+  Future uploadProfile() async {
+    if (file == null) return;
+
+    final fileName = basename(file!.path);
+    final destination = 'profile/$fileName';
+
+    task = FirebaseApi.uploadFile(destination, file!);
+    setState(() {});
+
+    if (task == null) return;
+
+    final snapshot = await task!.whenComplete(() {
+      print('profile picture uploaded');
+
+      ///Todo snakbar upload
+    });
+    final urlDownload = await snapshot.ref.getDownloadURL();
+
+    setState(() {
+      updatedProfile = urlDownload;
+      // profilePicture = updatedProfile;
+    });
+
+    // setState(() {
+    //
+    // });
+
+    print('Download-Link: $urlDownload');
   }
 }
