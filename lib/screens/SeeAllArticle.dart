@@ -16,33 +16,27 @@ class SeeAllArticle extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
-                floating: true,
-                expandedHeight: 200,
+                floating: false,
+                expandedHeight: 150,
                 // automaticallyImplyLeading: true,
-                // toolbarHeight: 100,
+                toolbarHeight: 50,
                 // stretch: true,
                 pinned: true,
-                collapsedHeight: 70,
-                flexibleSpace: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    image: DecorationImage(
-                      image: AssetImage("images/background_image.png"),
-                      fit: BoxFit.cover,
+                collapsedHeight: 50,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text(
+                    'See all Article',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontFamily: 'Ubuntu',
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: Center(
-                    child: Text(
-                      'See all Article',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.9),
-                        fontSize: 22,
-                        fontFamily: 'Ubuntu',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                  background: Image.asset(
+                    'images/background_image.png',
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -83,7 +77,7 @@ class SeeAllArticle extends StatelessWidget {
                                 seeArticles.add(articles);
                               }
                               return Container(
-                                padding: EdgeInsets.symmetric(horizontal: 70),
+                                padding: EdgeInsets.symmetric(horizontal: 5),
                                 child: Column(
                                   children: seeArticles,
                                 ),
@@ -145,3 +139,28 @@ class SeeAllArticlesDb extends StatelessWidget {
     );
   }
 }
+
+//flexible space => sliver
+
+// Container(
+// decoration: BoxDecoration(
+// color: Colors.blue,
+// image: DecorationImage(
+// image: AssetImage("images/background_image.png"),
+// fit: BoxFit.cover,
+// ),
+// ),
+// width: double.infinity,
+// height: double.infinity,
+// child: Center(
+// child: Text(
+// 'See all Article',
+// style: TextStyle(
+// color: Colors.white.withOpacity(0.9),
+// fontSize: 22,
+// fontFamily: 'Ubuntu',
+// fontWeight: FontWeight.w600,
+// ),
+// ),
+// ),
+// ),

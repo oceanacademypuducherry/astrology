@@ -9,6 +9,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,10 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
               (BuildContext context, int index) {
                 return Column(
                   children: [
+                    //Article
                     Container(
                       padding: EdgeInsets.only(bottom: 10),
-                      height: 600,
-                      color: Colors.grey[200],
+                      // color: Colors.blue,
                       child: Column(
                         children: [
                           Container(
@@ -159,6 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
+                    //Query
                     Container(
                       margin:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -225,6 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
+                    //Video
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 20),
                       padding: EdgeInsets.only(bottom: 10),
@@ -330,14 +333,25 @@ class ArticleFromDb extends StatelessWidget {
   Widget build(BuildContext context) {
     // print(articleName);
     return Container(
-      color: Colors.grey[100],
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xff045de9),
+            Colors.grey.shade300,
+          ],
+        ),
+      ),
       height: 400,
       width: 350,
       child: CarouselSlider(
         items: articleImage,
         options: CarouselOptions(
           height: 280.0,
-          enlargeCenterPage: true,
+          // enlargeCenterPage: true,
+          scrollDirection: Axis.horizontal,
+          pageSnapping: false,
           autoPlay: false,
           aspectRatio: 16 / 9,
           autoPlayCurve: Curves.fastOutSlowIn,
