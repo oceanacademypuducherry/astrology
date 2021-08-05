@@ -446,19 +446,18 @@ class _RegisterState extends State<Register> {
                           ),
                           child: ElevatedButton(
                             onPressed: () {
-                              print(profilePictureLink);
-                              // print(widget.userNumber);
-                              // _firestore.collection("newusers").add({
-                              //   "name": nameController.text,
-                              //   "email": emailController.text,
-                              //   "jadhagam": jadhagamLink,
-                              //   'profile': profilePictureLink,
-                              //   'PhoneNumber': widget.userNumber
-                              // });
-                              // Get.to(() => BottomNavigation(),
-                              //     transition: Transition.rightToLeft,
-                              //     curve: Curves.easeInToLinear,
-                              //     duration: Duration(milliseconds: 600));
+                              print(widget.userNumber);
+                              _firestore.collection("newusers").add({
+                                "name": nameController.text,
+                                "email": emailController.text,
+                                "jadhagam": jadhagamLink,
+                                'profile': profilePictureLink,
+                                'PhoneNumber': widget.userNumber
+                              });
+                              Get.to(() => BottomNavigation(),
+                                  transition: Transition.rightToLeft,
+                                  curve: Curves.easeInToLinear,
+                                  duration: Duration(milliseconds: 600));
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
