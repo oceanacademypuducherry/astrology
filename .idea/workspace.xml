@@ -25,19 +25,36 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="updated video orientation issue">
-      <change afterPath="$PROJECT_DIR$/images/p.jpg" afterDir="false" />
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="updated profile screen">
+      <change afterPath="$PROJECT_DIR$/images/profile1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/AppointmentScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/AppointmentScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/EditProfile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/EditProfile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/ProfileScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/ProfileScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/SeeAllArticle.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/SeeAllArticle.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,14 +89,14 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\jass0\Desktop\astrology\images" />
-      <recent name="C:\Users\kjaya\Documents\flutter\astrology\android\app" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jass0\Desktop\astrology\images" />
       <recent name="C:\Users\jass0\StudioProjects\astrology_app\images" />
       <recent name="C:\Users\jass0\StudioProjects\astrology_app\fonts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jass0\Desktop\astrology\images" />
+      <recent name="C:\Users\kjaya\Documents\flutter\astrology\android\app" />
     </key>
   </component>
   <component name="RunManager">
@@ -268,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628062538725</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="updated profile screen">
+      <created>1628137732793</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1628137732793</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -305,7 +329,8 @@
     <MESSAGE value="query completed" />
     <MESSAGE value="updated books screen video screen" />
     <MESSAGE value="updated video orientation issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated video orientation issue" />
+    <MESSAGE value="updated profile screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated profile screen" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1627881964327">
@@ -328,38 +353,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1865" height="255" key="GridCell.Tab.0.bottom" timestamp="1628132750546">
+    <state width="1865" height="255" key="GridCell.Tab.0.bottom" timestamp="1628138633925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628132750546" />
-    <state width="1865" height="255" key="GridCell.Tab.0.center" timestamp="1628132750546">
+    <state width="1865" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628138633925" />
+    <state width="1865" height="255" key="GridCell.Tab.0.center" timestamp="1628138633925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="255" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628132750546" />
-    <state width="1865" height="255" key="GridCell.Tab.0.left" timestamp="1628132750546">
+    <state width="1865" height="255" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628138633925" />
+    <state width="1865" height="255" key="GridCell.Tab.0.left" timestamp="1628138633925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="255" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628132750546" />
-    <state width="1865" height="255" key="GridCell.Tab.0.right" timestamp="1628132750546">
+    <state width="1865" height="255" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628138633925" />
+    <state width="1865" height="255" key="GridCell.Tab.0.right" timestamp="1628138633925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1865" height="255" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628132750546" />
+    <state width="1865" height="255" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628138633925" />
     <state x="184" y="86" key="MergeDialog" timestamp="1627991253687">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="184" y="86" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627991253687" />
-    <state x="591" y="281" key="MultipleFileMergeDialog" timestamp="1628061893970">
+    <state x="591" y="281" key="MultipleFileMergeDialog" timestamp="1628137758104">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628061893970" />
+    <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628137758104" />
     <state x="336" y="77" key="SettingsEditor" timestamp="1627717639509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1627717639509" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628062549630">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628137766058">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628062549630" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628137766058" />
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1627640290603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
