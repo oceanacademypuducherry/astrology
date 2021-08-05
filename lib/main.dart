@@ -4,12 +4,14 @@ import 'package:astrology_app/screens/loginscreen.dart';
 import 'package:astrology_app/screens/ouery_fetch.dart';
 import 'package:astrology_app/screens/registerscreen.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:astrology_app/Forum/forumController.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +21,8 @@ void main() async {
   ]);
   await Firebase.initializeApp();
   Get.put(OtpController());
+  Get.put(ForumContreller());
+
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -37,6 +41,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Widget route = Login();
 
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   sessionCheck() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     MyApp.session = prefs.getString('user') ?? null;

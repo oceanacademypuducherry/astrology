@@ -1,3 +1,5 @@
+import 'package:astrology_app/Forum/forumController.dart';
+import 'package:astrology_app/main.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/FreeVideos.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
@@ -22,6 +24,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
+
+  forumFunction() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var forumdata = prefs.getString('user') ?? null.toString();
+    final userData = await _firestore.collection('newusers').get();
+    _forumContreller.setUserSession(forumdata);
+    for (var user in userData.docs) {
+      if (_forumContreller.userSession.value == user['PhoneNumber']) {
+        _forumContreller.setUserInfo(user.data());
+      }
+    }
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+    print(_forumContreller.userSession.value);
+    print(_forumContreller.sessionUserInfo.value);
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -29,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+    forumFunction();
   }
 
   @override
