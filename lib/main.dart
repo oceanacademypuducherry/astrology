@@ -13,6 +13,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:astrology_app/Forum/forumController.dart';
 
+FirebaseFirestore _firestore = FirebaseFirestore.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -22,7 +23,15 @@ void main() async {
   await Firebase.initializeApp();
   Get.put(OtpController());
   Get.put(ForumContreller());
-
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String userNumber = prefs.getString('user').toString();
+  var userDatas = await _firestore.collection('newusers').get();
+  for (var i in userDatas.docs) {
+    if (i['PhoneNumber'] == userNumber) {
+      Get.find<ForumContreller>().setUserSession(userNumber.toString());
+      Get.find<ForumContreller>().setUserInfo(i.data());
+    }
+  }
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -39,23 +48,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Widget route = Login();
-
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  sessionCheck() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    MyApp.session = prefs.getString('user') ?? null;
-
-    route = MyApp.session != null ? HomeScreen() : Login();
-    print("routeChecking in mainpage${route}");
-    print("routeChecking in mainpage session${MyApp.session}");
-  }
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
+  // route = MyApp.session != null ? HomeScreen() : Login();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    sessionCheck();
+    print('.......................');
+    print(_forumContreller.userSession.value);
+    print(_forumContreller.sessionUserInfo.value);
+    print('.......................');
   }
 
   @override
@@ -64,7 +67,9 @@ class _MyAppState extends State<MyApp> {
       child: Scaffold(
         backgroundColor: Colors.blue,
         resizeToAvoidBottomInset: false,
-        body: route,
+        body: _forumContreller.userSession.value.isNotEmpty
+            ? BottomNavigation()
+            : Login(),
       ),
     );
   }
