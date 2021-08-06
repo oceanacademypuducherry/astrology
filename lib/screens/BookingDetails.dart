@@ -1,5 +1,6 @@
 import 'package:astrology_app/screens/SomeoneElseScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 enum Appointment { ForMe, SomeoneElse }
@@ -15,6 +16,39 @@ class BookingDetails extends StatefulWidget {
 class _BookingDetailsState extends State<BookingDetails> {
   Appointment _appointment = Appointment.ForMe;
   Purpose _purpose = Purpose.Marriage;
+
+  ///widgets
+  Widget _buildName() {
+    return TextFormField(
+      // ignore: deprecated_member_use
+      autovalidate: validation,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s")),
+        LengthLimitingTextInputFormatter(40),
+      ],
+      // autovalidate: _autoValidate,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'name is required';
+        } else if (value.length < 3) {
+          return 'character should be morethan 2';
+        }
+        return null;
+      },
+      decoration: const InputDecoration(
+          // prefixIcon: Icon(Icons.drive_file_rename_outline),
+          errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
+          border: InputBorder.none,
+          hintText: 'Enter Your Name',
+          hintStyle: TextStyle(fontSize: 12)
+          // labelText: 'Name',
+          ),
+      controller: nameController,
+      onChanged: (value) {
+        fullname = value;
+      },
+    );
+  }
 
   bool value = false;
   @override
@@ -205,6 +239,9 @@ class _BookingDetailsState extends State<BookingDetails> {
                     },
                   ),
                 ),
+
+                ///Condition  value == other means Textfield
+                _purpose == Purpose.Other ? TextField() : Container(),
                 Divider(
                   thickness: 0.2,
                   color: Colors.grey,

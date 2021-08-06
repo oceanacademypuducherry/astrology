@@ -170,7 +170,7 @@ class _SomeoneElseState extends State<SomeoneElse> {
                     Spacer(),
                     ElevatedButton(
                       onPressed: () {},
-                      child: Text('Continue'),
+                      child: Text('Upload Jadhagam'),
                       style: ElevatedButton.styleFrom(
                           fixedSize: Size(double.infinity, 50),
                           padding: EdgeInsets.symmetric(
