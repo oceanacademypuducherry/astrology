@@ -1,4 +1,5 @@
 import 'package:astrology_app/screens/SomeoneElseScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -17,14 +18,28 @@ class _BookingDetailsState extends State<BookingDetails> {
   Appointment _appointment = Appointment.ForMe;
   Purpose _purpose = Purpose.Marriage;
 
+  ///variable
+  bool validation = false;
+  var fullname;
+
+  ///controller
+  TextEditingController? nameController = TextEditingController();
+
   ///widgets
-  Widget _buildName() {
+  Widget _buildOther() {
     return TextFormField(
+      textAlign: TextAlign.left,
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontFamily: 'Ubuntu',
+        fontSize: 15,
+        color: Colors.black54,
+      ),
       // ignore: deprecated_member_use
       autovalidate: validation,
       inputFormatters: <TextInputFormatter>[
         FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s")),
-        LengthLimitingTextInputFormatter(40),
+        LengthLimitingTextInputFormatter(100),
       ],
       // autovalidate: _autoValidate,
       validator: (value) {
@@ -36,13 +51,19 @@ class _BookingDetailsState extends State<BookingDetails> {
         return null;
       },
       decoration: const InputDecoration(
-          // prefixIcon: Icon(Icons.drive_file_rename_outline),
-          errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
-          border: InputBorder.none,
-          hintText: 'Enter Your Name',
-          hintStyle: TextStyle(fontSize: 12)
-          // labelText: 'Name',
-          ),
+        contentPadding: EdgeInsets.all(11),
+        prefixIcon: Icon(Icons.drive_file_rename_outline),
+        errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
+        border: InputBorder.none,
+        hintText: 'Enter Your Reason',
+        hintStyle: TextStyle(
+          fontWeight: FontWeight.normal,
+          fontFamily: 'Ubuntu',
+          fontSize: 16,
+          color: Colors.grey,
+        ),
+        // labelText: 'Reason',
+      ),
       controller: nameController,
       onChanged: (value) {
         fullname = value;
@@ -241,7 +262,22 @@ class _BookingDetailsState extends State<BookingDetails> {
                 ),
 
                 ///Condition  value == other means Textfield
-                _purpose == Purpose.Other ? TextField() : Container(),
+                _purpose == Purpose.Other
+                    ? Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade100,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0.3, 0.3),
+                            ),
+                          ],
+                        ),
+                        child: _buildOther(),
+                      )
+                    : Container(),
                 Divider(
                   thickness: 0.2,
                   color: Colors.grey,
