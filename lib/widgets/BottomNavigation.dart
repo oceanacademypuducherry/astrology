@@ -1,3 +1,4 @@
+import 'package:astrology_app/Forum/forum.dart';
 import 'package:astrology_app/screens/AppointmentScreen.dart';
 import 'package:astrology_app/screens/BooksScreen.dart';
 import 'package:astrology_app/screens/ForumScreen.dart';
@@ -21,7 +22,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     HomeScreen(),
     BooksScreen(),
     AppointmentScreen(),
-    ForumScreen(),
+    Forum(),
     ProfileScreen(),
   ];
 
