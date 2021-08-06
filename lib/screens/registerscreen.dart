@@ -450,7 +450,7 @@ class _RegisterState extends State<Register> {
                               _firestore.collection("newusers").add({
                                 "name": nameController.text,
                                 "email": emailController.text,
-                                "jadhagam": jadhagamLink,
+                                "jadhagam": jadhagamLink ?? '',
                                 'profile': profilePictureLink,
                                 'PhoneNumber': widget.userNumber
                               });
