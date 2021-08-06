@@ -20,6 +20,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
   String? orderTime;
 
   List minuteSlot = [];
+  bool? isCheck;
 
   String? value;
   void minTime(List newList) {
@@ -77,9 +78,9 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                   ? null
                   : () {
                       orderTime = time_slot.elementAt(index);
-                      // setState(() {
-                      //   isCheck = true;
-                      // });
+                      setState(() {
+                        isCheck = true;
+                      });
 
                       print('+++++++++++++++++++++++++++++++');
                     },
@@ -88,7 +89,9 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                   Card(
                     color: widget.dbList.contains(time_slot.elementAt(index))
                         ? Colors.grey
-                        : Colors.white,
+                        : isCheck == true
+                            ? Colors.blue
+                            : Colors.white,
                     child: GridTile(
                       child: Center(
                         child: Column(
@@ -98,7 +101,9 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                             // isCheck ?  time_slot.elementAt(index) == orderTime ?Icon(Icons.check) : Text(''),
                             Text(
                                 '${time_slot.elementAt(index).toString().substring(time_slot.elementAt(index).toString().length - 8)}'),
-                            Text('$index'),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Text(widget.dbList
                                     .contains(time_slot.elementAt(index))
                                 ? "Full"
