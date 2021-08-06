@@ -25,9 +25,33 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="checking 3">
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="checking 2">
+      <change afterPath="$PROJECT_DIR$/lib/screens/demoregister.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/loginscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/loginscreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/registerscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/registerscreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,15 +86,16 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jass0\Desktop\astrology\lib\screens" />
+      <recent name="C:\Users\jass0\Desktop\astrology\images" />
+      <recent name="C:\Users\jass0\StudioProjects\astrology_app\images" />
+      <recent name="C:\Users\jass0\StudioProjects\astrology_app\fonts" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kjaya\Documents\flutter\astrology\lib" />
       <recent name="C:\Users\jass0\Desktop\astrology\images" />
       <recent name="C:\Users\kjaya\Documents\flutter\astrology\android\app" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\jass0\Desktop\astrology\images" />
-      <recent name="C:\Users\jass0\StudioProjects\astrology_app\images" />
-      <recent name="C:\Users\jass0\StudioProjects\astrology_app\fonts" />
     </key>
   </component>
   <component name="RunManager">
@@ -79,7 +104,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -308,14 +333,7 @@
       <option name="project" value="LOCAL" />
       <updated>1628264596677</updated>
     </task>
-    <task id="LOCAL-00032" summary="checking 3">
-      <created>1628265020529</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1628265020529</updated>
-    </task>
-    <option name="localTasksCounter" value="33" />
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -331,6 +349,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="start auth" />
     <MESSAGE value="auth going" />
     <MESSAGE value="auth completed" />
     <MESSAGE value="check" />
@@ -355,8 +374,7 @@
     <MESSAGE value="razorpay connected" />
     <MESSAGE value="checking 1" />
     <MESSAGE value="checking 2" />
-    <MESSAGE value="checking 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="checking 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="checking 2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1627881964327">
@@ -371,30 +389,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="652" y="256" key="#main.dart/0.0.1920.1040@0.0.1920.1040" timestamp="1627637499606" />
-    <state x="92" y="92" width="1736" height="856" key="AVDManager" timestamp="1628222698307">
+    <state x="92" y="92" width="1736" height="856" key="AVDManager" timestamp="1628271215171">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="AVDManager/0.0.1920.1040@0.0.1920.1040" timestamp="1628222698307" />
+    <state x="92" y="92" width="1736" height="856" key="AVDManager/0.0.1920.1040@0.0.1920.1040" timestamp="1628271215171" />
     <state x="686" y="196" key="FileChooserDialogImpl" timestamp="1627541249527">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="392" key="GridCell.Tab.0.bottom" timestamp="1628265157639">
+    <state width="1865" height="224" key="GridCell.Tab.0.bottom" timestamp="1628272527718">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="392" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628265157639" />
-    <state width="1860" height="392" key="GridCell.Tab.0.center" timestamp="1628265157639">
+    <state width="1865" height="224" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628272527718" />
+    <state width="1865" height="224" key="GridCell.Tab.0.center" timestamp="1628272527717">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="392" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628265157639" />
-    <state width="1860" height="392" key="GridCell.Tab.0.left" timestamp="1628265157639">
+    <state width="1865" height="224" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628272527717" />
+    <state width="1865" height="224" key="GridCell.Tab.0.left" timestamp="1628272527717">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="392" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628265157639" />
-    <state width="1860" height="392" key="GridCell.Tab.0.right" timestamp="1628265157639">
+    <state width="1865" height="224" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628272527717" />
+    <state width="1865" height="224" key="GridCell.Tab.0.right" timestamp="1628272527718">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="392" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628265157639" />
+    <state width="1865" height="224" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628272527718" />
     <state x="184" y="86" key="MergeDialog" timestamp="1628263947727">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -411,10 +429,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628263931050" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628265155778">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628264603503">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628265155778" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628264603503" />
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1628264564690">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -427,10 +445,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628263939834" />
-    <state x="667" y="253" width="585" height="558" key="find.popup" timestamp="1628231450693">
+    <state x="667" y="253" width="691" height="668" key="find.popup" timestamp="1628271709280">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="667" y="253" width="585" height="558" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1628231450693" />
+    <state x="667" y="253" width="691" height="668" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1628271709280" />
     <state x="416" y="126" key="new project wizard" timestamp="1627575717306">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -471,6 +489,11 @@
           <url>file://$PROJECT_DIR$/lib/screens/AppointmentScreen.dart</url>
           <line>59</line>
           <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/loginscreen.dart</url>
+          <line>587</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

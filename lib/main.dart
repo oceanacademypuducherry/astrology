@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
     print('.......................');
     print(_forumContreller.userSession.value);
     print(_forumContreller.sessionUserInfo.value);
-    print(_forumContreller.userDocumentId.value);
+
     print('.......................');
   }
 

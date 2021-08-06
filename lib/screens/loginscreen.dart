@@ -597,7 +597,7 @@ class _LoginState extends State<Login> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5)),
                             elevation: 2,
-                            primary: Colors.blue,
+                            primary: Color(0xff045de9),
                             onPrimary: Colors.white,
                             textStyle: const TextStyle(
                               fontFamily: 'Ubuntu',

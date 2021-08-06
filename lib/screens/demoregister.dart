@@ -1,4 +1,5 @@
-import 'package:astrology_app/Forum/forumController.dart';
+import 'dart:io';
+import 'dart:ui';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
 import 'package:astrology_app/services/storage_service.dart';
@@ -10,14 +11,14 @@ import 'package:flutter/cupertino.dart';
 // import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
-import 'dart:io';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
-
 import 'dart:typed_data';
+import 'package:flutter/cupertino.dart';
 
 class Register extends StatefulWidget {
   String? userNumber;
@@ -28,12 +29,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  ForumContreller _forumContreller = Get.find<ForumContreller>();
-
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
-  final birthPlaceController = TextEditingController();
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   UploadTask? task;
   File? file;
@@ -41,10 +39,10 @@ class _RegisterState extends State<Register> {
   String? jadhagamLink;
   String? fullname;
   String? email;
-  String? birthPlace;
   String? query;
   String? phoneNumber;
   bool validation = false;
+  late TimeOfDay onChange;
 
   String? getId;
   void user_id() async {
@@ -136,36 +134,52 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Widget _buildBirthPlace() {
+  Widget _buildPlace() {
     return TextFormField(
-      inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontFamily: 'Ubuntu',
+        fontSize: 14,
+        color: Colors.black54,
+      ),
       // ignore: deprecated_member_use
       autovalidate: validation,
-      validator: (value) =>
-          EmailValidator.validate(value!) ? null : "please enter a valid email",
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s")),
+        LengthLimitingTextInputFormatter(30),
+      ],
+      // autovalidate: _autoValidate,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'name is required';
+        } else if (value.length < 3) {
+          return 'character should be morethan 2';
+        }
+        return null;
+      },
       decoration: const InputDecoration(
-        // prefixIcon: Icon(Icons.email_outlined),
+        // prefixIcon: Icon(Icons.drive_file_rename_outline),
+        contentPadding: EdgeInsets.zero,
         errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
         border: InputBorder.none,
-        hintText: 'Enter Your Birth Place',
+        hintText: 'Enter Your Name',
         hintStyle: TextStyle(
           fontWeight: FontWeight.normal,
           fontFamily: 'Ubuntu',
           fontSize: 14,
           color: Colors.grey,
         ),
-        // labelText: 'Email',
+        // labelText: 'Name',
       ),
-      controller: emailController,
+      controller: nameController,
       onChanged: (value) {
-        email = value;
+        fullname = value;
       },
     );
   }
 
   Widget _buildphonenumber() {
     return TextFormField(
-      readOnly: true,
       style: TextStyle(
         fontWeight: FontWeight.normal,
         fontFamily: 'Ubuntu',
@@ -206,13 +220,6 @@ class _RegisterState extends State<Register> {
         phoneNumber = value;
       },
     );
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    phoneNumberController.text = '${widget.userNumber.toString()}';
   }
 
   @override
@@ -284,7 +291,6 @@ class _RegisterState extends State<Register> {
               ),
               Container(
                   width: double.infinity,
-                  // height: MediaQuery.of(context).size.height - m,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -530,7 +536,7 @@ class _RegisterState extends State<Register> {
                         margin: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 25),
                         decoration: const BoxDecoration(
-                            color: Colors.red,
+                            color: Colors.white,
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                             boxShadow: [
                               BoxShadow(
@@ -568,7 +574,57 @@ class _RegisterState extends State<Register> {
                                   Container(
                                     height: 30,
                                     // color: Colors.pinkAccent,
-                                    child: _buildBirthPlace(),
+                                    child: _buildEmail(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 25),
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 20,
+                                spreadRadius: 5,
+                                offset: Offset(
+                                  2.0,
+                                  2.0,
+                                ),
+                              ),
+                            ]),
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.only(left: 15, top: 5),
+                              color: Colors.white,
+                              height: 70,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: const Text(
+                                      'Birth Place',
+                                      style: TextStyle(
+                                        fontFamily: 'Ubuntu',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 30,
+                                    // color: Colors.pinkAccent,
+                                    child: _buildPlace(),
                                   ),
                                 ],
                               ),
@@ -578,42 +634,26 @@ class _RegisterState extends State<Register> {
                       ),
 
                       ///DOB and
-                      // ElevatedButton(
-                      //     onPressed: _selectTime, child: Text('Birth Time')),
-                      Container(
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        width: MediaQuery.of(context).size.width,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            _selectDate(context);
-                            Navigator.of(context).push(
-                              showPicker(
-                                context: context,
-                                value: _time,
-                                onChange: onTimeChanged,
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: Size(double.infinity, 50),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            elevation: 2,
-                            primary: Color(0xff045de9),
-                            onPrimary: Colors.white,
-                            textStyle: const TextStyle(
-                              fontFamily: 'Ubuntu',
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                      ElevatedButton(
+                          onPressed: _selectTime, child: Text('Birth Time')),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            showPicker(
+                              context: context,
+                              value: _time,
+                              onChange: onTimeChanged,
                             ),
-                          ),
-                          child: Text(
-                            "Select Birth Day and Birth Time",
-                            style: TextStyle(color: Colors.white),
-                          ),
+                          );
+                        },
+                        child: Text(
+                          "Open time picker",
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
+                      ElevatedButton(
+                          onPressed: () => _selectDate(context),
+                          child: Text('data')),
 
                       ///Register button
                       Container(
@@ -759,3 +799,22 @@ class _RegisterState extends State<Register> {
     print('Download-Link: $urlDownload');
   }
 }
+
+// ElevatedButton(
+// onPressed: () {
+// DatePicker.showDatePicker(context,
+// showTitleActions: true,
+// minTime: DateTime(1950, 1, 5),
+// maxTime: DateTime(2025, 6, 7),
+// onChanged: (date) {
+// print('change $date');
+// }, onConfirm: (date) {
+// print('confirm $date');
+// },
+// currentTime: DateTime.now(),
+// locale: LocaleType.en);
+// },
+// child: Text(
+// 'Choose DOB',
+// style: TextStyle(color: Colors.white),
+// )),
