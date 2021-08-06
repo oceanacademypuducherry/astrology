@@ -33,7 +33,7 @@ class _ForumState extends State<Forum> {
     int mySeconds = postTime.difference(DateTime.now()).inSeconds;
 
     mySeconds = ~mySeconds;
-    print(mySeconds);
+
     // return mySeconds.toString();
     if (mySeconds > 0 && mySeconds < 60) {
       return 'Few Second ago';
@@ -314,7 +314,7 @@ class _ForumState extends State<Forum> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    username,
+                                                    username.toString(),
                                                     style: TextStyle(
                                                         fontSize: 20,
                                                         color:
