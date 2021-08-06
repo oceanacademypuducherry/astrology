@@ -276,11 +276,11 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                         //     ?.openBookmarkView();
                                       }
                                     : () {
-                                        _firestore
-                                            .collection('books')
-                                            .doc(getId)
-                                            .update({'type': 'free'});
-                                        // openCheckout();
+                                        // _firestore
+                                        //     .collection('books')
+                                        //     .doc(getId)
+                                        //     .update({'type': 'free'});
+                                        openCheckout();
                                       },
                                 child: widget.bookType == 'free'
                                     ? Text('View Pdf')

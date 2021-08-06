@@ -10,6 +10,8 @@ import 'package:astrology_app/widgets/countrycode.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -38,6 +40,7 @@ class _LoginState extends State<Login> {
   bool wait = false;
   String buttonName = "Send";
   String verificationIdFinal = "";
+  String _forceResendingToken = '';
   String smsCode = "";
 
   String countryCode = '+91';
@@ -95,7 +98,7 @@ class _LoginState extends State<Login> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
             child: Text(
-              wait ? 'RESEND' : 'SEND',
+              buttonName,
               style: TextStyle(
                 color: wait ? Colors.pinkAccent : Colors.black,
                 fontSize: 14,
@@ -107,30 +110,17 @@ class _LoginState extends State<Login> {
             ),
           ),
           onTap: wait
-              ? () async {
-                  setState(() {
-                    number =
-                        '${countryCode.toString()} ${phoneNumberController.text}';
-                  });
-
-                  user_id(number!);
-                  await authClass.verifyPhoneNumber("${number}", setData);
-                }
+              ? null
               : () async {
-                  // startTimer();
+                  number =
+                      '${countryCode.toString()} ${phoneNumberController.text}';
                   setState(() {
+                    isClick = true;
                     start = 60;
                     wait = true;
                     buttonName = "Resend";
                   });
-                  number =
-                      '${countryCode.toString()} ${phoneNumberController.text}';
-                  // userNumberToAUth(number!);
-                  user_id(number!);
-                  print(getId);
-                  await authClass.verifyPhoneNumber("${number}", setData);
-
-                  isClick = true;
+                  await authClass.verifyPhoneNumber(number!, setData);
                 },
         ),
       ),
@@ -298,43 +288,46 @@ class _LoginState extends State<Login> {
     }
   }
 
-  Future<void> verifyPhoneNumber(String phoneNumber, Function setData) async {
-    PhoneVerificationCompleted verificationCompleted =
-        (PhoneAuthCredential phoneAuthCredential) async {
-      print('verificatin completed');
-    };
-    PhoneVerificationFailed verificationFailed =
-        (FirebaseAuthException exception) {
-      // showSnackBar(context, exception.toString());
-      print(exception.toString());
-    };
-    PhoneCodeSent codeSent = (String verificationID, int? forceResendingtoken) {
-      // showSnackBar(context, "Verification Code sent on the phone number");
-
-      print(forceResendingtoken);
-      print("Verification Code sent on the phone number");
-      print(verificationID);
-      setData(verificationID);
-    };
-
-    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
-        (String verificationID) {
-      // showSnackBar(context, "Time out");
-      print('time out');
-    };
-    try {
-      await _auth.verifyPhoneNumber(
-          timeout: Duration(seconds: 60),
-          phoneNumber: phoneNumber,
-          verificationCompleted: verificationCompleted,
-          verificationFailed: verificationFailed,
-          codeSent: codeSent,
-          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
-    } catch (e) {
-      // showSnackBar(context, e.toString());
-      print(e.toString());
-    }
-  }
+  // Future<void> verifyPhoneNumber(String phoneNumber, Function setData) async {
+  //   PhoneVerificationCompleted verificationCompleted =
+  //       (PhoneAuthCredential phoneAuthCredential) async {
+  //     print('verificatin completed');
+  //   };
+  //   PhoneVerificationFailed verificationFailed =
+  //       (FirebaseAuthException exception) {
+  //     // showSnackBar(context, exception.toString());
+  //     print(exception.toString());
+  //   };
+  //
+  //   PhoneCodeSent codeSent =
+  //       (String verificationID, [int? forceResnedingtoken]) async {
+  //     // showSnackBar(context, "Verification Code sent on the phone number");
+  //
+  //     print(forceResnedingtoken.runtimeType);
+  //     print(forceResnedingtoken);
+  //     print("Verification Code sent on the phone number");
+  //     print(verificationID);
+  //     setData(verificationID, forceResnedingtoken);
+  //   };
+  //
+  //   PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
+  //       (String verificationID) {
+  //     // showSnackBar(context, "Time out");
+  //     print('time out');
+  //   };
+  //   try {
+  //     await _auth.verifyPhoneNumber(
+  //         timeout: Duration(seconds: 60),
+  //         phoneNumber: phoneNumber,
+  //         verificationCompleted: verificationCompleted,
+  //         verificationFailed: verificationFailed,
+  //         codeSent: codeSent,
+  //         codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+  //   } catch (e) {
+  //     // showSnackBar(context, e.toString());
+  //     print(e.toString());
+  //   }
+  // }
 
   void setData(String verificationId) {
     setState(() {
@@ -356,10 +349,8 @@ class _LoginState extends State<Login> {
     Timer _timer = Timer.periodic(onsec, (timer) {
       if (start == 0) {
         setState(() {
-          print('cancel');
           timer.cancel();
           wait = false;
-          buttonName = 'Send';
         });
       } else {
         setState(() {

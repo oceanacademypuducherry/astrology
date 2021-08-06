@@ -1,3 +1,4 @@
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/SomeoneElseScreen.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,13 +6,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 enum Appointment { ForMe, SomeoneElse }
 enum Purpose { Marriage, Astrology, Other }
 
 class BookingDetails extends StatefulWidget {
-  String selectedTime;
-  BookingDetails({required this.selectedTime});
+  // DateTime selectedTime;
+  // BookingDetails({required this.selectedTime});
 
   @override
   _BookingDetailsState createState() => _BookingDetailsState();
@@ -20,8 +23,10 @@ class BookingDetails extends StatefulWidget {
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class _BookingDetailsState extends State<BookingDetails> {
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
   Appointment _appointment = Appointment.ForMe;
   Purpose _purpose = Purpose.Marriage;
+  late Razorpay _razorpay;
 
   ///variable
   bool validation = false;
@@ -78,10 +83,67 @@ class _BookingDetailsState extends State<BookingDetails> {
 
   bool value = false;
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _razorpay = Razorpay();
+    print(_forumContreller.userSession.value);
+    print(_forumContreller.sessionUserInfo.value);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    print('************************************************');
+    print(_forumContreller.userSession.value);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _razorpay.clear();
+  }
+
+  ///RAZORPAY START
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    Fluttertoast.showToast(
+        msg: "SUCCESS: " + response.paymentId!,
+        toastLength: Toast.LENGTH_SHORT);
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    Fluttertoast.showToast(
+        msg: "ERROR: " + response.code.toString() + " - " + response.message!,
+        toastLength: Toast.LENGTH_SHORT);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: " + response.walletName!,
+        toastLength: Toast.LENGTH_SHORT);
+  }
+
+  void openCheckout() async {
+    var options = {
+      'key': 'rzp_live_yI4lHyiI5FRJWt',
+      'amount': 100,
+      'name': 'OceanAcademy',
+      'description': 'Booking Appointment',
+      'prefill': {'contact': 'ggggggg', 'email': 'jaya'},
+      'external': {
+        'wallets': ['paytm']
+      }
+    };
+
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      debugPrint('Error: e');
+    }
+  }
+
+  ///RAZORPAY END
+  @override
   Widget build(BuildContext context) {
-    // print(_purpose);
-    // print(_appointment);
-    print(widget.selectedTime);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff045de9),
@@ -374,18 +436,19 @@ class _BookingDetailsState extends State<BookingDetails> {
                       onPressed: _appointment == Appointment.ForMe
                           ? () {
                               ///payment page
+                              openCheckout();
 
-                              _firestore.collection('booking').add({
-                                'time': widget.selectedTime,
-                                'purpose of appointment':
-                                    _appointment.toString(),
-                                'appointment For': _purpose.toString(),
-                              });
-
-                              Get.to(() => BottomNavigation(),
-                                  transition: Transition.topLevel,
-                                  // curve: Curves.ease,
-                                  duration: Duration(milliseconds: 600));
+                              // _firestore.collection('booking').add({
+                              //   'time': Get.arguments,
+                              //   'purpose of appointment':
+                              //       _appointment.toString(),
+                              //   'appointment For': _purpose.toString(),
+                              // });
+                              //
+                              // Get.to(() => BottomNavigation(),
+                              //     transition: Transition.topLevel,
+                              //     // curve: Curves.ease,
+                              //     duration: Duration(milliseconds: 600));
                             }
                           : () {
                               ///someone else page
