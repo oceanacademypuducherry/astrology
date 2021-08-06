@@ -32,6 +32,18 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
     print(minuteSlot);
   }
 
+  Map colorChange = {
+    0: false,
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false,
+    7: false,
+    8: false,
+  };
+
   @override
   Widget build(BuildContext context) {
     List time_slot = [
@@ -70,26 +82,29 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
             itemCount: time_slot.length,
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-            itemBuilder: (context, index) => InkWell(
-              // onTap: () {
-              //   orderTime = time_slot.elementAt(index);
-              // },
-              onTap: widget.dbList.contains(time_slot.elementAt(index))
-                  ? null
-                  : () {
-                      orderTime = time_slot.elementAt(index);
-                      setState(() {
-                        isCheck = true;
-                      });
+            itemBuilder: (context, index) {
+              bool _hasBeenPressed = false;
+              return Material(
+                // color: _hasBeenPressed ? Colors.blue : Colors.white,
+                child: InkWell(
+                  onTap: widget.dbList.contains(time_slot.elementAt(index))
+                      ? null
+                      : () {
+                          orderTime = time_slot.elementAt(index);
+                          setState(() {
+                            colorChange.updateAll(
+                                (key, value) => colorChange[key] = false);
+                            colorChange[index] = true;
+                          });
 
-                      print('+++++++++++++++++++++++++++++++');
-                    },
-              child: Column(
-                children: [
-                  Card(
+                          print('$orderTime');
+
+                          print('+++++++++++++++++++++++++++++++');
+                        },
+                  child: Card(
                     color: widget.dbList.contains(time_slot.elementAt(index))
                         ? Colors.grey
-                        : isCheck == true
+                        : colorChange[index]
                             ? Colors.blue
                             : Colors.white,
                     child: GridTile(
@@ -98,7 +113,6 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // isCheck ?  time_slot.elementAt(index) == orderTime ?Icon(Icons.check) : Text(''),
                             Text(
                                 '${time_slot.elementAt(index).toString().substring(time_slot.elementAt(index).toString().length - 8)}'),
                             SizedBox(
@@ -116,17 +130,25 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                       //     : Icon(Icons.add),
                     ),
                   ),
-                ],
-              ),
-            ),
+                ),
+              );
+            },
           )),
           ElevatedButton(
             child: Text('continue'),
             onPressed: () {
-              print(orderTime);
-              _firestore.collection('booking').add({
-                'time': orderTime,
+              setState(() {
+                colorChange.updateAll((key, value) => colorChange[key] = false);
               });
+              print(orderTime);
+
+              Get.to(() => BookingDetails(),
+                  transition: Transition.rightToLeft,
+                  curve: Curves.easeInToLinear,
+                  duration: Duration(milliseconds: 600));
+              // _firestore.collection('booking').add({
+              //   'time': orderTime,
+              // });
             },
           )
         ],
