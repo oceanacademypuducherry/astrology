@@ -57,7 +57,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
       '${widget.focusedDate} 05:00 PM',
       '${widget.focusedDate} 06:00 PM'
     ];
-
+    print(widget.dbList);
     // minTime(time_slot);
 
     return Scaffold(

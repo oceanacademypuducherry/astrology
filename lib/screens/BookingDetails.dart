@@ -1,4 +1,6 @@
 import 'package:astrology_app/screens/SomeoneElseScreen.dart';
+import 'package:astrology_app/widgets/BottomNavigation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +16,8 @@ class BookingDetails extends StatefulWidget {
   @override
   _BookingDetailsState createState() => _BookingDetailsState();
 }
+
+FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class _BookingDetailsState extends State<BookingDetails> {
   Appointment _appointment = Appointment.ForMe;
@@ -75,8 +79,9 @@ class _BookingDetailsState extends State<BookingDetails> {
   bool value = false;
   @override
   Widget build(BuildContext context) {
-    print(_purpose);
-    print(_appointment);
+    // print(_purpose);
+    // print(_appointment);
+    print(widget.selectedTime);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff045de9),
@@ -369,10 +374,18 @@ class _BookingDetailsState extends State<BookingDetails> {
                       onPressed: _appointment == Appointment.ForMe
                           ? () {
                               ///payment page
-                              // Get.to(() => BookingDetails(),
-                              //     transition: Transition.topLevel,
-                              //     // curve: Curves.ease,
-                              //     duration: Duration(milliseconds: 600));
+
+                              _firestore.collection('booking').add({
+                                'time': widget.selectedTime,
+                                'purpose of appointment':
+                                    _appointment.toString(),
+                                'appointment For': _purpose.toString(),
+                              });
+
+                              Get.to(() => BottomNavigation(),
+                                  transition: Transition.topLevel,
+                                  // curve: Curves.ease,
+                                  duration: Duration(milliseconds: 600));
                             }
                           : () {
                               ///someone else page
