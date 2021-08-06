@@ -1,13 +1,53 @@
 import 'package:astrology_app/screens/BookingDetails.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 
-class AppointmentTimeScreen extends StatelessWidget {
-  const AppointmentTimeScreen({Key? key}) : super(key: key);
+class AppointmentTimeScreen extends StatefulWidget {
+  String focusedDate;
+  List dbList;
+  AppointmentTimeScreen({required this.focusedDate, required this.dbList});
+
+  @override
+  _AppointmentTimeScreenState createState() => _AppointmentTimeScreenState();
+}
+
+class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  String? orderTime;
+
+  List minuteSlot = [];
+  bool? isCheck;
+
+  String? value;
+  void minTime(List newList) {
+    for (var i in newList) {
+      String minute = i.toString().substring(i.length - 2);
+      // String choosen = minute.substring(i.length - 2)
+      minuteSlot.add(minute);
+    }
+    print(minuteSlot);
+  }
 
   @override
   Widget build(BuildContext context) {
+    List time_slot = [
+      '${widget.focusedDate} 10:00 AM',
+      '${widget.focusedDate} 11:00 AM',
+      "${widget.focusedDate} 12:00 PM",
+      '${widget.focusedDate} 01:00 PM',
+      '${widget.focusedDate} 02:00 PM',
+      '${widget.focusedDate} 03:00 PM',
+      '${widget.focusedDate} 04:00 PM',
+      '${widget.focusedDate} 05:00 PM',
+      '${widget.focusedDate} 06:00 PM'
+    ];
+
+    // minTime(time_slot);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff045de9),
@@ -22,400 +62,74 @@ class AppointmentTimeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: 1,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 50, horizontal: 15),
-                child: Column(
-                  children: [
-                    ///morning
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          // color: Colors.blue,
-                          width: 30,
-                          height: 30,
-                          child: Image.asset(
-                            'images/morning.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 30,
-                          child: Text(
-                            'Morning',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 15,
-                              fontFamily: 'Ubuntu',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(60, 40),
-                              fixedSize: Size(80, 35),
-                              shadowColor: Colors.grey.shade400,
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              elevation: 2,
-                              onPrimary: Colors.grey,
-                              primary: Colors.white,
-                            ),
-                            child: Text(
-                              '9 AM',
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(60, 40),
-                              fixedSize: Size(80, 35),
-                              shadowColor: Colors.grey.shade400,
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              elevation: 2,
-                              onPrimary: Colors.grey,
-                              primary: Colors.white,
-                            ),
-                            child: Text(
-                              '9 AM',
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(60, 40),
-                              fixedSize: Size(80, 35),
-                              shadowColor: Colors.grey.shade400,
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              elevation: 2,
-                              onPrimary: Colors.grey,
-                              primary: Colors.white,
-                            ),
-                            child: Text(
-                              '9 AM',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 40),
+      body: Column(
+        children: [
+          Text('Evening'),
+          Expanded(
+              child: GridView.builder(
+            itemCount: time_slot.length,
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemBuilder: (context, index) => InkWell(
+              // onTap: () {
+              //   orderTime = time_slot.elementAt(index);
+              // },
+              onTap: widget.dbList.contains(time_slot.elementAt(index))
+                  ? null
+                  : () {
+                      orderTime = time_slot.elementAt(index);
+                      setState(() {
+                        isCheck = true;
+                      });
 
-                    ///afternoon
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          // color: Colors.blue,
-                          width: 30,
-                          height: 30,
-                          child: Image.asset(
-                            'images/afternoon.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 30,
-                          child: Text(
-                            'Afternoon',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 15,
-                              fontFamily: 'Ubuntu',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(60, 40),
-                              fixedSize: Size(80, 35),
-                              shadowColor: Colors.grey.shade400,
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              elevation: 2,
-                              onPrimary: Colors.grey,
-                              primary: Colors.white,
-                            ),
-                            child: Text(
-                              '9 AM',
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(60, 40),
-                              fixedSize: Size(80, 35),
-                              shadowColor: Colors.grey.shade400,
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              elevation: 2,
-                              onPrimary: Colors.grey,
-                              primary: Colors.white,
-                            ),
-                            child: Text(
-                              '9 AM',
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(60, 40),
-                              fixedSize: Size(80, 35),
-                              shadowColor: Colors.grey.shade400,
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              elevation: 2,
-                              onPrimary: Colors.grey,
-                              primary: Colors.white,
-                            ),
-                            child: Text(
-                              '9 AM',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 40),
-
-                    ///evening
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          // color: Colors.blue,
-                          width: 30,
-                          height: 30,
-                          child: Image.asset(
-                            'images/morning.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 30,
-                          child: Text(
-                            'Evening',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 15,
-                              fontFamily: 'Ubuntu',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(60, 40),
-                              fixedSize: Size(80, 35),
-                              shadowColor: Colors.grey.shade400,
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              elevation: 2,
-                              onPrimary: Colors.grey,
-                              primary: Colors.white,
-                            ),
-                            child: Text(
-                              '9 AM',
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(60, 40),
-                              fixedSize: Size(80, 35),
-                              shadowColor: Colors.grey.shade400,
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              elevation: 2,
-                              onPrimary: Colors.grey,
-                              primary: Colors.white,
-                            ),
-                            child: Text(
-                              '9 AM',
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(60, 40),
-                              fixedSize: Size(80, 35),
-                              shadowColor: Colors.grey.shade400,
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              elevation: 2,
-                              onPrimary: Colors.grey,
-                              primary: Colors.white,
-                            ),
-                            child: Text(
-                              '9 AM',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 25),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.to(() => BookingDetails(),
-                          transition: Transition.topLevel,
-                          // curve: Curves.ease,
-                          duration: Duration(milliseconds: 600));
+                      print('+++++++++++++++++++++++++++++++');
                     },
-                    child: Text('Continue'),
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: Size(double.infinity, 50),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 25,
+              child: Column(
+                children: [
+                  Card(
+                    color: widget.dbList.contains(time_slot.elementAt(index))
+                        ? Colors.grey
+                        : isCheck == true
+                            ? Colors.blue
+                            : Colors.white,
+                    child: GridTile(
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // isCheck ?  time_slot.elementAt(index) == orderTime ?Icon(Icons.check) : Text(''),
+                            Text(
+                                '${time_slot.elementAt(index).toString().substring(time_slot.elementAt(index).toString().length - 8)}'),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(widget.dbList
+                                    .contains(time_slot.elementAt(index))
+                                ? "Full"
+                                : 'Available'),
+                          ],
                         ),
-                        textStyle: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontFamily: 'Ubuntu',
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
+                      ),
+                      // header: orderTime == time_slot.elementAt(index)
+                      //     ? Icon(Icons.check)
+                      //     : Icon(Icons.add),
+                    ),
                   ),
                 ],
-              )
-            ],
-          );
-        },
+              ),
+            ),
+          )),
+          ElevatedButton(
+            child: Text('continue'),
+            onPressed: () {
+              print(orderTime);
+              _firestore.collection('booking').add({
+                'time': orderTime,
+              });
+            },
+          )
+        ],
       ),
     );
   }
