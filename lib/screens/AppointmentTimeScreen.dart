@@ -142,7 +142,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
               });
               print(orderTime);
 
-              Get.to(() => BookingDetails(),
+              Get.to(() => BookingDetails(selectedTime: orderTime.toString()),
                   transition: Transition.rightToLeft,
                   curve: Curves.easeInToLinear,
                   duration: Duration(milliseconds: 600));
