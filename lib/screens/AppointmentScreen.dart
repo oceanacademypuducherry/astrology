@@ -19,8 +19,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getItem();
-    getContent();
   }
 
   List dbList = [];
@@ -31,7 +29,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         .collection('booking')
         .snapshots(includeMetadataChanges: true)) {
       for (var message in snapshot.docs) {
-        String getTime = message.data()['time'];
+        print('going');
+        var getTime = message.data()['time'];
         dbList.add(getTime);
       }
       print('++++++++++++++++++');
@@ -40,31 +39,16 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     }
   }
 
-  List available = [
-    '10:00',
-    '11:00',
-    '12:00',
-    '01:00',
-    '02:00',
-  ];
-
   String? value;
   String? formattedTime;
   int count = 0;
   List timing = [];
 
-  void getContent() async {
-    var data = await firestore.collection('demo').get();
-    for (var i in data.docs) {
-      var name = i['map'][0]['q2'];
-      print('$name 88888888888');
-    }
-  }
-
   TextEditingController _eventController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    getItem();
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -148,7 +132,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 selectedDay = selectDay;
                 focusedDay = focusDay;
               });
-              getContent();
+
               // setState(() {
               //   openBottomSheet(context);
               // });
