@@ -82,6 +82,7 @@ class _BookingDetailsState extends State<BookingDetails> {
   }
 
   bool value = false;
+  String rupees = " \$50";
   @override
   void initState() {
     // TODO: implement initState
@@ -105,8 +106,25 @@ class _BookingDetailsState extends State<BookingDetails> {
 
   ///RAZORPAY START
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    _firestore.collection('booking').add({});
-
+    _firestore.collection('booking').add({
+      'time': Get.arguments,
+      'phoneNumber': _forumContreller.userSession.value,
+      'email': _forumContreller.sessionUserInfo.value['email'],
+      'userName': _forumContreller.sessionUserInfo.value['name'],
+      'jadhagam': _forumContreller.sessionUserInfo.value['jadhagam'],
+      'payment': rupees,
+      'birthTime': _forumContreller.sessionUserInfo.value['name'],
+      'birthPlace': _forumContreller.sessionUserInfo.value['name'],
+      'bookingFor': _appointment.toString(),
+      'purposeFor': _purpose.toString(),
+    });
+    print('uploaded successfully');
+    print(
+        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+    Get.to(() => BottomNavigation(),
+        transition: Transition.rightToLeft,
+        curve: Curves.easeInToLinear,
+        duration: Duration(milliseconds: 600));
     Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId!,
         toastLength: Toast.LENGTH_SHORT);
@@ -247,6 +265,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                   ),
                 ),
                 SizedBox(height: 20),
+                Text(rupees),
                 Divider(
                   thickness: 0.2,
                   color: Colors.grey,
