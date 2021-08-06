@@ -25,7 +25,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="razorpay connected" />
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="checking 1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/AppointmentScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/AppointmentScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -291,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628263470089</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="checking 1">
+      <created>1628264189152</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1628264189152</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,7 +321,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed beta to stable version and flutter updated" />
     <MESSAGE value="updated registerscreen.dart and loginscreen.dart" />
     <MESSAGE value="start auth" />
     <MESSAGE value="auth going" />
@@ -332,7 +345,8 @@
     <MESSAGE value="app icon changed" />
     <MESSAGE value="profile" />
     <MESSAGE value="razorpay connected" />
-    <option name="LAST_COMMIT_MESSAGE" value="razorpay connected" />
+    <MESSAGE value="checking 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="checking 1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1627881964327">
@@ -355,26 +369,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="330" key="GridCell.Tab.0.bottom" timestamp="1628261634935">
+    <state width="1860" height="330" key="GridCell.Tab.0.bottom" timestamp="1628264038088">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628261634935" />
-    <state width="1860" height="330" key="GridCell.Tab.0.center" timestamp="1628261634935">
+    <state width="1860" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628264038088" />
+    <state width="1860" height="330" key="GridCell.Tab.0.center" timestamp="1628264038088">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="330" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628261634935" />
-    <state width="1860" height="330" key="GridCell.Tab.0.left" timestamp="1628261634935">
+    <state width="1860" height="330" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628264038088" />
+    <state width="1860" height="330" key="GridCell.Tab.0.left" timestamp="1628264038088">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="330" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628261634935" />
-    <state width="1860" height="330" key="GridCell.Tab.0.right" timestamp="1628261634935">
+    <state width="1860" height="330" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628264038088" />
+    <state width="1860" height="330" key="GridCell.Tab.0.right" timestamp="1628264038088">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="330" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628261634935" />
-    <state x="184" y="86" key="MergeDialog" timestamp="1628226767251">
+    <state width="1860" height="330" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628264038088" />
+    <state x="184" y="86" key="MergeDialog" timestamp="1628263947727">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="184" y="86" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628226767251" />
+    <state x="184" y="86" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628263947727" />
     <state x="591" y="281" key="MultipleFileMergeDialog" timestamp="1628263538908">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -383,22 +397,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1627717639509" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628263787487">
+    <state x="744" y="236" key="VCS.ChangeListViewerDialog" timestamp="1628263931050">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628263787487" />
-    <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1627640290603">
+    <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628263931050" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628264195591">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627640290603" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628264195591" />
+    <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1628264564690">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628264564690" />
     <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1628252721286">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1628252721286" />
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1628263922578">
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1628263939834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628263922578" />
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628263939834" />
     <state x="667" y="253" width="585" height="558" key="find.popup" timestamp="1628231450693">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -441,7 +459,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/AppointmentScreen.dart</url>
-          <line>42</line>
+          <line>59</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>

@@ -46,6 +46,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print(widget.dbList);
   }
 
   @override
