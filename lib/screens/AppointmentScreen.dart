@@ -19,7 +19,25 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    getItem();
     getContent();
+  }
+
+  List dbList = [];
+
+  void getItem() async {
+    print("---------------------------");
+    await for (var snapshot in firestore
+        .collection('booking')
+        .snapshots(includeMetadataChanges: true)) {
+      for (var message in snapshot.docs) {
+        String getTime = message.data()['time'];
+        dbList.add(getTime);
+      }
+      print('++++++++++++++++++');
+
+      print("---------------------------");
+    }
   }
 
   List available = [
@@ -44,465 +62,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   }
 
   TextEditingController _eventController = TextEditingController();
-  // void openBottomSheet(context) {
-  //   showModalBottomSheet(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return Column(
-  //           children: [
-  //             Container(
-  //               height: 500,
-  //               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-  //               child: Wrap(
-  //                 children: [
-  //                   ///morning
-  //                   Row(
-  //                     children: [
-  //                       Container(
-  //                         margin: EdgeInsets.symmetric(horizontal: 10),
-  //                         // color: Colors.blue,
-  //                         width: 30,
-  //                         height: 30,
-  //                         child: Image.asset(
-  //                           'images/morning.png',
-  //                           fit: BoxFit.cover,
-  //                         ),
-  //                       ),
-  //                       Container(
-  //                         alignment: Alignment.center,
-  //                         height: 30,
-  //                         child: Text(
-  //                           'Morning',
-  //                           style: TextStyle(
-  //                             color: Colors.blue,
-  //                             fontSize: 15,
-  //                             fontFamily: 'Ubuntu',
-  //                             fontWeight: FontWeight.w700,
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                   SingleChildScrollView(
-  //                     scrollDirection: Axis.horizontal,
-  //                     child: Container(
-  //                       alignment: Alignment.centerLeft,
-  //                       child: Row(
-  //                         mainAxisAlignment: MainAxisAlignment.start,
-  //                         children: [
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ),
-  //                   ),
-  //
-  //                   ///afternoon
-  //                   Row(
-  //                     children: [
-  //                       Container(
-  //                         margin: EdgeInsets.symmetric(horizontal: 10),
-  //                         // color: Colors.blue,
-  //                         width: 30,
-  //                         height: 30,
-  //                         child: Image.asset(
-  //                           'images/afternoon.png',
-  //                           fit: BoxFit.cover,
-  //                         ),
-  //                       ),
-  //                       Container(
-  //                         alignment: Alignment.center,
-  //                         height: 30,
-  //                         child: Text(
-  //                           'Afternoon',
-  //                           style: TextStyle(
-  //                             color: Colors.blue,
-  //                             fontSize: 15,
-  //                             fontFamily: 'Ubuntu',
-  //                             fontWeight: FontWeight.w700,
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                   SingleChildScrollView(
-  //                     scrollDirection: Axis.horizontal,
-  //                     child: Container(
-  //                       alignment: Alignment.centerLeft,
-  //                       child: Row(
-  //                         mainAxisAlignment: MainAxisAlignment.start,
-  //                         children: [
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ),
-  //                   ),
-  //
-  //                   ///evening
-  //                   Row(
-  //                     children: [
-  //                       Container(
-  //                         margin: EdgeInsets.symmetric(horizontal: 10),
-  //                         // color: Colors.blue,
-  //                         width: 30,
-  //                         height: 30,
-  //                         child: Image.asset(
-  //                           'images/morning.png',
-  //                           fit: BoxFit.cover,
-  //                         ),
-  //                       ),
-  //                       Container(
-  //                         alignment: Alignment.center,
-  //                         height: 30,
-  //                         child: Text(
-  //                           'Evening',
-  //                           style: TextStyle(
-  //                             color: Colors.blue,
-  //                             fontSize: 15,
-  //                             fontFamily: 'Ubuntu',
-  //                             fontWeight: FontWeight.w700,
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                   SingleChildScrollView(
-  //                     scrollDirection: Axis.horizontal,
-  //                     child: Container(
-  //                       alignment: Alignment.centerLeft,
-  //                       child: Row(
-  //                         mainAxisAlignment: MainAxisAlignment.start,
-  //                         children: [
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                           Container(
-  //                             margin: EdgeInsets.symmetric(
-  //                                 horizontal: 10, vertical: 20),
-  //                             alignment: Alignment.center,
-  //                             decoration: BoxDecoration(
-  //                               boxShadow: [
-  //                                 BoxShadow(
-  //                                   color: Colors.grey,
-  //                                   offset: Offset(0.1, 0.2),
-  //                                 )
-  //                               ],
-  //                               color: Colors.grey[100],
-  //                               borderRadius: BorderRadius.circular(10),
-  //                             ),
-  //                             height: 40,
-  //                             width: 100,
-  //                             child: Text(
-  //                               'Wed 1 Jul',
-  //                               style: TextStyle(
-  //                                 color: Colors.grey,
-  //                                 fontSize: 13,
-  //                                 fontFamily: 'Ubuntu',
-  //                                 fontWeight: FontWeight.normal,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ),
-  //                   ),
-  //
-  //                   ///continue
-  //                   Row(
-  //                     children: [
-  //                       ElevatedButton(
-  //                         onPressed: () {},
-  //                         child: Text('Continue'),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //       });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -585,11 +144,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             },
             // Day Changed
             onDaySelected: (DateTime selectDay, DateTime focusDay) {
-              Get.to(() => AppointmentTimeScreen(),
-                  // transition: Transition.cupertinoDialog,
-                  fullscreenDialog: true,
-                  curve: Curves.easeInToLinear,
-                  duration: Duration(milliseconds: 600));
               setState(() {
                 selectedDay = selectDay;
                 focusedDay = focusDay;
@@ -603,7 +157,16 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               // 2020-01-02 03:04:05.000
 
               print(focusedDay);
-              print(formattedTime);
+              print(formattedTime.runtimeType);
+              Get.to(
+                  () => AppointmentTimeScreen(
+                        focusedDate: formattedTime.toString(),
+                        dbList: dbList,
+                      ),
+                  // transition: Transition.cupertinoDialog,
+                  fullscreenDialog: true,
+                  curve: Curves.easeInToLinear,
+                  duration: Duration(milliseconds: 600));
             },
 
             //To style the Calendar
