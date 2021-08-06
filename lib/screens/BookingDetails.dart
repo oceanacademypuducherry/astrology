@@ -105,6 +105,8 @@ class _BookingDetailsState extends State<BookingDetails> {
 
   ///RAZORPAY START
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    _firestore.collection('booking').add({});
+
     Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId!,
         toastLength: Toast.LENGTH_SHORT);
@@ -128,7 +130,10 @@ class _BookingDetailsState extends State<BookingDetails> {
       'amount': 100,
       'name': 'OceanAcademy',
       'description': 'Booking Appointment',
-      'prefill': {'contact': 'ggggggg', 'email': 'jaya'},
+      'prefill': {
+        'contact': '${_forumContreller.userSession.value}',
+        'email': '${_forumContreller.sessionUserInfo.value['email']}'
+      },
       'external': {
         'wallets': ['paytm']
       }

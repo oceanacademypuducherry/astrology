@@ -246,9 +246,10 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
               onPressed: () {
                 print('>>>>>>>>>>>>>>>>>>>>>>>');
                 print(orderTime);
-                // setState(() {
-                //   colorChange.updateAll((key, value) => colorChange[key] = false);
-                // });
+                setState(() {
+                  colorChange
+                      .updateAll((key, value) => colorChange[key] = false);
+                });
 
                 Get.to(() => BookingDetails(),
                     arguments: orderTime,
