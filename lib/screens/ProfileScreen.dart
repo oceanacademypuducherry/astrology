@@ -1,3 +1,4 @@
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/services/storage_service.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
@@ -22,6 +23,7 @@ class ProfileScreen extends StatefulWidget {
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
   UploadTask? task;
   File? file;
   String? email = 'thamizh';
@@ -40,38 +42,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var getName;
   var getMobileNumber;
   var getEmail;
-  // var getProfile;
-  // var getJadhagam;
-  // var profileLink;
-
-  // void edit_profile() async {
-  //   print("---------------------------");
-  //   await for (var snapshot in _firestore
-  //       .collection('newusers')
-  //       .where("PhoneNumber", isEqualTo: '+91 1234567890')
-  //       .snapshots(includeMetadataChanges: true)) {
-  //     for (var message in snapshot.docs) {
-  //       getName = message.data()['name'];
-  //       getMobileNumber = message.data()['PhoneNumber'];
-  //       getEmail = message.data()['email'];
-  //       getProfile = message.data()['profile'];
-  //       getJadhagam = message.data()['jadhagam'];
-  //     }
-  //     print('++++++++++++++++++');
-  //     setState(() {
-  //       nameController =
-  //           TextEditingController(text: getName == null ? '' : getName);
-  //       emailController =
-  //           TextEditingController(text: getEmail == null ? '' : getEmail);
-  //       phoneNumberController = TextEditingController(
-  //           text: getMobileNumber == null ? '' : getMobileNumber);
-  //       profileLink = getProfile;
-  //       jadhagamLink = getJadhagam;
-  //     });
-  //   }
-  //
-  //   print("---------------------------");
-  // }
 
   Widget _buildEmail() {
     return TextFormField(
@@ -160,13 +130,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         phoneNumber = value;
       },
     );
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // edit_profile();
   }
 
   @override
@@ -436,8 +399,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       _firestore
                                                           .collection(
                                                               "newusers")
-                                                          .doc(
-                                                              '96tbzTBfqZnwEHCzYhM6')
+                                                          .doc(Get.find<
+                                                                  ForumContreller>()
+                                                              .userDocumentId
+                                                              .toString())
                                                           .set({
                                                         "name": nameController!
                                                             .text,

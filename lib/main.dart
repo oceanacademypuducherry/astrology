@@ -30,6 +30,7 @@ void main() async {
     if (i['PhoneNumber'] == userNumber) {
       Get.find<ForumContreller>().setUserSession(userNumber.toString());
       Get.find<ForumContreller>().setUserInfo(i.data());
+      Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
     }
   }
   runApp(
@@ -58,6 +59,7 @@ class _MyAppState extends State<MyApp> {
     print('.......................');
     print(_forumContreller.userSession.value);
     print(_forumContreller.sessionUserInfo.value);
+    print(_forumContreller.userDocumentId.value);
     print('.......................');
   }
 

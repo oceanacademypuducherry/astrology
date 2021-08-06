@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/otpscreen.dart';
@@ -255,13 +256,33 @@ class _LoginState extends State<Login> {
       print('$getId kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
       print(userSession.data());
       if (userSession.data() != null) {
-        session();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('user', number!);
+        String userNumber = prefs.getString('user').toString();
+        var userDatas = await _firestore.collection('newusers').get();
+        for (var i in userDatas.docs) {
+          if (i['PhoneNumber'] == userNumber) {
+            Get.find<ForumContreller>().setUserSession(userNumber.toString());
+            Get.find<ForumContreller>().setUserInfo(i.data());
+            Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
+          }
+        }
         Get.to(() => BottomNavigation(),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
             duration: Duration(milliseconds: 600));
       } else {
-        session();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('user', number!);
+        String userNumber = prefs.getString('user').toString();
+        var userDatas = await _firestore.collection('newusers').get();
+        for (var i in userDatas.docs) {
+          if (i['PhoneNumber'] == userNumber) {
+            Get.find<ForumContreller>().setUserSession(userNumber.toString());
+            Get.find<ForumContreller>().setUserInfo(i.data());
+            Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
+          }
+        }
         print(
             '$number aaaaaaaaaaaaaaaaaaattttttttttttttttttttttttssssssssssseeeeeeeee');
         Get.to(
@@ -346,21 +367,6 @@ class _LoginState extends State<Login> {
         });
       }
     });
-  }
-
-  session() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('user', number!);
-    // await prefs.setBool('isSession', true);
-
-    print("${number!} ssssssssssssss");
-    print('Otp Submited');
-  }
-
-  Future<void> userNumberToAUth(String number) async {
-    print('geting user number...........................');
-    otp_controller.setUserNumber(number);
-    print(number);
   }
 
   @override
