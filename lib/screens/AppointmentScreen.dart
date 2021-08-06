@@ -30,9 +30,35 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         .snapshots(includeMetadataChanges: true)) {
       for (var message in snapshot.docs) {
         print('going');
-        var getTime = message.data()['time'];
-        dbList.add(getTime);
+        dynamic getTime = message['time'];
+        int yearFormat;
+        int monthFormat;
+        int dayFormat;
+        int hourFormat;
+        int minuteFormat;
+
+        var year = DateFormat('yyyy');
+        var month = DateFormat('MM');
+        var day = DateFormat('dd');
+        var hour = DateFormat('hh');
+        var minute = DateFormat('mm');
+
+        yearFormat = int.parse(year.format(getTime.toDate()));
+        monthFormat = int.parse(month.format(getTime.toDate()));
+        dayFormat = int.parse(day.format(getTime.toDate()));
+        hourFormat = int.parse(hour.format(getTime.toDate()));
+        minuteFormat = int.parse(minute.format(getTime.toDate()));
+        print(monthFormat.runtimeType);
+
+        // DateTime dt = DateTime.parse(
+        //     '${yearFormat.toString()}-${monthFormat.toString()}-${dayFormat} ${hourFormat}:${minuteFormat}');
+        //
+        var dt = DateTime(
+            yearFormat, monthFormat, dayFormat, hourFormat, minuteFormat);
+        dbList.add(dt);
+        print(dt);
       }
+
       print('++++++++++++++++++');
 
       print("---------------------------");
@@ -43,8 +69,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   String? formattedTime;
   int count = 0;
   List timing = [];
-
-  TextEditingController _eventController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

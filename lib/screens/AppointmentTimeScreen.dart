@@ -7,8 +7,12 @@ import 'package:get/get.dart';
 
 class AppointmentTimeScreen extends StatefulWidget {
   String focusedDate;
+
   List dbList;
-  AppointmentTimeScreen({required this.focusedDate, required this.dbList});
+  AppointmentTimeScreen({
+    required this.focusedDate,
+    required this.dbList,
+  });
 
   @override
   _AppointmentTimeScreenState createState() => _AppointmentTimeScreenState();
@@ -17,20 +21,12 @@ class AppointmentTimeScreen extends StatefulWidget {
 class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  String? orderTime;
+  DateTime? orderTime;
 
   List minuteSlot = [];
   bool? isCheck;
 
   String? value;
-  void minTime(List newList) {
-    for (var i in newList) {
-      String minute = i.toString().substring(i.length - 2);
-      // String choosen = minute.substring(i.length - 2)
-      minuteSlot.add(minute);
-    }
-    print(minuteSlot);
-  }
 
   Map colorChange = {
     0: false,
@@ -42,22 +38,32 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
     6: false,
     7: false,
     8: false,
+    9: false,
   };
+  List timing = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  bool _hasBeenPressed = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     List time_slot = [
-      '${widget.focusedDate} 10:00 AM',
-      '${widget.focusedDate} 11:00 AM',
-      "${widget.focusedDate} 12:00 PM",
-      '${widget.focusedDate} 01:00 PM',
-      '${widget.focusedDate} 02:00 PM',
-      '${widget.focusedDate} 03:00 PM',
-      '${widget.focusedDate} 04:00 PM',
-      '${widget.focusedDate} 05:00 PM',
-      '${widget.focusedDate} 06:00 PM'
+      DateTime.parse('${widget.focusedDate} 09:00'),
+      DateTime.parse('${widget.focusedDate} 10:00'),
+      DateTime.parse('${widget.focusedDate} 11:00'),
+      DateTime.parse('${widget.focusedDate} 12:00'),
+      DateTime.parse('${widget.focusedDate} 13:00'),
+      DateTime.parse('${widget.focusedDate} 14:00'),
+      DateTime.parse('${widget.focusedDate} 15:00'),
+      DateTime.parse('${widget.focusedDate} 16:00'),
+      DateTime.parse('${widget.focusedDate} 17:00'),
+      DateTime.parse('${widget.focusedDate} 18:00'),
     ];
-    print(widget.dbList);
+    // print(widget.dbList);
+
     // minTime(time_slot);
 
     return Scaffold(
@@ -74,84 +80,184 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Text('Evening'),
-          Expanded(
-              child: GridView.builder(
-            itemCount: time_slot.length,
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-            itemBuilder: (context, index) {
-              bool _hasBeenPressed = false;
-              return Material(
-                // color: _hasBeenPressed ? Colors.blue : Colors.white,
-                child: InkWell(
-                  onTap: widget.dbList.contains(time_slot.elementAt(index))
-                      ? null
-                      : () {
-                          orderTime = time_slot.elementAt(index);
-                          setState(() {
-                            colorChange.updateAll(
-                                (key, value) => colorChange[key] = false);
-                            colorChange[index] = true;
-                          });
-
-                          print('$orderTime');
-
-                          print('+++++++++++++++++++++++++++++++');
-                        },
-                  child: Card(
-                    color: widget.dbList.contains(time_slot.elementAt(index))
-                        ? Colors.grey
-                        : colorChange[index]
-                            ? Colors.blue
-                            : Colors.white,
-                    child: GridTile(
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                                '${time_slot.elementAt(index).toString().substring(time_slot.elementAt(index).toString().length - 8)}'),
-                            SizedBox(
-                              height: 10,
+      body: Container(
+        color: Colors.pink,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Morning'),
+                  Wrap(
+                    children: [
+                      for (var i = 0; i < time_slot.length; i++)
+                        if (DateFormat.jm().format(time_slot[i]).substring(
+                                DateFormat.jm().format(time_slot[i]).length -
+                                    2) ==
+                            'AM')
+                          GestureDetector(
+                            onTap: widget.dbList.contains(time_slot[i])
+                                ? null
+                                : () {
+                                    setState(() {
+                                      print('$i 000000000000');
+                                      colorChange.updateAll((key, value) =>
+                                          colorChange[key] = false);
+                                      colorChange[i] = true;
+                                    });
+                                    orderTime = time_slot[i];
+                                    print(orderTime);
+                                  },
+                            child: Card(
+                              color: widget.dbList.contains(time_slot[i])
+                                  ? Colors.grey
+                                  : colorChange[i]
+                                      ? Colors.blue
+                                      : Colors.white,
+                              //                  Colors.white,,
+                              child: Column(
+                                children: [
+                                  Text('$i'),
+                                  Text(
+                                      '${DateFormat.jm().format(time_slot[i])}'),
+                                  widget.dbList.contains(time_slot[i])
+                                      ? Text('FULL')
+                                      : Text('FREE')
+                                ],
+                              ),
                             ),
-                            Text(widget.dbList
-                                    .contains(time_slot.elementAt(index))
-                                ? "Full"
-                                : 'Available'),
-                          ],
-                        ),
-                      ),
-                      // header: orderTime == time_slot.elementAt(index)
-                      //     ? Icon(Icons.check)
-                      //     : Icon(Icons.add),
-                    ),
+                          ),
+                    ],
                   ),
-                ),
-              );
-            },
-          )),
-          ElevatedButton(
-            child: Text('continue'),
-            onPressed: () {
-              setState(() {
-                colorChange.updateAll((key, value) => colorChange[key] = false);
-              });
-              print(orderTime);
+                ],
+              ),
+            ),
+            Container(
+              color: Colors.yellowAccent,
+              child: Column(
+                children: [
+                  Text('AfterNoon'),
+                  Wrap(
+                    children: [
+                      for (var i = 0; i < time_slot.length; i++)
+                        if ((DateFormat.jm().format(time_slot[i]).substring(
+                                    DateFormat.jm()
+                                            .format(time_slot[i])
+                                            .length -
+                                        2) ==
+                                'PM') &&
+                            time_slot[i].hour > 12 &&
+                            time_slot[i].hour < 16)
+                          GestureDetector(
+                            onTap: widget.dbList.contains(i)
+                                ? null
+                                : () {
+                                    setState(() {
+                                      print('$i 000000000000');
+                                      colorChange.updateAll((key, value) =>
+                                          colorChange[key] = false);
+                                      colorChange[i] = true;
+                                    });
+                                    orderTime = time_slot[i];
+                                    print(orderTime);
+                                  },
+                            child: Card(
+                              color: widget.dbList.contains(time_slot[i])
+                                  ? Colors.grey
+                                  : colorChange[i]
+                                      ? Colors.blue
+                                      : Colors.white,
+                              child: Column(
+                                children: [
+                                  Text(
+                                      '${DateFormat.jm().format(time_slot[i])}'),
+                                  widget.dbList.contains(i)
+                                      ? Text('FULL')
+                                      : Text('FREE')
+                                ],
+                              ),
+                            ),
+                          ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              color: Colors.lightGreenAccent,
+              child: Column(
+                children: [
+                  Text('Evenings'),
+                  Wrap(
+                    children: [
+                      for (var i = 0; i < time_slot.length; i++)
+                        if ((DateFormat.jm().format(time_slot[i]).substring(
+                                    DateFormat.jm()
+                                            .format(time_slot[i])
+                                            .length -
+                                        2) ==
+                                'PM') &&
+                            time_slot[i].hour > 15 &&
+                            time_slot[i].hour < 21)
+                          GestureDetector(
+                            onTap: widget.dbList.contains(i)
+                                ? null
+                                : () {
+                                    orderTime = time_slot[i];
+                                    print(orderTime);
+                                    setState(() {
+                                      print('$i 000000000000');
+                                      colorChange.updateAll((key, value) =>
+                                          colorChange[key] = false);
+                                      colorChange[i] = true;
+                                    });
+                                  },
+                            child: Card(
+                              margin: EdgeInsets.all(12),
+                              elevation: 4,
+                              color: widget.dbList.contains(time_slot[i])
+                                  ? Colors.grey
+                                  : colorChange[i]
+                                      ? Colors.blue
+                                      : Colors.white,
+                              child: Column(
+                                children: [
+                                  Text(
+                                      '${DateFormat.jm().format(time_slot[i])}'),
+                                  widget.dbList.contains(time_slot[i])
+                                      ? Text('FULL')
+                                      : Text('FREE')
+                                ],
+                              ),
+                            ),
+                          ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              child: Text('continue'),
+              onPressed: () {
+                print('>>>>>>>>>>>>>>>>>>>>>>>');
+                print(orderTime);
+                // setState(() {
+                //   colorChange.updateAll((key, value) => colorChange[key] = false);
+                // });
 
-              Get.to(() => BookingDetails(selectedTime: orderTime.toString()),
-                  transition: Transition.rightToLeft,
-                  curve: Curves.easeInToLinear,
-                  duration: Duration(milliseconds: 600));
-              // _firestore.collection('booking').add({
-              //   'time': orderTime,
-              // });
-            },
-          )
-        ],
+                Get.to(() => BookingDetails(),
+                    arguments: orderTime,
+                    transition: Transition.rightToLeft,
+                    curve: Curves.easeInToLinear,
+                    duration: Duration(milliseconds: 600));
+              },
+            )
+          ],
+        ),
       ),
     );
   }

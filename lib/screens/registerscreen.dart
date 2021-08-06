@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
 import 'package:astrology_app/services/storage_service.dart';
@@ -11,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:intl/intl.dart';
+
+import 'dart:io';
 import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -26,6 +26,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
+
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
@@ -144,6 +146,13 @@ class _RegisterState extends State<Register> {
         phoneNumber = value;
       },
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    phoneNumberController.text = '${widget.userNumber.toString()}';
   }
 
   @override
