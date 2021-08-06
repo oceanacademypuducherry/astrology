@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
         resizeToAvoidBottomInset: false,
         body: _forumContreller.userSession.value.isNotEmpty
             ? BottomNavigation()
-            : Login(),
+            : BottomNavigation(),
       ),
     );
   }
