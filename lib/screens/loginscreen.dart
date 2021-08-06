@@ -3,6 +3,7 @@ import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/otpscreen.dart';
 import 'package:astrology_app/screens/registerscreen.dart';
+import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:astrology_app/widgets/auth_service.dart';
 import 'package:astrology_app/widgets/countrycode.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -255,7 +256,7 @@ class _LoginState extends State<Login> {
       print(userSession.data());
       if (userSession.data() != null) {
         session();
-        Get.to(() => HomeScreen(),
+        Get.to(() => BottomNavigation(),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
             duration: Duration(milliseconds: 600));

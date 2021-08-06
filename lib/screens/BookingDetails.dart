@@ -8,7 +8,8 @@ enum Appointment { ForMe, SomeoneElse }
 enum Purpose { Marriage, Astrology, Other }
 
 class BookingDetails extends StatefulWidget {
-  const BookingDetails({Key? key}) : super(key: key);
+  String selectedTime;
+  BookingDetails({required this.selectedTime});
 
   @override
   _BookingDetailsState createState() => _BookingDetailsState();

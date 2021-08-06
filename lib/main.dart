@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     MyApp.session = prefs.getString('user') ?? null;
 
-    route = MyApp.session != null ? HomeScreen() : Login();
+    route = MyApp.session != null ? BottomNavigation() : Login();
     print("routeChecking in mainpage${route}");
     print("routeChecking in mainpage session${MyApp.session}");
   }
