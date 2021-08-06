@@ -42,22 +42,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var getName;
   var getMobileNumber;
   var getEmail;
-  var getId;
-
-  void edit_profile() async {
-    print("---------------------------");
-    await for (var snapshot in _firestore
-        .collection('newusers')
-        .where("PhoneNumber", isEqualTo: _forumContreller.userSession.value)
-        .snapshots(includeMetadataChanges: true)) {
-      for (var message in snapshot.docs) {
-        getId = message.id;
-      }
-      print('++++++++++++++++++');
-    }
-
-    print("---------------------------");
-  }
 
   Widget _buildEmail() {
     return TextFormField(
@@ -146,13 +130,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         phoneNumber = value;
       },
     );
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    edit_profile();
   }
 
   @override
@@ -422,7 +399,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       _firestore
                                                           .collection(
                                                               "newusers")
-                                                          .doc(getId)
+                                                          .doc(Get.find<
+                                                                  ForumContreller>()
+                                                              .userDocumentId
+                                                              .toString())
                                                           .set({
                                                         "name": nameController!
                                                             .text,

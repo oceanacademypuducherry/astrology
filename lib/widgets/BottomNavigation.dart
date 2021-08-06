@@ -1,12 +1,16 @@
 import 'package:astrology_app/Forum/forum.dart';
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/AppointmentScreen.dart';
 import 'package:astrology_app/screens/BooksScreen.dart';
 import 'package:astrology_app/screens/ForumScreen.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/ProfileScreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key? key}) : super(key: key);
@@ -25,6 +29,25 @@ class _BottomNavigationState extends State<BottomNavigation> {
     Forum(),
     ProfileScreen(),
   ];
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  setSession() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userNumber = prefs.getString('user').toString();
+    var userDatas = await _firestore.collection('newusers').get();
+    for (var i in userDatas.docs) {
+      if (i['PhoneNumber'] == userNumber) {
+        Get.find<ForumContreller>().setUserSession(userNumber.toString());
+        Get.find<ForumContreller>().setUserInfo(i.data());
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setSession();
+  }
 
   @override
   Widget build(BuildContext context) {

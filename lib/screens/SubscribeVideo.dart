@@ -72,18 +72,19 @@ class SubscribeVideoScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        width: 250,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.to(() => PaidVedios(),
-                                // transition: Transition.cupertinoDialog,
-                                fullscreenDialog: true,
-                                curve: Curves.easeInToLinear,
-                                duration: Duration(milliseconds: 600));
-                          },
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      width: 270,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Get.to(() => PaidVedios(),
+                              // transition: Transition.cupertinoDialog,
+                              fullscreenDialog: true,
+                              curve: Curves.easeInToLinear,
+                              duration: Duration(milliseconds: 600));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -110,19 +111,18 @@ class SubscribeVideoScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Container(
-                        child: Text(
-                          "YouTube Premium is a paid membership, available in certain countries, that gives you an ad-free, "
-                          "feature-rich (offline viewing), and enhanced experience across many of Google's video and music services, "
-                          "like YouTube, YouTube Music, YouTube Gaming, and YouTube Kids",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontFamily: 'Ubuntu',
-                            fontSize: 10,
-                            color: Colors.black54,
-                          ),
+                    Container(
+                      margin: EdgeInsets.all(15),
+                      child: Text(
+                        "YouTube Premium is a paid membership, available in certain countries, that gives you an ad-free, "
+                        "feature-rich (offline viewing), and enhanced experience across many of Google's video and music services, "
+                        "like YouTube, YouTube Music, YouTube Gaming, and YouTube Kids",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Ubuntu',
+                          fontSize: 10,
+                          color: Colors.black54,
                         ),
                       ),
                     ),
