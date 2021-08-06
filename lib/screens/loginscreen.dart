@@ -351,16 +351,7 @@ class _LoginState extends State<Login> {
   session() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('user', number!);
-    // await prefs.setBool('isSession', true);
-
-    print("${number!} ssssssssssssss");
     print('Otp Submited');
-  }
-
-  Future<void> userNumberToAUth(String number) async {
-    print('geting user number...........................');
-    otp_controller.setUserNumber(number);
-    print(number);
   }
 
   @override
