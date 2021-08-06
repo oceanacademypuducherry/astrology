@@ -7,11 +7,11 @@ FirebaseFirestore _firestore = FirebaseFirestore.instance;
 class ForumContreller extends GetxController {
   final userSession = ''.obs;
   final sessionUserInfo = {}.obs;
+  final userDocumentId = ''.obs;
 
-  // getSession() async {
-  //   SharedPreferences _preferences = await SharedPreferences.getInstance();
-  //   setUserSession(_preferences.getString('user') ?? ''.toString());
-  // }
+  setUserDocumentId(documentId) {
+    userDocumentId(documentId);
+  }
 
   setUserInfo(userInfo) {
     sessionUserInfo(userInfo);

@@ -70,6 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                TextButton(
+                                    onPressed: () async {
+                                      SharedPreferences pref =
+                                          await SharedPreferences.getInstance();
+
+                                      pref.clear();
+                                    },
+                                    child: Text('log out')),
                                 Text(
                                   "Article Collection",
                                   style: TextStyle(

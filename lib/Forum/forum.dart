@@ -499,8 +499,8 @@ class _ForumState extends State<Forum> {
                                                           ['email'] ==
                                                       user['email']) {
                                                     try {
-                                                      // userProfile =
-                                                      //     user['profile'];
+                                                      userProfile =
+                                                          user['profile'];
                                                     } catch (e) {
                                                       print(e);
                                                     }
