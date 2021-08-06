@@ -82,7 +82,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
         ),
       ),
       body: Container(
-        color: Colors.pink,
+        color: Colors.white,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
@@ -92,7 +92,18 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Morning'),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'images/morning.png',
+                        width: 40,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text('Morning'),
+                    ],
+                  ),
                   Wrap(
                     children: [
                       for (var i = 0; i < time_slot.length; i++)
