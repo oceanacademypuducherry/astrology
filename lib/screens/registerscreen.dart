@@ -722,10 +722,10 @@ class _RegisterState extends State<Register> {
                                   "subscribe": false,
                                 });
 
-                                // Get.to(() => BottomNavigation(),
-                                //     transition: Transition.rightToLeft,
-                                //     curve: Curves.easeInToLinear,
-                                //     duration: Duration(milliseconds: 600));
+                                Get.off(() => BottomNavigation(),
+                                    transition: Transition.rightToLeft,
+                                    curve: Curves.easeInToLinear,
+                                    duration: Duration(milliseconds: 600));
                               } else {
                                 Get.snackbar(
                                   "Hello user!",
