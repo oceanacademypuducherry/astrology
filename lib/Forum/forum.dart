@@ -31,14 +31,20 @@ class _ForumState extends State<Forum> {
     //datetime converting
     var postTime = DateTime(year, month, date, hours, minutes, seconds);
 
-    int mySeconds = postTime.difference(DateTime.now()).inSeconds;
+    var test =
+        DateTime.fromMicrosecondsSinceEpoch(timestamp.microsecondsSinceEpoch);
+    print('ddddddddddddd${test}');
+    print(timestamp);
 
-    mySeconds = ~mySeconds;
+    int mySeconds = test.difference(DateTime.now()).inSeconds;
+    print(~mySeconds);
+    mySeconds = mySeconds * -1;
 
     // return mySeconds.toString();
+
     if (mySeconds < 60) {
       return 'Few Second ago';
-    } else if (mySeconds < 60 * 60) {
+    } else if (mySeconds < 3600) {
       return '${mySeconds ~/ 60} Minute ago';
     } else if (mySeconds < 86400) {
       return '${mySeconds ~/ 3600} Hours ago';
@@ -114,7 +120,10 @@ class _ForumState extends State<Forum> {
 
   Widget allForums() {
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection('forums').snapshots(),
+      stream: _firestore
+          .collection('forums')
+          .orderBy('postTime', descending: true)
+          .snapshots(),
       builder: (context, forumsSnapshot) {
         if (!forumsSnapshot.hasData) {
           return Text('Loading...');
