@@ -27,6 +27,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ForumContreller _forumContreller = Get.find<ForumContreller>();
 
+  setSessionDatas() async {
+    var userDatas = await _firestore.collection('newusers').get();
+    for (var i in userDatas.docs) {
+      if (i['phoneNumber'] == _forumContreller.userSession) {
+        Get.find<ForumContreller>().setUserInfo(i.data());
+        Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
+      }
+    }
+    print('☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻');
+    print(_forumContreller.sessionUserInfo.value);
+    print(_forumContreller.sessionUserInfo.value);
+    print('☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻');
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -34,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+    setSessionDatas();
   }
 
   @override
@@ -305,16 +320,36 @@ class _HomeScreenState extends State<HomeScreen> {
                                           duration:
                                               Duration(milliseconds: 600));
                                 },
-                                child: Container(
-                                  margin: EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    image: DecorationImage(
-                                      image:
-                                          AssetImage("images/premiumlock.png"),
-                                      fit: BoxFit.cover,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(10.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              "images/premiumlock.png"),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    Positioned(
+                                        left: 25,
+                                        top: 20,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            color: Colors.white54,
+                                            child: Icon(
+                                              Icons.lock,
+                                              size: 25,
+                                            ),
+                                          ),
+                                        )),
+                                  ],
                                 ),
                               ),
                               GestureDetector(
@@ -326,17 +361,39 @@ class _HomeScreenState extends State<HomeScreen> {
                                       curve: Curves.easeInToLinear,
                                       duration: Duration(milliseconds: 600));
                                 },
-                                child: Container(
-                                  margin: EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        "images/freevideo.png",
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(10.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            "images/freevideo.png",
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                      fit: BoxFit.cover,
                                     ),
-                                  ),
+                                    Positioned(
+                                        left: 25,
+                                        top: 20,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            color: Colors.white54,
+                                            child: Text(
+                                              'Free',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20),
+                                            ),
+                                          ),
+                                        )),
+                                  ],
                                 ),
                               ),
                             ],
