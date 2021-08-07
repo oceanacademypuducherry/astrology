@@ -120,6 +120,7 @@ class _LoginState extends State<Login> {
                     wait = true;
                     buttonName = "Resend";
                   });
+                  user_id(number!);
                   await authClass.verifyPhoneNumber(number!, setData);
                 },
         ),
@@ -300,6 +301,12 @@ class _LoginState extends State<Login> {
         });
       }
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
