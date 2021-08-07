@@ -291,8 +291,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             items: [
                               GestureDetector(
                                 onTap: () {
-                                  print('ontap');
-
                                   _forumContreller
                                           .sessionUserInfo.value['subscribe']
                                       ? Get.to(() => PaidVedios(),
