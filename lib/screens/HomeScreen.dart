@@ -1,5 +1,6 @@
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/main.dart';
+import 'package:astrology_app/payment%20info/payment_successfuly.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/FreeVideos.dart';
 import 'package:astrology_app/screens/PaidVedios.dart';
@@ -76,6 +77,28 @@ class _HomeScreenState extends State<HomeScreen> {
               (BuildContext context, int index) {
                 return Column(
                   children: [
+                    TextButton(
+                        onPressed: () async {
+                          SharedPreferences pref =
+                              await SharedPreferences.getInstance();
+
+                          pref.clear();
+
+                          Get.to(
+                            () => Login(),
+                            transition: Transition.rightToLeft,
+                            curve: Curves.easeInToLinear,
+                            duration: Duration(milliseconds: 600),
+                          );
+                          print('logout');
+                        },
+                        child: Text('log out')),
+                    TextButton(
+                      child: Text('Payment'),
+                      onPressed: () async {
+                        Get.to(PaymentSuccessfully(), fullscreenDialog: true);
+                      },
+                    ),
                     //Article
                     Container(
                       color: Colors.blue[50],
@@ -88,22 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                TextButton(
-                                    onPressed: () async {
-                                      SharedPreferences pref =
-                                          await SharedPreferences.getInstance();
-
-                                      pref.clear();
-
-                                      Get.to(
-                                        () => Login(),
-                                        transition: Transition.rightToLeft,
-                                        curve: Curves.easeInToLinear,
-                                        duration: Duration(milliseconds: 600),
-                                      );
-                                      print('logout');
-                                    },
-                                    child: Text('log out')),
                                 Text(
                                   "Article Collection",
                                   style: TextStyle(
