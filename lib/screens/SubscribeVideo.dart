@@ -1,4 +1,5 @@
 import 'package:astrology_app/Forum/forumController.dart';
+import 'package:astrology_app/payment%20info/payment_successfuly.dart';
 import 'package:astrology_app/screens/PaidVedios.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -53,7 +54,7 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
       'subscribe': true,
     });
 
-    Get.to(() => BottomNavigation(),
+    Get.to(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
         curve: Curves.easeInToLinear,
         duration: Duration(milliseconds: 600));

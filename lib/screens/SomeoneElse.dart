@@ -1,70 +1,93 @@
 import 'package:astrology_app/Forum/forumController.dart';
+import 'package:astrology_app/payment%20info/payment_successfuly.dart';
 import 'package:astrology_app/services/storage_service.dart';
-import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+
 import 'dart:io';
 import 'package:path/path.dart';
+import 'package:file_picker/file_picker.dart';
+
+import 'dart:typed_data';
+
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
-class SomeoneElse extends StatefulWidget {
+class SomeoneElseScreen extends StatefulWidget {
   String appointmentFor;
   String purpose;
-  SomeoneElse({required this.appointmentFor, required this.purpose});
-
+  String ruppess;
+  DateTime time;
+  SomeoneElseScreen(
+      {required this.appointmentFor,
+      required this.purpose,
+      required this.ruppess,
+      required this.time});
   @override
-  _SomeoneElseState createState() => _SomeoneElseState();
+  State<SomeoneElseScreen> createState() => _SomeoneElseScreenState();
 }
 
-FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-class _SomeoneElseState extends State<SomeoneElse> {
-  ForumContreller _forumContreller = Get.find<ForumContreller>();
+class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
   late Razorpay _razorpay;
+  FocusNode messageFocusNode1 = FocusNode();
+  FocusNode messageFocusNode2 = FocusNode();
+  FocusNode messageFocusNode3 = FocusNode();
+  FocusNode messageFocusNode4 = FocusNode();
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
 
-  ///controller
-  TextEditingController? emailController = TextEditingController();
-  TextEditingController? nameController = TextEditingController();
-  TextEditingController? phoneNumberController = TextEditingController();
-
-  ///variable
-  var getName;
-  var getMobileNumber;
-  var phoneNumber;
-  var getEmail;
-  var email;
-  var fullname;
-  String rupees = " \$50";
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final birthPlaceController = TextEditingController();
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   UploadTask? task;
   File? file;
   String? profilePictureLink;
   String? jadhagamLink;
+  String? fullname;
+  String? email;
+  String? birthPlace;
+  String? query;
+  String? phoneNumber;
   bool validation = false;
+  var date;
+  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
+  DateTime selectedDate = DateTime.now();
 
-  ///widegts
   Widget _buildEmail() {
     return TextFormField(
+      focusNode: messageFocusNode1,
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontFamily: 'Ubuntu',
+        fontSize: 14,
+        color: Colors.black54,
+      ),
       inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
       // ignore: deprecated_member_use
       autovalidate: validation,
       validator: (value) =>
           EmailValidator.validate(value!) ? null : "please enter a valid email",
       decoration: const InputDecoration(
-          // prefixIcon: Icon(Icons.email_outlined),
-          errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
-          border: InputBorder.none,
-          hintText: 'Enter Your Email',
-          hintStyle: TextStyle(fontSize: 12)
-          // labelText: 'Email',
-          ),
-      readOnly: true,
+        // prefixIcon: Icon(Icons.email_outlined),
+        errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
+        border: InputBorder.none,
+        hintText: 'Enter Your Email',
+        hintStyle: TextStyle(
+          fontWeight: FontWeight.normal,
+          fontFamily: 'Ubuntu',
+          fontSize: 14,
+          color: Colors.grey,
+        ),
+        // labelText: 'Email',
+      ),
       controller: emailController,
       onChanged: (value) {
         email = value;
@@ -74,11 +97,18 @@ class _SomeoneElseState extends State<SomeoneElse> {
 
   Widget _buildName() {
     return TextFormField(
+      focusNode: messageFocusNode2,
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontFamily: 'Ubuntu',
+        fontSize: 14,
+        color: Colors.black54,
+      ),
       // ignore: deprecated_member_use
       autovalidate: validation,
       inputFormatters: <TextInputFormatter>[
         FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s")),
-        LengthLimitingTextInputFormatter(40),
+        LengthLimitingTextInputFormatter(30),
       ],
       // autovalidate: _autoValidate,
       validator: (value) {
@@ -90,13 +120,19 @@ class _SomeoneElseState extends State<SomeoneElse> {
         return null;
       },
       decoration: const InputDecoration(
-          // prefixIcon: Icon(Icons.drive_file_rename_outline),
-          errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
-          border: InputBorder.none,
-          hintText: 'Enter Your Name',
-          hintStyle: TextStyle(fontSize: 12)
-          // labelText: 'Name',
-          ),
+        // prefixIcon: Icon(Icons.drive_file_rename_outline),
+        contentPadding: EdgeInsets.zero,
+        errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
+        border: InputBorder.none,
+        hintText: 'Enter Your Name',
+        hintStyle: TextStyle(
+          fontWeight: FontWeight.normal,
+          fontFamily: 'Ubuntu',
+          fontSize: 14,
+          color: Colors.grey,
+        ),
+        // labelText: 'Name',
+      ),
       controller: nameController,
       onChanged: (value) {
         fullname = value;
@@ -104,8 +140,44 @@ class _SomeoneElseState extends State<SomeoneElse> {
     );
   }
 
+  Widget _buildBirthPlace() {
+    return TextFormField(
+      focusNode: messageFocusNode3,
+      inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
+      // ignore: deprecated_member_use
+      autovalidate: validation,
+      validator: (value) =>
+          EmailValidator.validate(value!) ? null : "please enter a valid email",
+      decoration: const InputDecoration(
+        // prefixIcon: Icon(Icons.email_outlined),
+        errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
+        border: InputBorder.none,
+        hintText: 'Enter Your Birth Place',
+        hintStyle: TextStyle(
+          fontWeight: FontWeight.normal,
+          fontFamily: 'Ubuntu',
+          fontSize: 14,
+          color: Colors.grey,
+        ),
+        // labelText: 'Email',
+      ),
+      controller: birthPlaceController,
+      onChanged: (value) {
+        birthPlace = value;
+      },
+    );
+  }
+
   Widget _buildphonenumber() {
     return TextFormField(
+      focusNode: messageFocusNode4,
+      readOnly: true,
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontFamily: 'Ubuntu',
+        fontSize: 14,
+        color: Colors.black54,
+      ),
       // ignore: deprecated_member_use
       autovalidate: validation,
       inputFormatters: <TextInputFormatter>[
@@ -123,15 +195,19 @@ class _SomeoneElseState extends State<SomeoneElse> {
         return null;
       },
       decoration: const InputDecoration(
-          // prefixIcon: Icon(Icons.phone_android_outlined),
-          errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
-          border: InputBorder.none,
-          hintText: 'Enter Your Number',
-          hintStyle: TextStyle(fontSize: 12)
-          // labelText: 'Number',
-          ),
+        // prefixIcon: Icon(Icons.phone_android_outlined),
+        errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
+        border: InputBorder.none,
+        hintText: 'Enter Your Number',
+        hintStyle: TextStyle(
+          fontWeight: FontWeight.normal,
+          fontFamily: 'Ubuntu',
+          fontSize: 14,
+          color: Colors.grey,
+        ),
+        // labelText: 'Number',
+      ),
       controller: phoneNumberController,
-      readOnly: true,
       onChanged: (value) {
         phoneNumber = value;
       },
@@ -144,6 +220,7 @@ class _SomeoneElseState extends State<SomeoneElse> {
     super.initState();
 
     _razorpay = Razorpay();
+    phoneNumberController.text = _forumContreller.userSession.value;
     print(_forumContreller.userSession.value);
     print(_forumContreller.sessionUserInfo.value);
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
@@ -161,29 +238,48 @@ class _SomeoneElseState extends State<SomeoneElse> {
 
   ///RAZORPAY START
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    _firestore.collection('booking').add({
-      'time': Get.arguments,
-      'phoneNumber': _forumContreller.userSession.value,
-      'email': _forumContreller.sessionUserInfo.value['email'],
-      'userName': _forumContreller.sessionUserInfo.value['name'],
-      'jadhagam': _forumContreller.sessionUserInfo.value['jadhagam'],
-      'payment': rupees,
-      'birthTime': _forumContreller.sessionUserInfo.value['birthTime'],
-      'birthPlace': _forumContreller.sessionUserInfo.value['birthPlace'],
-      'bookingFor': widget.appointmentFor,
-      'purposeFor': widget.purpose,
-    });
-    print('uploaded successfully');
-
-    Get.to(() => BottomNavigation(),
+    date = DateTime(selectedDate.year, selectedDate.month, selectedDate.day,
+        _time.hour, _time.minute);
+    print(_forumContreller.userSession.value);
+    if (nameController.text.isNotEmpty &&
+        emailController.text.isNotEmpty &&
+        jadhagamLink!.isNotEmpty &&
+        profilePictureLink!.isNotEmpty &&
+        birthPlace != null &&
+        date != null) {
+      _firestore.collection("booking").add({
+        'time': widget.time,
+        'payment': widget.ruppess,
+        "userName": nameController.text,
+        "email": emailController.text,
+        "jadhagam": jadhagamLink,
+        'profile': profilePictureLink,
+        'phoneNumber': _forumContreller.userSession.value,
+        'bookingFor': widget.appointmentFor,
+        'purposeFor': widget.purpose,
+        "birthPlace": birthPlace,
+        "birthTime": date,
+      });
+    } else {
+      Get.snackbar(
+        "Hello user!",
+        "Please provide your documents",
+        icon: Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.blue[500],
+        borderRadius: 10,
+        margin: EdgeInsets.all(12),
+        colorText: Colors.white,
+        duration: Duration(seconds: 4),
+        isDismissible: true,
+        dismissDirection: SnackDismissDirection.HORIZONTAL,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
+    }
+    Get.to(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
         curve: Curves.easeInToLinear,
         duration: Duration(milliseconds: 600));
-    print(
-        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-    print(response.paymentId);
-    print(response.orderId);
-    print(response.signature);
     Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId!,
         toastLength: Toast.LENGTH_SHORT);
@@ -229,206 +325,496 @@ class _SomeoneElseState extends State<SomeoneElse> {
 
   @override
   Widget build(BuildContext context) {
-    final fileName = file != null ? basename(file!.path) : 'No File Selected';
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Container(
-          // color: Colors.grey[200],
-          margin: EdgeInsets.symmetric(
-            vertical: 20,
-          ),
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        GestureDetector(
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage:
-                                NetworkImage('$profilePictureLink'),
-                          ),
-                        ),
-                        Positioned(
-                          right: 5,
-                          bottom: 5,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(0.5, 0.5),
-                                  color: Colors.grey,
-                                )
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            width: 25,
-                            height: 25,
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.add,
-                              ),
-                              onPressed: selectProfileFile,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    ElevatedButton(
-                      onPressed: selectJadhagamFile,
-                      child: Text('Upload Jadhagam'),
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: Size(double.infinity, 50),
-                          padding: EdgeInsets.symmetric(
-                            vertical: 12,
-                            horizontal: 25,
-                          ),
-                          textStyle: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'Ubuntu',
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
-                    Spacer(),
-                  ],
-                ),
-              ),
-              Text('$fileName'),
-              Container(
-                margin: EdgeInsets.only(right: 20, left: 20, top: 30),
-                child: Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        'Full Name',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 15,
-                          fontFamily: 'Ubuntu',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    _buildName(),
-                  ],
-                ),
-              ),
-              Divider(
-                color: Colors.black54,
-                thickness: 0.2,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        'Mobile Phone',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 15,
-                          fontFamily: 'Ubuntu',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    _buildphonenumber(),
-                  ],
-                ),
-              ),
-              Divider(
-                color: Colors.black54,
-                thickness: 0.2,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        'Email',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 15,
-                          fontFamily: 'Ubuntu',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    _buildEmail(),
-                  ],
-                ),
-              ),
-              Divider(
-                color: Colors.black54,
-                thickness: 0.2,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                width: MediaQuery.of(context).size.width,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xff045de9),
-                          Colors.blue,
-                        ],
-                      )),
-                  child: ElevatedButton(
-                    ///checking For Me or SomeoneElse to Route to next Page
-                    onPressed: () {
-                      ///someone else page
-                      openCheckout();
-                      // Get.to(() => SomeoneElse(),
-                      //     transition: Transition.topLevel,
-                      //     // curve: Curves.ease,
-                      //     duration: Duration(milliseconds: 600));
-                    },
-                    child: Text('Proceed to Payment'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.transparent,
-                      fixedSize: Size(double.infinity, 50),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 25,
-                      ),
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Ubuntu',
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                      elevation: 0,
+    ///select date picker function
+    _selectDate(BuildContext context) async {
+      final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate, // Refer step 1
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2050),
+      );
+      if (picked != null && picked != selectedDate)
+        setState(() {
+          selectedDate = picked;
+        });
+    }
+
+    ///select time onPress
+    onTimeChanged(newTime) {
+      setState(() {
+        _time = newTime;
+      });
+    }
+
+    ///mediaQuery width
+    var m = MediaQuery.of(context).size.width / 6;
+    // final fileName = file != null ? basename(file!.path) : 'No File Selected';
+
+    return SafeArea(
+      child: Scaffold(
+        body: KeyboardDismisser(
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Color(0xff045de9),
+            ),
+            width: double.infinity,
+            child: ListView(
+              // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              reverse: true,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  height: m,
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      fontFamily: 'Ubuntu',
+                      fontWeight: FontWeight.w300,
+                      color: Colors.white,
+                      fontSize: 20,
                     ),
                   ),
                 ),
-              ),
-            ],
+                Container(
+                    width: double.infinity,
+                    // height: MediaQuery.of(context).size.height - m,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                    ),
+                    // width: double.infinity,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ///circle avatar
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                // crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 100,
+                                    // color: Colors.amberAccent,
+                                    alignment: Alignment.center,
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.blue[900],
+                                      maxRadius: 50,
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(40)),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                blurRadius: 10,
+                                                spreadRadius: 0,
+                                                offset: Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                              ),
+                                            ]),
+                                        child: CircleAvatar(
+                                          maxRadius: 48,
+                                          backgroundColor: Colors.white,
+                                          backgroundImage: NetworkImage(
+                                              "${profilePictureLink?.toString()}"),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  ElevatedButton(
+                                    onPressed: selectProfileFile,
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(2),
+                                      ),
+                                      elevation: 2,
+                                      primary: Colors.blue,
+                                      onPrimary: Colors.white,
+                                      textStyle: const TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: 'Ubuntu',
+                                      ),
+                                    ),
+                                    child: const Text('Upload Profile'),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    height: 95,
+                                    width: 100,
+                                    // color: Colors.amberAccent,
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  "${jadhagamLink?.toString()}"),
+                                              fit: BoxFit.cover),
+                                          border: Border.all(
+                                            width: 2,
+                                            color: Colors.blue.shade900,
+                                          ),
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              blurRadius: 10,
+                                              spreadRadius: 0,
+                                              offset: Offset(
+                                                5.0,
+                                                5.0,
+                                              ),
+                                            ),
+                                          ]),
+                                    ),
+                                  ),
+                                  SizedBox(height: 13),
+                                  ElevatedButton(
+                                    onPressed: selectJadhagamFile,
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      elevation: 2,
+                                      onPrimary: Colors.white,
+                                      textStyle: const TextStyle(
+                                        fontFamily: 'Ubuntu',
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    child: const Text('Upload Jadhagam'),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        ///Textfield
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 20,
+                                        spreadRadius: 5,
+                                        offset: Offset(
+                                          2.0,
+                                          2.0,
+                                        ),
+                                      ),
+                                    ]),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
+                                width: 150,
+                                height: 70,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: const Text(
+                                        'Full name',
+                                        style: TextStyle(
+                                          fontFamily: 'Ubuntu',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      color: Colors.grey.shade100,
+                                      height: 40,
+                                      // color: Colors.pinkAccent,
+                                      child: _buildName(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 20,
+                                        spreadRadius: 5,
+                                        offset: Offset(
+                                          2.0,
+                                          2.0,
+                                        ),
+                                      ),
+                                    ]),
+                                width: 150,
+                                height: 70,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: const Text(
+                                        'Mobile',
+                                        style: TextStyle(
+                                          fontFamily: 'Ubuntu',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      // color: Colors.pinkAccent,
+                                      child: _buildphonenumber(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 25),
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 20,
+                                  spreadRadius: 5,
+                                  offset: Offset(
+                                    2.0,
+                                    2.0,
+                                  ),
+                                ),
+                              ]),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
+                                color: Colors.white,
+                                height: 70,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: const Text(
+                                        'Email',
+                                        style: TextStyle(
+                                          fontFamily: 'Ubuntu',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      // color: Colors.pinkAccent,
+                                      child: _buildEmail(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 25),
+                          decoration: const BoxDecoration(
+                              color: Colors.red,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 20,
+                                  spreadRadius: 5,
+                                  offset: Offset(
+                                    2.0,
+                                    2.0,
+                                  ),
+                                ),
+                              ]),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
+                                color: Colors.white,
+                                height: 70,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: const Text(
+                                        'Birth Place',
+                                        style: TextStyle(
+                                          fontFamily: 'Ubuntu',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      // color: Colors.pinkAccent,
+                                      child: _buildBirthPlace(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        ///DOB
+                        // ElevatedButton(
+                        //     onPressed: _selectTime, child: Text('Birth Time')),
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (messageFocusNode1.hasFocus ||
+                                  messageFocusNode2.hasFocus ||
+                                  messageFocusNode3.hasFocus ||
+                                  messageFocusNode4.hasFocus) {
+                                messageFocusNode1.unfocus();
+                                messageFocusNode2.unfocus();
+                                messageFocusNode3.unfocus();
+                                messageFocusNode4.unfocus();
+                              }
+
+                              await _selectDate(context);
+                              Navigator.of(context).push(
+                                showPicker(
+                                  context: context,
+                                  value: _time,
+                                  onChange: onTimeChanged,
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              fixedSize: Size(double.infinity, 50),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+                              elevation: 2,
+                              primary: Color(0xff045de9),
+                              onPrimary: Colors.white,
+                              textStyle: const TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            child: Text(
+                              "Select Birth Day and Birth Time",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+
+                        ///Register button
+                        Container(
+                          width: double.infinity,
+                          height: 50,
+                          margin: const EdgeInsets.only(
+                            top: 25,
+                            left: 20,
+                            right: 20,
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              openCheckout();
+
+                              ///for unfocus everykeyboard
+                              if (messageFocusNode1.hasFocus ||
+                                  messageFocusNode2.hasFocus ||
+                                  messageFocusNode3.hasFocus ||
+                                  messageFocusNode4.hasFocus) {
+                                messageFocusNode1.unfocus();
+                                messageFocusNode2.unfocus();
+                                messageFocusNode3.unfocus();
+                                messageFocusNode4.unfocus();
+                              }
+
+                              ///firebase
+
+                              print('///////////////////$date');
+
+                              ///route
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+                              elevation: 2,
+                              primary: Color(0xff045de9),
+                              onPrimary: Colors.white,
+                              textStyle: const TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontSize: 15,
+                              ),
+                            ),
+                            child: const Text('Proceed To Pay'),
+                          ),
+                        ),
+                      ],
+                    )),
+              ].reversed.toList(),
+            ),
           ),
         ),
       ),
     );
   }
 
+  ///upload functions
   Future selectJadhagamFile() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;

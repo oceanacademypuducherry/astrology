@@ -1,5 +1,6 @@
 import 'package:astrology_app/Forum/forumController.dart';
-import 'package:astrology_app/screens/SomeoneElse.dart';
+import 'package:astrology_app/payment%20info/payment_successfuly.dart';
+import 'package:astrology_app/screens/SomeoneElseScreen.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -115,6 +116,7 @@ class _BookingDetailsState extends State<BookingDetails> {
       'email': _forumContreller.sessionUserInfo.value['email'],
       'userName': _forumContreller.sessionUserInfo.value['name'],
       'jadhagam': _forumContreller.sessionUserInfo.value['jadhagam'],
+      'profile': _forumContreller.sessionUserInfo.value['profile'],
       'payment': rupees,
       'birthTime': _forumContreller.sessionUserInfo.value['birthTime'],
       'birthPlace': _forumContreller.sessionUserInfo.value['birthPlace'],
@@ -123,7 +125,7 @@ class _BookingDetailsState extends State<BookingDetails> {
     });
     print('uploaded successfully');
 
-    Get.to(() => BottomNavigation(),
+    Get.off(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
         curve: Curves.easeInToLinear,
         duration: Duration(milliseconds: 600));
@@ -572,9 +574,11 @@ class _BookingDetailsState extends State<BookingDetails> {
                           : () {
                               ///someone else page
                               Get.to(
-                                  () => SomeoneElse(
+                                  () => SomeoneElseScreen(
                                         appointmentFor: _appointment.toString(),
                                         purpose: _purpose.toString(),
+                                        time: newDate,
+                                        ruppess: rupees,
                                       ),
                                   transition: Transition.topLevel,
                                   // curve: Curves.ease,
