@@ -113,30 +113,36 @@ class _BookingDetailsState extends State<BookingDetails> {
       'userName': _forumContreller.sessionUserInfo.value['name'],
       'jadhagam': _forumContreller.sessionUserInfo.value['jadhagam'],
       'payment': rupees,
-      'birthTime': _forumContreller.sessionUserInfo.value['name'],
-      'birthPlace': _forumContreller.sessionUserInfo.value['name'],
+      'birthTime': _forumContreller.sessionUserInfo.value['birthTime'],
+      'birthPlace': _forumContreller.sessionUserInfo.value['birthPlace'],
       'bookingFor': _appointment.toString(),
       'purposeFor': _purpose.toString(),
     });
     print('uploaded successfully');
-    print(
-        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+
     Get.to(() => BottomNavigation(),
         transition: Transition.rightToLeft,
         curve: Curves.easeInToLinear,
         duration: Duration(milliseconds: 600));
+    print(
+        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+    print(response.paymentId);
+    print(response.orderId);
+    print(response.signature);
     Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId!,
         toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
+    print(response.message);
     Fluttertoast.showToast(
         msg: "ERROR: " + response.code.toString() + " - " + response.message!,
         toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
+    print(response.walletName);
     Fluttertoast.showToast(
         msg: "EXTERNAL_WALLET: " + response.walletName!,
         toastLength: Toast.LENGTH_SHORT);
@@ -476,7 +482,11 @@ class _BookingDetailsState extends State<BookingDetails> {
                             }
                           : () {
                               ///someone else page
-                              Get.to(() => SomeoneElse(),
+                              Get.to(
+                                  () => SomeoneElse(
+                                        appointmentFor: _appointment.toString(),
+                                        purpose: _purpose.toString(),
+                                      ),
                                   transition: Transition.topLevel,
                                   // curve: Curves.ease,
                                   duration: Duration(milliseconds: 600));
