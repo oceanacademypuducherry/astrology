@@ -54,7 +54,7 @@ class _LoginState extends State<Login> {
     print("---------------------------");
     await for (var snapshot in _firestore
         .collection('newusers')
-        .where("PhoneNumber", isEqualTo: user)
+        .where("phoneNumber", isEqualTo: user)
         .snapshots(includeMetadataChanges: true)) {
       for (var message in snapshot.docs) {
         getId = message.id;
@@ -538,7 +538,7 @@ class _LoginState extends State<Login> {
 
                                   print(
                                       '=============================================');
-                                  print('${verificationIdFinal}sowthri');
+                                  print('${getId}sowthri');
                                 }
                               : null,
                           style: ElevatedButton.styleFrom(
