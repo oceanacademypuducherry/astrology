@@ -12,6 +12,16 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  FocusNode messageFocusNode1 = FocusNode();
+  FocusNode messageFocusNode2 = FocusNode();
+  FocusNode messageFocusNode3 = FocusNode();
+  FocusNode messageFocusNode4 = FocusNode();
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final birthPlaceController = TextEditingController();
+
   String? email;
 
   String? phoneNumber;

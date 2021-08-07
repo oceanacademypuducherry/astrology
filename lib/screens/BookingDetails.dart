@@ -1,5 +1,5 @@
 import 'package:astrology_app/Forum/forumController.dart';
-import 'package:astrology_app/screens/SomeoneElseScreen.dart';
+import 'package:astrology_app/screens/SomeoneElse.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
