@@ -1,17 +1,23 @@
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/services/storage_service.dart';
+import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:path/path.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class SomeoneElse extends StatefulWidget {
-  const SomeoneElse({Key? key}) : super(key: key);
+  String appointmentFor;
+  String purpose;
+  SomeoneElse({required this.appointmentFor, required this.purpose});
 
   @override
   _SomeoneElseState createState() => _SomeoneElseState();
@@ -20,6 +26,9 @@ class SomeoneElse extends StatefulWidget {
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class _SomeoneElseState extends State<SomeoneElse> {
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
+  late Razorpay _razorpay;
+
   ///controller
   TextEditingController? emailController = TextEditingController();
   TextEditingController? nameController = TextEditingController();
@@ -32,6 +41,7 @@ class _SomeoneElseState extends State<SomeoneElse> {
   var getEmail;
   var email;
   var fullname;
+  String rupees = " \$50";
   UploadTask? task;
   File? file;
   String? profilePictureLink;
@@ -132,7 +142,90 @@ class _SomeoneElseState extends State<SomeoneElse> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _razorpay = Razorpay();
+    print(_forumContreller.userSession.value);
+    print(_forumContreller.sessionUserInfo.value);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    print('************************************************');
+    print(_forumContreller.userSession.value);
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _razorpay.clear();
+  }
+
+  ///RAZORPAY START
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    _firestore.collection('booking').add({
+      'time': Get.arguments,
+      'phoneNumber': _forumContreller.userSession.value,
+      'email': _forumContreller.sessionUserInfo.value['email'],
+      'userName': _forumContreller.sessionUserInfo.value['name'],
+      'jadhagam': _forumContreller.sessionUserInfo.value['jadhagam'],
+      'payment': rupees,
+      'birthTime': _forumContreller.sessionUserInfo.value['birthTime'],
+      'birthPlace': _forumContreller.sessionUserInfo.value['birthPlace'],
+      'bookingFor': widget.appointmentFor,
+      'purposeFor': widget.purpose,
+    });
+    print('uploaded successfully');
+
+    Get.to(() => BottomNavigation(),
+        transition: Transition.rightToLeft,
+        curve: Curves.easeInToLinear,
+        duration: Duration(milliseconds: 600));
+    print(
+        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+    print(response.paymentId);
+    print(response.orderId);
+    print(response.signature);
+    Fluttertoast.showToast(
+        msg: "SUCCESS: " + response.paymentId!,
+        toastLength: Toast.LENGTH_SHORT);
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    print(response.message);
+    Fluttertoast.showToast(
+        msg: "ERROR: " + response.code.toString() + " - " + response.message!,
+        toastLength: Toast.LENGTH_SHORT);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    print(response.walletName);
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: " + response.walletName!,
+        toastLength: Toast.LENGTH_SHORT);
+  }
+
+  void openCheckout() async {
+    var options = {
+      'key': 'rzp_live_yI4lHyiI5FRJWt',
+      'amount': 100,
+      'name': 'OceanAcademy',
+      'description': 'Booking Appointment',
+      'prefill': {
+        'contact': '${_forumContreller.userSession.value}',
+        'email': '${_forumContreller.sessionUserInfo.value['email']}'
+      },
+      'external': {
+        'wallets': ['paytm']
+      }
+    };
+
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      debugPrint('Error: e');
+    }
+  }
+
+  ///RAZORPAY END
 
   @override
   Widget build(BuildContext context) {
@@ -304,10 +397,11 @@ class _SomeoneElseState extends State<SomeoneElse> {
                     ///checking For Me or SomeoneElse to Route to next Page
                     onPressed: () {
                       ///someone else page
-                      Get.to(() => SomeoneElse(),
-                          transition: Transition.topLevel,
-                          // curve: Curves.ease,
-                          duration: Duration(milliseconds: 600));
+                      openCheckout();
+                      // Get.to(() => SomeoneElse(),
+                      //     transition: Transition.topLevel,
+                      //     // curve: Curves.ease,
+                      //     duration: Duration(milliseconds: 600));
                     },
                     child: Text('Proceed to Payment'),
                     style: ElevatedButton.styleFrom(
