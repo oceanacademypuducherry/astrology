@@ -61,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     //Article
                     Container(
+                      color: Colors.blue[50],
                       padding: EdgeInsets.only(bottom: 10),
                       // color: Colors.blue,
                       child: Column(
@@ -113,78 +114,98 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              StreamBuilder<QuerySnapshot>(
-                                stream: _firestore
-                                    .collection('articles')
-                                    .snapshots(),
-                                // ignore: missing_return
-                                builder: (context, snapshot) {
-                                  if (!snapshot.hasData) {
-                                    return Text("Loading...");
-                                  } else {
-                                    final messages = snapshot.data!.docs;
-                                    // ignore: non_constant_identifier_names
-                                    List<GestureDetector> DBUpcoming = [];
-                                    for (var message in messages) {
-                                      final images = message['articleImage'];
-                                      final articleName =
-                                          message['articleName'];
-                                      final articleDescription =
-                                          message['content'];
-
-                                      GestureDetector messageContent =
-                                          GestureDetector(
-                                              child: Container(
-                                                margin: EdgeInsets.all(10.0),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  image: DecorationImage(
-                                                    image: NetworkImage(images),
-                                                    fit: BoxFit.cover,
+                          StreamBuilder<QuerySnapshot>(
+                            stream:
+                                _firestore.collection('articles').snapshots(),
+                            // ignore: missing_return
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return Text("Loading...");
+                              } else {
+                                final articles = snapshot.data!.docs;
+                                return Container(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: CarouselSlider(
+                                    items: [
+                                      for (var article in articles)
+                                        GestureDetector(
+                                            child: Container(
+                                              child: Column(
+                                                children: [
+                                                  Expanded(
+                                                    flex: 10,
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.all(5),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.2),
+                                                                blurRadius: 5)
+                                                          ]),
+                                                      margin:
+                                                          EdgeInsets.all(10),
+                                                      height: 50,
+                                                      width: 300,
+                                                      child: Image.network(
+                                                        article['articleImage'],
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
+                                                  Expanded(
+                                                    child: Text(
+                                                      article['articleName'],
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.blue),
+                                                    ),
+                                                  )
+                                                ],
                                               ),
-                                              onTap: () {
-                                                print('jaya');
-                                                Get.to(
-                                                    () => ArticleDescription(
-                                                          description:
-                                                              articleDescription,
-                                                        ),
-                                                    transition:
-                                                        Transition.rightToLeft,
-                                                    curve:
-                                                        Curves.easeInToLinear,
-                                                    duration: Duration(
-                                                        milliseconds: 600));
-                                              });
-
-                                      DBUpcoming.add(messageContent);
-                                    }
-                                    return Row(
-                                      children: [
-                                        ArticleFromDb(
-                                          articleImage: DBUpcoming,
-                                        ),
-                                      ],
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
+                                            ),
+                                            onTap: () {
+                                              Get.to(
+                                                  () => ArticleDescription(
+                                                        description:
+                                                            article['content'],
+                                                        articleTitle: article[
+                                                            'articleName'],
+                                                      ),
+                                                  transition:
+                                                      Transition.rightToLeft,
+                                                  curve: Curves.easeInToLinear,
+                                                  duration: Duration(
+                                                      milliseconds: 400));
+                                            }),
+                                    ],
+                                    //Slider Container properties
+                                    options: CarouselOptions(
+                                      enableInfiniteScroll: true,
+                                      // height: 300.0,
+                                      enlargeCenterPage: true,
+                                      autoPlay: true,
+                                      aspectRatio: 30 / 15,
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                      autoPlayAnimationDuration:
+                                          Duration(milliseconds: 800),
+                                      viewportFraction: 0.7,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
                           )
                         ],
                       ),
                     ),
                     //Query
                     Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                       height: 300,
                       // color: Colors.blue,
                       child: Column(
@@ -384,3 +405,28 @@ class ArticleFromDb extends StatelessWidget {
     );
   }
 }
+
+// GestureDetector(
+// child: Container(
+// margin: EdgeInsets.all(10.0),
+// decoration: BoxDecoration(
+// borderRadius:
+// BorderRadius.circular(8.0),
+// image: DecorationImage(
+// image: NetworkImage(images),
+// fit: BoxFit.cover,
+// ),
+// ),
+// ),
+// onTap: () {
+// Get.to(
+// () => ArticleDescription(
+// description:
+// articleDescription,
+// ),
+// transition:
+// Transition.rightToLeft,
+// curve: Curves.easeInToLinear,
+// duration: Duration(
+// milliseconds: 600));
+// });

@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ArticleDescription extends StatelessWidget {
-  String description;
-  ArticleDescription({required this.description});
+  String? description;
+  String? articleTitle;
+  ArticleDescription({this.description, this.articleTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +74,7 @@ class ArticleDescription extends StatelessWidget {
                             alignment: Alignment.center,
                             width: double.infinity,
                             child: Text(
-                              'The Article',
+                              '${articleTitle}',
                               style: TextStyle(
                                 color: Colors.blue.withOpacity(0.9),
                                 fontSize: 20,
