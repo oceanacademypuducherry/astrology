@@ -254,6 +254,8 @@ class _LoginState extends State<Login> {
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
             duration: Duration(milliseconds: 600));
+        Get.snackbar('success', "You are loggesd in",
+            backgroundColor: Colors.black, colorText: Colors.white);
       } else {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('user', number!);
@@ -268,7 +270,8 @@ class _LoginState extends State<Login> {
             duration: Duration(milliseconds: 600));
       }
     } catch (e) {
-      print('error ${e.toString()}');
+      Get.snackbar('error in otp verification', '${e.toString()}',
+          backgroundColor: Colors.black, colorText: Colors.white);
     }
   }
 

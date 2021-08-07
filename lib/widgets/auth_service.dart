@@ -13,26 +13,27 @@ class AuthClass {
   Future<void> verifyPhoneNumber(String phoneNumber, Function setData) async {
     PhoneVerificationCompleted verificationCompleted =
         (PhoneAuthCredential phoneAuthCredential) async {
-      print('verificatin completed');
+      Get.snackbar('CodeSend', "Verification Completed",
+          backgroundColor: Colors.black, colorText: Colors.white);
     };
     PhoneVerificationFailed verificationFailed =
         (FirebaseAuthException exception) {
-      // showSnackBar(context, exception.toString());
-      print(exception.toString());
+      Get.snackbar('error', exception.toString(),
+          backgroundColor: Colors.black, colorText: Colors.white);
     };
     PhoneCodeSent codeSent =
         (String verificationID, [int? forceResnedingtoken]) {
-      // showSnackBar(context, "Verification Code sent on the phone number");
-
       print(forceResnedingtoken);
       print("Verification Code sent on the phone number");
+      Get.snackbar('CodeSend', "Verification Code sent on the phone number",
+          backgroundColor: Colors.black, colorText: Colors.white);
       setData(verificationID);
     };
 
     PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
         (String verificationID) {
-      // showSnackBar(context, "Time out");
-      print('time out');
+      Get.snackbar('CodeSend', "TimeOut",
+          backgroundColor: Colors.black, colorText: Colors.white);
     };
     try {
       await _auth.verifyPhoneNumber(
@@ -43,28 +44,9 @@ class AuthClass {
           codeSent: codeSent,
           codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
     } catch (e) {
-      // showSnackBar(context, e.toString());
+      Get.snackbar('error while verify phone number', "${e.toString()}",
+          backgroundColor: Colors.black, colorText: Colors.white);
       print(e.toString());
     }
   }
-  // Future<void> signInwithPhoneNumber(
-  //   String verificationId,
-  //   String smsCode,
-  // ) async {
-  //   try {
-  //     AuthCredential credential = PhoneAuthProvider.credential(
-  //         verificationId: verificationId, smsCode: smsCode);
-  //
-  //     UserCredential userCredential =
-  //         await _auth.signInWithCredential(credential);
-  //     // storeTokenAndData(userCredential);
-  //     print('${verificationId}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-  //     Get.to(() => HomeScreen(),
-  //         transition: Transition.rightToLeft,
-  //         curve: Curves.easeInToLinear,
-  //         duration: Duration(milliseconds: 600));
-  //   } catch (e) {
-  //     print('error ${e.toString()}');
-  //   }
-  // }
 }
