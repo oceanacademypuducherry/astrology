@@ -120,6 +120,7 @@ class _LoginState extends State<Login> {
                     wait = true;
                     buttonName = "Resend";
                   });
+                  user_id(number!);
                   await authClass.verifyPhoneNumber(number!, setData);
                 },
         ),
@@ -236,27 +237,19 @@ class _LoginState extends State<Login> {
     try {
       AuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: smsCode);
-
       UserCredential userCredential =
           await _auth.signInWithCredential(credential);
-      // storeTokenAndData(userCredential);
-      print('${verificationId}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
       userSession = await _firestore.collection('newusers').doc(getId).get();
-      print(userCredential.credential);
-      print('$getId kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-      print(userSession.data());
+
       if (userSession.data() != null) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('user', number!);
         String userNumber = prefs.getString('user').toString();
-        var userDatas = await _firestore.collection('newusers').get();
-        for (var i in userDatas.docs) {
-          if (i['PhoneNumber'] == userNumber) {
-            Get.find<ForumContreller>().setUserSession(userNumber.toString());
-            Get.find<ForumContreller>().setUserInfo(i.data());
-            Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
-          }
-        }
+
+        Get.find<ForumContreller>().setUserSession(userNumber.toString());
+        Get.find<ForumContreller>().setUserInfo(userSession.data());
+        Get.find<ForumContreller>()
+            .setUserDocumentId(userSession.id.toString());
         Get.to(() => BottomNavigation(),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
@@ -265,19 +258,10 @@ class _LoginState extends State<Login> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('user', number!);
         String userNumber = prefs.getString('user').toString();
-        var userDatas = await _firestore.collection('newusers').get();
-        for (var i in userDatas.docs) {
-          if (i['PhoneNumber'] == userNumber) {
-            Get.find<ForumContreller>().setUserSession(userNumber.toString());
-            Get.find<ForumContreller>().setUserInfo(i.data());
-            Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
-          }
-        }
-        print(
-            '$number aaaaaaaaaaaaaaaaaaattttttttttttttttttttttttssssssssssseeeeeeeee');
+        Get.find<ForumContreller>().setUserSession(userNumber.toString());
         Get.to(
             () => Register(
-                  userNumber: number,
+                  userNumber: userNumber,
                 ),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
@@ -287,47 +271,6 @@ class _LoginState extends State<Login> {
       print('error ${e.toString()}');
     }
   }
-
-  // Future<void> verifyPhoneNumber(String phoneNumber, Function setData) async {
-  //   PhoneVerificationCompleted verificationCompleted =
-  //       (PhoneAuthCredential phoneAuthCredential) async {
-  //     print('verificatin completed');
-  //   };
-  //   PhoneVerificationFailed verificationFailed =
-  //       (FirebaseAuthException exception) {
-  //     // showSnackBar(context, exception.toString());
-  //     print(exception.toString());
-  //   };
-  //
-  //   PhoneCodeSent codeSent =
-  //       (String verificationID, [int? forceResnedingtoken]) async {
-  //     // showSnackBar(context, "Verification Code sent on the phone number");
-  //
-  //     print(forceResnedingtoken.runtimeType);
-  //     print(forceResnedingtoken);
-  //     print("Verification Code sent on the phone number");
-  //     print(verificationID);
-  //     setData(verificationID, forceResnedingtoken);
-  //   };
-  //
-  //   PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
-  //       (String verificationID) {
-  //     // showSnackBar(context, "Time out");
-  //     print('time out');
-  //   };
-  //   try {
-  //     await _auth.verifyPhoneNumber(
-  //         timeout: Duration(seconds: 60),
-  //         phoneNumber: phoneNumber,
-  //         verificationCompleted: verificationCompleted,
-  //         verificationFailed: verificationFailed,
-  //         codeSent: codeSent,
-  //         codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
-  //   } catch (e) {
-  //     // showSnackBar(context, e.toString());
-  //     print(e.toString());
-  //   }
-  // }
 
   void setData(String verificationId) {
     setState(() {
@@ -358,6 +301,12 @@ class _LoginState extends State<Login> {
         });
       }
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
