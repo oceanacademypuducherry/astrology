@@ -27,7 +27,7 @@ void main() async {
   String userNumber = prefs.getString('user').toString();
   var userDatas = await _firestore.collection('newusers').get();
   for (var i in userDatas.docs) {
-    if (i['PhoneNumber'] == userNumber) {
+    if (i['phoneNumber'] == userNumber) {
       Get.find<ForumContreller>().setUserSession(userNumber.toString());
       Get.find<ForumContreller>().setUserInfo(i.data());
       Get.find<ForumContreller>().setUserDocumentId(i.id.toString());

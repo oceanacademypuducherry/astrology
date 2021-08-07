@@ -29,10 +29,10 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  FocusNode f = FocusNode();
-  FocusNode f2 = FocusNode();
-  FocusNode f3 = FocusNode();
-  FocusNode f4 = FocusNode();
+  FocusNode messageFocusNode1 = FocusNode();
+  FocusNode messageFocusNode2 = FocusNode();
+  FocusNode messageFocusNode3 = FocusNode();
+  FocusNode messageFocusNode4 = FocusNode();
   ForumContreller _forumContreller = Get.find<ForumContreller>();
 
   final nameController = TextEditingController();
@@ -73,7 +73,7 @@ class _RegisterState extends State<Register> {
 
   Widget _buildEmail() {
     return TextFormField(
-      focusNode: f,
+      focusNode: messageFocusNode1,
       inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
       // ignore: deprecated_member_use
       autovalidate: validation,
@@ -101,7 +101,7 @@ class _RegisterState extends State<Register> {
 
   Widget _buildName() {
     return TextFormField(
-      focusNode: f2,
+      focusNode: messageFocusNode2,
       style: TextStyle(
         fontWeight: FontWeight.normal,
         fontFamily: 'Ubuntu',
@@ -146,7 +146,7 @@ class _RegisterState extends State<Register> {
 
   Widget _buildBirthPlace() {
     return TextFormField(
-      focusNode: f3,
+      focusNode: messageFocusNode3,
       inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
       // ignore: deprecated_member_use
       autovalidate: validation,
@@ -165,16 +165,16 @@ class _RegisterState extends State<Register> {
         ),
         // labelText: 'Email',
       ),
-      controller: emailController,
+      controller: birthPlaceController,
       onChanged: (value) {
-        email = value;
+        birthPlace = value;
       },
     );
   }
 
   Widget _buildphonenumber() {
     return TextFormField(
-      focusNode: f4,
+      focusNode: messageFocusNode4,
       readOnly: true,
       style: TextStyle(
         fontWeight: FontWeight.normal,
@@ -227,48 +227,39 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    var date;
     TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
     DateTime selectedDate = DateTime.now();
 
+    ///select date picker function
     _selectDate(BuildContext context) async {
       final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate, // Refer step 1
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2025),
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2050),
       );
       if (picked != null && picked != selectedDate)
         setState(() {
           selectedDate = picked;
-          print(selectedDate);
         });
     }
 
-    void _selectTime() async {
-      final TimeOfDay? newTime = await showTimePicker(
-        context: context,
-        initialTime: _time,
-      );
-      if (newTime != null) {
-        setState(() {
-          _time = newTime;
-        });
-      }
-    }
-
-    void onTimeChanged(TimeOfDay newTime) {
+    ///select time onPress
+    onTimeChanged(newTime) {
       setState(() {
         _time = newTime;
-        print(_time);
       });
     }
 
+    ///mediaQuery width
     var m = MediaQuery.of(context).size.width / 6;
     print(widget.userNumber);
     // final fileName = file != null ? basename(file!.path) : 'No File Selected';
 
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: KeyboardDismisser(
           child: Container(
             decoration: const BoxDecoration(
@@ -277,6 +268,7 @@ class _RegisterState extends State<Register> {
             width: double.infinity,
             height: double.infinity,
             child: ListView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               reverse: true,
               children: [
                 Container(
@@ -345,7 +337,7 @@ class _RegisterState extends State<Register> {
                                           maxRadius: 48,
                                           backgroundColor: Colors.white,
                                           backgroundImage: NetworkImage(
-                                              "${profilePictureLink}"),
+                                              "${profilePictureLink?.toString()}"),
                                         ),
                                       ),
                                     ),
@@ -355,8 +347,8 @@ class _RegisterState extends State<Register> {
                                     onPressed: selectProfileFile,
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
+                                        borderRadius: BorderRadius.circular(2),
+                                      ),
                                       elevation: 2,
                                       primary: Colors.blue,
                                       onPrimary: Colors.white,
@@ -380,6 +372,10 @@ class _RegisterState extends State<Register> {
                                     alignment: Alignment.center,
                                     child: Container(
                                       decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                "${jadhagamLink?.toString()}"),
+                                          ),
                                           border: Border.all(
                                             width: 2,
                                             color: Colors.blue.shade900,
@@ -625,7 +621,7 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
 
-                        ///DOB and
+                        ///DOB
                         // ElevatedButton(
                         //     onPressed: _selectTime, child: Text('Birth Time')),
                         Container(
@@ -633,8 +629,18 @@ class _RegisterState extends State<Register> {
                               horizontal: 20, vertical: 10),
                           width: MediaQuery.of(context).size.width,
                           child: ElevatedButton(
-                            onPressed: () {
-                              _selectDate(context);
+                            onPressed: () async {
+                              if (messageFocusNode1.hasFocus ||
+                                  messageFocusNode2.hasFocus ||
+                                  messageFocusNode3.hasFocus ||
+                                  messageFocusNode4.hasFocus) {
+                                messageFocusNode1.unfocus();
+                                messageFocusNode2.unfocus();
+                                messageFocusNode3.unfocus();
+                                messageFocusNode4.unfocus();
+                              }
+
+                              await _selectDate(context);
                               Navigator.of(context).push(
                                 showPicker(
                                   context: context,
@@ -674,22 +680,52 @@ class _RegisterState extends State<Register> {
                           ),
                           child: ElevatedButton(
                             onPressed: () {
-                              f.unfocus();
-                              f2.unfocus();
-                              f3.unfocus();
-                              f4.unfocus();
+                              date = DateTime(
+                                  selectedDate.year,
+                                  selectedDate.month,
+                                  selectedDate.day,
+                                  _time.hour,
+                                  _time.minute);
                               print(widget.userNumber);
-                              _firestore.collection("newusers").add({
-                                "name": nameController.text,
-                                "email": emailController.text,
-                                "jadhagam": jadhagamLink,
-                                'profile': profilePictureLink,
-                                'PhoneNumber': widget.userNumber
-                              });
-                              Get.to(() => BottomNavigation(),
-                                  transition: Transition.rightToLeft,
-                                  curve: Curves.easeInToLinear,
-                                  duration: Duration(milliseconds: 600));
+
+                              ///for unfocus everykeyboard
+                              if (messageFocusNode1.hasFocus ||
+                                  messageFocusNode2.hasFocus ||
+                                  messageFocusNode3.hasFocus ||
+                                  messageFocusNode4.hasFocus) {
+                                messageFocusNode1.unfocus();
+                                messageFocusNode2.unfocus();
+                                messageFocusNode3.unfocus();
+                                messageFocusNode4.unfocus();
+                              }
+
+                              ///firebase
+                              if (nameController.text.isNotEmpty &&
+                                  emailController.text.isNotEmpty &&
+                                  jadhagamLink!.isNotEmpty &&
+                                  profilePictureLink!.isNotEmpty &&
+                                  widget.userNumber!.isNotEmpty &&
+                                  birthPlace!.isNotEmpty) {
+                                _firestore.collection("newusers").add({
+                                  "name": nameController.text,
+                                  "email": emailController.text,
+                                  "jadhagam": jadhagamLink,
+                                  'profile': profilePictureLink,
+                                  'phoneNumber': widget.userNumber,
+                                  "birthPlace": birthPlace,
+                                  "birthTime": date,
+                                  "subscribe": false,
+                                });
+
+                                // Get.to(() => BottomNavigation(),
+                                //     transition: Transition.rightToLeft,
+                                //     curve: Curves.easeInToLinear,
+                                //     duration: Duration(milliseconds: 600));
+                              }
+
+                              print('///////////////////$date');
+
+                              ///route
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -744,6 +780,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  ///upload functions
   Future selectJadhagamFile() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
