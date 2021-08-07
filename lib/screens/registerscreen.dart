@@ -60,7 +60,7 @@ class _RegisterState extends State<Register> {
         .collection('newusers')
 
         ///todo LogIn.registerNumber
-        .where("PhoneNumber", isEqualTo: widget.userNumber)
+        .where("phoneNumber", isEqualTo: widget.userNumber)
         .snapshots(includeMetadataChanges: true)) {
       for (var message in snapshot.docs) {
         getId = message.id;

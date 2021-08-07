@@ -177,7 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 for (var message in messages) {
                                   nameController!.text = message['name'];
                                   phoneNumberController!.text =
-                                      message['PhoneNumber'];
+                                      message['phoneNumber'];
                                   emailController!.text = message['email'];
 
                                   final profilePicture = message['profile'];
