@@ -42,14 +42,14 @@ class MyForums extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 3),
                         child: ListTile(
-                          tileColor: Colors.redAccent,
-                          hoverColor: Colors.red,
+                          tileColor: Colors.grey[600],
                           title: Text(
                             forumData['question'],
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                           trailing: IconButton(
                             icon: Icon(Icons.delete),
+                            color: Colors.white,
                             onPressed: () {
                               print(forumData.id);
                               _firestore
