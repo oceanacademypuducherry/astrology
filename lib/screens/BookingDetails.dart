@@ -178,6 +178,7 @@ class _BookingDetailsState extends State<BookingDetails> {
   var hour;
   var dayTime;
   void getTime() {
+    DateTime newDate = Get.arguments;
     if (newDate.hour > 12) {
       hour = newDate.hour - 12;
 
@@ -188,8 +189,8 @@ class _BookingDetailsState extends State<BookingDetails> {
       dayTime = 'AM';
       minute = newDate.minute;
     }
-    // hour = hour < 9 ? '0$hour' : hour;
-    // minute = minute < 9 ? '0$minute' : minute;
+    hour = hour < 9 ? '0$hour' : hour;
+    minute = minute < 9 ? '0$minute' : minute;
   }
 
   ///RAZORPAY END
