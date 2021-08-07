@@ -36,25 +36,25 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         int dayFormat;
         int hourFormat;
         int minuteFormat;
+        String dayTime;
 
         var year = DateFormat('yyyy');
         var month = DateFormat('MM');
         var day = DateFormat('dd');
         var hour = DateFormat('hh');
         var minute = DateFormat('mm');
+        var daytime = DateFormat('a');
 
         yearFormat = int.parse(year.format(getTime.toDate()));
         monthFormat = int.parse(month.format(getTime.toDate()));
         dayFormat = int.parse(day.format(getTime.toDate()));
         hourFormat = int.parse(hour.format(getTime.toDate()));
         minuteFormat = int.parse(minute.format(getTime.toDate()));
-        print(monthFormat.runtimeType);
+        dayTime = daytime.format(getTime.toDate());
+        print(dayTime);
 
-        // DateTime dt = DateTime.parse(
-        //     '${yearFormat.toString()}-${monthFormat.toString()}-${dayFormat} ${hourFormat}:${minuteFormat}');
-        //
-        var dt = DateTime(
-            yearFormat, monthFormat, dayFormat, hourFormat, minuteFormat);
+        var dt = DateTime(yearFormat, monthFormat, dayFormat,
+            dayTime == 'AM' ? hourFormat : hourFormat + 12, minuteFormat);
         dbList.add(dt);
         print(dt);
       }
