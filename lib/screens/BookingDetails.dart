@@ -1,4 +1,5 @@
 import 'package:astrology_app/Forum/forumController.dart';
+import 'package:astrology_app/payment%20info/payment_successfuly.dart';
 import 'package:astrology_app/screens/SomeoneElseScreen.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -124,7 +125,7 @@ class _BookingDetailsState extends State<BookingDetails> {
     });
     print('uploaded successfully');
 
-    Get.to(() => BottomNavigation(),
+    Get.off(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
         curve: Curves.easeInToLinear,
         duration: Duration(milliseconds: 600));
@@ -576,7 +577,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                                   () => SomeoneElseScreen(
                                         appointmentFor: _appointment.toString(),
                                         purpose: _purpose.toString(),
-                                        time: Get.arguments,
+                                        time: newDate,
                                         ruppess: rupees,
                                       ),
                                   transition: Transition.topLevel,

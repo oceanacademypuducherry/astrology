@@ -1,4 +1,6 @@
+import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PaymentSuccessfully extends StatelessWidget {
   @override
@@ -23,7 +25,10 @@ class PaymentSuccessfully extends StatelessWidget {
               ),
               ElevatedButton(
                 child: Text('Okay'),
-                onPressed: () {},
+                onPressed: () {
+                  Get.off(BottomNavigation(),
+                      transition: Transition.rightToLeft);
+                },
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xff5AC4F9),
                 ),

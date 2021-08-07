@@ -1,13 +1,10 @@
 import 'package:astrology_app/Forum/forumController.dart';
-import 'package:astrology_app/screens/HomeScreen.dart';
-import 'package:astrology_app/screens/loginscreen.dart';
+import 'package:astrology_app/payment%20info/payment_successfuly.dart';
 import 'package:astrology_app/services/storage_service.dart';
-import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
-// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -279,7 +276,7 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
         forwardAnimationCurve: Curves.easeOutBack,
       );
     }
-    Get.to(() => BottomNavigation(),
+    Get.to(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
         curve: Curves.easeInToLinear,
         duration: Duration(milliseconds: 600));
