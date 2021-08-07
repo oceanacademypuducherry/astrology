@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:intl/intl.dart';
 
 enum Appointment { ForMe, SomeoneElse }
 enum Purpose { Marriage, Astrology, Other }
@@ -83,7 +84,7 @@ class _BookingDetailsState extends State<BookingDetails> {
   }
 
   bool value = false;
-  String rupees = " \$50";
+  String rupees = "100";
   @override
   void initState() {
     // TODO: implement initState
@@ -175,10 +176,13 @@ class _BookingDetailsState extends State<BookingDetails> {
   }
 
   var minute;
+  String? monthFormat;
   var hour;
   var dayTime;
+  var month = DateFormat('MMMM');
   void getTime() {
     DateTime newDate = Get.arguments;
+
     if (newDate.hour > 12) {
       hour = newDate.hour - 12;
 
@@ -191,6 +195,8 @@ class _BookingDetailsState extends State<BookingDetails> {
     }
     hour = hour < 9 ? '0$hour' : hour;
     minute = minute < 9 ? '0$minute' : minute;
+    monthFormat = month.format(newDate);
+    print(monthFormat);
   }
 
   ///RAZORPAY END
@@ -280,7 +286,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'Saturday, 24 July 2021',
+                            '${newDate.day.toString()} ${monthFormat} ${newDate.year.toString()}',
                             style: TextStyle(
                               fontWeight: FontWeight.normal,
                               fontFamily: 'Ubuntu',
@@ -294,7 +300,67 @@ class _BookingDetailsState extends State<BookingDetails> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Text(rupees),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        width: 80,
+                        height: 40,
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0.2, 0.2),
+                            ),
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Text(
+                          'Booking Fees',
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Ubuntu',
+                            fontSize: 13,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        height: 40,
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0.2, 0.2),
+                            ),
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            '₹${rupees}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontFamily: 'Ubuntu',
+                              fontSize: 13,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Divider(
                   thickness: 0.2,
                   color: Colors.grey,

@@ -1,9 +1,5 @@
 import 'package:astrology_app/controller/otp_controller.dart';
-import 'package:astrology_app/screens/HomeScreen.dart';
-import 'package:astrology_app/screens/loginscreen.dart';
-import 'package:astrology_app/screens/ouery_fetch.dart';
-import 'package:astrology_app/screens/registerscreen.dart';
-import 'package:astrology_app/widgets/BottomNavigation.dart';
+import 'package:astrology_app/screens/ProfileScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -70,8 +66,8 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: Colors.blue,
         resizeToAvoidBottomInset: false,
         body: _forumContreller.userSession.value.isNotEmpty
-            ? BottomNavigation()
-            : Login(),
+            ? ProfileScreen()
+            : ProfileScreen(),
       ),
     );
   }
