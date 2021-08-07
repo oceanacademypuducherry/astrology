@@ -24,9 +24,9 @@ FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class _BookingDetailsState extends State<BookingDetails> {
   ForumContreller _forumContreller = Get.find<ForumContreller>();
+  late Razorpay _razorpay;
   Appointment _appointment = Appointment.ForMe;
   Purpose _purpose = Purpose.Marriage;
-  late Razorpay _razorpay;
 
   ///variable
   bool validation = false;

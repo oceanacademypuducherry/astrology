@@ -2,6 +2,7 @@ import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/main.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/FreeVideos.dart';
+import 'package:astrology_app/screens/PaidVedios.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
@@ -224,13 +225,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               TextButton(
                                   onPressed: () async {
-                                    // SharedPreferences prefs =
-                                    //     await SharedPreferences.getInstance();
-                                    // await prefs.clear();
-                                    // Get.to(() => Login(),
-                                    //     transition: Transition.rightToLeft,
-                                    //     curve: Curves.easeInToLinear,
-                                    //     duration: Duration(milliseconds: 600));
                                     Get.to(QueryScreen());
                                   },
                                   child: Text(
@@ -298,11 +292,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               GestureDetector(
                                 onTap: () {
                                   print('ontap');
-                                  Get.to(() => SubscribeVideoScreen(),
-                                      // transition: Transition.cupertinoDialog,
-                                      fullscreenDialog: true,
-                                      curve: Curves.easeInToLinear,
-                                      duration: Duration(milliseconds: 600));
+
+                                  _forumContreller
+                                          .sessionUserInfo.value['subscribe']
+                                      ? Get.to(() => PaidVedios(),
+                                          // transition: Transition.cupertinoDialog,
+                                          fullscreenDialog: true,
+                                          curve: Curves.easeInToLinear,
+                                          duration: Duration(milliseconds: 600))
+                                      : Get.to(() => SubscribeVideoScreen(),
+                                          // transition: Transition.cupertinoDialog,
+                                          fullscreenDialog: true,
+                                          curve: Curves.easeInToLinear,
+                                          duration:
+                                              Duration(milliseconds: 600));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.all(10.0),
