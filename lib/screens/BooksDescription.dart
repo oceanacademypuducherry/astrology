@@ -1,15 +1,11 @@
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/PdfView.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-// import 'package:flutter/services.dart';
-// import 'package:syncfusion_flutter_pdf/pdf.dart';
-// import 'package:translator/translator.dart';
 
 class BooksDescription extends StatefulWidget {
   String bookImage;
@@ -29,6 +25,7 @@ class BooksDescription extends StatefulWidget {
 }
 
 class _BooksDescriptionState extends State<BooksDescription> {
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
   late Razorpay _razorpay;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String? getId;
@@ -84,11 +81,16 @@ class _BooksDescriptionState extends State<BooksDescription> {
 
   void openCheckout() async {
     var options = {
-      'key': 'rzp_test_IS2DfdDQWMgxw4',
-      'amount': 2000,
-      'name': 'Acme Corp.',
+      'key': 'rzp_live_yI4lHyiI5FRJWt',
+
+      ///to make widget.book type
+      'amount': 100,
+      'name': 'Ocean Academy',
       'description': widget.bookName,
-      'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'},
+      'prefill': {
+        'contact': '${_forumContreller.userSession.value}',
+        'email': '${_forumContreller.sessionUserInfo.value['email']}'
+      },
       'external': {
         'wallets': ['paytm']
       }

@@ -60,6 +60,9 @@ dependencies:
   video_player: ^2.1.12
   better_player: ^0.0.72
   youtube_player_flutter: ^8.0.0
+  day_night_time_picker: ^1.0.3+1
+  flutter_datetime_picker: ^1.5.1
+  keyboard_dismisser: ^2.0.0
 
 
 

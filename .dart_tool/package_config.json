@@ -110,6 +110,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "day_night_time_picker",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/day_night_time_picker-1.0.3+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "email_validator",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/email_validator-2.0.1",
       "packageUri": "lib/",
@@ -202,6 +208,12 @@
     {
       "name": "flutter",
       "rootUri": "file:///C:/src/flutter/packages/flutter",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_datetime_picker",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_datetime_picker-1.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -310,6 +322,12 @@
     {
       "name": "js",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "keyboard_dismisser",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/keyboard_dismisser-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -662,7 +680,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-08-06T03:56:17.542226Z",
+  "generated": "2021-08-07T04:50:04.205104Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }
