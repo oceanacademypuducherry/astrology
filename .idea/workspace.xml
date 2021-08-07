@@ -25,18 +25,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="someoneelse changed">
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="payment success full completed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/payment info/payment_successfuly.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/payment info/payment_successfuly.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/BooksDescription.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BooksDescription.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/SomeoneElseScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/SomeoneElseScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/SubscribeVideo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/SubscribeVideo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/auth_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/auth_service.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -429,7 +425,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628344679266</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="payment success full completed">
+      <created>1628345800671</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1628345800671</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -445,7 +448,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated books screen video screen" />
     <MESSAGE value="updated video orientation issue" />
     <MESSAGE value="updated profile screen" />
     <MESSAGE value="edit completed" />
@@ -470,7 +472,8 @@
     <MESSAGE value="Phone changed to phone" />
     <MESSAGE value="book details completed" />
     <MESSAGE value="someoneelse changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="someoneelse changed" />
+    <MESSAGE value="payment success full completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="payment success full completed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="383" key="#Notifications" timestamp="1628317220045">
@@ -497,22 +500,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="231" key="GridCell.Tab.0.bottom" timestamp="1628344748854">
+    <state width="1877" height="231" key="GridCell.Tab.0.bottom" timestamp="1628346738064">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="231" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628344748854" />
-    <state width="1860" height="231" key="GridCell.Tab.0.center" timestamp="1628344748854">
+    <state width="1877" height="231" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628346738064" />
+    <state width="1877" height="231" key="GridCell.Tab.0.center" timestamp="1628346738064">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="231" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628344748854" />
-    <state width="1860" height="231" key="GridCell.Tab.0.left" timestamp="1628344748854">
+    <state width="1877" height="231" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628346738064" />
+    <state width="1877" height="231" key="GridCell.Tab.0.left" timestamp="1628346738064">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="231" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628344748854" />
-    <state width="1860" height="231" key="GridCell.Tab.0.right" timestamp="1628344748854">
+    <state width="1877" height="231" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628346738064" />
+    <state width="1877" height="231" key="GridCell.Tab.0.right" timestamp="1628346738064">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="231" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628344748854" />
+    <state width="1877" height="231" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628346738064" />
     <state x="184" y="86" key="MergeDialog" timestamp="1628342511770">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -529,10 +532,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628317221299" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628344730973">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628345808112">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628344730973" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628345808112" />
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1628264564690">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
