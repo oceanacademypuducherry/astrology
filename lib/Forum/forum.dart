@@ -35,14 +35,14 @@ class _ForumState extends State<Forum> {
     mySeconds = ~mySeconds;
 
     // return mySeconds.toString();
-    if (mySeconds > 0 && mySeconds < 60) {
+    if (mySeconds < 60) {
       return 'Few Second ago';
-    } else if (mySeconds > 60 && mySeconds < 3600) {
+    } else if (mySeconds < 60 * 60) {
       return '${mySeconds ~/ 60} Minute ago';
-    } else if (mySeconds > 3600 && mySeconds < 86400) {
-      return '${mySeconds ~/ (60 * 60)} Hours ago';
-    } else if (mySeconds > 86400 && mySeconds < 2073601) {
-      return '${mySeconds ~/ (60 * 60 * 24)} Day ago';
+    } else if (mySeconds < 86400) {
+      return '${mySeconds ~/ 3600} Hours ago';
+    } else if (mySeconds < 172800) {
+      return '${mySeconds ~/ (86400)} Day ago';
     } else {
       var dateformatString = DateFormat('MMMM d y').format(DateTime(
         year,
@@ -109,71 +109,6 @@ class _ForumState extends State<Forum> {
     }
 
     ///TODO likes function
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('Forum'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                if (_forumContreller.userSession.value.isNotEmpty) {
-                  Get.to(MyForums());
-                } else {
-                  Get.snackbar('Failed', 'Log In Please',
-                      backgroundColor: Colors.black, colorText: Colors.white);
-                }
-              },
-              icon: Icon(Icons.delete))
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Visibility(
-        visible: MediaQuery.of(context).viewInsets.bottom == 0,
-        child: Container(
-          height: 65.0,
-          width: 65.0,
-          child: FittedBox(
-            child: FloatingActionButton(
-              onPressed: () {
-                if (_forumContreller.userSession.value.isNotEmpty) {
-                  Get.bottomSheet(AddPost());
-                } else {
-                  Get.snackbar('Failed', 'Log In Please',
-                      backgroundColor: Colors.black, colorText: Colors.white);
-                }
-              },
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
-              // elevation: 5.0,
-            ),
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.blue,
-        elevation: 20,
-        shape: CircularNotchedRectangle(),
-        child: Container(
-          height: 40,
-          padding: EdgeInsets.all(20),
-        ),
-      ),
-      body: Container(
-        // child: TextButton(
-        //   onPressed: () {
-        //     addData();
-        //   },
-        //   child: Text('add data'),
-        // ),
-        child: allForums(),
-      ),
-    );
   }
 
   Widget allForums() {
@@ -817,6 +752,81 @@ class _ForumState extends State<Forum> {
           );
         }
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100.0), // here the desired height
+          child: Container(
+            height: 100,
+            child: Text('Forums'),
+            color: Colors.red,
+          )),
+
+      // AppBar(
+      //   title: Text('Forum'),
+      //   actions: [
+      //     IconButton(
+      //         onPressed: () {
+      //           if (_forumContreller.userSession.value.isNotEmpty) {
+      //             Get.to(MyForums());
+      //           } else {
+      //             Get.snackbar('Failed', 'Log In Please',
+      //                 backgroundColor: Colors.black, colorText: Colors.white);
+      //           }
+      //         },
+      //         icon: Icon(Icons.delete))
+      //   ],
+      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Visibility(
+        visible: MediaQuery.of(context).viewInsets.bottom == 0,
+        child: Container(
+          height: 65.0,
+          width: 65.0,
+          child: FittedBox(
+            child: FloatingActionButton(
+              onPressed: () {
+                if (_forumContreller.userSession.value.isNotEmpty) {
+                  Get.bottomSheet(AddPost());
+                } else {
+                  Get.snackbar('Failed', 'Log In Please',
+                      backgroundColor: Colors.black, colorText: Colors.white);
+                }
+              },
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              // elevation: 5.0,
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.blue,
+        elevation: 20,
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          height: 40,
+          padding: EdgeInsets.all(20),
+        ),
+      ),
+      body: SafeArea(
+        child: Container(
+          // child: TextButton(
+          //   onPressed: () {
+          //     addData();
+          //   },
+          //   child: Text('add data'),
+          // ),
+          child: allForums(),
+        ),
+      ),
     );
   }
 }
