@@ -115,6 +115,7 @@ class _BookingDetailsState extends State<BookingDetails> {
       'email': _forumContreller.sessionUserInfo.value['email'],
       'userName': _forumContreller.sessionUserInfo.value['name'],
       'jadhagam': _forumContreller.sessionUserInfo.value['jadhagam'],
+      'profile': _forumContreller.sessionUserInfo.value['profile'],
       'payment': rupees,
       'birthTime': _forumContreller.sessionUserInfo.value['birthTime'],
       'birthPlace': _forumContreller.sessionUserInfo.value['birthPlace'],
@@ -572,9 +573,11 @@ class _BookingDetailsState extends State<BookingDetails> {
                           : () {
                               ///someone else page
                               Get.to(
-                                  () => SomeoneElse(
+                                  () => SomeoneElseScreen(
                                         appointmentFor: _appointment.toString(),
                                         purpose: _purpose.toString(),
+                                        time: Get.arguments,
+                                        ruppess: rupees,
                                       ),
                                   transition: Transition.topLevel,
                                   // curve: Curves.ease,
