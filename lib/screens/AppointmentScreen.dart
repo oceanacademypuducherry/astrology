@@ -52,7 +52,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         minuteFormat = int.parse(minute.format(getTime.toDate()));
         dayTime = daytime.format(getTime.toDate());
         print(dayTime);
-
+        //
         var dt = DateTime(yearFormat, monthFormat, dayFormat,
             dayTime == 'AM' ? hourFormat : hourFormat + 12, minuteFormat);
         dbList.add(dt);

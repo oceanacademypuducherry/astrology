@@ -85,132 +85,40 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
         color: Colors.white,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'images/morning.png',
-                        width: 40,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Morning',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
-                  ),
-                  Wrap(
-                    alignment: WrapAlignment.start,
-                    crossAxisAlignment: WrapCrossAlignment.start,
-                    children: [
-                      for (var i = 0; i < time_slot.length; i++)
-                        if (DateFormat.jm().format(time_slot[i]).substring(
-                                DateFormat.jm().format(time_slot[i]).length -
-                                    2) ==
-                            'AM')
-                          GestureDetector(
-                            onTap: widget.dbList.contains(time_slot[i])
-                                ? null
-                                : () {
-                                    setState(() {
-                                      print('$i 000000000000');
-                                      colorChange.updateAll((key, value) =>
-                                          colorChange[key] = false);
-                                      colorChange[i] = true;
-                                    });
-                                    orderTime = time_slot[i];
-                                    print(orderTime);
-                                  },
-                            child: Card(
-                              color: widget.dbList.contains(time_slot[i])
-                                  ? Colors.red[200]
-                                  : colorChange[i]
-                                      ? Colors.green[300]
-                                      : Colors.grey[200],
-                              elevation: 8,
-                              //                  Colors.white,,
-                              child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 10),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 10),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      '${DateFormat.jm().format(time_slot[i])}',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    widget.dbList.contains(time_slot[i])
-                                        ? Text(
-                                            'Unavailable',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )
-                                        : Text(
-                                            'Available',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 35),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'images/afternoon.png',
-                        width: 40,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'AfterNoon',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    child: Wrap(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'images/morning.png',
+                          width: 40,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Morning',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
+                    Wrap(
                       alignment: WrapAlignment.start,
                       crossAxisAlignment: WrapCrossAlignment.start,
                       children: [
                         for (var i = 0; i < time_slot.length; i++)
-                          if ((DateFormat.jm().format(time_slot[i]).substring(
-                                      DateFormat.jm()
-                                              .format(time_slot[i])
-                                              .length -
-                                          2) ==
-                                  'PM') &&
-                              time_slot[i].hour > 12 &&
-                              time_slot[i].hour < 16)
+                          if (DateFormat.jm().format(time_slot[i]).substring(
+                                  DateFormat.jm().format(time_slot[i]).length -
+                                      2) ==
+                              'AM')
                             GestureDetector(
-                              onTap: widget.dbList.contains(i)
+                              onTap: widget.dbList.contains(time_slot[i])
                                   ? null
                                   : () {
                                       setState(() {
@@ -229,6 +137,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                         ? Colors.green[300]
                                         : Colors.grey[200],
                                 elevation: 8,
+                                //                  Colors.white,,
                                 child: Container(
                                   margin: EdgeInsets.symmetric(horizontal: 10),
                                   padding: EdgeInsets.symmetric(
@@ -242,7 +151,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      widget.dbList.contains(i)
+                                      widget.dbList.contains(time_slot[i])
                                           ? Text(
                                               'Unavailable',
                                               style: TextStyle(
@@ -264,137 +173,233 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                             ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Container(
-              // color: Colors.lightGreenAccent,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'images/night.png',
-                        width: 40,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Evenings',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
-                  ),
-                  Wrap(
-                    alignment: WrapAlignment.start,
-                    crossAxisAlignment: WrapCrossAlignment.start,
-                    children: [
-                      for (var i = 0; i < time_slot.length; i++)
-                        if ((DateFormat.jm().format(time_slot[i]).substring(
-                                    DateFormat.jm()
-                                            .format(time_slot[i])
-                                            .length -
-                                        2) ==
-                                'PM') &&
-                            time_slot[i].hour > 15 &&
-                            time_slot[i].hour < 21)
-                          GestureDetector(
-                            onTap: widget.dbList.contains(i)
-                                ? null
-                                : () {
-                                    orderTime = time_slot[i];
-                                    print(orderTime);
-                                    setState(() {
-                                      print('$i 000000000000');
-                                      colorChange.updateAll((key, value) =>
-                                          colorChange[key] = false);
-                                      colorChange[i] = true;
-                                    });
-                                  },
-                            child: Card(
-                              // margin: EdgeInsets.all(12),
-                              color: widget.dbList.contains(time_slot[i])
-                                  ? Colors.red[200]
-                                  : colorChange[i]
-                                      ? Colors.green[300]
-                                      : Colors.grey[200],
-                              elevation: 8,
-                              child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 10),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 10),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      '${DateFormat.jm().format(time_slot[i])}',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 35),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'images/afternoon.png',
+                          width: 40,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'AfterNoon',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      child: Wrap(
+                        alignment: WrapAlignment.start,
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        children: [
+                          for (var i = 0; i < time_slot.length; i++)
+                            if ((DateFormat.jm().format(time_slot[i]).substring(
+                                        DateFormat.jm()
+                                                .format(time_slot[i])
+                                                .length -
+                                            2) ==
+                                    'PM') &&
+                                time_slot[i].hour > 12 &&
+                                time_slot[i].hour < 16)
+                              GestureDetector(
+                                onTap: widget.dbList.contains(i)
+                                    ? null
+                                    : () {
+                                        setState(() {
+                                          print('$i 000000000000');
+                                          colorChange.updateAll((key, value) =>
+                                              colorChange[key] = false);
+                                          colorChange[i] = true;
+                                        });
+                                        orderTime = time_slot[i];
+                                        print(orderTime);
+                                      },
+                                child: Card(
+                                  color: widget.dbList.contains(time_slot[i])
+                                      ? Colors.red[200]
+                                      : colorChange[i]
+                                          ? Colors.green[300]
+                                          : Colors.grey[200],
+                                  elevation: 8,
+                                  child: Container(
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 10),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          '${DateFormat.jm().format(time_slot[i])}',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        widget.dbList.contains(i)
+                                            ? Text(
+                                                'Unavailable',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            : Text(
+                                                'Available',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                      ],
                                     ),
-                                    widget.dbList.contains(time_slot[i])
-                                        ? Text(
-                                            'Unavailable',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )
-                                        : Text(
-                                            'Available',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )
-                                  ],
+                                  ),
+                                ),
+                              ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                // color: Colors.lightGreenAccent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'images/night.png',
+                          width: 40,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Evenings',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
+                    Wrap(
+                      alignment: WrapAlignment.start,
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      children: [
+                        for (var i = 0; i < time_slot.length; i++)
+                          if ((DateFormat.jm().format(time_slot[i]).substring(
+                                      DateFormat.jm()
+                                              .format(time_slot[i])
+                                              .length -
+                                          2) ==
+                                  'PM') &&
+                              time_slot[i].hour > 15 &&
+                              time_slot[i].hour < 21)
+                            GestureDetector(
+                              onTap: widget.dbList.contains(i)
+                                  ? null
+                                  : () {
+                                      orderTime = time_slot[i];
+                                      print(orderTime);
+                                      setState(() {
+                                        print('$i 000000000000');
+                                        colorChange.updateAll((key, value) =>
+                                            colorChange[key] = false);
+                                        colorChange[i] = true;
+                                      });
+                                    },
+                              child: Card(
+                                // margin: EdgeInsets.all(12),
+                                color: widget.dbList.contains(time_slot[i])
+                                    ? Colors.red[200]
+                                    : colorChange[i]
+                                        ? Colors.green[300]
+                                        : Colors.grey[200],
+                                elevation: 8,
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 10),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        '${DateFormat.jm().format(time_slot[i])}',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      widget.dbList.contains(time_slot[i])
+                                          ? Text(
+                                              'Unavailable',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          : Text(
+                                              'Available',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Text(
-                        'continue',
-                        style: TextStyle(
-                          fontSize: 20,
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: Text(
+                          'continue',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                    ),
-                    onPressed: () {
-                      print('>>>>>>>>>>>>>>>>>>>>>>>');
-                      print(orderTime);
-                      setState(() {
-                        colorChange.updateAll(
-                            (key, value) => colorChange[key] = false);
-                      });
+                      onPressed: () {
+                        print('>>>>>>>>>>>>>>>>>>>>>>>');
+                        print(orderTime);
+                        setState(() {
+                          colorChange.updateAll(
+                              (key, value) => colorChange[key] = false);
+                        });
 
-                      Get.to(() => BookingDetails(),
-                          arguments: orderTime,
-                          transition: Transition.rightToLeft,
-                          curve: Curves.easeInToLinear,
-                          duration: Duration(milliseconds: 600));
-                    },
-                  ),
-                ],
-              ),
-            )
-          ],
+                        Get.to(() => BookingDetails(),
+                            arguments: orderTime,
+                            transition: Transition.rightToLeft,
+                            curve: Curves.easeInToLinear,
+                            duration: Duration(milliseconds: 600));
+                      },
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

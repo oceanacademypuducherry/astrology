@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
       DeviceOrientation.portraitUp,
     ]);
     setSessionDatas();
+    print('==============================');
   }
 
   @override

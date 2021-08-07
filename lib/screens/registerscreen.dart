@@ -74,6 +74,12 @@ class _RegisterState extends State<Register> {
   Widget _buildEmail() {
     return TextFormField(
       focusNode: messageFocusNode1,
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontFamily: 'Ubuntu',
+        fontSize: 14,
+        color: Colors.black54,
+      ),
       inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
       // ignore: deprecated_member_use
       autovalidate: validation,
@@ -259,16 +265,14 @@ class _RegisterState extends State<Register> {
 
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         body: KeyboardDismisser(
           child: Container(
             decoration: const BoxDecoration(
               color: Color(0xff045de9),
             ),
             width: double.infinity,
-            height: double.infinity,
             child: ListView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               reverse: true,
               children: [
                 Container(
@@ -291,8 +295,8 @@ class _RegisterState extends State<Register> {
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
                       ),
                     ),
                     // width: double.infinity,
@@ -373,9 +377,9 @@ class _RegisterState extends State<Register> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
-                                            image: NetworkImage(
-                                                "${jadhagamLink?.toString()}"),
-                                          ),
+                                              image: NetworkImage(
+                                                  "${jadhagamLink?.toString()}"),
+                                              fit: BoxFit.cover),
                                           border: Border.all(
                                             width: 2,
                                             color: Colors.blue.shade900,
@@ -705,7 +709,8 @@ class _RegisterState extends State<Register> {
                                   jadhagamLink!.isNotEmpty &&
                                   profilePictureLink!.isNotEmpty &&
                                   widget.userNumber!.isNotEmpty &&
-                                  birthPlace!.isNotEmpty) {
+                                  birthPlace != null &&
+                                  date != null) {
                                 _firestore.collection("newusers").add({
                                   "name": nameController.text,
                                   "email": emailController.text,
@@ -721,6 +726,22 @@ class _RegisterState extends State<Register> {
                                 //     transition: Transition.rightToLeft,
                                 //     curve: Curves.easeInToLinear,
                                 //     duration: Duration(milliseconds: 600));
+                              } else {
+                                Get.snackbar(
+                                  "Hello user!",
+                                  "Please provide your documents",
+                                  icon: Icon(Icons.person, color: Colors.white),
+                                  snackPosition: SnackPosition.TOP,
+                                  backgroundColor: Colors.blue[500],
+                                  borderRadius: 10,
+                                  margin: EdgeInsets.all(12),
+                                  colorText: Colors.white,
+                                  duration: Duration(seconds: 4),
+                                  isDismissible: true,
+                                  dismissDirection:
+                                      SnackDismissDirection.HORIZONTAL,
+                                  forwardAnimationCurve: Curves.easeOutBack,
+                                );
                               }
 
                               print('///////////////////$date');

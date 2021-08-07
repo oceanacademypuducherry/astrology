@@ -34,6 +34,7 @@ class _BookingDetailsState extends State<BookingDetails> {
 
   ///controller
   TextEditingController? nameController = TextEditingController();
+  DateTime newDate = Get.arguments;
 
   ///widgets
   Widget _buildOther() {
@@ -87,6 +88,7 @@ class _BookingDetailsState extends State<BookingDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    getTime();
 
     _razorpay = Razorpay();
     print(_forumContreller.userSession.value);
@@ -135,6 +137,7 @@ class _BookingDetailsState extends State<BookingDetails> {
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
+    print('*************Error******************');
     print(response.message);
     Fluttertoast.showToast(
         msg: "ERROR: " + response.code.toString() + " - " + response.message!,
@@ -142,6 +145,7 @@ class _BookingDetailsState extends State<BookingDetails> {
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
+    print('*************WALLETETTETTE******************');
     print(response.walletName);
     Fluttertoast.showToast(
         msg: "EXTERNAL_WALLET: " + response.walletName!,
@@ -168,6 +172,24 @@ class _BookingDetailsState extends State<BookingDetails> {
     } catch (e) {
       debugPrint('Error: e');
     }
+  }
+
+  var minute;
+  var hour;
+  var dayTime;
+  void getTime() {
+    if (newDate.hour > 12) {
+      hour = newDate.hour - 12;
+
+      dayTime = 'PM';
+      minute = newDate.minute;
+    } else {
+      hour = newDate.hour;
+      dayTime = 'AM';
+      minute = newDate.minute;
+    }
+    // hour = hour < 9 ? '0$hour' : hour;
+    // minute = minute < 9 ? '0$minute' : minute;
   }
 
   ///RAZORPAY END
@@ -199,7 +221,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Date and Time',
+                    'Your Appointment Date and Time',
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
                       fontFamily: 'Ubuntu',
@@ -230,7 +252,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Text(
-                          '2:16 PM',
+                          '${hour}:${minute} ${dayTime}',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
                             fontFamily: 'Ubuntu',
