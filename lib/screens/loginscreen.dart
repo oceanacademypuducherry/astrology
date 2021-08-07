@@ -1,16 +1,12 @@
 import 'dart:async';
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
-import 'package:astrology_app/screens/HomeScreen.dart';
-import 'package:astrology_app/screens/otpscreen.dart';
 import 'package:astrology_app/screens/registerscreen.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:astrology_app/widgets/auth_service.dart';
 import 'package:astrology_app/widgets/countrycode.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,7 +36,6 @@ class _LoginState extends State<Login> {
   bool wait = false;
   String buttonName = "Send";
   String verificationIdFinal = "";
-  String _forceResendingToken = '';
   String smsCode = "";
 
   String countryCode = '+91';
@@ -248,12 +243,15 @@ class _LoginState extends State<Login> {
 
         Get.find<ForumContreller>().setUserSession(userNumber.toString());
         Get.find<ForumContreller>().setUserInfo(userSession.data());
+        Get.find<ForumContreller>().setUserDocumentId(getId);
         Get.find<ForumContreller>()
             .setUserDocumentId(userSession.id.toString());
         Get.to(() => BottomNavigation(),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
             duration: Duration(milliseconds: 600));
+        Get.snackbar('success', "You are loggesd in",
+            backgroundColor: Colors.black, colorText: Colors.white);
       } else {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('user', number!);
@@ -268,7 +266,8 @@ class _LoginState extends State<Login> {
             duration: Duration(milliseconds: 600));
       }
     } catch (e) {
-      print('error ${e.toString()}');
+      Get.snackbar('error in otp verification', '${e.toString()}',
+          backgroundColor: Colors.black, colorText: Colors.white);
     }
   }
 

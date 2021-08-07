@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:astrology_app/Forum/forumController.dart';
@@ -30,19 +31,21 @@ class _ForumState extends State<Forum> {
     //datetime converting
     var postTime = DateTime(year, month, date, hours, minutes, seconds);
 
-    int mySeconds = postTime.difference(DateTime.now()).inSeconds;
+    var test =
+        DateTime.fromMicrosecondsSinceEpoch(timestamp.microsecondsSinceEpoch);
+    print(timestamp);
+    int mySeconds = test.difference(DateTime.now()).inSeconds;
+    print(~mySeconds);
+    mySeconds = mySeconds * -1;
 
-    mySeconds = ~mySeconds;
-
-    // return mySeconds.toString();
-    if (mySeconds > 0 && mySeconds < 60) {
+    if (mySeconds < 60) {
       return 'Few Second ago';
-    } else if (mySeconds > 60 && mySeconds < 3600) {
+    } else if (mySeconds < 3600) {
       return '${mySeconds ~/ 60} Minute ago';
-    } else if (mySeconds > 3600 && mySeconds < 86400) {
-      return '${mySeconds ~/ (60 * 60)} Hours ago';
-    } else if (mySeconds > 86400 && mySeconds < 2073601) {
-      return '${mySeconds ~/ (60 * 60 * 24)} Day ago';
+    } else if (mySeconds < 86400) {
+      return '${mySeconds ~/ 3600} Hours ago';
+    } else if (mySeconds < 172800) {
+      return '${mySeconds ~/ (86400)} Day ago';
     } else {
       var dateformatString = DateFormat('MMMM d y').format(DateTime(
         year,
@@ -111,74 +114,12 @@ class _ForumState extends State<Forum> {
     ///TODO likes function
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('Forum'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                if (_forumContreller.userSession.value.isNotEmpty) {
-                  Get.to(MyForums());
-                } else {
-                  Get.snackbar('Failed', 'Log In Please',
-                      backgroundColor: Colors.black, colorText: Colors.white);
-                }
-              },
-              icon: Icon(Icons.delete))
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Visibility(
-        visible: MediaQuery.of(context).viewInsets.bottom == 0,
-        child: Container(
-          height: 65.0,
-          width: 65.0,
-          child: FittedBox(
-            child: FloatingActionButton(
-              onPressed: () {
-                if (_forumContreller.userSession.value.isNotEmpty) {
-                  Get.bottomSheet(AddPost());
-                } else {
-                  Get.snackbar('Failed', 'Log In Please',
-                      backgroundColor: Colors.black, colorText: Colors.white);
-                }
-              },
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
-              // elevation: 5.0,
-            ),
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.blue,
-        elevation: 20,
-        shape: CircularNotchedRectangle(),
-        child: Container(
-          height: 40,
-          padding: EdgeInsets.all(20),
-        ),
-      ),
-      body: Container(
-        // child: TextButton(
-        //   onPressed: () {
-        //     addData();
-        //   },
-        //   child: Text('add data'),
-        // ),
-        child: allForums(),
-      ),
-    );
-  }
-
   Widget allForums() {
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection('forums').snapshots(),
+      stream: _firestore
+          .collection('forums')
+          .orderBy('postTime', descending: true)
+          .snapshots(),
       builder: (context, forumsSnapshot) {
         if (!forumsSnapshot.hasData) {
           return Text('Loading...');
@@ -817,6 +758,90 @@ class _ForumState extends State<Forum> {
           );
         }
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 5,
+        toolbarHeight: 60,
+        backgroundColor: Colors.blue[100],
+        centerTitle: true,
+        title: Text(
+          'Forum',
+          style: TextStyle(color: Colors.blue),
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: CircleAvatar(
+            radius: 10,
+            backgroundImage:
+                NetworkImage(_forumContreller.sessionUserInfo.value['profile']),
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (_forumContreller.userSession.value.isNotEmpty) {
+                Get.to(MyForums());
+              } else {
+                Get.snackbar('Failed', 'Log In Please',
+                    backgroundColor: Colors.black, colorText: Colors.white);
+              }
+            },
+            icon: Icon(FontAwesomeIcons.listAlt),
+            color: Colors.blue,
+          )
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Visibility(
+        visible: MediaQuery.of(context).viewInsets.bottom == 0,
+        child: Container(
+          height: 65.0,
+          width: 65.0,
+          child: FittedBox(
+            child: FloatingActionButton(
+              onPressed: () {
+                if (_forumContreller.userSession.value.isNotEmpty) {
+                  Get.bottomSheet(AddPost());
+                } else {
+                  Get.snackbar('Failed', 'Log In Please',
+                      backgroundColor: Colors.black, colorText: Colors.white);
+                }
+              },
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              // elevation: 5.0,
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.blue[300],
+        elevation: 20,
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          height: 40,
+          padding: EdgeInsets.all(20),
+        ),
+      ),
+      body: SafeArea(
+        child: Container(
+          // child: TextButton(
+          //   onPressed: () {
+          //     addData();
+          //   },
+          //   child: Text('add data'),
+          // ),
+          child: allForums(),
+        ),
+      ),
     );
   }
 }

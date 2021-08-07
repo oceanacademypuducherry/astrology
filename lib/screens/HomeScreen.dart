@@ -2,6 +2,7 @@ import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/main.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/FreeVideos.dart';
+import 'package:astrology_app/screens/PaidVedios.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
@@ -26,6 +27,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ForumContreller _forumContreller = Get.find<ForumContreller>();
 
+  setSessionDatas() async {
+    var userDatas = await _firestore.collection('newusers').get();
+    for (var i in userDatas.docs) {
+      if (i['phoneNumber'] == _forumContreller.userSession) {
+        Get.find<ForumContreller>().setUserInfo(i.data());
+        Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
+      }
+    }
+    print('☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻');
+    print(_forumContreller.sessionUserInfo.value);
+    print(_forumContreller.sessionUserInfo.value);
+    print('☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻');
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -33,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+    setSessionDatas();
   }
 
   @override
@@ -61,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     //Article
                     Container(
+                      color: Colors.blue[50],
                       padding: EdgeInsets.only(bottom: 10),
                       // color: Colors.blue,
                       child: Column(
@@ -113,78 +130,98 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              StreamBuilder<QuerySnapshot>(
-                                stream: _firestore
-                                    .collection('articles')
-                                    .snapshots(),
-                                // ignore: missing_return
-                                builder: (context, snapshot) {
-                                  if (!snapshot.hasData) {
-                                    return Text("Loading...");
-                                  } else {
-                                    final messages = snapshot.data!.docs;
-                                    // ignore: non_constant_identifier_names
-                                    List<GestureDetector> DBUpcoming = [];
-                                    for (var message in messages) {
-                                      final images = message['articleImage'];
-                                      final articleName =
-                                          message['articleName'];
-                                      final articleDescription =
-                                          message['content'];
-
-                                      GestureDetector messageContent =
-                                          GestureDetector(
-                                              child: Container(
-                                                margin: EdgeInsets.all(10.0),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  image: DecorationImage(
-                                                    image: NetworkImage(images),
-                                                    fit: BoxFit.cover,
+                          StreamBuilder<QuerySnapshot>(
+                            stream:
+                                _firestore.collection('articles').snapshots(),
+                            // ignore: missing_return
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return Text("Loading...");
+                              } else {
+                                final articles = snapshot.data!.docs;
+                                return Container(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: CarouselSlider(
+                                    items: [
+                                      for (var article in articles)
+                                        GestureDetector(
+                                            child: Container(
+                                              child: Column(
+                                                children: [
+                                                  Expanded(
+                                                    flex: 10,
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.all(5),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.2),
+                                                                blurRadius: 5)
+                                                          ]),
+                                                      margin:
+                                                          EdgeInsets.all(10),
+                                                      height: 50,
+                                                      width: 300,
+                                                      child: Image.network(
+                                                        article['articleImage'],
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
+                                                  Expanded(
+                                                    child: Text(
+                                                      article['articleName'],
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.blue),
+                                                    ),
+                                                  )
+                                                ],
                                               ),
-                                              onTap: () {
-                                                print('jaya');
-                                                Get.to(
-                                                    () => ArticleDescription(
-                                                          description:
-                                                              articleDescription,
-                                                        ),
-                                                    transition:
-                                                        Transition.rightToLeft,
-                                                    curve:
-                                                        Curves.easeInToLinear,
-                                                    duration: Duration(
-                                                        milliseconds: 600));
-                                              });
-
-                                      DBUpcoming.add(messageContent);
-                                    }
-                                    return Row(
-                                      children: [
-                                        ArticleFromDb(
-                                          articleImage: DBUpcoming,
-                                        ),
-                                      ],
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
+                                            ),
+                                            onTap: () {
+                                              Get.to(
+                                                  () => ArticleDescription(
+                                                        description:
+                                                            article['content'],
+                                                        articleTitle: article[
+                                                            'articleName'],
+                                                      ),
+                                                  transition:
+                                                      Transition.rightToLeft,
+                                                  curve: Curves.easeInToLinear,
+                                                  duration: Duration(
+                                                      milliseconds: 400));
+                                            }),
+                                    ],
+                                    //Slider Container properties
+                                    options: CarouselOptions(
+                                      enableInfiniteScroll: false,
+                                      // height: 300.0,
+                                      enlargeCenterPage: true,
+                                      autoPlay: true,
+                                      aspectRatio: 30 / 15,
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                      autoPlayAnimationDuration:
+                                          Duration(milliseconds: 800),
+                                      viewportFraction: 0.7,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
                           )
                         ],
                       ),
                     ),
                     //Query
                     Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                       height: 300,
                       // color: Colors.blue,
                       child: Column(
@@ -203,13 +240,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               TextButton(
                                   onPressed: () async {
-                                    // SharedPreferences prefs =
-                                    //     await SharedPreferences.getInstance();
-                                    // await prefs.clear();
-                                    // Get.to(() => Login(),
-                                    //     transition: Transition.rightToLeft,
-                                    //     curve: Curves.easeInToLinear,
-                                    //     duration: Duration(milliseconds: 600));
                                     Get.to(QueryScreen());
                                   },
                                   child: Text(
@@ -276,23 +306,50 @@ class _HomeScreenState extends State<HomeScreen> {
                             items: [
                               GestureDetector(
                                 onTap: () {
-                                  print('ontap');
-                                  Get.to(() => SubscribeVideoScreen(),
-                                      // transition: Transition.cupertinoDialog,
-                                      fullscreenDialog: true,
-                                      curve: Curves.easeInToLinear,
-                                      duration: Duration(milliseconds: 600));
+                                  _forumContreller
+                                          .sessionUserInfo.value['subscribe']
+                                      ? Get.to(() => PaidVedios(),
+                                          // transition: Transition.cupertinoDialog,
+                                          fullscreenDialog: true,
+                                          curve: Curves.easeInToLinear,
+                                          duration: Duration(milliseconds: 600))
+                                      : Get.to(() => SubscribeVideoScreen(),
+                                          // transition: Transition.cupertinoDialog,
+                                          fullscreenDialog: true,
+                                          curve: Curves.easeInToLinear,
+                                          duration:
+                                              Duration(milliseconds: 600));
                                 },
-                                child: Container(
-                                  margin: EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    image: DecorationImage(
-                                      image:
-                                          AssetImage("images/premiumlock.png"),
-                                      fit: BoxFit.cover,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(10.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              "images/premiumlock.png"),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    Positioned(
+                                        left: 25,
+                                        top: 20,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            color: Colors.white54,
+                                            child: Icon(
+                                              Icons.lock,
+                                              size: 25,
+                                            ),
+                                          ),
+                                        )),
+                                  ],
                                 ),
                               ),
                               GestureDetector(
@@ -304,24 +361,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                       curve: Curves.easeInToLinear,
                                       duration: Duration(milliseconds: 600));
                                 },
-                                child: Container(
-                                  margin: EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        "images/freevideo.png",
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(10.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            "images/freevideo.png",
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                      fit: BoxFit.cover,
                                     ),
-                                  ),
+                                    Positioned(
+                                        left: 25,
+                                        top: 20,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          child: Container(
+                                            padding: EdgeInsets.all(10),
+                                            color: Colors.white54,
+                                            child: Text(
+                                              'Free',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20),
+                                            ),
+                                          ),
+                                        )),
+                                  ],
                                 ),
                               ),
                             ],
                             //Slider Container properties
                             options: CarouselOptions(
                               enableInfiniteScroll: false,
-                              height: 230.0,
+                              // height: 230.0,
                               enlargeCenterPage: true,
                               autoPlay: false,
                               aspectRatio: 16 / 9,
@@ -384,3 +463,28 @@ class ArticleFromDb extends StatelessWidget {
     );
   }
 }
+
+// GestureDetector(
+// child: Container(
+// margin: EdgeInsets.all(10.0),
+// decoration: BoxDecoration(
+// borderRadius:
+// BorderRadius.circular(8.0),
+// image: DecorationImage(
+// image: NetworkImage(images),
+// fit: BoxFit.cover,
+// ),
+// ),
+// ),
+// onTap: () {
+// Get.to(
+// () => ArticleDescription(
+// description:
+// articleDescription,
+// ),
+// transition:
+// Transition.rightToLeft,
+// curve: Curves.easeInToLinear,
+// duration: Duration(
+// milliseconds: 600));
+// });

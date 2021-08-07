@@ -21,9 +21,10 @@ class _NativeVedioUrlState extends State<NativeVedioUrl> {
           aspectRatio: 16 / 9,
           child: BetterPlayer.network(
             widget.vedioUrl,
-            betterPlayerConfiguration: BetterPlayerConfiguration(
-              aspectRatio: 16 / 9,
-            ),
+            betterPlayerConfiguration:
+                BetterPlayerConfiguration(autoPlay: true, fit: BoxFit.fill
+                    // aspectRatio: 16 / 9,
+                    ),
           )),
     );
   }

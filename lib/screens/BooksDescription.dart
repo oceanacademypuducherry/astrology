@@ -1,5 +1,6 @@
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/PdfView.dart';
+import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,11 +34,11 @@ class _BooksDescriptionState extends State<BooksDescription> {
   @override
   void initState() {
     super.initState();
+    book_id();
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-    book_id();
   }
 
   void book_id() async {
@@ -62,6 +63,23 @@ class _BooksDescriptionState extends State<BooksDescription> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    _firestore.collection('BookPaymentDetails').add({
+      'time': DateTime.now(),
+      'phoneNumber': _forumContreller.userSession.value,
+      'email': _forumContreller.sessionUserInfo.value['email'],
+      'userName': _forumContreller.sessionUserInfo.value['name'],
+      'payment': widget.bookType,
+      'bookName': widget.bookName,
+    });
+
+    _firestore.collection('books').doc('${getId}').update({
+      'type': 'free',
+    });
+    print('uploaded successfully');
+    Get.to(() => BottomNavigation(),
+        transition: Transition.rightToLeft,
+        curve: Curves.easeInToLinear,
+        duration: Duration(milliseconds: 600));
     Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId!,
         toastLength: Toast.LENGTH_SHORT);
