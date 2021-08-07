@@ -605,7 +605,7 @@ class _LoginState extends State<Login> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          child: Text('SEND OTP'),
+                          child: Text('Submit'),
                         ),
                       ),
                     ],
