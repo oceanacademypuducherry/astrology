@@ -33,14 +33,10 @@ class _ForumState extends State<Forum> {
 
     var test =
         DateTime.fromMicrosecondsSinceEpoch(timestamp.microsecondsSinceEpoch);
-    print('ddddddddddddd${test}');
     print(timestamp);
-
     int mySeconds = test.difference(DateTime.now()).inSeconds;
     print(~mySeconds);
     mySeconds = mySeconds * -1;
-
-    // return mySeconds.toString();
 
     if (mySeconds < 60) {
       return 'Few Second ago';
