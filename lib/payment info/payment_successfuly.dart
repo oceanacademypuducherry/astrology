@@ -7,7 +7,8 @@ class PaymentSuccessfully extends StatelessWidget {
       color: Colors.white,
       child: Center(
         child: Column(
-          children: [Image.network('images/payment_success.svg')],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Image.network('images/payment_success.png')],
         ),
       ),
     );
