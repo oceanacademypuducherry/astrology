@@ -8,7 +8,7 @@ class PaymentSuccessfully extends StatelessWidget {
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Image.network('images/payment_success.png')],
+          children: [Image.asset('images/payment_success.png')],
         ),
       ),
     );
