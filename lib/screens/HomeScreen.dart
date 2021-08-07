@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                     //Slider Container properties
                                     options: CarouselOptions(
-                                      enableInfiniteScroll: true,
+                                      enableInfiniteScroll: false,
                                       // height: 300.0,
                                       enlargeCenterPage: true,
                                       autoPlay: true,
@@ -342,7 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             //Slider Container properties
                             options: CarouselOptions(
                               enableInfiniteScroll: false,
-                              height: 230.0,
+                              // height: 230.0,
                               enlargeCenterPage: true,
                               autoPlay: false,
                               aspectRatio: 16 / 9,
