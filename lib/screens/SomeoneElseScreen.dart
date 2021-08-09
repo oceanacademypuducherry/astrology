@@ -11,13 +11,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
-
-import 'dart:typed_data';
-
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class SomeoneElseScreen extends StatefulWidget {
@@ -240,42 +236,20 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     date = DateTime(selectedDate.year, selectedDate.month, selectedDate.day,
         _time.hour, _time.minute);
-    print(_forumContreller.userSession.value);
-    if (nameController.text.isNotEmpty &&
-        emailController.text.isNotEmpty &&
-        jadhagamLink!.isNotEmpty &&
-        profilePictureLink!.isNotEmpty &&
-        birthPlace != null &&
-        date != null) {
-      _firestore.collection("booking").add({
-        'time': widget.time,
-        'payment': widget.ruppess,
-        "userName": nameController.text,
-        "email": emailController.text,
-        "jadhagam": jadhagamLink,
-        'profile': profilePictureLink,
-        'phoneNumber': _forumContreller.userSession.value,
-        'bookingFor': widget.appointmentFor,
-        'purposeFor': widget.purpose,
-        "birthPlace": birthPlace,
-        "birthTime": date,
-      });
-    } else {
-      Get.snackbar(
-        "Hello user!",
-        "Please provide your documents",
-        icon: Icon(Icons.person, color: Colors.white),
-        snackPosition: SnackPosition.TOP,
-        backgroundColor: Colors.blue[500],
-        borderRadius: 10,
-        margin: EdgeInsets.all(12),
-        colorText: Colors.white,
-        duration: Duration(seconds: 4),
-        isDismissible: true,
-        dismissDirection: SnackDismissDirection.HORIZONTAL,
-        forwardAnimationCurve: Curves.easeOutBack,
-      );
-    }
+    _firestore.collection("booking").add({
+      'time': widget.time,
+      'payment': widget.ruppess,
+      "userName": nameController.text,
+      "email": emailController.text,
+      "jadhagam": jadhagamLink,
+      'profile': profilePictureLink,
+      'phoneNumber': _forumContreller.userSession.value,
+      'bookingFor': widget.appointmentFor,
+      'purposeFor': widget.purpose,
+      "birthPlace": birthPlace,
+      "birthTime": date,
+    });
+
     Get.to(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
         curve: Curves.easeInToLinear,
@@ -427,8 +401,12 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                         child: CircleAvatar(
                                           maxRadius: 48,
                                           backgroundColor: Colors.white,
-                                          backgroundImage: NetworkImage(
-                                              "${profilePictureLink?.toString()}"),
+                                          backgroundImage: profilePictureLink ==
+                                                  null
+                                              ? NetworkImage(
+                                                  'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png')
+                                              : NetworkImage(
+                                                  "${profilePictureLink.toString()}"),
                                         ),
                                       ),
                                     ),
@@ -462,29 +440,17 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                     // color: Colors.amberAccent,
                                     alignment: Alignment.center,
                                     child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "${jadhagamLink?.toString()}"),
-                                              fit: BoxFit.cover),
-                                          border: Border.all(
-                                            width: 2,
-                                            color: Colors.blue.shade900,
-                                          ),
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              blurRadius: 10,
-                                              spreadRadius: 0,
-                                              offset: Offset(
-                                                5.0,
-                                                5.0,
+                                      height: 350.0,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        child: jadhagamLink == null
+                                            ? Placeholder()
+                                            : Image.network(
+                                                "$jadhagamLink",
+                                                fit: BoxFit.contain,
                                               ),
-                                            ),
-                                          ]),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(height: 13),
@@ -771,7 +737,30 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                           ),
                           child: ElevatedButton(
                             onPressed: () {
-                              openCheckout();
+                              if (nameController.text.isNotEmpty &&
+                                  emailController.text.isNotEmpty &&
+                                  jadhagamLink!.isNotEmpty &&
+                                  profilePictureLink!.isNotEmpty &&
+                                  birthPlace != null &&
+                                  date != null) {
+                                openCheckout();
+                              } else {
+                                Get.snackbar(
+                                  "Hello user!",
+                                  "Please provide your documents",
+                                  icon: Icon(Icons.person, color: Colors.white),
+                                  snackPosition: SnackPosition.TOP,
+                                  backgroundColor: Colors.blue[500],
+                                  borderRadius: 10,
+                                  margin: EdgeInsets.all(12),
+                                  colorText: Colors.white,
+                                  duration: Duration(seconds: 4),
+                                  isDismissible: true,
+                                  dismissDirection:
+                                      SnackDismissDirection.HORIZONTAL,
+                                  forwardAnimationCurve: Curves.easeOutBack,
+                                );
+                              }
 
                               ///for unfocus everykeyboard
                               if (messageFocusNode1.hasFocus ||
