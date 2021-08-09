@@ -68,7 +68,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
       // ignore: deprecated_member_use
       autovalidate: validation,
-      validator: (value) => EmailValidator.validate(value!) ? null : "please enter a valid email",
+      validator: (value) =>
+          EmailValidator.validate(value!) ? null : "please enter a valid email",
       decoration: const InputDecoration(
           // prefixIcon: Icon(Icons.email_outlined),
           errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
@@ -176,7 +177,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
       // ignore: deprecated_member_use
       autovalidate: validation,
-      validator: (value) => EmailValidator.validate(value!) ? null : "please enter a valid email",
+      validator: (value) =>
+          EmailValidator.validate(value!) ? null : "please enter a valid email",
       decoration: const InputDecoration(
         // prefixIcon: Icon(Icons.email_outlined),
         errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
@@ -258,7 +260,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         return Column(
                           children: [
                             StreamBuilder<QuerySnapshot>(
-                              stream: _firestore.collection('newusers').snapshots(),
+                              stream:
+                                  _firestore.collection('newusers').snapshots(),
                               // ignore: missing_return
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
@@ -266,20 +269,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 } else {
                                   final messages = snapshot.data!;
                                   for (var message in messages.docs) {
-                                    print("${_forumContreller.userDocumentId}  _forumContreller.userDocumentId///////");
+                                    print(
+                                        "${_forumContreller.userDocumentId}  _forumContreller.userDocumentId///////");
                                     print("${message.id}  message.id///////");
-                                    if (_forumContreller.userDocumentId == message.id) {
+                                    if (_forumContreller.userDocumentId ==
+                                        message.id) {
                                       nameController!.text = message['name'];
-                                      phoneNumberController!.text = message['phoneNumber'];
+                                      phoneNumberController!.text =
+                                          message['phoneNumber'];
                                       emailController!.text = message['email'];
-                                      birthPlaceController!.text = message['birthPlace'];
+                                      birthPlaceController!.text =
+                                          message['birthPlace'];
                                       date = message['birthTime'];
 
                                       getProfilePicture = message['profile'];
                                       getJadhagam = message['jadhagam'];
                                       getName = nameController!.text;
                                       getEmail = emailController!.text;
-                                      getMobileNumber = phoneNumberController!.text;
+                                      getMobileNumber =
+                                          phoneNumberController!.text;
                                     }
                                   }
                                   return Container(
@@ -291,12 +299,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     child: Column(
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 25),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Column(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Container(
                                                     height: 120,
@@ -306,19 +318,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     child: Container(
                                                       decoration: BoxDecoration(
                                                           image: DecorationImage(
-                                                              image: NetworkImage(updatedProfile == null
-                                                                  ? '${getProfilePicture}'
-                                                                  : '${updatedProfile}'),
-                                                              fit: BoxFit.cover),
+                                                              image: NetworkImage(
+                                                                  updatedProfile ==
+                                                                          null
+                                                                      ? '${getProfilePicture}'
+                                                                      : '${updatedProfile}'),
+                                                              fit:
+                                                                  BoxFit.cover),
                                                           border: Border.all(
                                                             width: 2,
-                                                            color: Colors.blue.shade900,
+                                                            color: Colors
+                                                                .blue.shade900,
                                                           ),
                                                           color: Colors.white,
-                                                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10)),
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color: Colors.black26,
+                                                              color: Colors
+                                                                  .black26,
                                                               blurRadius: 10,
                                                               spreadRadius: 0,
                                                               offset: Offset(
@@ -331,23 +352,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   ),
                                                   SizedBox(height: 13),
                                                   ElevatedButton(
-                                                    onPressed: selectProfileFile,
-                                                    style: ElevatedButton.styleFrom(
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(5)),
+                                                    onPressed:
+                                                        selectProfileFile,
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
                                                       elevation: 2,
                                                       onPrimary: Colors.white,
-                                                      textStyle: const TextStyle(
+                                                      textStyle:
+                                                          const TextStyle(
                                                         fontFamily: 'Ubuntu',
                                                         fontSize: 12,
                                                       ),
                                                     ),
-                                                    child: const Text('Update Profile'),
+                                                    child: const Text(
+                                                        'Update Profile'),
                                                   ),
                                                 ],
                                               ),
                                               Column(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Container(
                                                     height: 120,
@@ -357,19 +388,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     child: Container(
                                                       decoration: BoxDecoration(
                                                           image: DecorationImage(
-                                                              image: NetworkImage(updatedJadhagam == null
-                                                                  ? '${getJadhagam}'
-                                                                  : '${updatedJadhagam}'),
-                                                              fit: BoxFit.cover),
+                                                              image: NetworkImage(
+                                                                  updatedJadhagam ==
+                                                                          null
+                                                                      ? '${getJadhagam}'
+                                                                      : '${updatedJadhagam}'),
+                                                              fit:
+                                                                  BoxFit.cover),
                                                           border: Border.all(
                                                             width: 2,
-                                                            color: Colors.blue.shade900,
+                                                            color: Colors
+                                                                .blue.shade900,
                                                           ),
                                                           color: Colors.white,
-                                                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10)),
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color: Colors.black26,
+                                                              color: Colors
+                                                                  .black26,
                                                               blurRadius: 10,
                                                               spreadRadius: 0,
                                                               offset: Offset(
@@ -382,18 +422,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   ),
                                                   SizedBox(height: 13),
                                                   ElevatedButton(
-                                                    onPressed: selectJadhagamFile,
-                                                    style: ElevatedButton.styleFrom(
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(5)),
+                                                    onPressed:
+                                                        selectJadhagamFile,
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
                                                       elevation: 2,
                                                       onPrimary: Colors.white,
-                                                      textStyle: const TextStyle(
+                                                      textStyle:
+                                                          const TextStyle(
                                                         fontFamily: 'Ubuntu',
                                                         fontSize: 12,
                                                       ),
                                                     ),
-                                                    child: const Text('Update Jadhagam'),
+                                                    child: const Text(
+                                                        'Update Jadhagam'),
                                                   ),
                                                 ],
                                               ),
@@ -401,10 +449,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           ),
                                         ),
                                         Container(
-                                          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 25),
                                           decoration: const BoxDecoration(
                                               color: Colors.red,
-                                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.black12,
@@ -419,31 +469,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           child: Column(
                                             children: [
                                               Container(
-                                                padding: const EdgeInsets.only(left: 15, top: 5),
+                                                padding: const EdgeInsets.only(
+                                                    left: 15, top: 5),
                                                 color: Colors.white,
                                                 height: 70,
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Container(
-                                                      alignment: Alignment.centerLeft,
+                                                      alignment:
+                                                          Alignment.centerLeft,
                                                       child: RichText(
                                                         text: TextSpan(
                                                             text: 'Full Name ',
                                                             style: TextStyle(
-                                                              fontFamily: 'Ubuntu',
+                                                              fontFamily:
+                                                                  'Ubuntu',
                                                               fontSize: 16,
-                                                              fontWeight: FontWeight.bold,
-                                                              color: Colors.blue,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.blue,
                                                             ),
                                                             children: [
                                                               TextSpan(
-                                                                text: "(Editable)",
-                                                                style: TextStyle(
-                                                                  fontFamily: 'Ubuntu',
+                                                                text:
+                                                                    "(Editable)",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'Ubuntu',
                                                                   fontSize: 10,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.lightBlue,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .lightBlue,
                                                                 ),
                                                               )
                                                             ]),
@@ -465,11 +529,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           thickness: 0.2,
                                         ),
                                         Container(
-                                          margin: EdgeInsets.symmetric(horizontal: 33, vertical: 10),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 33, vertical: 10),
                                           child: Column(
                                             children: [
                                               Container(
-                                                width: MediaQuery.of(context).size.width,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
                                                 child: Text(
                                                   'Mobile Phone',
                                                   style: TextStyle(
@@ -489,11 +556,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           thickness: 0.2,
                                         ),
                                         Container(
-                                          margin: EdgeInsets.symmetric(horizontal: 33, vertical: 10),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 33, vertical: 10),
                                           child: Column(
                                             children: [
                                               Container(
-                                                width: MediaQuery.of(context).size.width,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
                                                 child: Text(
                                                   'Email',
                                                   style: TextStyle(
@@ -513,10 +583,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           thickness: 0.2,
                                         ),
                                         Container(
-                                          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 25),
                                           decoration: const BoxDecoration(
                                               color: Colors.red,
-                                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.black12,
@@ -531,31 +603,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           child: Column(
                                             children: [
                                               Container(
-                                                padding: const EdgeInsets.only(left: 15, top: 5),
+                                                padding: const EdgeInsets.only(
+                                                    left: 15, top: 5),
                                                 color: Colors.white,
                                                 height: 70,
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Container(
-                                                      alignment: Alignment.centerLeft,
+                                                      alignment:
+                                                          Alignment.centerLeft,
                                                       child: RichText(
                                                         text: TextSpan(
-                                                            text: 'Birth Place ',
+                                                            text:
+                                                                'Birth Place ',
                                                             style: TextStyle(
-                                                              fontFamily: 'Ubuntu',
+                                                              fontFamily:
+                                                                  'Ubuntu',
                                                               fontSize: 16,
-                                                              fontWeight: FontWeight.bold,
-                                                              color: Colors.blue,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.blue,
                                                             ),
                                                             children: [
                                                               TextSpan(
-                                                                text: "(Editable)",
-                                                                style: TextStyle(
-                                                                  fontFamily: 'Ubuntu',
+                                                                text:
+                                                                    "(Editable)",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'Ubuntu',
                                                                   fontSize: 10,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.lightBlue,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .lightBlue,
                                                                 ),
                                                               )
                                                             ]),
@@ -578,13 +665,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ),
                                         Container(
                                           alignment: Alignment.topLeft,
-                                          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 10),
                                           padding: EdgeInsets.all(10),
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           height: 80,
                                           decoration: BoxDecoration(
                                               color: Colors.white,
-                                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.black12,
@@ -597,10 +687,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 ),
                                               ]),
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.only(bottom: 15),
+                                                margin:
+                                                    EdgeInsets.only(bottom: 15),
                                                 alignment: Alignment.topLeft,
                                                 child: Text(
                                                   'Date and Time',
@@ -615,11 +707,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               Container(
                                                 alignment: Alignment.topLeft,
                                                 child: Text(
-                                                  '${date!.toDate()}',
+                                                  '${date}',
                                                   style: TextStyle(
                                                     fontFamily: 'Ubuntu',
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.normal,
+                                                    fontWeight:
+                                                        FontWeight.normal,
                                                     color: Colors.black54,
                                                   ),
                                                 ),
@@ -628,8 +721,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           ),
                                         ),
                                         Container(
-                                          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                          width: MediaQuery.of(context).size.width,
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 10),
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           child: ElevatedButton(
                                             onPressed: () async {
                                               if (messageFocusNode1.hasFocus ||
@@ -651,23 +746,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 ),
                                               );
 
-                                              date = DateTime(selectedDate.year, selectedDate.month, selectedDate.day,
-                                                  _time.hour, _time.minute);
+                                              date = DateTime(
+                                                  selectedDate.year,
+                                                  selectedDate.month,
+                                                  selectedDate.day,
+                                                  _time.hour,
+                                                  _time.minute);
                                               print('date in button  ${date}');
-                                              // print('_time in button  ${_time.hour} ${_time.minute}');
-                                              // print('date in button delected year ${selectedDate.year}');
 
                                               ///update only date and time
                                               _firestore
                                                   .collection("newusers")
-                                                  .doc(Get.find<ForumContreller>().userDocumentId.toString())
+                                                  .doc(Get.find<
+                                                          ForumContreller>()
+                                                      .userDocumentId
+                                                      .toString())
                                                   .update({
                                                 "birthTime": date,
                                               });
                                             },
                                             style: ElevatedButton.styleFrom(
-                                              fixedSize: Size(double.infinity, 50),
-                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                              fixedSize:
+                                                  Size(double.infinity, 50),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
                                               elevation: 2,
                                               primary: Color(0xff045de9),
                                               onPrimary: Colors.white,
@@ -679,7 +782,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ),
                                             child: Text(
                                               "Update Birth Day and Birth Time",
-                                              style: TextStyle(color: Colors.white),
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             ),
                                           ),
                                         ),
@@ -707,55 +811,80 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               }
 
                                               ///firebase
-                                              if (nameController!.text.isNotEmpty &&
-                                                  birthPlaceController!.text.isNotEmpty) {
+                                              if (nameController!
+                                                      .text.isNotEmpty &&
+                                                  birthPlaceController!
+                                                      .text.isNotEmpty) {
                                                 _firestore
                                                     .collection("newusers")
-                                                    .doc(Get.find<ForumContreller>().userDocumentId.toString())
+                                                    .doc(Get.find<
+                                                            ForumContreller>()
+                                                        .userDocumentId
+                                                        .toString())
                                                     .update({
                                                   "name": nameController!.text,
-                                                  "birthPlace": birthPlaceController!.text,
+                                                  "birthPlace":
+                                                      birthPlaceController!
+                                                          .text,
                                                   "jadhagam": updatedJadhagam,
                                                   'profile': updatedProfile,
-                                                  'phoneNumber': phoneNumberController!.text,
+                                                  'phoneNumber':
+                                                      phoneNumberController!
+                                                          .text,
                                                 });
 
                                                 Get.snackbar(
                                                   "Hello user!",
                                                   "Docuemnts are Updated",
-                                                  icon: Icon(Icons.person, color: Colors.white),
-                                                  snackPosition: SnackPosition.TOP,
-                                                  backgroundColor: Colors.blue[500],
+                                                  icon: Icon(Icons.person,
+                                                      color: Colors.white),
+                                                  snackPosition:
+                                                      SnackPosition.TOP,
+                                                  backgroundColor:
+                                                      Colors.blue[500],
                                                   borderRadius: 10,
                                                   margin: EdgeInsets.all(12),
                                                   colorText: Colors.white,
-                                                  duration: Duration(seconds: 4),
+                                                  duration:
+                                                      Duration(seconds: 4),
                                                   isDismissible: true,
-                                                  dismissDirection: SnackDismissDirection.HORIZONTAL,
-                                                  forwardAnimationCurve: Curves.easeOutBack,
+                                                  dismissDirection:
+                                                      SnackDismissDirection
+                                                          .HORIZONTAL,
+                                                  forwardAnimationCurve:
+                                                      Curves.easeOutBack,
                                                 );
                                                 print('Updated Successfully');
                                               } else {
                                                 Get.snackbar(
                                                   "Hello user!",
                                                   "Please provide your documents",
-                                                  icon: Icon(Icons.person, color: Colors.white),
-                                                  snackPosition: SnackPosition.TOP,
-                                                  backgroundColor: Colors.blue[500],
+                                                  icon: Icon(Icons.person,
+                                                      color: Colors.white),
+                                                  snackPosition:
+                                                      SnackPosition.TOP,
+                                                  backgroundColor:
+                                                      Colors.blue[500],
                                                   borderRadius: 10,
                                                   margin: EdgeInsets.all(12),
                                                   colorText: Colors.white,
-                                                  duration: Duration(seconds: 4),
+                                                  duration:
+                                                      Duration(seconds: 4),
                                                   isDismissible: true,
-                                                  dismissDirection: SnackDismissDirection.HORIZONTAL,
-                                                  forwardAnimationCurve: Curves.easeOutBack,
+                                                  dismissDirection:
+                                                      SnackDismissDirection
+                                                          .HORIZONTAL,
+                                                  forwardAnimationCurve:
+                                                      Curves.easeOutBack,
                                                 );
                                               }
 
                                               ///route
                                             },
                                             style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
                                               elevation: 2,
                                               primary: Color(0xff045de9),
                                               onPrimary: Colors.white,
@@ -773,14 +902,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           thickness: 0.2,
                                         ),
                                         Container(
-                                          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                          width: MediaQuery.of(context).size.width,
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 10),
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           child: Column(
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal: 10),
                                                 alignment: Alignment.centerLeft,
-                                                width: MediaQuery.of(context).size.width,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
                                                 child: Text(
                                                   'History of Appointment',
                                                   style: TextStyle(
@@ -792,24 +926,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 ),
                                               ),
                                               SingleChildScrollView(
-                                                scrollDirection: Axis.horizontal,
+                                                scrollDirection:
+                                                    Axis.horizontal,
                                                 child: Container(
-                                                  alignment: Alignment.centerLeft,
+                                                  alignment:
+                                                      Alignment.centerLeft,
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
                                                     children: [
                                                       Container(
-                                                        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                                                        alignment: Alignment.center,
-                                                        decoration: BoxDecoration(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 20),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color: Colors.grey,
-                                                              offset: Offset(0.1, 0.2),
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.1, 0.2),
                                                             )
                                                           ],
-                                                          color: Colors.grey[100],
-                                                          borderRadius: BorderRadius.circular(10),
+                                                          color:
+                                                              Colors.grey[100],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
                                                         ),
                                                         height: 40,
                                                         width: 100,
@@ -818,23 +965,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                           style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 13,
-                                                            fontFamily: 'Ubuntu',
-                                                            fontWeight: FontWeight.normal,
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
                                                           ),
                                                         ),
                                                       ),
                                                       Container(
-                                                        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                                                        alignment: Alignment.center,
-                                                        decoration: BoxDecoration(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 20),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color: Colors.grey,
-                                                              offset: Offset(0.1, 0.2),
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.1, 0.2),
                                                             )
                                                           ],
-                                                          color: Colors.grey[100],
-                                                          borderRadius: BorderRadius.circular(10),
+                                                          color:
+                                                              Colors.grey[100],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
                                                         ),
                                                         height: 40,
                                                         width: 100,
@@ -843,23 +1003,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                           style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 13,
-                                                            fontFamily: 'Ubuntu',
-                                                            fontWeight: FontWeight.normal,
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
                                                           ),
                                                         ),
                                                       ),
                                                       Container(
-                                                        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                                                        alignment: Alignment.center,
-                                                        decoration: BoxDecoration(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 20),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color: Colors.grey,
-                                                              offset: Offset(0.1, 0.2),
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.1, 0.2),
                                                             )
                                                           ],
-                                                          color: Colors.grey[100],
-                                                          borderRadius: BorderRadius.circular(10),
+                                                          color:
+                                                              Colors.grey[100],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
                                                         ),
                                                         height: 40,
                                                         width: 100,
@@ -868,23 +1041,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                           style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 13,
-                                                            fontFamily: 'Ubuntu',
-                                                            fontWeight: FontWeight.normal,
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
                                                           ),
                                                         ),
                                                       ),
                                                       Container(
-                                                        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                                                        alignment: Alignment.center,
-                                                        decoration: BoxDecoration(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10,
+                                                                vertical: 20),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color: Colors.grey,
-                                                              offset: Offset(0.1, 0.2),
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.1, 0.2),
                                                             )
                                                           ],
-                                                          color: Colors.grey[100],
-                                                          borderRadius: BorderRadius.circular(10),
+                                                          color:
+                                                              Colors.grey[100],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
                                                         ),
                                                         height: 40,
                                                         width: 100,
@@ -893,8 +1079,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                           style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 13,
-                                                            fontFamily: 'Ubuntu',
-                                                            fontWeight: FontWeight.normal,
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
                                                           ),
                                                         ),
                                                       ),
