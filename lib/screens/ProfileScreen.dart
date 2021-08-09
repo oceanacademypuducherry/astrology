@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:path/path.dart';
 import 'dart:io';
+import 'package:intl/intl.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -54,6 +55,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   var getProfilePicture;
   var getJadhagam;
+
+  String? monthFormat;
+  String? dayTime;
+  int? dayFormat;
+  int? hourFormat;
+  int? minuteFormat;
+  int? yearFormat;
+  var newHour;
+  var newMinute;
 
   ///widgets
 
@@ -280,7 +290,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       emailController!.text = message['email'];
                                       birthPlaceController!.text =
                                           message['birthPlace'];
-                                      date = message['birthTime'];
 
                                       getProfilePicture = message['profile'];
                                       getJadhagam = message['jadhagam'];
@@ -288,6 +297,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       getEmail = emailController!.text;
                                       getMobileNumber =
                                           phoneNumberController!.text;
+                                      date = message['birthTime'];
+
+                                      var month = DateFormat('MMMM');
+                                      var year = DateFormat('yyyy');
+                                      var day = DateFormat('d');
+                                      var hour = DateFormat('hh');
+                                      var minute = DateFormat('mm');
+                                      var daytime = DateFormat('a');
+
+                                      monthFormat = month.format(date.toDate());
+                                      yearFormat =
+                                          int.parse(year.format(date.toDate()));
+                                      dayFormat =
+                                          int.parse(day.format(date.toDate()));
+                                      hourFormat =
+                                          int.parse(hour.format(date.toDate()));
+                                      minuteFormat = int.parse(
+                                          minute.format(date.toDate()));
+                                      dayTime = daytime.format(date.toDate());
+
+                                      newHour = hourFormat! < 9
+                                          ? '0$hourFormat'
+                                          : hourFormat;
+                                      newMinute = minuteFormat! < 9
+                                          ? '0$minuteFormat'
+                                          : minuteFormat;
                                     }
                                   }
                                   return Container(
@@ -707,7 +742,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               Container(
                                                 alignment: Alignment.topLeft,
                                                 child: Text(
-                                                  '${date}',
+                                                  '${monthFormat} ${dayFormat} ,'
+                                                  ' ${yearFormat} at ${newHour}:${newMinute} ${dayTime}',
                                                   style: TextStyle(
                                                     fontFamily: 'Ubuntu',
                                                     fontSize: 16,
@@ -826,8 +862,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   "birthPlace":
                                                       birthPlaceController!
                                                           .text,
-                                                  "jadhagam": updatedJadhagam,
-                                                  'profile': updatedProfile,
+                                                  "jadhagam":
+                                                      updatedJadhagam == null
+                                                          ? getJadhagam
+                                                          : updatedJadhagam,
+                                                  'profile':
+                                                      updatedProfile == null
+                                                          ? getProfilePicture
+                                                          : updatedProfile,
                                                   'phoneNumber':
                                                       phoneNumberController!
                                                           .text,
@@ -854,7 +896,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   forwardAnimationCurve:
                                                       Curves.easeOutBack,
                                                 );
-                                                print('Updated Successfully');
                                               } else {
                                                 Get.snackbar(
                                                   "Hello user!",
@@ -1137,6 +1178,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (task == null) return;
 
     final snapshot = await task!.whenComplete(() {
+      Get.snackbar(
+        "Hello user!",
+        "Jadhagam uploaded successfully",
+        icon: Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.blue[500],
+        borderRadius: 10,
+        margin: EdgeInsets.all(12),
+        colorText: Colors.white,
+        duration: Duration(seconds: 4),
+        isDismissible: true,
+        dismissDirection: SnackDismissDirection.HORIZONTAL,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
       print('profile picture uploaded');
     });
     final urlDownload = await snapshot.ref.getDownloadURL();
@@ -1173,6 +1228,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
       print('profile picture uploaded');
 
       ///Todo snakbar upload
+      Get.snackbar(
+        "Hello user!",
+        "profile uploaded successfully",
+        icon: Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.blue[500],
+        borderRadius: 10,
+        margin: EdgeInsets.all(12),
+        colorText: Colors.white,
+        duration: Duration(seconds: 4),
+        isDismissible: true,
+        dismissDirection: SnackDismissDirection.HORIZONTAL,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
     });
     final urlDownload = await snapshot.ref.getDownloadURL();
 
