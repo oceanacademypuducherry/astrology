@@ -50,7 +50,6 @@ class _RegisterState extends State<Register> {
   String? query;
   String? phoneNumber;
   bool validation = false;
-
   String? getId;
 
   void user_id() async {
