@@ -247,7 +247,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey,
-                                offset: Offset(0.2, 0.2),
+                                blurRadius: 0.5,
+                                offset: Offset(0.3, 0.3),
                               ),
                             ],
                             color: Colors.white,
@@ -271,7 +272,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey,
-                                offset: Offset(0.2, 0.2),
+                                blurRadius: 0.5,
+                                offset: Offset(0.3, 0.3),
                               ),
                             ],
                             color: Colors.white,
@@ -293,45 +295,39 @@ class _BookingDetailsState extends State<BookingDetails> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  Divider(
+                    thickness: 0.2,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Booking Price',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 16,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       children: [
                         Container(
                           alignment: Alignment.center,
-                          width: 80,
                           height: 40,
                           margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey,
-                                offset: Offset(0.2, 0.2),
-                              ),
-                            ],
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Text(
-                            'Booking Fees',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontFamily: 'Ubuntu',
-                              fontSize: 13,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                offset: Offset(0.2, 0.2),
+                                blurRadius: 0.5,
+                                offset: Offset(0.3, 0.3),
                               ),
                             ],
                             color: Colors.white,
@@ -339,14 +335,26 @@ class _BookingDetailsState extends State<BookingDetails> {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              '₹${rupees}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'Ubuntu',
-                                fontSize: 13,
-                                color: Colors.black54,
-                              ),
+                            child: RichText(
+                              text: TextSpan(
+                                  text: '₹ ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Ubuntu',
+                                    fontSize: 19,
+                                    color: Colors.black54,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: '${rupees}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: 'Ubuntu',
+                                        fontSize: 16,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                                  ]),
                             ),
                           ),
                         ),
