@@ -27,6 +27,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
   bool? isCheck;
 
   String? value;
+  bool isOpen = false;
 
   Map colorChange = {
     0: false,
@@ -126,6 +127,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                         colorChange.updateAll((key, value) =>
                                             colorChange[key] = false);
                                         colorChange[i] = true;
+                                        isOpen = true;
                                       });
                                       orderTime = time_slot[i];
                                       print(orderTime);
@@ -219,6 +221,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                           colorChange.updateAll((key, value) =>
                                               colorChange[key] = false);
                                           colorChange[i] = true;
+                                          isOpen = true;
                                         });
                                         orderTime = time_slot[i];
                                         print(orderTime);
@@ -316,6 +319,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                         colorChange.updateAll((key, value) =>
                                             colorChange[key] = false);
                                         colorChange[i] = true;
+                                        isOpen = true;
                                       });
                                     },
                               child: Card(
@@ -380,20 +384,22 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                           ),
                         ),
                       ),
-                      onPressed: () {
-                        print('>>>>>>>>>>>>>>>>>>>>>>>');
-                        print(orderTime);
-                        setState(() {
-                          colorChange.updateAll(
-                              (key, value) => colorChange[key] = false);
-                        });
+                      onPressed: isOpen
+                          ? () {
+                              print('>>>>>>>>>>>>>>>>>>>>>>>');
+                              print(orderTime);
+                              setState(() {
+                                colorChange.updateAll(
+                                    (key, value) => colorChange[key] = false);
+                              });
 
-                        Get.to(() => BookingDetails(),
-                            arguments: orderTime,
-                            transition: Transition.rightToLeft,
-                            curve: Curves.easeInToLinear,
-                            duration: Duration(milliseconds: 600));
-                      },
+                              Get.to(() => BookingDetails(),
+                                  arguments: orderTime,
+                                  transition: Transition.rightToLeft,
+                                  curve: Curves.easeInToLinear,
+                                  duration: Duration(milliseconds: 600));
+                            }
+                          : null,
                     ),
                   ],
                 ),

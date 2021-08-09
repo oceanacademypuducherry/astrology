@@ -18,7 +18,7 @@ class AuthClass {
     };
     PhoneVerificationFailed verificationFailed =
         (FirebaseAuthException exception) {
-      Get.snackbar('error', exception.toString(),
+      Get.snackbar('error', 'verification failed',
           backgroundColor: Colors.black, colorText: Colors.white);
     };
     PhoneCodeSent codeSent =
@@ -31,10 +31,7 @@ class AuthClass {
     };
 
     PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
-        (String verificationID) {
-      Get.snackbar('CodeSend', "TimeOut",
-          backgroundColor: Colors.black, colorText: Colors.white);
-    };
+        (String verificationID) {};
     try {
       await _auth.verifyPhoneNumber(
           timeout: Duration(seconds: 60),
@@ -44,7 +41,7 @@ class AuthClass {
           codeSent: codeSent,
           codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
     } catch (e) {
-      Get.snackbar('error while verify phone number', "${e.toString()}",
+      Get.snackbar('error while verify phone number', "phonenumber error",
           backgroundColor: Colors.black, colorText: Colors.white);
       print(e.toString());
     }
