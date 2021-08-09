@@ -117,7 +117,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                     ),
                     SizedBox(height: 15),
                     Wrap(
-                      spacing: 5,
+                      spacing: 7,
                       alignment: WrapAlignment.start,
                       crossAxisAlignment: WrapCrossAlignment.start,
                       children: [
@@ -224,7 +224,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                     SizedBox(height: 15),
                     Container(
                       child: Wrap(
-                        spacing: 5,
+                        spacing: 7,
                         alignment: WrapAlignment.start,
                         crossAxisAlignment: WrapCrossAlignment.start,
                         children: [
@@ -325,7 +325,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                     ),
                     SizedBox(height: 15),
                     Wrap(
-                      spacing: 5,
+                      spacing: 7,
                       alignment: WrapAlignment.start,
                       crossAxisAlignment: WrapCrossAlignment.start,
                       children: [
