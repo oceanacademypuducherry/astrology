@@ -91,6 +91,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                margin: EdgeInsets.only(top: 20, left: 15, bottom: 20, right: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -105,18 +106,25 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                         ),
                         Text(
                           'Morning',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Ubuntu',
+                            fontSize: 18,
+                            color: Colors.blue,
+                          ),
                         ),
                       ],
                     ),
+                    SizedBox(height: 15),
                     Wrap(
+                      spacing: 5,
                       alignment: WrapAlignment.start,
                       crossAxisAlignment: WrapCrossAlignment.start,
                       children: [
                         for (var i = 0; i < time_slot.length; i++)
-                          if (DateFormat.jm().format(time_slot[i]).substring(
-                                  DateFormat.jm().format(time_slot[i]).length -
-                                      2) ==
+                          if (DateFormat.jm()
+                                  .format(time_slot[i])
+                                  .substring(DateFormat.jm().format(time_slot[i]).length - 2) ==
                               'AM')
                             GestureDetector(
                               onTap: widget.dbList.contains(time_slot[i])
@@ -124,8 +132,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                   : () {
                                       setState(() {
                                         print('$i 000000000000');
-                                        colorChange.updateAll((key, value) =>
-                                            colorChange[key] = false);
+                                        colorChange.updateAll((key, value) => colorChange[key] = false);
                                         colorChange[i] = true;
                                         isOpen = true;
                                       });
@@ -133,40 +140,53 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                       print(orderTime);
                                     },
                               child: Card(
+                                shadowColor: Colors.grey[100],
                                 color: widget.dbList.contains(time_slot[i])
-                                    ? Colors.red[200]
+                                    ? Colors.black.withOpacity(0.05)
                                     : colorChange[i]
-                                        ? Colors.green[300]
+                                        ? Colors.green[100]
                                         : Colors.grey[200],
-                                elevation: 8,
-                                //                  Colors.white,,
+                                elevation: widget.dbList.contains(time_slot[i]) ? 0 : 13,
                                 child: Container(
                                   margin: EdgeInsets.symmetric(horizontal: 10),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                                   child: Column(
                                     children: [
                                       Text(
                                         '${DateFormat.jm().format(time_slot[i])}',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold),
+                                        style: widget.dbList.contains(time_slot[i])
+                                            ? TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 16,
+                                                color: Colors.pink[200],
+                                              )
+                                            : TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 16,
+                                                color: Colors.black54,
+                                              ),
                                       ),
+                                      SizedBox(height: 2),
                                       widget.dbList.contains(time_slot[i])
                                           ? Text(
                                               'Unavailable',
                                               style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 13,
+                                                color: Colors.pink[200],
+                                              ),
                                             )
                                           : Text(
                                               'Available',
                                               style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 13,
+                                                color: Colors.black38,
+                                              ),
                                             )
                                     ],
                                   ),
@@ -179,7 +199,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 35),
+                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -187,28 +207,31 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                       children: [
                         Image.asset(
                           'images/afternoon.png',
-                          width: 40,
+                          width: 30,
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
+                        SizedBox(width: 10),
                         Text(
                           'AfterNoon',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Ubuntu',
+                            fontSize: 16,
+                            color: Colors.blue,
+                          ),
                         ),
                       ],
                     ),
+                    SizedBox(height: 15),
                     Container(
                       child: Wrap(
+                        spacing: 5,
                         alignment: WrapAlignment.start,
                         crossAxisAlignment: WrapCrossAlignment.start,
                         children: [
                           for (var i = 0; i < time_slot.length; i++)
-                            if ((DateFormat.jm().format(time_slot[i]).substring(
-                                        DateFormat.jm()
-                                                .format(time_slot[i])
-                                                .length -
-                                            2) ==
+                            if ((DateFormat.jm()
+                                        .format(time_slot[i])
+                                        .substring(DateFormat.jm().format(time_slot[i]).length - 2) ==
                                     'PM') &&
                                 time_slot[i].hour > 12 &&
                                 time_slot[i].hour < 16)
@@ -218,8 +241,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                     : () {
                                         setState(() {
                                           print('$i 000000000000');
-                                          colorChange.updateAll((key, value) =>
-                                              colorChange[key] = false);
+                                          colorChange.updateAll((key, value) => colorChange[key] = false);
                                           colorChange[i] = true;
                                           isOpen = true;
                                         });
@@ -227,42 +249,45 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                         print(orderTime);
                                       },
                                 child: Card(
+                                  shadowColor: Colors.grey[100],
                                   color: widget.dbList.contains(time_slot[i])
-                                      ? Colors.red[200]
+                                      ? Colors.black.withOpacity(0.05)
                                       : colorChange[i]
-                                          ? Colors.green[300]
+                                          ? Colors.green[100]
                                           : Colors.grey[200],
-                                  elevation: 8,
+                                  elevation: widget.dbList.contains(time_slot[i]) ? 0 : 13,
                                   child: Container(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 10),
+                                    margin: EdgeInsets.symmetric(horizontal: 10),
+                                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                                     child: Column(
                                       children: [
                                         Text(
                                           '${DateFormat.jm().format(time_slot[i])}',
                                           style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.w300,
+                                            fontFamily: 'Ubuntu',
+                                            fontSize: 16,
+                                            color: Colors.black54,
+                                          ),
                                         ),
                                         widget.dbList.contains(i)
                                             ? Text(
                                                 'Unavailable',
                                                 style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Ubuntu',
+                                                  fontSize: 13,
+                                                  color: Colors.black38,
+                                                ),
                                               )
                                             : Text(
                                                 'Available',
                                                 style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Ubuntu',
+                                                  fontSize: 13,
+                                                  color: Colors.black38,
+                                                ),
                                               )
                                       ],
                                     ),
@@ -276,7 +301,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                 ),
               ),
               Container(
-                // color: Colors.lightGreenAccent,
+                margin: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -284,27 +309,30 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                       children: [
                         Image.asset(
                           'images/night.png',
-                          width: 40,
+                          width: 35,
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
+                        SizedBox(width: 10),
                         Text(
                           'Evenings',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Ubuntu',
+                            fontSize: 16,
+                            color: Colors.blue,
+                          ),
                         ),
                       ],
                     ),
+                    SizedBox(height: 15),
                     Wrap(
+                      spacing: 5,
                       alignment: WrapAlignment.start,
                       crossAxisAlignment: WrapCrossAlignment.start,
                       children: [
                         for (var i = 0; i < time_slot.length; i++)
-                          if ((DateFormat.jm().format(time_slot[i]).substring(
-                                      DateFormat.jm()
-                                              .format(time_slot[i])
-                                              .length -
-                                          2) ==
+                          if ((DateFormat.jm()
+                                      .format(time_slot[i])
+                                      .substring(DateFormat.jm().format(time_slot[i]).length - 2) ==
                                   'PM') &&
                               time_slot[i].hour > 15 &&
                               time_slot[i].hour < 21)
@@ -316,47 +344,51 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                       print(orderTime);
                                       setState(() {
                                         print('$i 000000000000');
-                                        colorChange.updateAll((key, value) =>
-                                            colorChange[key] = false);
+                                        colorChange.updateAll((key, value) => colorChange[key] = false);
                                         colorChange[i] = true;
                                         isOpen = true;
                                       });
                                     },
                               child: Card(
-                                // margin: EdgeInsets.all(12),
+                                shadowColor: Colors.grey[100],
                                 color: widget.dbList.contains(time_slot[i])
-                                    ? Colors.red[200]
+                                    ? Colors.black.withOpacity(0.05)
                                     : colorChange[i]
-                                        ? Colors.green[300]
+                                        ? Colors.green[100]
                                         : Colors.grey[200],
-                                elevation: 8,
+                                elevation: widget.dbList.contains(time_slot[i]) ? 0 : 13,
                                 child: Container(
                                   margin: EdgeInsets.symmetric(horizontal: 10),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                                   child: Column(
                                     children: [
                                       Text(
                                         '${DateFormat.jm().format(time_slot[i])}',
                                         style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.w300,
+                                          fontFamily: 'Ubuntu',
+                                          fontSize: 16,
+                                          color: Colors.black54,
+                                        ),
                                       ),
                                       widget.dbList.contains(time_slot[i])
                                           ? Text(
                                               'Unavailable',
                                               style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 13,
+                                                color: Colors.black38,
+                                              ),
                                             )
                                           : Text(
                                               'Available',
                                               style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 13,
+                                                color: Colors.black38,
+                                              ),
                                             )
                                     ],
                                   ),
@@ -365,32 +397,39 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                             ),
                       ],
                     ),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 20),
+                    width: MediaQuery.of(context).size.width / 1.1,
+                    height: 50,
+                    child: ElevatedButton(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         child: Text(
-                          'continue',
+                          'Continue',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Ubuntu',
+                            fontSize: 16,
+                            color: Colors.white,
                           ),
                         ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff045de9),
                       ),
                       onPressed: isOpen
                           ? () {
                               print('>>>>>>>>>>>>>>>>>>>>>>>');
                               print(orderTime);
                               setState(() {
-                                colorChange.updateAll(
-                                    (key, value) => colorChange[key] = false);
+                                colorChange.updateAll((key, value) => colorChange[key] = false);
                               });
 
                               Get.to(() => BookingDetails(),
@@ -401,8 +440,8 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                             }
                           : null,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               )
             ],
           ),
