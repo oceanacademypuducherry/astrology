@@ -43,10 +43,11 @@ class _LoginState extends State<Login> {
         child: KeyboardDismisser(
           child: Container(
             color: Vx.white,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: ListView(
               children: [
+                SizedBox(
+                  height: 100,
+                ),
                 Image.asset(
                   'images/login 1.png',
                   width: MediaQuery.of(context).size.width / 1.3,
@@ -142,7 +143,6 @@ class _LoginState extends State<Login> {
                   print(
                       '.........................${_forumContreller.userSession.value} ........................');
                   _otpController.verifyPhoneNumber(context);
-                  // Get.to(OTP());
                 }).p12(),
               ],
             ),

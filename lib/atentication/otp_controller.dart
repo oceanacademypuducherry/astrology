@@ -84,8 +84,7 @@ class OTPController extends GetxController {
           await prefs.setString('user', userPhoneNumber.value);
           String userNumber = prefs.getString('user').toString();
           print(userData.data());
-          _forumContreller.setUserSession(
-              '${countryCode.value.toString()} ${userPhoneNumber.value.toString()}');
+          _forumContreller.setUserSession(userPhoneNumber.value.toString());
           _forumContreller.setUserInfo(userData.data());
           _forumContreller.setUserDocumentId(userData.id);
           break;
