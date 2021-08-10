@@ -24,10 +24,9 @@ class _VideoPlayerBothWidgetState extends State<VideoPlayerBothWidget> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      widget.controller != null && widget.controller.value.isInitialized
-          ? Container(alignment: Alignment.topCenter, child: buildVideo())
-          : Center(child: CircularProgressIndicator());
+  Widget build(BuildContext context) => widget.controller != null && widget.controller.value.isInitialized
+      ? Container(alignment: Alignment.topCenter, child: buildVideo())
+      : Center(child: CircularProgressIndicator());
 
   Widget buildVideo() => OrientationBuilder(
         builder: (context, orientation) {

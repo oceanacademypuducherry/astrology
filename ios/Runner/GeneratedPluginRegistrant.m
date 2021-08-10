@@ -4,12 +4,6 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<auto_orientation/AutoOrientationPlugin.h>)
-#import <auto_orientation/AutoOrientationPlugin.h>
-#else
-@import auto_orientation;
-#endif
-
 #if __has_include(<better_player/BetterPlayerPlugin.h>)
 #import <better_player/BetterPlayerPlugin.h>
 #else
@@ -121,7 +115,6 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [AutoOrientationPlugin registerWithRegistrar:[registry registrarForPlugin:@"AutoOrientationPlugin"]];
   [BetterPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"BetterPlayerPlugin"]];
   [FLTFirebaseFirestorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseFirestorePlugin"]];
   [FilePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FilePickerPlugin"]];

@@ -291,6 +291,17 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                           //     .update({'type': 'free'});
                                           openCheckout();
                                         },
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 1,
+                                    primary: Colors.white,
+                                    textStyle: TextStyle(
+                                      color: Colors.blue,
+                                      fontSize: 12,
+                                      fontFamily: "Ubuntu",
+                                      letterSpacing: 0.4,
+                                      height: 1,
+                                    ),
+                                  ),
                                   child: widget.bookType == 'free' ? Text('View Pdf') : Text('Proceed to pay')),
                             ),
                           ],
@@ -299,20 +310,40 @@ class _BooksDescriptionState extends State<BooksDescription> {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                      widget.description,
-                      style: TextStyle(
-                        color: Colors.black.withOpacity(0.6),
-                        fontSize: 14,
-                        height: 1.6,
-                        fontWeight: FontWeight.normal,
-                        // fontStyle: FontStyle.italic,
-                        fontFamily: "Ubuntu",
-                        letterSpacing: 0.6,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                          'Description',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 14,
+                            height: 1.6,
+                            fontWeight: FontWeight.normal,
+                            // fontStyle: FontStyle.italic,
+                            fontFamily: "Ubuntu",
+                            letterSpacing: 0.6,
+                          ),
+                        ),
                       ),
-                    ),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                          widget.description,
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.6),
+                            fontSize: 14,
+                            height: 1.6,
+                            fontWeight: FontWeight.normal,
+                            // fontStyle: FontStyle.italic,
+                            fontFamily: "Ubuntu",
+                            letterSpacing: 0.6,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
