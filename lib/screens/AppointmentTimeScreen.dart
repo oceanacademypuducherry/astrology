@@ -42,6 +42,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
     9: false,
   };
   List timing = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  List freeTime = [];
   bool _hasBeenPressed = false;
   @override
   void initState() {
@@ -50,8 +51,29 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
     print(widget.dbList);
   }
 
+  void getAvailable(String date) async {
+    print("---------------------------");
+    await for (var snapshot in _firestore
+        .collection('availableTime')
+        .snapshots(includeMetadataChanges: true)) {
+      for (var message in snapshot.docs) {
+        print('available time');
+        String getTime = message['time'];
+        print(getTime);
+        print('+++++++++++++');
+        freeTime.add(DateTime.parse('${date} ${getTime}'));
+        print(freeTime);
+      }
+
+      print('++++++++++++++++++');
+
+      print("---------------------------");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    getAvailable(widget.focusedDate);
     List time_slot = [
       DateTime.parse('${widget.focusedDate} 09:00'),
       DateTime.parse('${widget.focusedDate} 10:00'),
@@ -65,6 +87,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
       DateTime.parse('${widget.focusedDate} 18:00'),
     ];
     // print(widget.dbList);
+    print(freeTime);
 
     // minTime(time_slot);
 
@@ -122,13 +145,13 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                       alignment: WrapAlignment.start,
                       crossAxisAlignment: WrapCrossAlignment.start,
                       children: [
-                        for (var i = 0; i < time_slot.length; i++)
-                          if (DateFormat.jm().format(time_slot[i]).substring(
-                                  DateFormat.jm().format(time_slot[i]).length -
+                        for (var i = 0; i < freeTime.length; i++)
+                          if (DateFormat.jm().format(freeTime[i]).substring(
+                                  DateFormat.jm().format(freeTime[i]).length -
                                       2) ==
                               'AM')
                             GestureDetector(
-                              onTap: widget.dbList.contains(time_slot[i])
+                              onTap: widget.dbList.contains(freeTime[i])
                                   ? null
                                   : () {
                                       setState(() {
@@ -138,17 +161,17 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                         colorChange[i] = true;
                                         isOpen = true;
                                       });
-                                      orderTime = time_slot[i];
+                                      orderTime = freeTime[i];
                                       print(orderTime);
                                     },
                               child: Card(
                                 shadowColor: Colors.grey[100],
-                                color: widget.dbList.contains(time_slot[i])
+                                color: widget.dbList.contains(freeTime[i])
                                     ? Colors.black.withOpacity(0.05)
                                     : colorChange[i]
                                         ? Colors.green[100]
                                         : Colors.grey[200],
-                                elevation: widget.dbList.contains(time_slot[i])
+                                elevation: widget.dbList.contains(freeTime[i])
                                     ? 0
                                     : 13,
                                 child: Container(
@@ -158,9 +181,9 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        '${DateFormat.jm().format(time_slot[i])}',
+                                        '${DateFormat.jm().format(freeTime[i])}',
                                         style:
-                                            widget.dbList.contains(time_slot[i])
+                                            widget.dbList.contains(freeTime[i])
                                                 ? TextStyle(
                                                     fontWeight: FontWeight.w300,
                                                     fontFamily: 'Ubuntu',
@@ -175,7 +198,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                                   ),
                                       ),
                                       SizedBox(height: 2),
-                                      widget.dbList.contains(time_slot[i])
+                                      widget.dbList.contains(freeTime[i])
                                           ? Text(
                                               'Unavailable',
                                               style: TextStyle(

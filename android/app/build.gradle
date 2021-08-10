@@ -33,6 +33,9 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
+    lintOptions {
+        checkReleaseBuilds false
+    }
     compileSdkVersion 30
 
     sourceSets {
@@ -57,12 +60,9 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
-
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 }

@@ -23,6 +23,22 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
   List dbList = [];
 
+  void getAvailable() async {
+    print("---------------------------");
+    await for (var snapshot in firestore
+        .collection('availableTime')
+        .snapshots(includeMetadataChanges: true)) {
+      for (var message in snapshot.docs) {
+        print('going');
+        String getTime = message['time'];
+      }
+
+      print('++++++++++++++++++');
+
+      print("---------------------------");
+    }
+  }
+
   void getItem() async {
     print("---------------------------");
     await for (var snapshot in firestore
