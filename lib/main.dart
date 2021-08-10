@@ -25,7 +25,8 @@ void main() async {
   Get.put(ForumContreller());
   Get.put(OTPController());
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String userNumber = prefs.getString('user').toString();
+  // String userNumber = prefs.getString('user').toString();
+  String userNumber = "+91 9342364952";
   var userDatas = await _firestore.collection('newusers').get();
   for (var i in userDatas.docs) {
     if (i['phoneNumber'] == userNumber) {
