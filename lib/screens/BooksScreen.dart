@@ -8,126 +8,6 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-Widget? BottomSheet(String imageLink, String description, String bookName,
-    String pdfLink, String type) {
-  Get.bottomSheet(
-    Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 20,
-        horizontal: 30,
-      ),
-      width: double.infinity,
-      height: 170,
-      color: Colors.white,
-      child: Row(
-        children: [
-          Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  height: 120,
-                  width: 100,
-                  child: Image.network(
-                    imageLink,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 15),
-                height: 55,
-                width: 140,
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        bookName,
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.7),
-                          fontSize: 14,
-                          height: 1.3,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "Ubuntu",
-                          letterSpacing: 0.6,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'BY GURUJI',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 10,
-                          fontFamily: "Ubuntu",
-                          letterSpacing: 0.4,
-                          height: 1,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        type,
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 10,
-                          fontFamily: "Ubuntu",
-                          letterSpacing: 0.4,
-                          height: 1,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              OutlinedButton(
-                  onPressed: () {
-                    Get.to(BooksDescription(
-                      description: description,
-                      bookImage: imageLink,
-                      bookType: type,
-                      bookName: bookName,
-                      pdfLink: pdfLink,
-                    ));
-                  },
-                  child: Text('PreView'))
-            ],
-          )
-        ],
-      ),
-    ),
-    barrierColor: Colors.black.withOpacity(0.7),
-    isDismissible: true,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(30),
-        topRight: Radius.circular(30),
-      ),
-      side: BorderSide(
-        width: 0.1,
-        color: Colors.black,
-      ),
-    ),
-    enableDrag: true,
-  );
-}
-
 class BooksScreen extends StatefulWidget {
   @override
   _BooksScreenState createState() => _BooksScreenState();
@@ -275,7 +155,7 @@ class _BooksScreenState extends State<BooksScreen> {
   }
 }
 
-class BooksDb extends StatelessWidget {
+class BooksDb extends StatefulWidget {
   String bookImage;
   String bookName;
   String bookType;
@@ -287,12 +167,277 @@ class BooksDb extends StatelessWidget {
       required this.description,
       required this.bookType,
       required this.pdfLink});
+
+  @override
+  _BooksDbState createState() => _BooksDbState();
+}
+
+class _BooksDbState extends State<BooksDb> {
+  Widget? BottomSheet(String imageLink, String description, String bookName, String pdfLink, String type) {
+    Get.bottomSheet(
+      Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 30,
+        ),
+        width: double.infinity,
+        height: 170,
+        color: Colors.white,
+        child: Row(
+          children: [
+            Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    height: 120,
+                    width: 100,
+                    child: Image.network(
+                      imageLink,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  height: 55,
+                  width: 140,
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          bookName,
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.7),
+                            fontSize: 14,
+                            height: 1.3,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "Ubuntu",
+                            letterSpacing: 0.6,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'BY GURUJI',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 10,
+                            fontFamily: "Ubuntu",
+                            letterSpacing: 0.4,
+                            height: 1,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          type,
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 10,
+                            fontFamily: "Ubuntu",
+                            letterSpacing: 0.4,
+                            height: 1,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                OutlinedButton(
+                    onPressed: () {
+                      Get.to(BooksDescription(
+                        description: description,
+                        bookImage: imageLink,
+                        bookType: type,
+                        bookName: bookName,
+                        pdfLink: pdfLink,
+                      ));
+                    },
+                    child: Text('PreView'))
+              ],
+            )
+          ],
+        ),
+      ),
+      barrierColor: Colors.black.withOpacity(0.7),
+      isDismissible: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+        side: BorderSide(
+          width: 0.1,
+          color: Colors.black,
+        ),
+      ),
+      enableDrag: true,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: GestureDetector(
         onTap: () {
-          BottomSheet(bookImage, description, bookName, pdfLink, bookType);
+          Get.bottomSheet(
+            Container(
+              padding: EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 30,
+              ),
+              width: double.infinity,
+              height: 170,
+              color: Colors.white,
+              child: Row(
+                children: [
+                  Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          height: 120,
+                          width: 100,
+                          child: Image.network(
+                            widget.bookImage,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.symmetric(horizontal: 15),
+                        height: 55,
+                        width: 140,
+                        child: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                widget.bookName,
+                                style: TextStyle(
+                                  color: Colors.black.withOpacity(0.7),
+                                  fontSize: 14,
+                                  height: 1.3,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "Ubuntu",
+                                  letterSpacing: 0.6,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'BY GURUJI',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 10,
+                                  fontFamily: "Ubuntu",
+                                  letterSpacing: 0.4,
+                                  height: 1,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                widget.bookType,
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 10,
+                                  fontFamily: "Ubuntu",
+                                  letterSpacing: 0.4,
+                                  height: 1,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: OutlinedButton(
+                            onPressed: () {
+                              Get.off(
+                                BooksDescription(
+                                  description: widget.description,
+                                  bookImage: widget.bookImage,
+                                  bookType: widget.bookType,
+                                  bookName: widget.bookName,
+                                  pdfLink: widget.pdfLink,
+                                ),
+                                transition: Transition.downToUp,
+                                duration: Duration(milliseconds: 500),
+                              );
+                            },
+                            style: OutlinedButton.styleFrom(
+                                fixedSize: Size(100, 40),
+                                elevation: 5,
+                                backgroundColor: Colors.white,
+                                primary: Colors.white,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                            child: Text(
+                              'View',
+                              style: TextStyle(
+                                color: Colors.black.withOpacity(0.7),
+                                fontSize: 14,
+                                height: 1.3,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "Ubuntu",
+                                letterSpacing: 0.6,
+                              ),
+                            )),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+            barrierColor: Colors.black.withOpacity(0.7),
+            persistent: false,
+            isDismissible: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+              side: BorderSide(
+                width: 0.1,
+                color: Colors.black,
+              ),
+            ),
+            enableDrag: true,
+          );
         },
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 10),
@@ -306,7 +451,7 @@ class BooksDb extends StatelessWidget {
                       height: 180,
                       width: 135,
                       child: Image.network(
-                        bookImage,
+                        widget.bookImage,
                         fit: BoxFit.fill,
 
                         // alignment: Alignment.center,
@@ -314,10 +459,9 @@ class BooksDb extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    child: bookType == 'free'
+                    child: widget.bookType == 'free'
                         ? Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 5.0, horizontal: 5.0),
+                            margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -335,9 +479,18 @@ class BooksDb extends StatelessWidget {
                               ),
                             ),
                           )
-                        : CircleAvatar(
-                            radius: 10,
-                            child: Icon(Icons.lock),
+                        : Positioned(
+                            left: 3,
+                            top: 3,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.black54,
+                              radius: 17,
+                              child: Icon(
+                                Icons.lock,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
                           ),
                   ),
                 ],
@@ -351,7 +504,7 @@ class BooksDb extends StatelessWidget {
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        bookName,
+                        widget.bookName,
                         style: TextStyle(
                           color: Colors.black.withOpacity(0.7),
                           fontSize: 13,
