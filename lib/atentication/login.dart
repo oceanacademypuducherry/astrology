@@ -141,8 +141,8 @@ class _LoginState extends State<Login> {
                       '${_otpController.countryCode.value} ${_phoneNumber.text}');
                   print(
                       '.........................${_forumContreller.userSession.value} ........................');
-                  // _otpController.verifyPhoneNumber(context);
-                  Get.to(OTP());
+                  _otpController.verifyPhoneNumber(context);
+                  // Get.to(OTP());
                 }).p12(),
               ],
             ),

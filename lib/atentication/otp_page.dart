@@ -37,7 +37,7 @@ class _OTPState extends State<OTP> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  'images/otp 1.png',
+                  'images/otp 2.png',
                   width: MediaQuery.of(context).size.width / 1.2,
                 ),
                 SizedBox(

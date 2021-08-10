@@ -1,4 +1,5 @@
 import 'package:astrology_app/Forum/forumController.dart';
+import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_page.dart';
 import 'package:astrology_app/screens/registerscreen.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
@@ -33,7 +34,7 @@ class OTPController extends GetxController {
         (FirebaseAuthException exception) {
       VxDialog.showAlert(
         context,
-        title: "Login Failed",
+        title: "Request Failed",
         content: exception.message.toString(),
       );
       print(exception.message);
@@ -50,7 +51,7 @@ class OTPController extends GetxController {
       VxDialog.showAlert(context,
           title: "Login Failed",
           content: "Request Timeout Try Again", onPressed: () {
-        Get.back();
+        Get.off(Login());
       });
     };
     try {
@@ -111,8 +112,10 @@ class OTPController extends GetxController {
       print('${_forumContreller.userSession} uuuuuuuuuuuuuuuuuuuuuuuuu');
 
       VxToast.show(context, msg: 'loged in');
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       print(e.toString());
+      VxDialog.showAlert(context,
+          title: 'Login Faild', content: e.message.toString());
       VxToast.show(context, msg: e.toString());
     }
   }
