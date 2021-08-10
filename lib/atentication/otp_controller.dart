@@ -19,13 +19,14 @@ class OTPController extends GetxController {
   final userPhoneNumber = ''.obs;
   final otpCount = 60.obs;
   final resend = false.obs;
-  final countryCode = '+91'.obs;
+  final getCountryCode = '+91'.obs;
 
   setUserPhoneNumber(PhoneNumber) {
     userPhoneNumber(PhoneNumber);
   }
 
-  Future<void> verifyPhoneNumber(BuildContext context) async {
+  Future<void> verifyPhoneNumber(
+      String phoneNumber, BuildContext context) async {
     PhoneVerificationCompleted verificationCompleted =
         (PhoneAuthCredential phoneAuthCredential) async {
       VxToast.show(context, msg: 'verification completed');
@@ -57,13 +58,14 @@ class OTPController extends GetxController {
     try {
       await _auth.verifyPhoneNumber(
           timeout: Duration(seconds: 60),
-          phoneNumber: userPhoneNumber.value.toString(),
+          phoneNumber: phoneNumber,
           verificationCompleted: verificationCompleted,
           verificationFailed: verificationFailed,
           codeSent: codeSent,
           codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
     } on FirebaseAuthException catch (e) {
       VxToast.show(context, msg: e.message.toString());
+      print(e);
     }
   }
 

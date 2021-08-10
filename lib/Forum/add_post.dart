@@ -16,17 +16,17 @@ class AddPost extends StatelessWidget {
       height: 250,
       color: Colors.white,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             child: TextField(
                 controller: _postController,
+                minLines: 1,
                 maxLines: 5,
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Ask your Question")),
+                    border: OutlineInputBorder(), labelText: "Ask Question")),
           ),
-          Spacer(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -42,7 +42,7 @@ class AddPost extends StatelessWidget {
                   ),
                   onPressed: () async {
                     if (_postController.text.isNotEmpty &&
-                        _postController.text.length > 5) {
+                        _postController.text.length > 10) {
                       _firestore.collection('forums').doc().set({
                         'question': _postController.text,
                         'auth': _forumContreller.sessionUserInfo['email'],
@@ -53,7 +53,8 @@ class AddPost extends StatelessWidget {
                       });
                       Get.back();
                     } else {
-                      Get.snackbar('Failed Post', 'Pleas fill the field',
+                      Get.snackbar('Failed Post',
+                          'Field wil be grater then 10 character',
                           backgroundColor: Colors.black,
                           colorText: Colors.white);
                     }

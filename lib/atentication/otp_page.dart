@@ -13,6 +13,7 @@ class OTP extends StatefulWidget {
 class _OTPState extends State<OTP> {
   OTPController _otpController = Get.find<OTPController>();
   ForumContreller _forumContreller = Get.find<ForumContreller>();
+
   final smsCode = ''.obs;
   final faildOTP = true.obs;
 

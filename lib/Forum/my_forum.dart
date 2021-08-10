@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class MyForums extends StatelessWidget {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -52,10 +53,18 @@ class MyForums extends StatelessWidget {
                             color: Colors.white,
                             onPressed: () {
                               print(forumData.id);
-                              _firestore
-                                  .collection('forums')
-                                  .doc(forumData.id)
-                                  .delete();
+                              VxDialog.showConfirmation(context,
+                                  title: 'Are you sure?',
+                                  content:
+                                      'Once deleted you will not able to recover this data',
+                                  confirm: 'Delete It',
+                                  confirmBgColor: Colors.redAccent,
+                                  cancel: 'No', onConfirmPress: () {
+                                _firestore
+                                    .collection('forums')
+                                    .doc(forumData.id)
+                                    .delete();
+                              });
                             },
                           ),
                         ),

@@ -78,24 +78,17 @@ class _BooksDescriptionState extends State<BooksDescription> {
     });
     print('uploaded successfully');
     Get.to(() => PaymentSuccessfully(),
-        transition: Transition.rightToLeft,
-        curve: Curves.easeInToLinear,
-        duration: Duration(milliseconds: 600));
-    Fluttertoast.showToast(
-        msg: "SUCCESS: " + response.paymentId!,
-        toastLength: Toast.LENGTH_SHORT);
+        transition: Transition.rightToLeft, curve: Curves.easeInToLinear, duration: Duration(milliseconds: 600));
+    Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!, toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
     Fluttertoast.showToast(
-        msg: "ERROR: " + response.code.toString() + " - " + response.message!,
-        toastLength: Toast.LENGTH_SHORT);
+        msg: "ERROR: " + response.code.toString() + " - " + response.message!, toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    Fluttertoast.showToast(
-        msg: "EXTERNAL_WALLET: " + response.walletName!,
-        toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(msg: "EXTERNAL_WALLET: " + response.walletName!, toastLength: Toast.LENGTH_SHORT);
   }
 
   void openCheckout() async {
@@ -123,6 +116,7 @@ class _BooksDescriptionState extends State<BooksDescription> {
   }
 
   bool isOpen = false;
+
   @override
   Widget build(BuildContext context) {
     final FlutterTts flutterTts = FlutterTts();
@@ -214,6 +208,7 @@ class _BooksDescriptionState extends State<BooksDescription> {
                           ],
                         ),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
@@ -273,39 +268,31 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                 ],
                               ),
                             ),
-                            // OutlinedButton(
-                            //     onPressed: () => _speak(),
-                            //     child: Text('PreView')),
-                            // OutlinedButton(
-                            //     onPressed: () => _stop(),
-                            //     child: Text('PreView')),
-                            OutlinedButton(
-                                onPressed: widget.bookType == 'free'
-                                    ? () {
-                                        print('jaya');
-                                        setState(() {
-                                          isOpen = true;
-                                        });
-                                        Get.to(
-                                            () => PdfView(
-                                                pdfLink: widget.pdfLink),
-                                            transition: Transition.rightToLeft,
-                                            curve: Curves.easeInToLinear,
-                                            duration:
-                                                Duration(milliseconds: 600));
-                                        // _pdfViewerKey.currentState
-                                        //     ?.openBookmarkView();
-                                      }
-                                    : () {
-                                        // _firestore
-                                        //     .collection('books')
-                                        //     .doc(getId)
-                                        //     .update({'type': 'free'});
-                                        openCheckout();
-                                      },
-                                child: widget.bookType == 'free'
-                                    ? Text('View Pdf')
-                                    : Text('Proceed to pay')),
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                              child: OutlinedButton(
+                                  onPressed: widget.bookType == 'free'
+                                      ? () {
+                                          print('jaya');
+                                          setState(() {
+                                            isOpen = true;
+                                          });
+                                          Get.to(() => PdfView(pdfLink: widget.pdfLink),
+                                              transition: Transition.rightToLeft,
+                                              curve: Curves.easeInToLinear,
+                                              duration: Duration(milliseconds: 600));
+                                          // _pdfViewerKey.currentState
+                                          //     ?.openBookmarkView();
+                                        }
+                                      : () {
+                                          // _firestore
+                                          //     .collection('books')
+                                          //     .doc(getId)
+                                          //     .update({'type': 'free'});
+                                          openCheckout();
+                                        },
+                                  child: widget.bookType == 'free' ? Text('View Pdf') : Text('Proceed to pay')),
+                            ),
                           ],
                         ),
                         Spacer(),
@@ -327,19 +314,6 @@ class _BooksDescriptionState extends State<BooksDescription> {
                       ),
                     ),
                   ),
-                  // Visibility(
-                  //   visible: isOpen,
-                  //   child: SingleChildScrollView(
-                  //     child: Container(
-                  //       /// TO make correct height
-                  //       height: 400,
-                  //       child: SfPdfViewer.network(
-                  //         '${widget.pdfLink}',
-                  //         key: _pdfViewerKey,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // )
                 ],
               ),
             ),

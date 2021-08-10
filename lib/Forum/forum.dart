@@ -8,6 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/Forum/add_post.dart';
 import 'package:astrology_app/Forum/my_forum.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class Forum extends StatefulWidget {
   const Forum({Key? key}) : super(key: key);
@@ -33,9 +35,9 @@ class _ForumState extends State<Forum> {
 
     var test =
         DateTime.fromMicrosecondsSinceEpoch(timestamp.microsecondsSinceEpoch);
-    print(timestamp);
+
     int mySeconds = test.difference(DateTime.now()).inSeconds;
-    print(~mySeconds);
+
     mySeconds = mySeconds * -1;
 
     if (mySeconds < 60) {
@@ -68,13 +70,6 @@ class _ForumState extends State<Forum> {
             .doc(forum.id)
             .update({'likes': forum['likes'] + 1});
         localLikesList[_forumContreller.sessionUserInfo.value['email']] = true;
-        // localLikesList.addAll({
-        //   _forumContreller
-        //       .sessionUserInfo
-        //       .value['email']: true
-        // });
-
-        print(localLikesList);
 
         _firestore
             .collection('forums')
@@ -100,7 +95,6 @@ class _ForumState extends State<Forum> {
             .doc(forum.id)
             .update({'likes': forum['likes'] + 1});
         localLikesList[_forumContreller.sessionUserInfo.value['email']] = true;
-        print(localLikesList);
 
         _firestore
             .collection('forums')
@@ -135,8 +129,8 @@ class _ForumState extends State<Forum> {
                   TextEditingController();
               TextEditingController questionController =
                   TextEditingController(text: forum['question']);
-              FocusNode questionFieldFocus = FocusNode();
 
+              bool isShow = false;
               return Container(
                 margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                 decoration: BoxDecoration(color: Colors.grey[50], boxShadow: [
@@ -151,69 +145,72 @@ class _ForumState extends State<Forum> {
                         margin: EdgeInsets.all(5),
                         color: Colors.white,
                         child: ExpansionTile(
-                          onExpansionChanged: (val) {},
-                          trailing: _forumContreller
-                                      .sessionUserInfo.value['email'] ==
-                                  forum['auth']
-                              ? GestureDetector(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(50),
-                                    child: Container(
-                                      color: Colors.blue,
-                                      padding: EdgeInsets.all(5),
-                                      child: Icon(
-                                        Icons.edit,
-                                        color: Colors.white,
-                                        size: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    Get.defaultDialog(
-                                      title: 'Edit Your Qusetion',
-                                      titleStyle: TextStyle(fontSize: 20),
-                                      content: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: TextField(
-                                          autofocus: true,
-                                          controller: questionController,
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                          ),
-                                        ),
-                                      ),
-                                      actions: [
-                                        ElevatedButton(
-                                          child: Text('Close'),
-                                          onPressed: () {
-                                            Get.back();
-                                          },
-                                        ),
-                                        ElevatedButton(
-                                          child: Text('Save'),
-                                          onPressed: () {
-                                            if (_forumContreller
-                                                .userSession.value.isNotEmpty) {
-                                              _firestore
-                                                  .collection('forums')
-                                                  .doc(forum.id)
-                                                  .update({
-                                                'question':
-                                                    questionController.text
-                                              });
-                                              Get.back();
-                                            } else {
-                                              Get.snackbar(
-                                                  'Failed', 'Login First');
-                                            }
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                )
-                              : Icon(Icons.keyboard_arrow_down_sharp),
+                          onExpansionChanged: (val) {
+                            _forumContreller.setIsShow(val);
+                            print(_forumContreller.isShow.value);
+                          },
+                          // trailing: _forumContreller
+                          //             .sessionUserInfo.value['email'] ==
+                          //         forum['auth']
+                          //     ? GestureDetector(
+                          //         child: ClipRRect(
+                          //           borderRadius: BorderRadius.circular(50),
+                          //           child: Container(
+                          //             color: Colors.blue,
+                          //             padding: EdgeInsets.all(5),
+                          //             child: Icon(
+                          //               Icons.edit,
+                          //               color: Colors.white,
+                          //               size: 20,
+                          //             ),
+                          //           ),
+                          //         ),
+                          //         onTap: () {
+                          //           Get.defaultDialog(
+                          //             title: 'Edit Your Qusetion',
+                          //             titleStyle: TextStyle(fontSize: 20),
+                          //             content: Container(
+                          //               width:
+                          //                   MediaQuery.of(context).size.width,
+                          //               child: TextField(
+                          //                 autofocus: true,
+                          //                 controller: questionController,
+                          //                 decoration: InputDecoration(
+                          //                   border: OutlineInputBorder(),
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //             actions: [
+                          //               ElevatedButton(
+                          //                 child: Text('Close'),
+                          //                 onPressed: () {
+                          //                   Get.back();
+                          //                 },
+                          //               ),
+                          //               ElevatedButton(
+                          //                 child: Text('Save'),
+                          //                 onPressed: () {
+                          //                   if (_forumContreller
+                          //                       .userSession.value.isNotEmpty) {
+                          //                     _firestore
+                          //                         .collection('forums')
+                          //                         .doc(forum.id)
+                          //                         .update({
+                          //                       'question':
+                          //                           questionController.text
+                          //                     });
+                          //                     Get.back();
+                          //                   } else {
+                          //                     Get.snackbar(
+                          //                         'Failed', 'Login First');
+                          //                   }
+                          //                 },
+                          //               ),
+                          //             ],
+                          //           );
+                          //         },
+                          //       )
+                          //     : Icon(Icons.keyboard_arrow_down_sharp),
                           title: Container(
                             child: Column(
                               children: [
@@ -257,7 +254,7 @@ class _ForumState extends State<Forum> {
                                                   Text(
                                                     username.toString(),
                                                     style: TextStyle(
-                                                        fontSize: 20,
+                                                        fontSize: 18,
                                                         color:
                                                             Colors.grey[800]),
                                                   ),
@@ -265,6 +262,7 @@ class _ForumState extends State<Forum> {
                                                     timestampToDate(
                                                         forum['postTime']),
                                                     style: TextStyle(
+                                                        fontSize: 12,
                                                         color:
                                                             Colors.grey[600]),
                                                   ),
@@ -284,7 +282,7 @@ class _ForumState extends State<Forum> {
                                     forum['question'],
                                     textAlign: TextAlign.justify,
                                     style: TextStyle(
-                                        fontSize: 15, color: Colors.grey[800]),
+                                        fontSize: 20, color: Colors.grey[800]),
                                   ),
                                 ),
                                 Container(
@@ -340,6 +338,79 @@ class _ForumState extends State<Forum> {
                                           fontSize: 14,
                                         ),
                                       ),
+                                      _forumContreller.sessionUserInfo
+                                                  .value['email'] ==
+                                              forum['auth']
+                                          ? GestureDetector(
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                child: Container(
+                                                  color: Colors.blue,
+                                                  padding: EdgeInsets.all(5),
+                                                  child: Icon(
+                                                    Icons.edit,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                ),
+                                              ),
+                                              onTap: () {
+                                                Get.defaultDialog(
+                                                  title: 'Edit Your Qusetion',
+                                                  titleStyle:
+                                                      TextStyle(fontSize: 20),
+                                                  content: Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    child: TextField(
+                                                      autofocus: true,
+                                                      controller:
+                                                          questionController,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  actions: [
+                                                    ElevatedButton(
+                                                      child: Text('Close'),
+                                                      onPressed: () {
+                                                        Get.back();
+                                                      },
+                                                    ),
+                                                    ElevatedButton(
+                                                      child: Text('Save'),
+                                                      onPressed: () {
+                                                        if (_forumContreller
+                                                            .userSession
+                                                            .value
+                                                            .isNotEmpty) {
+                                                          _firestore
+                                                              .collection(
+                                                                  'forums')
+                                                              .doc(forum.id)
+                                                              .update({
+                                                            'question':
+                                                                questionController
+                                                                    .text
+                                                          });
+                                                          Get.back();
+                                                        } else {
+                                                          Get.snackbar('Failed',
+                                                              'Login First');
+                                                        }
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            )
+                                          : SizedBox(),
                                     ],
                                   ),
                                 ),
@@ -785,12 +856,7 @@ class _ForumState extends State<Forum> {
         actions: [
           IconButton(
             onPressed: () {
-              if (_forumContreller.userSession.value.isNotEmpty) {
-                Get.to(MyForums());
-              } else {
-                Get.snackbar('Failed', 'Log In Please',
-                    backgroundColor: Colors.black, colorText: Colors.white);
-              }
+              Get.to(MyForums());
             },
             icon: Icon(FontAwesomeIcons.listAlt),
             color: Colors.blue,
@@ -800,24 +866,27 @@ class _ForumState extends State<Forum> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Visibility(
         visible: MediaQuery.of(context).viewInsets.bottom == 0,
-        child: Container(
-          height: 65.0,
-          width: 65.0,
-          child: FittedBox(
-            child: FloatingActionButton(
-              onPressed: () {
-                if (_forumContreller.userSession.value.isNotEmpty) {
-                  Get.bottomSheet(AddPost());
-                } else {
-                  Get.snackbar('Failed', 'Log In Please',
-                      backgroundColor: Colors.black, colorText: Colors.white);
-                }
-              },
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
+        child: KeyboardDismisser(
+          child: Container(
+            height: 65.0,
+            width: 65.0,
+            child: FittedBox(
+              child: FloatingActionButton(
+                onPressed: () {
+                  if (_forumContreller.userSession.value.isNotEmpty) {
+                    // Get.bottomSheet(AddPost());
+                    Get.defaultDialog(content: AddPost());
+                  } else {
+                    Get.snackbar('Failed', 'Log In Please',
+                        backgroundColor: Colors.black, colorText: Colors.white);
+                  }
+                },
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                // elevation: 5.0,
               ),
-              // elevation: 5.0,
             ),
           ),
         ),
