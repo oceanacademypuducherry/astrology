@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/Forum/add_post.dart';
 import 'package:astrology_app/Forum/my_forum.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Forum extends StatefulWidget {
@@ -855,12 +856,7 @@ class _ForumState extends State<Forum> {
         actions: [
           IconButton(
             onPressed: () {
-              if (_forumContreller.userSession.value.isNotEmpty) {
-                Get.to(MyForums());
-              } else {
-                Get.snackbar('Failed', 'Log In Please',
-                    backgroundColor: Colors.black, colorText: Colors.white);
-              }
+              Get.to(MyForums());
             },
             icon: Icon(FontAwesomeIcons.listAlt),
             color: Colors.blue,
@@ -870,25 +866,27 @@ class _ForumState extends State<Forum> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Visibility(
         visible: MediaQuery.of(context).viewInsets.bottom == 0,
-        child: Container(
-          height: 65.0,
-          width: 65.0,
-          child: FittedBox(
-            child: FloatingActionButton(
-              onPressed: () {
-                if (_forumContreller.userSession.value.isNotEmpty) {
-                  // Get.bottomSheet(AddPost());
-                  Get.defaultDialog(content: AddPost());
-                } else {
-                  Get.snackbar('Failed', 'Log In Please',
-                      backgroundColor: Colors.black, colorText: Colors.white);
-                }
-              },
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
+        child: KeyboardDismisser(
+          child: Container(
+            height: 65.0,
+            width: 65.0,
+            child: FittedBox(
+              child: FloatingActionButton(
+                onPressed: () {
+                  if (_forumContreller.userSession.value.isNotEmpty) {
+                    // Get.bottomSheet(AddPost());
+                    Get.defaultDialog(content: AddPost());
+                  } else {
+                    Get.snackbar('Failed', 'Log In Please',
+                        backgroundColor: Colors.black, colorText: Colors.white);
+                  }
+                },
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                // elevation: 5.0,
               ),
-              // elevation: 5.0,
             ),
           ),
         ),
