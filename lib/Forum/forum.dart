@@ -875,7 +875,8 @@ class _ForumState extends State<Forum> {
                 onPressed: () {
                   if (_forumContreller.userSession.value.isNotEmpty) {
                     // Get.bottomSheet(AddPost());
-                    Get.defaultDialog(content: AddPost());
+                    Get.defaultDialog(
+                        title: 'Ask Question', content: AddPost());
                   } else {
                     Get.snackbar('Failed', 'Log In Please',
                         backgroundColor: Colors.black, colorText: Colors.white);
