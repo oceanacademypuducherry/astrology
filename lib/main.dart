@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
       child: Scaffold(
         backgroundColor: Colors.blue,
         resizeToAvoidBottomInset: false,
-        body: _forumContreller.userSession.value.isNotEmpty ? BottomNavigation() : BottomNavigation(),
+        body: _forumContreller.userSession.value.isNotEmpty ? BottomNavigation() : Login(),
       ),
     );
   }

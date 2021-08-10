@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:astrology_app/screens/vedioPlayer/custom_control_buttons.dart';
 import 'package:astrology_app/screens/vedioPlayer/overlayWidget.dart';
-import 'package:auto_orientation/auto_orientation.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerBothWidget extends StatefulWidget {
@@ -24,10 +25,9 @@ class _VideoPlayerBothWidgetState extends State<VideoPlayerBothWidget> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      widget.controller != null && widget.controller.value.isInitialized
-          ? Container(alignment: Alignment.topCenter, child: buildVideo())
-          : Center(child: CircularProgressIndicator());
+  Widget build(BuildContext context) => widget.controller != null && widget.controller.value.isInitialized
+      ? Container(alignment: Alignment.topCenter, child: buildVideo())
+      : Center(child: CircularProgressIndicator());
 
   Widget buildVideo() => OrientationBuilder(
         builder: (context, orientation) {
@@ -46,9 +46,9 @@ class _VideoPlayerBothWidgetState extends State<VideoPlayerBothWidget> {
                       controller: widget.controller,
                       onClickedFullScreen: () {
                         if (isPortrait) {
-                          AutoOrientation.landscapeRightMode();
+                          DeviceOrientation.portraitUp;
                         } else {
-                          AutoOrientation.portraitUpMode();
+                          DeviceOrientation.portraitUp;
                         }
                       },
                     ),
