@@ -1,10 +1,11 @@
 import 'package:astrology_app/Forum/forumController.dart';
-import 'package:astrology_app/atentication/country_code.dart';
+
 import 'package:astrology_app/atentication/otp_controller.dart';
-import 'package:astrology_app/atentication/otp_page.dart';
+
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:astrology_app/widgets/countrycode.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -21,19 +22,20 @@ class _LoginState extends State<Login> {
   OTPController _otpController = Get.find<OTPController>();
   ForumContreller _forumContreller = Get.find<ForumContreller>();
 
-  List<String> codes = [];
-
-  countryCodeGet() {
-    for (var item in CountryCode) {
-      codes.add(item['dial_code'].toString());
+  String countryCode = '+91';
+  List countries = codes;
+  List getCountryCode() {
+    List<String> getCountryCode = [];
+    for (var country in countries) {
+      getCountryCode.add(country['code']);
     }
+    return getCountryCode;
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    countryCodeGet();
   }
 
   @override
@@ -77,33 +79,70 @@ class _LoginState extends State<Login> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Obx(() => Text(_otpController.countryCode.value))
+                    CountryCodePicker(
+                      hideMainText: false,
+                      showFlag: false,
+                      padding: EdgeInsets.all(0),
+                      favorite: ['+91', '+54', 'US'],
+                      textStyle: TextStyle(
+                        fontFamily: 'Ubuntu',
+                        color: Colors.black54,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      backgroundColor: Colors.transparent,
+                      onChanged: (object) {
+                        print('object $object');
+                        _otpController.getCountryCode.value = object.toString();
+                      },
+                      initialSelection:
+                          getCountryCode()[getCountryCode().indexOf('IN')],
+                      showFlagDialog: true,
+                      showDropDownButton: true,
+                      dialogBackgroundColor: Colors.white,
+                      hideSearch: false,
+                      dialogSize: Size(double.infinity, double.infinity),
+                      dialogTextStyle: TextStyle(
+                        fontFamily: 'Ubuntu',
+                        color: Colors.black54,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      enabled: true,
+                      boxDecoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                    )
                         .box
-                        .p16
-                        .gray200
                         .border(color: Vx.blue400)
-                        .rounded
                         .leftRounded(value: 8)
-                        .make()
-                        .onTap(() {
-                      VxBottomSheet.bottomSheetOptions(context,
-                          option: codes,
-                          defaultData: _otpController.countryCode.value,
-                          backgroundColor: Vx.white,
-                          roundedFromTop: true,
-                          enableDrag: true,
-                          isSafeAreaFromBottom: true, onSelect: (index, value) {
-                        print(value);
-
-                        _otpController.countryCode.value = value;
-                      });
-                    }),
+                        .make(),
+                    // Obx(() => Text(_otpController.countryCode.value))
+                    //     .box
+                    //     .p16
+                    //     .gray200
+                    //     .border(color: Vx.blue400)
+                    //     .rounded
+                    //     .leftRounded(value: 8)
+                    //     .make()
+                    //     .onTap(() {
+                    //   VxBottomSheet.bottomSheetOptions(context,
+                    //       option: codes,
+                    //       defaultData: _otpController.countryCode.value,
+                    //       backgroundColor: Vx.white,
+                    //       roundedFromTop: true,
+                    //       enableDrag: true,
+                    //       isSafeAreaFromBottom: true, onSelect: (index, value) {
+                    //     print(value);
+                    //
+                    //     _otpController.countryCode.value = value;
+                    //   });
+                    // }),
                     SizedBox(
                       width: 5,
                     ),
                     Container(
                             width: MediaQuery.of(context).size.width / 1.5,
                             child: VxTextField(
+                              fillColor: Vx.white,
                               controller: _phoneNumber,
                               borderType: VxTextFieldBorderType.none,
                               hint: 'Phone Number',
@@ -131,18 +170,19 @@ class _LoginState extends State<Login> {
                     .p16
                     .blue400
                     .width(
-                      MediaQuery.of(context).size.width / 1.1,
+                      MediaQuery.of(context).size.width,
                     )
                     .alignCenter
                     .roundedSM
                     .make()
-                    .px12()
+                    .px2()
                     .onInkTap(() {
                   _otpController.setUserPhoneNumber(
-                      '${_otpController.countryCode.value} ${_phoneNumber.text}');
+                      '${_otpController.getCountryCode.value} ${_phoneNumber.text}');
                   print(
-                      '.........................${_forumContreller.userSession.value} ........................');
-                  _otpController.verifyPhoneNumber(context);
+                      '.........................${_otpController.userPhoneNumber.value} ........................');
+                  _otpController.verifyPhoneNumber(
+                      _otpController.userPhoneNumber.value.toString(), context);
                 }).p12(),
               ],
             ),
