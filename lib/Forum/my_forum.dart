@@ -29,9 +29,9 @@ class MyForums extends StatelessWidget {
               if (!snapshot.hasData) {
                 return Text('loading...');
               } else {
-                print(snapshot.data!);
                 for (var i in snapshot.data!.docs) {
                   print(i.data());
+                  print('jjjjjjjjjjjjjjjj');
                 }
 
                 return ListView.builder(
