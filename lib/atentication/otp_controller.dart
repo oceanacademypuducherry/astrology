@@ -1,4 +1,5 @@
 import 'package:astrology_app/Forum/forumController.dart';
+import 'package:astrology_app/atentication/otp_page.dart';
 import 'package:astrology_app/screens/registerscreen.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,37 +20,49 @@ class OTPController extends GetxController {
   final resend = false.obs;
   final countryCode = '+91'.obs;
 
-  Future<void> verifyPhoneNumber(
-      String phoneNumber, BuildContext context) async {
+  setUserPhoneNumber(PhoneNumber) {
+    userPhoneNumber(PhoneNumber);
+  }
+
+  Future<void> verifyPhoneNumber(BuildContext context) async {
     PhoneVerificationCompleted verificationCompleted =
         (PhoneAuthCredential phoneAuthCredential) async {
       VxToast.show(context, msg: 'verification completed');
     };
     PhoneVerificationFailed verificationFailed =
         (FirebaseAuthException exception) {
-      VxToast.show(context, msg: exception.toString());
-      print(exception);
+      VxDialog.showAlert(
+        context,
+        title: "Login Failed",
+        content: exception.message.toString(),
+      );
+      print(exception.message);
     };
     PhoneCodeSent codeSent =
         (String verificationID, [int? forceResendingToken]) {
       VxToast.show(context, msg: 'verification code sent on the phone number');
       verifyId.value = verificationID;
       countdown();
+      Get.to(OTP());
     };
     PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
         (String verificationID) {
-      VxToast.show(context, msg: 'time out');
+      VxDialog.showAlert(context,
+          title: "Login Failed",
+          content: "Request Timeout Try Again", onPressed: () {
+        Get.back();
+      });
     };
     try {
       await _auth.verifyPhoneNumber(
           timeout: Duration(seconds: 60),
-          phoneNumber: phoneNumber,
+          phoneNumber: userPhoneNumber.value.toString(),
           verificationCompleted: verificationCompleted,
           verificationFailed: verificationFailed,
           codeSent: codeSent,
           codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
-    } catch (e) {
-      VxToast.show(context, msg: e.toString());
+    } on FirebaseAuthException catch (e) {
+      VxToast.show(context, msg: e.message.toString());
     }
   }
 
@@ -101,17 +114,12 @@ class OTPController extends GetxController {
     } catch (e) {
       print(e.toString());
       VxToast.show(context, msg: e.toString());
-      VxDialog.showConfirmation(context,
-          title: userPhoneNumber.value.toString(),
-          content: "You want Change your Number",
-          cancel: 'No',
-          confirm: 'Yes', onConfirmPress: () {
-        Get.back();
-      });
     }
   }
 
   countdown() async {
+    resend.value = false;
+    otpCount.value = 60;
     while (otpCount.value > 0) {
       await Future.delayed(Duration(seconds: 1));
       otpCount(otpCount.value - 1);
