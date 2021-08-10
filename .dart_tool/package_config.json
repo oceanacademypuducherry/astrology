@@ -285,7 +285,7 @@
     },
     {
       "name": "get",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.3.5",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.3.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -309,7 +309,7 @@
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.3+1",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -537,37 +537,37 @@
     },
     {
       "name": "syncfusion_flutter_core",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_core-19.2.51",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_core-19.2.49",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "syncfusion_flutter_pdf",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_pdf-19.2.51-beta",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_pdf-19.2.49-beta",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "syncfusion_flutter_pdfviewer",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_pdfviewer-19.2.51-beta",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_pdfviewer-19.2.49-beta",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "syncfusion_flutter_pdfviewer_macos",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_pdfviewer_macos-19.2.51-beta",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_pdfviewer_macos-19.2.49-beta",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "syncfusion_flutter_pdfviewer_platform_interface",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_pdfviewer_platform_interface-19.2.51-beta",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_pdfviewer_platform_interface-19.2.49-beta",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "syncfusion_flutter_pdfviewer_web",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_pdfviewer_web-19.2.51-beta",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_pdfviewer_web-19.2.49-beta",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -657,31 +657,31 @@
     },
     {
       "name": "wakelock",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.3+3",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "wakelock_macos",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_macos-0.1.0+2",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_macos-0.1.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "wakelock_platform_interface",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_platform_interface-0.2.1+2",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_platform_interface-0.2.1+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "wakelock_web",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_web-0.2.0+2",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_web-0.2.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "wakelock_windows",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_windows-0.1.0+1",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_windows-0.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -716,7 +716,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-08-10T06:16:10.194652Z",
+  "generated": "2021-08-10T07:51:32.135308Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }
