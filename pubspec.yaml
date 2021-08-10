@@ -65,6 +65,7 @@ dependencies:
   keyboard_dismisser: ^2.0.0
   flutter_svg: ^0.22.0
   velocity_x: ^3.3.0
+  cached_network_image: ^3.1.0
 
 
 
