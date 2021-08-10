@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -126,33 +127,25 @@ class _BookingDetailsState extends State<BookingDetails> {
     print('uploaded successfully');
 
     Get.off(() => PaymentSuccessfully(),
-        transition: Transition.rightToLeft,
-        curve: Curves.easeInToLinear,
-        duration: Duration(milliseconds: 600));
-    print(
-        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+        transition: Transition.rightToLeft, curve: Curves.easeInToLinear, duration: Duration(milliseconds: 600));
+    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
     print(response.paymentId);
     print(response.orderId);
     print(response.signature);
-    Fluttertoast.showToast(
-        msg: "SUCCESS: " + response.paymentId!,
-        toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!, toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
     print('*************Error******************');
     print(response.message);
     Fluttertoast.showToast(
-        msg: "ERROR: " + response.code.toString() + " - " + response.message!,
-        toastLength: Toast.LENGTH_SHORT);
+        msg: "ERROR: " + response.code.toString() + " - " + response.message!, toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     print('*************WALLETETTETTE******************');
     print(response.walletName);
-    Fluttertoast.showToast(
-        msg: "EXTERNAL_WALLET: " + response.walletName!,
-        toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(msg: "EXTERNAL_WALLET: " + response.walletName!, toastLength: Toast.LENGTH_SHORT);
   }
 
   void openCheckout() async {
@@ -221,74 +214,48 @@ class _BookingDetailsState extends State<BookingDetails> {
       body: ListView.builder(
         itemCount: 1,
         itemBuilder: (context, index) {
-          return Container(
-            margin: EdgeInsets.symmetric(vertical: 20),
-            child: Column(
-              children: [
-                ///date and time
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Your Appointment Date and Time',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 16,
-                      color: Colors.blue,
+          return KeyboardDismisser(
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                children: [
+                  ///date and time
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Your Appointment Date and Time',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 16,
+                        color: Colors.blue,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        alignment: Alignment.center,
-                        width: 80,
-                        height: 40,
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0.2, 0.2),
-                            ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Text(
-                          '${hour}:${minute} ${dayTime}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'Ubuntu',
-                            fontSize: 13,
-                            color: Colors.black54,
+                  SizedBox(height: 10),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          width: 80,
+                          height: 40,
+                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 0.5,
+                                offset: Offset(0.3, 0.3),
+                              ),
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
                           ),
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        height: 40,
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0.2, 0.2),
-                            ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            '${newDate.day.toString()} ${monthFormat} ${newDate.year.toString()}',
+                            '${hour}:${minute} ${dayTime}',
                             style: TextStyle(
                               fontWeight: FontWeight.normal,
                               fontFamily: 'Ubuntu',
@@ -297,315 +264,346 @@ class _BookingDetailsState extends State<BookingDetails> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        alignment: Alignment.center,
-                        width: 80,
-                        height: 40,
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0.2, 0.2),
-                            ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Text(
-                          'Booking Fees',
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'Ubuntu',
-                            fontSize: 13,
-                            color: Colors.black54,
+                        Container(
+                          alignment: Alignment.center,
+                          height: 40,
+                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 0.5,
+                                offset: Offset(0.3, 0.3),
+                              ),
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
                           ),
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        height: 40,
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0.2, 0.2),
-                            ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            '₹${rupees}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontFamily: 'Ubuntu',
-                              fontSize: 13,
-                              color: Colors.black54,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '${newDate.day.toString()} ${monthFormat} ${newDate.year.toString()}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 13,
+                                color: Colors.black54,
+                              ),
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    thickness: 0.2,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Booking Price',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 16,
+                        color: Colors.blue,
                       ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  thickness: 0.2,
-                  color: Colors.grey,
-                ),
-                SizedBox(height: 20),
-
-                ///purpose of appointment
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Purpose of Appointment',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 16,
-                      color: Colors.blue,
                     ),
                   ),
-                ),
-                SizedBox(height: 10),
-
-                ///radio button
-                ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  title: const Text(
-                    'Marriage',
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  leading: Radio(
-                    value: Purpose.Marriage,
-                    groupValue: _purpose,
-                    onChanged: (value) {
-                      setState(() {
-                        _purpose = Purpose.Marriage;
-                      });
-                    },
-                  ),
-                ),
-                ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  title: const Text(
-                    'Astrology',
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  leading: Radio(
-                    value: Purpose.Astrology,
-                    groupValue: _purpose,
-                    onChanged: (value) {
-                      setState(() {
-                        _purpose = Purpose.Astrology;
-                      });
-                    },
-                  ),
-                ),
-                ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  title: const Text(
-                    'Other',
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  leading: Radio(
-                    value: Purpose.Other,
-                    groupValue: _purpose,
-                    onChanged: (value) {
-                      setState(() {
-                        _purpose = Purpose.Other;
-                      });
-                    },
-                  ),
-                ),
-
-                ///Condition  value == other means Textfield
-                _purpose == Purpose.Other
-                    ? Container(
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0.3, 0.3),
-                            ),
-                          ],
-                        ),
-                        child: _buildOther(),
-                      )
-                    : Container(),
-                Divider(
-                  thickness: 0.2,
-                  color: Colors.grey,
-                ),
-                SizedBox(height: 20),
-
-                ///this appointment is for
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'This Appointment is for',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 16,
-                      color: Colors.blue,
-                    ),
-                  ),
-                ),
-
-                ///radio button
-                ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  title: const Text(
-                    'For me',
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  leading: Radio(
-                    value: Appointment.ForMe,
-                    groupValue: _appointment,
-                    onChanged: (value) {
-                      setState(() {
-                        _appointment = Appointment.ForMe;
-                      });
-                    },
-                  ),
-                ),
-                ListTile(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  title: const Text(
-                    'Someone else',
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  leading: Radio(
-                    value: Appointment.SomeoneElse,
-                    groupValue: _appointment,
-                    onChanged: (value) {
-                      setState(() {
-                        _appointment = Appointment.SomeoneElse;
-                      });
-                    },
-                  ),
-                ),
-                Divider(
-                  thickness: 0.2,
-                  color: Colors.grey,
-                ),
-
-                ///continue button
-                SizedBox(height: 20),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  width: MediaQuery.of(context).size.width,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Color(0xff045de9),
-                            Colors.blue,
-                          ],
-                        )),
-                    child: ElevatedButton(
-                      ///checking For Me or SomeoneElse to Route to next Page
-                      onPressed: _appointment == Appointment.ForMe
-                          ? () {
-                              ///payment page
-                              openCheckout();
-
-                              // _firestore.collection('booking').add({
-                              //   'time': Get.arguments,
-                              //   'purpose of appointment':
-                              //       _appointment.toString(),
-                              //   'appointment For': _purpose.toString(),
-                              // });
-                              //
-                              // Get.to(() => BottomNavigation(),
-                              //     transition: Transition.topLevel,
-                              //     // curve: Curves.ease,
-                              //     duration: Duration(milliseconds: 600));
-                            }
-                          : () {
-                              ///someone else page
-                              Get.to(
-                                  () => SomeoneElseScreen(
-                                        appointmentFor: _appointment.toString(),
-                                        purpose: _purpose.toString(),
-                                        time: newDate,
-                                        ruppess: rupees,
+                  SizedBox(height: 10),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          height: 40,
+                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 0.5,
+                                offset: Offset(0.3, 0.3),
+                              ),
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: RichText(
+                              text: TextSpan(
+                                  text: '₹ ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Ubuntu',
+                                    fontSize: 19,
+                                    color: Colors.black54,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: '${rupees}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: 'Ubuntu',
+                                        fontSize: 16,
+                                        color: Colors.black54,
                                       ),
-                                  transition: Transition.topLevel,
-                                  // curve: Curves.ease,
-                                  duration: Duration(milliseconds: 600));
-                            },
-                      child: _appointment == Appointment.ForMe
-                          ? Text('Proceed to Payment')
-                          : Text('Update Their Document'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
-                        fixedSize: Size(double.infinity, 50),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 25,
+                                    ),
+                                  ]),
+                            ),
+                          ),
                         ),
-                        textStyle: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Ubuntu',
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                        elevation: 0,
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    thickness: 0.2,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(height: 20),
+
+                  ///purpose of appointment
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Purpose of Appointment',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 16,
+                        color: Colors.blue,
                       ),
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(height: 10),
+
+                  ///radio button
+                  ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    title: const Text(
+                      'Marriage',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    leading: Radio(
+                      value: Purpose.Marriage,
+                      groupValue: _purpose,
+                      onChanged: (value) {
+                        setState(() {
+                          _purpose = Purpose.Marriage;
+                        });
+                      },
+                    ),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    title: const Text(
+                      'Astrology',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    leading: Radio(
+                      value: Purpose.Astrology,
+                      groupValue: _purpose,
+                      onChanged: (value) {
+                        setState(() {
+                          _purpose = Purpose.Astrology;
+                        });
+                      },
+                    ),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    title: const Text(
+                      'Other',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    leading: Radio(
+                      value: Purpose.Other,
+                      groupValue: _purpose,
+                      onChanged: (value) {
+                        setState(() {
+                          _purpose = Purpose.Other;
+                        });
+                      },
+                    ),
+                  ),
+
+                  ///Condition  value == other means Textfield
+                  _purpose == Purpose.Other
+                      ? Container(
+                          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(0.3, 0.3),
+                              ),
+                            ],
+                          ),
+                          child: _buildOther(),
+                        )
+                      : Container(),
+                  Divider(
+                    thickness: 0.2,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(height: 20),
+
+                  ///this appointment is for
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'This Appointment is for',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 16,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+
+                  ///radio button
+                  ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    title: const Text(
+                      'For me',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    leading: Radio(
+                      value: Appointment.ForMe,
+                      groupValue: _appointment,
+                      onChanged: (value) {
+                        setState(() {
+                          _appointment = Appointment.ForMe;
+                        });
+                      },
+                    ),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    title: const Text(
+                      'Someone else',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    leading: Radio(
+                      value: Appointment.SomeoneElse,
+                      groupValue: _appointment,
+                      onChanged: (value) {
+                        setState(() {
+                          _appointment = Appointment.SomeoneElse;
+                        });
+                      },
+                    ),
+                  ),
+                  Divider(
+                    thickness: 0.2,
+                    color: Colors.grey,
+                  ),
+
+                  ///continue button
+                  SizedBox(height: 20),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    width: MediaQuery.of(context).size.width,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color(0xff045de9),
+                              Colors.blue,
+                            ],
+                          )),
+                      child: ElevatedButton(
+                        ///checking For Me or SomeoneElse to Route to next Page
+                        onPressed: _appointment == Appointment.ForMe
+                            ? () {
+                                ///payment page
+                                openCheckout();
+
+                                // _firestore.collection('booking').add({
+                                //   'time': Get.arguments,
+                                //   'purpose of appointment':
+                                //       _appointment.toString(),
+                                //   'appointment For': _purpose.toString(),
+                                // });
+                                //
+                                // Get.to(() => BottomNavigation(),
+                                //     transition: Transition.topLevel,
+                                //     // curve: Curves.ease,
+                                //     duration: Duration(milliseconds: 600));
+                              }
+                            : () {
+                                ///someone else page
+                                Get.to(
+                                    () => SomeoneElseScreen(
+                                          appointmentFor: _appointment.toString(),
+                                          purpose: _purpose.toString(),
+                                          time: newDate,
+                                          ruppess: rupees,
+                                        ),
+                                    transition: Transition.topLevel,
+                                    // curve: Curves.ease,
+                                    duration: Duration(milliseconds: 600));
+                              },
+                        child: _appointment == Appointment.ForMe
+                            ? Text('Proceed to Payment')
+                            : Text('Update Their Document'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.transparent,
+                          fixedSize: Size(double.infinity, 50),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 25,
+                          ),
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Ubuntu',
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                          elevation: 0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },

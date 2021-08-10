@@ -1,6 +1,7 @@
+import 'package:astrology_app/atentication/login.dart';
+import 'package:astrology_app/atentication/otp_controller.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
-import 'package:astrology_app/screens/ProfileScreen.dart';
-import 'package:astrology_app/screens/loginscreen.dart';
+
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,9 +21,12 @@ void main() async {
   ]);
   await Firebase.initializeApp();
   Get.put(OtpController());
+
   Get.put(ForumContreller());
+  Get.put(OTPController());
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String userNumber = prefs.getString('user').toString();
+  // String userNumber = prefs.getString('user').toString();
+  String userNumber = "+91 9342364952";
   var userDatas = await _firestore.collection('newusers').get();
   for (var i in userDatas.docs) {
     if (i['phoneNumber'] == userNumber) {

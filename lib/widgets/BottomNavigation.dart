@@ -20,6 +20,7 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
   int _selectedIndex = 0;
 
   List<Widget> _widgetOptions = <Widget>[
@@ -36,8 +37,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
     var userDatas = await _firestore.collection('newusers').get();
     for (var i in userDatas.docs) {
       if (i['phoneNumber'] == userNumber) {
-        Get.find<ForumContreller>().setUserSession(userNumber.toString());
-        Get.find<ForumContreller>().setUserInfo(i.data());
+        _forumContreller.setUserSession(userNumber.toString());
+        _forumContreller.setUserInfo(i.data());
+        _forumContreller.setUserDocumentId(i.id);
+        print(_forumContreller.sessionUserInfo.value);
+        print('7777777');
       }
     }
   }

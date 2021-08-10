@@ -16,17 +16,18 @@ class AddPost extends StatelessWidget {
       height: 250,
       color: Colors.white,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             child: TextField(
                 controller: _postController,
+                minLines: 1,
                 maxLines: 5,
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Ask your Question")),
           ),
-          Spacer(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

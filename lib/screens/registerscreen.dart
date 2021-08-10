@@ -1,5 +1,4 @@
 import 'package:astrology_app/Forum/forumController.dart';
-import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/screens/loginscreen.dart';
 import 'package:astrology_app/services/storage_service.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
@@ -7,13 +6,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
-// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
@@ -51,6 +49,10 @@ class _RegisterState extends State<Register> {
   String? phoneNumber;
   bool validation = false;
   String? getId;
+  var oldJadhagamLink =
+      'https://static-s.aa-cdn.net/img/gp/20600011090269/OXbExXWz_j6TPCsvx9CCxu2Rzcy1LGFCgNO-ag_VMdcMmHb6UWo4lLPBptyYY_ToMZo=s300?v=1';
+  var oldProfileLink =
+      'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png';
 
   void user_id() async {
     print("---------------------------");
@@ -223,6 +225,33 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  var date;
+  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
+  DateTime selectedDate = DateTime.now();
+
+  ///select date picker function
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate, // Refer step 1
+      firstDate: DateTime(1950),
+      lastDate: DateTime(2050),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        print(selectedDate);
+      });
+  }
+
+  ///select time onPress
+  onTimeChanged(newTime) {
+    setState(() {
+      _time = newTime;
+      // print(_time);
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -232,30 +261,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    var date;
-    TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
-    DateTime selectedDate = DateTime.now();
-
-    ///select date picker function
-    _selectDate(BuildContext context) async {
-      final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate, // Refer step 1
-        firstDate: DateTime(1950),
-        lastDate: DateTime(2050),
-      );
-      if (picked != null && picked != selectedDate)
-        setState(() {
-          selectedDate = picked;
-        });
-    }
-
-    ///select time onPress
-    onTimeChanged(newTime) {
-      setState(() {
-        _time = newTime;
-      });
-    }
+    String monthFormat = DateFormat('MMMM').format(selectedDate);
 
     ///mediaQuery width
     var m = MediaQuery.of(context).size.width / 6;
@@ -339,8 +345,12 @@ class _RegisterState extends State<Register> {
                                         child: CircleAvatar(
                                           maxRadius: 48,
                                           backgroundColor: Colors.white,
-                                          backgroundImage: NetworkImage(
-                                              "${profilePictureLink?.toString()}"),
+                                          backgroundImage: profilePictureLink ==
+                                                  null
+                                              ? NetworkImage(
+                                                  '${oldProfileLink}')
+                                              : NetworkImage(
+                                                  "${profilePictureLink.toString()}"),
                                         ),
                                       ),
                                     ),
@@ -376,9 +386,12 @@ class _RegisterState extends State<Register> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "${jadhagamLink?.toString()}"),
-                                              fit: BoxFit.cover),
+                                            image: jadhagamLink == null
+                                                ? NetworkImage(
+                                                    '${oldJadhagamLink}')
+                                                : NetworkImage(
+                                                    "${jadhagamLink.toString()}"),
+                                          ),
                                           border: Border.all(
                                             width: 2,
                                             color: Colors.blue.shade900,
@@ -625,8 +638,60 @@ class _RegisterState extends State<Register> {
                         ),
 
                         ///DOB
-                        // ElevatedButton(
-                        //     onPressed: _selectTime, child: Text('Birth Time')),
+                        Container(
+                          alignment: Alignment.topLeft,
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          padding: EdgeInsets.all(10),
+                          width: MediaQuery.of(context).size.width,
+                          height: 80,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 20,
+                                  spreadRadius: 5,
+                                  offset: Offset(
+                                    2.0,
+                                    2.0,
+                                  ),
+                                ),
+                              ]),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(bottom: 15),
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  'DOB',
+                                  style: TextStyle(
+                                    fontFamily: 'Ubuntu',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  '${monthFormat} ${selectedDate.day} ,'
+                                  ' ${selectedDate.year} at ${_time.hour}:${_time.minute}',
+                                  style: TextStyle(
+                                    fontFamily: 'Ubuntu',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         Container(
                           margin: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 10),
@@ -705,17 +770,21 @@ class _RegisterState extends State<Register> {
                               ///firebase
                               if (nameController.text.isNotEmpty &&
                                   emailController.text.isNotEmpty &&
-                                  jadhagamLink!.isNotEmpty &&
-                                  profilePictureLink!.isNotEmpty &&
                                   widget.userNumber!.isNotEmpty &&
                                   birthPlace != null &&
                                   date != null) {
                                 _firestore.collection("newusers").add({
                                   "name": nameController.text,
                                   "email": emailController.text,
-                                  "jadhagam": jadhagamLink,
-                                  'profile': profilePictureLink,
+                                  "jadhagam": jadhagamLink == null
+                                      ? oldJadhagamLink
+                                      : jadhagamLink,
+                                  'profile': profilePictureLink == null
+                                      ? oldProfileLink
+                                      : profilePictureLink,
                                   'phoneNumber': widget.userNumber,
+
+                                  ///todo widget.userNumber
                                   "birthPlace": birthPlace,
                                   "birthTime": date,
                                   "subscribe": false,
@@ -823,6 +892,20 @@ class _RegisterState extends State<Register> {
     if (task == null) return;
 
     final snapshot = await task!.whenComplete(() {
+      Get.snackbar(
+        "Hello user!",
+        "Jadhagam uploaded successfully",
+        icon: Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.blue[500],
+        borderRadius: 10,
+        margin: EdgeInsets.all(12),
+        colorText: Colors.white,
+        duration: Duration(seconds: 4),
+        isDismissible: true,
+        dismissDirection: SnackDismissDirection.HORIZONTAL,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
       print('profile picture uploaded');
     });
     final urlDownload = await snapshot.ref.getDownloadURL();
@@ -857,6 +940,20 @@ class _RegisterState extends State<Register> {
 
     final snapshot = await task!.whenComplete(() {
       print('profile picture uploaded');
+      Get.snackbar(
+        "Hello user!",
+        "profile uploaded successfully",
+        icon: Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.blue[500],
+        borderRadius: 10,
+        margin: EdgeInsets.all(12),
+        colorText: Colors.white,
+        duration: Duration(seconds: 4),
+        isDismissible: true,
+        dismissDirection: SnackDismissDirection.HORIZONTAL,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
 
       ///Todo snakbar upload
     });

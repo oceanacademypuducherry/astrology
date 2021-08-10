@@ -8,6 +8,11 @@ class ForumContreller extends GetxController {
   final userSession = ''.obs;
   final sessionUserInfo = {}.obs;
   final userDocumentId = ''.obs;
+  final isShow = false.obs;
+
+  setIsShow(show) {
+    isShow(show);
+  }
 
   setUserDocumentId(documentId) {
     userDocumentId(documentId);

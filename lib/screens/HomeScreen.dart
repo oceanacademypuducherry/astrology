@@ -30,8 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   setSessionDatas() async {
     var userDatas = await _firestore.collection('newusers').get();
+    print('${_forumContreller.userSession}gggggggggggggggggggg');
     for (var i in userDatas.docs) {
-      if (i['phoneNumber'] == _forumContreller.userSession) {
+      print('coming inside for');
+      if (i['phoneNumber'] == '+91 1234567890') {
+        print('coming inside');
+        print('${i.data}');
+        print('${i.id}');
         Get.find<ForumContreller>().setUserInfo(i.data());
         Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
       }
@@ -471,28 +476,3 @@ class ArticleFromDb extends StatelessWidget {
     );
   }
 }
-
-// GestureDetector(
-// child: Container(
-// margin: EdgeInsets.all(10.0),
-// decoration: BoxDecoration(
-// borderRadius:
-// BorderRadius.circular(8.0),
-// image: DecorationImage(
-// image: NetworkImage(images),
-// fit: BoxFit.cover,
-// ),
-// ),
-// ),
-// onTap: () {
-// Get.to(
-// () => ArticleDescription(
-// description:
-// articleDescription,
-// ),
-// transition:
-// Transition.rightToLeft,
-// curve: Curves.easeInToLinear,
-// duration: Duration(
-// milliseconds: 600));
-// });
