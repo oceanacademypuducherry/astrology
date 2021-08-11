@@ -272,7 +272,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               // ignore: missing_return
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
-                                  return Text("Loading...");
+                                  return LinearProgressIndicator(
+                                    color: Colors.blue[900],
+                                  );
                                 } else {
                                   final messages = snapshot.data!;
                                   for (var message in messages.docs) {
@@ -334,7 +336,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       decoration: BoxDecoration(
                                                           image: DecorationImage(
                                                               image: NetworkImage(updatedProfile == null
-                                                                  ? '${getProfilePicture}'
+                                                                  ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
                                                                   : '${updatedProfile}'),
                                                               fit: BoxFit.cover),
                                                           border: Border.all(
@@ -369,7 +371,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                         fontSize: 12,
                                                       ),
                                                     ),
-                                                    child: const Text('Update Profile'),
+                                                    child: const Text('Upload Profile'),
                                                   ),
                                                 ],
                                               ),
@@ -420,7 +422,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                         fontSize: 12,
                                                       ),
                                                     ),
-                                                    child: const Text('Update Jadhagam'),
+                                                    child: const Text('Upload Jadhagam'),
                                                   ),
                                                 ],
                                               ),
