@@ -48,7 +48,7 @@ class _LoginState extends State<Login> {
             child: ListView(
               children: [
                 SizedBox(
-                  height: 100,
+                  height: 50,
                 ),
                 Image.asset(
                   'images/login 1.png',
