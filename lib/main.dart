@@ -1,7 +1,6 @@
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_controller.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
-
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,7 +24,10 @@ void main() async {
   Get.put(ForumContreller());
   Get.put(OTPController());
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String userNumber = '+91 9342364952';
+
+  String userNumber = prefs.getString('user').toString();
+  // String userNumber = '+91 9342364952';
+
   var userDatas = await _firestore.collection('newusers').get();
   for (var i in userDatas.docs) {
     if (i['phoneNumber'] == userNumber) {
@@ -70,7 +72,9 @@ class _MyAppState extends State<MyApp> {
       child: Scaffold(
         backgroundColor: Colors.blue,
         resizeToAvoidBottomInset: false,
-        body: _forumContreller.userSession.value.isNotEmpty ? BottomNavigation() : Login(),
+        body: _forumContreller.userSession.value.isNotEmpty
+            ? BottomNavigation()
+            : Login(),
       ),
     );
   }

@@ -19,6 +19,7 @@ import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Register extends StatefulWidget {
   String? userNumber;
@@ -123,7 +124,6 @@ class _RegisterState extends State<Register> {
           fontWeight: FontWeight.normal,
           fontFamily: 'Ubuntu',
           fontSize: 14,
-          color: Colors.grey,
         ),
         // labelText: 'Name',
       ),
@@ -167,7 +167,6 @@ class _RegisterState extends State<Register> {
           fontWeight: FontWeight.normal,
           fontFamily: 'Ubuntu',
           fontSize: 14,
-          color: Colors.grey,
         ),
         // labelText: 'Name',
       ),
@@ -665,7 +664,7 @@ class _RegisterState extends State<Register> {
                           right: 20,
                         ),
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             print(widget.userNumber);
                             _firestore.collection("newusers").add({
                               "name": nameController.text,
@@ -674,6 +673,12 @@ class _RegisterState extends State<Register> {
                               'profile': profilePictureLink,
                               'PhoneNumber': widget.userNumber
                             });
+
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setString(
+                                'user', widget.userNumber.toString());
+
                             Get.to(() => BottomNavigation(),
                                 transition: Transition.rightToLeft,
                                 curve: Curves.easeInToLinear,

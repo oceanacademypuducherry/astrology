@@ -20,6 +20,12 @@ class OTPController extends GetxController {
   final otpCount = 60.obs;
   final resend = false.obs;
   final getCountryCode = '+91'.obs;
+  final isSubmited = false.obs;
+
+  setBreake(stopTimer, BuildContext context) {
+    isSubmited(stopTimer);
+    VxToast.show(context, msg: 'timerBreaked');
+  }
 
   setUserPhoneNumber(PhoneNumber) {
     userPhoneNumber(PhoneNumber);
@@ -44,20 +50,16 @@ class OTPController extends GetxController {
         (String verificationID, [int? forceResendingToken]) {
       VxToast.show(context, msg: 'verification code sent on the phone number');
       verifyId.value = verificationID;
-      countdown();
+      countdown(context);
       Get.to(OTP());
     };
     PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
         (String verificationID) {
-      VxDialog.showAlert(context,
-          title: "Login Failed",
-          content: "Request Timeout Try Again", onPressed: () {
-        Get.off(Login());
-      });
+      print(
+          '..........................................timeOut .......................................');
     };
     try {
       await _auth.verifyPhoneNumber(
-          timeout: Duration(seconds: 60),
           phoneNumber: phoneNumber,
           verificationCompleted: verificationCompleted,
           verificationFailed: verificationFailed,
@@ -80,31 +82,32 @@ class OTPController extends GetxController {
       final getUserData = await _firestore.collection('newusers').get();
 
       for (var userData in getUserData.docs) {
-        if (_forumContreller.userSession == userData['phoneNumber']) {
+        if (userPhoneNumber.value.toString() == userData['phoneNumber']) {
           ourUser = true;
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString('user', userPhoneNumber.value);
+          await prefs.setString('user', userPhoneNumber.value.toString());
           String userNumber = prefs.getString('user').toString();
           print(userData.data());
           _forumContreller.setUserSession(userPhoneNumber.value.toString());
           _forumContreller.setUserInfo(userData.data());
           _forumContreller.setUserDocumentId(userData.id);
-          break;
         }
       }
 
       if (ourUser) {
+        setBreake(true, context);
         Get.to(() => BottomNavigation(),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
             duration: Duration(milliseconds: 600));
-        Get.snackbar('success', "You are loggesd in",
+        Get.snackbar('success', "You are loged in",
             backgroundColor: Colors.black, colorText: Colors.white);
       } else {
         print('else working ');
-        Get.to(
+        setBreake(true, context);
+        Get.off(
             () => Register(
-                  userNumber: _forumContreller.userSession.value.toString(),
+                  userNumber: userPhoneNumber.value,
                 ),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
@@ -121,15 +124,24 @@ class OTPController extends GetxController {
     }
   }
 
-  countdown() async {
-    resend.value = false;
+  countdown(BuildContext context) async {
     otpCount.value = 60;
+    resend.value = false;
     while (otpCount.value > 0) {
       await Future.delayed(Duration(seconds: 1));
       otpCount(otpCount.value - 1);
+      if (isSubmited.value) {
+        break;
+      }
       if (otpCount.value == 0) {
+        VxDialog.showAlert(context,
+            title: "Login Failed",
+            content: "Request Timeout Try Again", onPressed: () {
+          Get.off(Login());
+        });
         resend.value = true;
       }
     }
+    print('timer breaked kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
   }
 }
