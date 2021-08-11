@@ -78,17 +78,24 @@ class _BooksDescriptionState extends State<BooksDescription> {
     });
     print('uploaded successfully');
     Get.to(() => PaymentSuccessfully(),
-        transition: Transition.rightToLeft, curve: Curves.easeInToLinear, duration: Duration(milliseconds: 600));
-    Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!, toastLength: Toast.LENGTH_SHORT);
+        transition: Transition.rightToLeft,
+        curve: Curves.easeInToLinear,
+        duration: Duration(milliseconds: 600));
+    Fluttertoast.showToast(
+        msg: "SUCCESS: " + response.paymentId!,
+        toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
     Fluttertoast.showToast(
-        msg: "ERROR: " + response.code.toString() + " - " + response.message!, toastLength: Toast.LENGTH_SHORT);
+        msg: "ERROR: " + response.code.toString() + " - " + response.message!,
+        toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    Fluttertoast.showToast(msg: "EXTERNAL_WALLET: " + response.walletName!, toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: " + response.walletName!,
+        toastLength: Toast.LENGTH_SHORT);
   }
 
   void openCheckout() async {
@@ -250,7 +257,9 @@ class _BooksDescriptionState extends State<BooksDescription> {
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  widget.bookType == 'free' ? widget.bookType : "₹ ${widget.bookType}",
+                                  widget.bookType == 'free'
+                                      ? widget.bookType
+                                      : "₹ ${widget.bookType}",
                                   style: TextStyle(
                                     color: Colors.blue,
                                     fontSize: 10,
@@ -266,7 +275,8 @@ class _BooksDescriptionState extends State<BooksDescription> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 20),
                           child: OutlinedButton(
                               onPressed: widget.bookType == 'free'
                                   ? () {
@@ -274,10 +284,15 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                       setState(() {
                                         isOpen = true;
                                       });
-                                      Get.to(() => PdfView(pdfLink: widget.pdfLink),
+                                      Get.to(
+                                          () => PdfView(
+                                                pdfLink: widget.pdfLink,
+                                                appBarName: "VIEW BOOK",
+                                              ),
                                           transition: Transition.rightToLeft,
                                           curve: Curves.easeInToLinear,
-                                          duration: Duration(milliseconds: 600));
+                                          duration:
+                                              Duration(milliseconds: 600));
                                       // _pdfViewerKey.currentState
                                       //     ?.openBookmarkView();
                                     }
@@ -299,7 +314,9 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                   height: 1,
                                 ),
                               ),
-                              child: widget.bookType == 'free' ? Text('View Pdf') : Text('Proceed to pay')),
+                              child: widget.bookType == 'free'
+                                  ? Text('View Pdf')
+                                  : Text('Proceed to pay')),
                         ),
                       ],
                     ),

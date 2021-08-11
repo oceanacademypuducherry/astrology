@@ -3,7 +3,8 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PdfView extends StatefulWidget {
   String pdfLink;
-  PdfView({required this.pdfLink});
+  String appBarName;
+  PdfView({required this.pdfLink, required this.appBarName});
   @override
   _PdfViewState createState() => _PdfViewState();
 }
@@ -14,7 +15,7 @@ class _PdfViewState extends State<PdfView> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('VIEW PDF'),
+        title: Text('${widget.appBarName}'),
       ),
       body: SfPdfViewer.network(
         '${widget.pdfLink}',

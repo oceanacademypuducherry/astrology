@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
-import 'package:better_player/better_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 // class YoutubeScreen extends StatefulWidget {
@@ -81,7 +78,12 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubeScreen extends StatefulWidget {
   String vedioLink;
-  YoutubeScreen({required this.vedioLink});
+  String vedioName;
+  String vedioDescription;
+  YoutubeScreen(
+      {required this.vedioLink,
+      required this.vedioDescription,
+      required this.vedioName});
   @override
   _YoutubeScreenState createState() => _YoutubeScreenState();
 }
@@ -106,8 +108,51 @@ class _YoutubeScreenState extends State<YoutubeScreen> {
           appBar: AppBar(
             title: Text("Youtube Video Player"),
           ),
-          body: Container(
-            child: player,
+          body: Column(
+            children: [
+              Container(
+                child: player,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage('images/admin.jpg'),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      '${widget.vedioName}',
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 18,
+                        fontFamily: 'Ubuntu',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Text(
+                  '${widget.vedioDescription}',
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 18,
+                    fontFamily: 'Ubuntu',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },

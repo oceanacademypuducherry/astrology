@@ -42,38 +42,39 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
     9: false,
   };
   List timing = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  List freeTime = [];
+  // List freeTime = [];
   bool _hasBeenPressed = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     print(widget.dbList);
+    print('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
   }
 
-  void getAvailable(String date) async {
-    print("---------------------------");
-    await for (var snapshot in _firestore
-        .collection('availableTime')
-        .snapshots(includeMetadataChanges: true)) {
-      for (var message in snapshot.docs) {
-        print('available time');
-        String getTime = message['time'];
-        print(getTime);
-        print('+++++++++++++');
-        freeTime.add(DateTime.parse('${date} ${getTime}'));
-        print(freeTime);
-      }
-
-      print('++++++++++++++++++');
-
-      print("---------------------------");
-    }
-  }
+  // void getAvailable(String date) async {
+  //   print("---------------------------");
+  //   await for (var snapshot in _firestore
+  //       .collection('availableTime')
+  //       .snapshots(includeMetadataChanges: true)) {
+  //     for (var message in snapshot.docs) {
+  //       print('available time');
+  //       String getTime = message['time'];
+  //       print(getTime);
+  //       print('+++++++++++++');
+  //       freeTime.add(DateTime.parse('${date} ${getTime}'));
+  //       print(freeTime);
+  //     }
+  //
+  //     print('++++++++++++++++++');
+  //
+  //     print("---------------------------");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
-    getAvailable(widget.focusedDate);
+    // getAvailable(widget.focusedDate);
     List time_slot = [
       DateTime.parse('${widget.focusedDate} 09:00'),
       DateTime.parse('${widget.focusedDate} 10:00'),
@@ -87,7 +88,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
       DateTime.parse('${widget.focusedDate} 18:00'),
     ];
     // print(widget.dbList);
-    print(freeTime);
+    // print(freeTime);
 
     // minTime(time_slot);
 
@@ -166,7 +167,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                     },
                               child: Card(
                                 shadowColor: Colors.grey[100],
-                                color: widget.dbList.contains(freeTime[i])
+                                color: widget.dbList.contains(time_slot[i])
                                     ? Colors.black.withOpacity(0.05)
                                     : colorChange[i]
                                         ? Colors.green[100]
