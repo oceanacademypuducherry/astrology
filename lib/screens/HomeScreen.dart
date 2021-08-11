@@ -13,6 +13,7 @@ import 'package:astrology_app/screens/vedioPlayer/Network_vedio_player.dart';
 import 'package:astrology_app/screens/vedioPlayer/youtubeScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print('${_forumContreller.userSession}gggggggggggggggggggg');
     for (var i in userDatas.docs) {
       print('coming inside for');
-      if (i['phoneNumber'] == '+91 1234567890') {
+      if (i['phoneNumber'] == _forumContreller.userSession.value) {
         print('coming inside');
         print('${i.data}');
         print('${i.id}');
@@ -343,8 +344,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             BorderRadius.circular(8.0),
                                         image: DecorationImage(
                                           image: AssetImage(
-                                              "images/premiumlock.png"),
-                                          fit: BoxFit.cover,
+                                              "images/thumbnail_.png"),
+                                          fit: BoxFit.contain,
                                         ),
                                       ),
                                     ),
@@ -384,9 +385,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             BorderRadius.circular(8.0),
                                         image: DecorationImage(
                                           image: AssetImage(
-                                            "images/freevideo.png",
+                                            "images/thumbnail_2.png",
                                           ),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.contain,
                                         ),
                                       ),
                                     ),

@@ -332,7 +332,7 @@ class _ForumState extends State<Forum> {
                                         ],
                                       ),
                                       Text(
-                                        '${forum['answers'].length} Answers',
+                                        '${forum['answers'].length} Show Answers',
                                         style: TextStyle(
                                           color: Colors.grey[600],
                                           fontSize: 14,
