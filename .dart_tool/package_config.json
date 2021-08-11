@@ -2,6 +2,12 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "agora_rtc_engine",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/agora_rtc_engine-4.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "archive",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.1.2",
       "packageUri": "lib/",
@@ -374,6 +380,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "json_annotation",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "keyboard_dismisser",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/keyboard_dismisser-2.0.0",
       "packageUri": "lib/",
@@ -460,6 +472,18 @@
     {
       "name": "pedantic",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "permission_handler",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.4+2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "permission_handler_platform_interface",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_platform_interface-3.6.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -609,7 +633,7 @@
     },
     {
       "name": "table_calendar",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/table_calendar-3.0.1",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/table_calendar-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -770,7 +794,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-08-10T13:02:31.970513Z",
+  "generated": "2021-08-11T07:50:25.937698Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

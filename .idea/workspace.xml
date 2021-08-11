@@ -25,7 +25,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="testing 4">
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="11-08 checking 2">
+      <change afterPath="$PROJECT_DIR$/lib/zoom/agora.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
@@ -42,16 +43,15 @@
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/notification_api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/notification_api.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/zoom/webView.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/zoom/webView.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -452,7 +452,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628599602193</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="11-08 checking 1">
+      <created>1628663032573</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1628663032596</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -468,8 +475,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated video orientation issue" />
-    <MESSAGE value="updated profile screen" />
     <MESSAGE value="edit completed" />
     <MESSAGE value="app icon changed" />
     <MESSAGE value="profile" />
@@ -493,7 +498,9 @@
     <MESSAGE value="today testing 2" />
     <MESSAGE value="testing 3" />
     <MESSAGE value="testing 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing 4" />
+    <MESSAGE value="11-08 checking 1" />
+    <MESSAGE value="11-08 checking 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="11-08 checking 2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="383" key="#Notifications" timestamp="1628317220045">
@@ -520,30 +527,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="403" key="GridCell.Tab.0.bottom" timestamp="1628660600609">
+    <state width="1877" height="362" key="GridCell.Tab.0.bottom" timestamp="1628671464168">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="403" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628660600609" />
-    <state width="1860" height="403" key="GridCell.Tab.0.center" timestamp="1628660600609">
+    <state width="1877" height="362" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1628671464168" />
+    <state width="1877" height="362" key="GridCell.Tab.0.center" timestamp="1628671464168">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="403" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628660600609" />
-    <state width="1860" height="403" key="GridCell.Tab.0.left" timestamp="1628660600609">
+    <state width="1877" height="362" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1628671464168" />
+    <state width="1877" height="362" key="GridCell.Tab.0.left" timestamp="1628671464168">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="403" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628660600609" />
-    <state width="1860" height="403" key="GridCell.Tab.0.right" timestamp="1628660600609">
+    <state width="1877" height="362" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1628671464168" />
+    <state width="1877" height="362" key="GridCell.Tab.0.right" timestamp="1628671464168">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="403" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628660600609" />
+    <state width="1877" height="362" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1628671464168" />
     <state x="184" y="86" key="MergeDialog" timestamp="1628660253612">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="184" y="86" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628660253612" />
-    <state x="591" y="281" key="MultipleFileMergeDialog" timestamp="1628599722022">
+    <state x="591" y="281" key="MultipleFileMergeDialog" timestamp="1628663133297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628599722022" />
+    <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628663133297" />
     <state x="336" y="77" key="SettingsEditor" timestamp="1627717639509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -552,10 +559,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628317221299" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628599759693">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1628663144583">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628599759693" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1628663144583" />
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1628504184871">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -580,17 +587,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="532" y="237" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1628594162065" />
-    <state x="623" y="229" width="840" height="678" key="search.everywhere.popup" timestamp="1628314848360">
+    <state x="623" y="229" width="840" height="678" key="search.everywhere.popup" timestamp="1628668287170">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="229" width="840" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1628314848360" />
+    <state x="623" y="229" width="840" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1628668287170" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/main.dart</url>
-          <line>44</line>
+          <line>41</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">

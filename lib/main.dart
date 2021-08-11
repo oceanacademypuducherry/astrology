@@ -1,9 +1,6 @@
-import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_controller.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
-import 'package:astrology_app/zoom/contentFromApi.dart';
-import 'package:astrology_app/zoom/webView.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +35,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: WebViewIntegration()),
+      home: Scaffold(body: MyApp()),
     ),
   );
 }
