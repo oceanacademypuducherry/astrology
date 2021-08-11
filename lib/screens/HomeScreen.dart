@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             // ignore: missing_return
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
-                                return Text("Loading...");
+                                return CircularProgressIndicator();
                               } else {
                                 final articles = snapshot.data!.docs;
                                 return Container(

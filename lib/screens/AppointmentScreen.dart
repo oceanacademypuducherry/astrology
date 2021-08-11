@@ -246,7 +246,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   // ignore: missing_return
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return Text("Loading...");
+                      return CircularProgressIndicator();
                     } else {
                       final bookings = snapshot.data!.docs;
                       return Container(

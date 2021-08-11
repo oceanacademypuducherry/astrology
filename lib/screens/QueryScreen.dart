@@ -51,7 +51,7 @@ class _QueryScreenState extends State<QueryScreen> {
                               // ignore: missing_return
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
-                                  return Text("Loading...");
+                                  return CircularProgressIndicator();
                                 } else {
                                   final messages = snapshot.data!.docs;
                                   List<QueryDb> queryDetails = [];
