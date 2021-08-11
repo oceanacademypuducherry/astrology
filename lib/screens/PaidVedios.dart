@@ -3,6 +3,7 @@ import 'package:astrology_app/screens/vedioPlayer/youtubeScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class PaidVedios extends StatelessWidget {
   // FreeVideos({Key? key}) : super(key: key);
@@ -41,7 +42,7 @@ class PaidVedios extends StatelessWidget {
                           // ignore: missing_return
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
-                              return Text("Loading...");
+                              return CircularProgressIndicator();
                             } else {
                               final messages = snapshot.data!.docs;
                               List<PaidVediosDb> vedioList = [];
