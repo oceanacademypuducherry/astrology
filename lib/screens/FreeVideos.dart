@@ -50,6 +50,7 @@ class FreeVideos extends StatelessWidget {
                                 final vedioImage = message['imageLink'];
                                 final vedioUrl = message['vedioUrl'];
                                 final title = message['title'];
+                                final description = message['description'];
 
                                 final freeVedios = FreeVedioDb(
                                   vedioImage: vedioImage,
@@ -57,8 +58,11 @@ class FreeVideos extends StatelessWidget {
                                   vedioTitle: title,
                                   onpress: () {
                                     Get.to(
-                                        () =>
-                                            YoutubeScreen(vedioLink: vedioUrl),
+                                        () => YoutubeScreen(
+                                              vedioLink: vedioUrl,
+                                              vedioDescription: description,
+                                              vedioName: title,
+                                            ),
                                         transition: Transition.topLevel,
                                         // fullscreenDialog: true,
                                         curve: Curves.easeInToLinear,

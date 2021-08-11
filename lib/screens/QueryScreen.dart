@@ -66,7 +66,10 @@ class _QueryScreenState extends State<QueryScreen> {
                                       pdfLink: answerLink,
                                       onpress: () {
                                         Get.to(
-                                            () => PdfView(pdfLink: answerLink),
+                                            () => PdfView(
+                                                  pdfLink: answerLink,
+                                                  appBarName: 'VIEW ANSWER',
+                                                ),
                                             transition: Transition.rightToLeft,
                                             curve: Curves.easeInToLinear,
                                             duration:

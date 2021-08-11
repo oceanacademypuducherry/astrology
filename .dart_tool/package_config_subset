@@ -2,10 +2,6 @@ astrology_app
 2.12
 file:///C:/Users/kjaya/Documents/flutter/astrology/
 file:///C:/Users/kjaya/Documents/flutter/astrology/lib/
-agora_rtc_engine
-2.12
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/agora_rtc_engine-4.0.6/
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/agora_rtc_engine-4.0.6/lib/
 archive
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.1.2/
@@ -242,10 +238,6 @@ js
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/lib/
-json_annotation
-2.12
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.0.1/
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/json_annotation-4.0.1/lib/
 keyboard_dismisser
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/keyboard_dismisser-2.0.0/
@@ -306,14 +298,6 @@ pedantic
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1/lib/
-permission_handler
-2.12
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.4+2/
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.4+2/lib/
-permission_handler_platform_interface
-2.12
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_platform_interface-3.6.1/
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_platform_interface-3.6.1/lib/
 petitparser
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-4.1.0/
@@ -486,10 +470,6 @@ wakelock_windows
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_windows-0.1.0+1/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_windows-0.1.0+1/lib/
-webview_flutter
-2.12
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter-2.0.10/
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter-2.0.10/lib/
 win32
 2.13
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.2.5/

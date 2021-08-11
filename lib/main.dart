@@ -1,3 +1,4 @@
+import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_controller.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
@@ -52,7 +53,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   ForumContreller _forumContreller = Get.find<ForumContreller>();
-  // route = MyApp.session != null ? HomeScreen() : Login();
 
   @override
   void initState() {

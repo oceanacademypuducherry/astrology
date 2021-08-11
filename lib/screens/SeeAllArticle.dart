@@ -66,6 +66,7 @@ class SeeAllArticle extends StatelessWidget {
                                   onpress: () {
                                     Get.to(
                                         () => ArticleDescription(
+                                              articleTitle: articleName,
                                               description: articleDescription,
                                             ),
                                         transition: Transition.rightToLeft,
