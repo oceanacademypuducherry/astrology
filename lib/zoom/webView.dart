@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -7,7 +9,10 @@ class WebViewIntegration extends StatefulWidget {
 }
 
 class _WebViewIntegrationState extends State<WebViewIntegration> {
-  late WebViewController _controller;
+  // late WebViewController _controller;
+  final Completer<WebViewController> _controller =
+      Completer<WebViewController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,11 +21,10 @@ class _WebViewIntegrationState extends State<WebViewIntegration> {
         ),
         body: SafeArea(
           child: WebView(
-            initialUrl:
-                'https://us02web.zoom.us/j/88982175765?pwd=bldhd2pWbkNtSzVQTTM0WHF6dmM5UT09',
+            initialUrl: 'https://www.digitalocean.com',
             javascriptMode: JavascriptMode.disabled,
-            onWebViewCreated: (WebViewController web) {
-              _controller = web;
+            onWebViewCreated: (WebViewController webViewController) {
+              _controller.complete(webViewController);
             },
           ),
         ));
