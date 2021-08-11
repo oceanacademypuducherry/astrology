@@ -77,10 +77,10 @@ class _BooksScreenState extends State<BooksScreen> {
                                 ),
                               ),
                               Container(
-                                height: 15,
+                                height: 10,
                                 child: Icon(
                                   Icons.arrow_drop_down_outlined,
-                                  size: 12,
+                                  size: 15,
                                   color: Colors.blue.withOpacity(0.8),
                                 ),
                               ),
@@ -173,125 +173,6 @@ class BooksDb extends StatefulWidget {
 }
 
 class _BooksDbState extends State<BooksDb> {
-  Widget? BottomSheet(String imageLink, String description, String bookName, String pdfLink, String type) {
-    Get.bottomSheet(
-      Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 20,
-          horizontal: 30,
-        ),
-        width: double.infinity,
-        height: 170,
-        color: Colors.white,
-        child: Row(
-          children: [
-            Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    height: 120,
-                    width: 100,
-                    child: Image.network(
-                      imageLink,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15),
-                  height: 55,
-                  width: 140,
-                  child: Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          bookName,
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.7),
-                            fontSize: 14,
-                            height: 1.3,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: "Ubuntu",
-                            letterSpacing: 0.6,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'BY GURUJI',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 10,
-                            fontFamily: "Ubuntu",
-                            letterSpacing: 0.4,
-                            height: 1,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          type,
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 10,
-                            fontFamily: "Ubuntu",
-                            letterSpacing: 0.4,
-                            height: 1,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                OutlinedButton(
-                    onPressed: () {
-                      Get.to(BooksDescription(
-                        description: description,
-                        bookImage: imageLink,
-                        bookType: type,
-                        bookName: bookName,
-                        pdfLink: pdfLink,
-                      ));
-                    },
-                    child: Text('PreView'))
-              ],
-            )
-          ],
-        ),
-      ),
-      barrierColor: Colors.black.withOpacity(0.7),
-      isDismissible: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
-        side: BorderSide(
-          width: 0.1,
-          color: Colors.black,
-        ),
-      ),
-      enableDrag: true,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -369,7 +250,7 @@ class _BooksDbState extends State<BooksDb> {
                             Container(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                widget.bookType,
+                                widget.bookType == 'free' ? widget.bookType : "₹ ${widget.bookType}",
                                 style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 10,
@@ -456,6 +337,14 @@ class _BooksDbState extends State<BooksDb> {
 
                         // alignment: Alignment.center,
                       ),
+                    ),
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      color: widget.bookType == 'free' ? Colors.transparent : Colors.black26,
+                      height: 180,
+                      width: 135,
                     ),
                   ),
                   Container(
