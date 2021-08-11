@@ -50,6 +50,7 @@ class PaidVedios extends StatelessWidget {
                                 final vedioImage = message['vedioImage'];
                                 final vedioUrl = message['vedioUrl'];
                                 final title = message['title'];
+                                final description = message['description'];
 
                                 final freeVedios = PaidVediosDb(
                                   vedioImage: vedioImage,
@@ -57,8 +58,11 @@ class PaidVedios extends StatelessWidget {
                                   vedioTitle: title,
                                   onpress: () {
                                     Get.to(
-                                        () =>
-                                            NativeVedioUrl(vedioUrl: vedioUrl),
+                                        () => NativeVedioUrl(
+                                              vedioUrl: vedioUrl,
+                                              videoDescription: description,
+                                              videoTitle: title,
+                                            ),
                                         transition: Transition.topLevel,
                                         // fullscreenDialog: true,
                                         curve: Curves.easeInToLinear,

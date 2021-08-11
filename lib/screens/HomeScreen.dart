@@ -1,16 +1,11 @@
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/atentication/login.dart';
-import 'package:astrology_app/main.dart';
-import 'package:astrology_app/payment%20info/payment_successfuly.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/FreeVideos.dart';
 import 'package:astrology_app/screens/PaidVedios.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
-
-import 'package:astrology_app/screens/vedioPlayer/Network_vedio_player.dart';
-import 'package:astrology_app/screens/vedioPlayer/youtubeScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
