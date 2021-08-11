@@ -1,4 +1,5 @@
 import 'package:astrology_app/Forum/forumController.dart';
+import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/main.dart';
 import 'package:astrology_app/payment%20info/payment_successfuly.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
@@ -7,7 +8,7 @@ import 'package:astrology_app/screens/PaidVedios.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
-import 'package:astrology_app/screens/loginscreen.dart';
+
 import 'package:astrology_app/screens/vedioPlayer/Network_vedio_player.dart';
 import 'package:astrology_app/screens/vedioPlayer/youtubeScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -82,22 +83,22 @@ class _HomeScreenState extends State<HomeScreen> {
               (BuildContext context, int index) {
                 return Column(
                   children: [
-                    // TextButton(
-                    //     onPressed: () async {
-                    //       SharedPreferences pref =
-                    //           await SharedPreferences.getInstance();
-                    //
-                    //       pref.clear();
-                    //
-                    //       Get.to(
-                    //         () => Login(),
-                    //         transition: Transition.rightToLeft,
-                    //         curve: Curves.easeInToLinear,
-                    //         duration: Duration(milliseconds: 600),
-                    //       );
-                    //       print('logout');
-                    //     },
-                    //     child: Text('log out')),
+                    TextButton(
+                        onPressed: () async {
+                          SharedPreferences pref =
+                              await SharedPreferences.getInstance();
+
+                          pref.clear();
+
+                          Get.to(
+                            () => Login(),
+                            transition: Transition.rightToLeft,
+                            curve: Curves.easeInToLinear,
+                            duration: Duration(milliseconds: 600),
+                          );
+                          print('logout');
+                        },
+                        child: Text('log out')),
                     // TextButton(
                     //   child: Text('Payment'),
                     //   onPressed: () async {

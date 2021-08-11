@@ -105,7 +105,9 @@ class _BooksScreenState extends State<BooksScreen> {
                           // ignore: missing_return
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
-                              return Text("Loading...");
+                              return LinearProgressIndicator(
+                                color: Colors.blue[900],
+                              );
                             } else {
                               final messages = snapshot.data!.docs;
                               List<BooksDb> Books = [];

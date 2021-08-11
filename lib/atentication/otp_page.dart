@@ -1,4 +1,5 @@
 import 'package:astrology_app/Forum/forumController.dart';
+import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -95,8 +96,17 @@ class _OTPState extends State<OTP> {
                     .make()
                     .px12()
                     .onInkTap(() async {
-                  await _otpController.signWithPhoneNumber(
-                      smsCode.value, context);
+                  if (_otpController.resend.value) {
+                    VxDialog.showAlert(context,
+                        title: "Login Failed",
+                        content: "Request Timeout Try Again", onPressed: () {
+                      Get.off(Login());
+                      _otpController.resend.value = false;
+                    });
+                  } else {
+                    await _otpController.signWithPhoneNumber(
+                        smsCode.value, context);
+                  }
                 }).p12(),
               ]),
         ),

@@ -18,6 +18,8 @@ import 'package:file_picker/file_picker.dart';
 
 import 'dart:typed_data';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Register extends StatefulWidget {
   String? userNumber;
   Register({this.userNumber});
@@ -50,9 +52,9 @@ class _RegisterState extends State<Register> {
   bool validation = false;
   String? getId;
   var oldJadhagamLink =
-      'https://static-s.aa-cdn.net/img/gp/20600011090269/OXbExXWz_j6TPCsvx9CCxu2Rzcy1LGFCgNO-ag_VMdcMmHb6UWo4lLPBptyYY_ToMZo=s300?v=1';
+      'https://firebasestorage.googleapis.com/v0/b/astrology-7cec1.appspot.com/o/profile%2Fjadhagam.webp?alt=media&token=4a51f0f5-6ea2-4b02-8089-1aba928cc736';
   var oldProfileLink =
-      'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png';
+      'https://firebasestorage.googleapis.com/v0/b/astrology-7cec1.appspot.com/o/profile%2Fprofile.png?alt=media&token=8045a2e6-f3ee-40b1-bf32-a571d917aff6';
 
   void user_id() async {
     print("---------------------------");
@@ -477,7 +479,6 @@ class _RegisterState extends State<Register> {
                                       ),
                                     ),
                                     Container(
-                                      color: Colors.grey.shade100,
                                       height: 40,
                                       // color: Colors.pinkAccent,
                                       child: _buildName(),
@@ -747,7 +748,7 @@ class _RegisterState extends State<Register> {
                             right: 20,
                           ),
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               date = DateTime(
                                   selectedDate.year,
                                   selectedDate.month,
@@ -789,6 +790,10 @@ class _RegisterState extends State<Register> {
                                   "birthTime": date,
                                   "subscribe": false,
                                 });
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.setString(
+                                    'user', widget.userNumber.toString());
 
                                 Get.off(() => BottomNavigation(),
                                     transition: Transition.rightToLeft,

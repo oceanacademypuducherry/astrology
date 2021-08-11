@@ -23,7 +23,10 @@ void main() async {
   Get.put(ForumContreller());
   Get.put(OTPController());
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String userNumber = '+91 9342364952';
+
+  String userNumber = prefs.getString('user').toString();
+  // String userNumber = '+91 9342364952';
+
   var userDatas = await _firestore.collection('newusers').get();
   for (var i in userDatas.docs) {
     if (i['phoneNumber'] == userNumber) {
@@ -70,7 +73,7 @@ class _MyAppState extends State<MyApp> {
         resizeToAvoidBottomInset: false,
         body: _forumContreller.userSession.value.isNotEmpty
             ? BottomNavigation()
-            : BottomNavigation(),
+            : Login(),
       ),
     );
   }
