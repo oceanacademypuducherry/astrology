@@ -84,22 +84,22 @@ class _HomeScreenState extends State<HomeScreen> {
               (BuildContext context, int index) {
                 return Column(
                   children: [
-                    TextButton(
-                        onPressed: () async {
-                          SharedPreferences pref =
-                              await SharedPreferences.getInstance();
-
-                          pref.clear();
-
-                          Get.to(
-                            () => Login(),
-                            transition: Transition.rightToLeft,
-                            curve: Curves.easeInToLinear,
-                            duration: Duration(milliseconds: 600),
-                          );
-                          print('logout');
-                        },
-                        child: Text('log out')),
+                    // TextButton(
+                    //     onPressed: () async {
+                    //       SharedPreferences pref =
+                    //           await SharedPreferences.getInstance();
+                    //
+                    //       pref.clear();
+                    //
+                    //       Get.to(
+                    //         () => Login(),
+                    //         transition: Transition.rightToLeft,
+                    //         curve: Curves.easeInToLinear,
+                    //         duration: Duration(milliseconds: 600),
+                    //       );
+                    //       print('logout');
+                    //     },
+                    //     child: Text('log out')),
                     // TextButton(
                     //   child: Text('Payment'),
                     //   onPressed: () async {
