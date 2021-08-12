@@ -789,6 +789,7 @@ class _RegisterState extends State<Register> {
                                   "birthPlace": birthPlace,
                                   "birthTime": date,
                                   "subscribe": false,
+                                  "books": "",
                                 });
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();

@@ -63,7 +63,7 @@ class _BooksDescriptionState extends State<BooksDescription> {
     _razorpay.clear();
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     _firestore.collection('BookPaymentDetails').add({
       'time': DateTime.now(),
       'phoneNumber': _forumContreller.userSession.value,
@@ -73,9 +73,18 @@ class _BooksDescriptionState extends State<BooksDescription> {
       'bookName': widget.bookName,
     });
 
-    _firestore.collection('books').doc('${getId}').update({
-      'type': 'free',
+    _firestore
+        .collection('newusers')
+        .doc('${_forumContreller.userDocumentId.value}')
+        .update({
+      'books': FieldValue.arrayUnion([widget.bookName]),
     });
+
+    var updateUser = await _firestore
+        .collection('newusers')
+        .doc(_forumContreller.userDocumentId.value)
+        .get();
+    _forumContreller.setUserInfo(updateUser.data());
     print('uploaded successfully');
     Get.to(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
@@ -118,7 +127,7 @@ class _BooksDescriptionState extends State<BooksDescription> {
     try {
       _razorpay.open(options);
     } catch (e) {
-      debugPrint('Error: e');
+      debugPrint('Error: e thhhhhhhhhhhhhhhhhhhhhhhhhh');
     }
   }
 
@@ -126,43 +135,6 @@ class _BooksDescriptionState extends State<BooksDescription> {
 
   @override
   Widget build(BuildContext context) {
-    final FlutterTts flutterTts = FlutterTts();
-    // final translator = GoogleTranslator();
-    Future _speak() async {
-      await flutterTts.setLanguage('ta');
-      var result = await flutterTts.speak("காலை வணக்கம்");
-      print('$result  playing///////////////////////////////////');
-      if (result == 1) setState(() => result = result.playing);
-    }
-
-    Future _stop() async {
-      var result = await flutterTts.stop();
-      if (result == 1) setState(() => result = result.stopped);
-    }
-
-    // Future<List<int>> _readDocumentData(String name) async {
-    //   final ByteData data = await rootBundle.load('assets/$name');
-    //   return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    // }
-    //
-    // Future<void> _extractAllText() async {
-    //   //Load the existing PDF document.
-    //   PdfDocument document = PdfDocument(
-    //       inputBytes: await _readDocumentData('pdf_succinctly.pdf'));
-    //
-    //   //Create the new instance of the PdfTextExtractor.
-    //   PdfTextExtractor extractor = PdfTextExtractor(document);
-    //
-    //   //Extract all the text from the document.
-    //   String text = extractor.extractText();
-    //
-    //   //Display the text.
-    //   // print('Translated: ${await text.translate(to: 'ta')}');
-    //   String language = "${await text.translate(to: 'ta')}";
-    //   print(language);
-    //   _showResult(language);
-    // }
-
     return Scaffold(
       body: SafeArea(
         child: Container(

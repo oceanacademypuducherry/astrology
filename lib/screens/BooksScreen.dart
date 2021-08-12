@@ -1,3 +1,4 @@
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/BooksDescription.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +15,7 @@ class BooksScreen extends StatefulWidget {
 }
 
 class _BooksScreenState extends State<BooksScreen> {
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
   @override
   Widget build(BuildContext context) {
     // final title = 'Grid List';
@@ -118,14 +120,18 @@ class _BooksScreenState extends State<BooksScreen> {
                                 final bookName = message['bookName'];
                                 final bookDescription = message['description'];
                                 final pdfLink = message['link'];
-                                print(bookName);
-                                print(pdfLink);
+
                                 final items = BooksDb(
                                   bookImage: booksLink,
                                   bookName: bookName,
                                   bookType: bookType,
                                   description: bookDescription,
                                   pdfLink: pdfLink,
+                                  userPurchased: _forumContreller
+                                          .sessionUserInfo.value['books']
+                                          .contains(bookName)
+                                      ? 'success'
+                                      : 'failure',
 
                                   // collegeLogoImage: logoImage,
                                 );
@@ -163,8 +169,10 @@ class BooksDb extends StatefulWidget {
   String bookType;
   String description;
   String pdfLink;
+  String userPurchased;
   BooksDb(
       {required this.bookImage,
+      required this.userPurchased,
       required this.bookName,
       required this.description,
       required this.bookType,
@@ -252,7 +260,9 @@ class _BooksDbState extends State<BooksDb> {
                             Container(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                widget.bookType == 'free' ? widget.bookType : "₹ ${widget.bookType}",
+                                widget.bookType == 'free'
+                                    ? widget.bookType
+                                    : "₹ ${widget.bookType}",
                                 style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 10,
@@ -288,7 +298,8 @@ class _BooksDbState extends State<BooksDb> {
                                 elevation: 5,
                                 backgroundColor: Colors.white,
                                 primary: Colors.white,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
                             child: Text(
                               'View',
                               style: TextStyle(
@@ -344,7 +355,10 @@ class _BooksDbState extends State<BooksDb> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      color: widget.bookType == 'free' ? Colors.transparent : Colors.black26,
+                      color: widget.bookType == 'free' ||
+                              widget.userPurchased == 'success'
+                          ? Colors.transparent
+                          : Colors.black26,
                       height: 180,
                       width: 135,
                     ),
@@ -352,7 +366,8 @@ class _BooksDbState extends State<BooksDb> {
                   Container(
                     child: widget.bookType == 'free'
                         ? Container(
-                            margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 5.0, horizontal: 5.0),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -370,19 +385,41 @@ class _BooksDbState extends State<BooksDb> {
                               ),
                             ),
                           )
-                        : Positioned(
-                            left: 3,
-                            top: 3,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.black54,
-                              radius: 17,
-                              child: Icon(
-                                Icons.lock,
-                                color: Colors.white,
-                                size: 20,
+                        : widget.bookType != 'free' &&
+                                widget.userPurchased == 'success'
+                            ? Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 5.0, horizontal: 5.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                padding: EdgeInsets.all(5.0),
+                                height: 23,
+                                width: 40,
+                                child: Text(
+                                  'SUCCESS',
+                                  style: TextStyle(
+                                    color: Colors.blue.withOpacity(0.8),
+                                    fontSize: 12,
+                                    fontFamily: 'Ubuntu',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              )
+                            : Positioned(
+                                left: 3,
+                                top: 3,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.black54,
+                                  radius: 17,
+                                  child: Icon(
+                                    Icons.lock,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
                   ),
                 ],
               ),

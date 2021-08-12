@@ -25,9 +25,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     super.initState();
   }
 
-  _launchURL() async {
-    const url =
-        'https://us05web.zoom.us/j/86533735047?pwd=RmVPdW82RXk2RUVuUGFWa3pFYzgwQT09';
+  _launchURL(String link) async {
+    String url = '$link';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -36,6 +35,27 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   }
 
   List dbList = [];
+  List freeTime = [];
+
+  void getFree(String date) async {
+    print("---------------------------");
+    await for (var snapshot in firestore
+        .collection('availableTime')
+        .snapshots(includeMetadataChanges: true)) {
+      for (var message in snapshot.docs) {
+        print('available time');
+        String getTime = message['time'];
+        print(getTime);
+        print('+++++++++++++');
+        freeTime.add(DateTime.parse('${date} ${getTime}'));
+        print(freeTime);
+      }
+
+      print('++++++++++++++++++');
+
+      print("---------------------------");
+    }
+  }
 
   void getAvailable() async {
     print("---------------------------");
@@ -187,10 +207,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 focusedDay = focusDay;
               });
 
-              // setState(() {
-              //   openBottomSheet(context);
-              // });
-
               formattedTime = DateFormat("yyyy-MM-dd").format(focusedDay);
               // 2020-01-02 03:04:05.000
 
@@ -198,10 +214,13 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               print(formattedTime);
               print('^^^^^^^^^^^^^^');
               print(dbList);
+
+              getFree(formattedTime.toString());
               Get.to(
                   () => AppointmentTimeScreen(
                         focusedDate: formattedTime.toString(),
                         dbList: dbList,
+                        freeList: freeTime,
                       ),
                   // transition: Transition.cupertinoDialog,
                   fullscreenDialog: true,
@@ -219,232 +238,229 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               ),
             ),
           ),
-          Container(
-            color: Colors.blue[50],
-            padding: EdgeInsets.only(bottom: 10),
-            // color: Colors.blue,
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Booking Details",
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            fontFamily: 'Ubuntu'),
-                      ),
-                    ],
-                  ),
-                ),
-                StreamBuilder<QuerySnapshot>(
-                  stream: firestore.collection('booking').snapshots(),
-                  // ignore: missing_return
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return CircularProgressIndicator();
-                    } else {
-                      final bookings = snapshot.data!.docs;
-                      return Container(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: CarouselSlider(
-                          items: [
-                            for (var book in bookings)
-                              if (book['phoneNumber'] ==
-                                  _forumContreller.userSession.value)
-                                GestureDetector(
-                                    child: Container(
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            flex: 9,
-                                            child: Container(
-                                                padding: EdgeInsets.all(5),
-                                                decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                          color: Colors.black
-                                                              .withOpacity(0.2),
-                                                          blurRadius: 5)
-                                                    ]),
-                                                margin: EdgeInsets.all(10),
-                                                height: 50,
-                                                width: 300,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      DateFormat.jm()
-                                                          .format(book['time']
-                                                              .toDate())
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                        fontSize: 30,
-                                                        color: book['time']
-                                                                        .toDate()
-                                                                        .difference(DateTime
-                                                                            .now())
-                                                                        .inSeconds <
-                                                                    600 &&
-                                                                book['time']
-                                                                        .toDate()
-                                                                        .difference(DateTime
-                                                                            .now())
-                                                                        .inSeconds >
-                                                                    0
-                                                            ? Colors.pinkAccent
-                                                            : book['time']
-                                                                        .toDate()
-                                                                        .difference(
-                                                                            DateTime.now())
-                                                                        .inSeconds >
-                                                                    0
-                                                                ? Colors.black
-                                                                : Colors.green,
-                                                      ),
-                                                    ),
-                                                    book['time']
-                                                                    .toDate()
-                                                                    .difference(
-                                                                        DateTime
-                                                                            .now())
-                                                                    .inSeconds <
-                                                                600 &&
-                                                            book['time']
-                                                                    .toDate()
-                                                                    .difference(
-                                                                        DateTime
-                                                                            .now())
-                                                                    .inSeconds >
-                                                                0
-                                                        ? Text(
-                                                            "JOIN NOW",
-                                                            style: TextStyle(
-                                                              fontSize: 25,
-                                                              color: book['time']
-                                                                              .toDate()
-                                                                              .difference(DateTime
-                                                                                  .now())
-                                                                              .inSeconds <
-                                                                          600 &&
-                                                                      book['time']
-                                                                              .toDate()
-                                                                              .difference(DateTime
-                                                                                  .now())
-                                                                              .inSeconds >
-                                                                          0
-                                                                  ? Colors
-                                                                      .pinkAccent
-                                                                  : book['time']
-                                                                              .toDate()
-                                                                              .difference(DateTime
-                                                                                  .now())
-                                                                              .inSeconds >
-                                                                          0
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .green,
-                                                            ),
-                                                          )
-                                                        : book['time']
-                                                                    .toDate()
-                                                                    .difference(
-                                                                        DateTime
-                                                                            .now())
-                                                                    .inSeconds >
-                                                                0
-                                                            ? Text(
-                                                                "NOT SCHEDULE",
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize: 25,
-                                                                  color: book['time'].toDate().difference(DateTime.now()).inSeconds <
-                                                                              600 &&
-                                                                          book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                              0
-                                                                      ? Colors
-                                                                          .pinkAccent
-                                                                      : book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                              0
-                                                                          ? Colors
-                                                                              .black
-                                                                          : Colors
-                                                                              .green,
-                                                                ),
-                                                              )
-                                                            : Text(
-                                                                "MEETING COMPLETED",
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize: 25,
-                                                                  color: book['time'].toDate().difference(DateTime.now()).inSeconds <
-                                                                              600 &&
-                                                                          book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                              0
-                                                                      ? Colors
-                                                                          .pinkAccent
-                                                                      : book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                              0
-                                                                          ? Colors
-                                                                              .black
-                                                                          : Colors
-                                                                              .green,
-                                                                ),
-                                                              ),
-                                                  ],
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    onTap: book['time']
-                                                    .toDate()
-                                                    .difference(DateTime.now())
-                                                    .inSeconds <
-                                                600 &&
-                                            book['time']
-                                                    .toDate()
-                                                    .difference(DateTime.now())
-                                                    .inSeconds >
-                                                0
-                                        ? () {
-                                            _launchURL();
-                                          }
-                                        : book['time']
-                                                    .toDate()
-                                                    .difference(DateTime.now())
-                                                    .inSeconds >
-                                                0
-                                            ? null
-                                            : null),
-                          ],
-                          //Slider Container properties
-                          options: CarouselOptions(
-                            enableInfiniteScroll: false,
-                            // height: 300.0,
-                            enlargeCenterPage: true,
-                            autoPlay: false,
-                            aspectRatio: 30 / 15,
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
-                            viewportFraction: 0.7,
-                          ),
+          SingleChildScrollView(
+            child: Container(
+              color: Colors.blue[50],
+              padding: EdgeInsets.only(bottom: 10),
+              // color: Colors.blue,
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Booking Details",
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              fontFamily: 'Ubuntu'),
                         ),
-                      );
-                    }
-                  },
-                )
-              ],
+                      ],
+                    ),
+                  ),
+                  StreamBuilder<QuerySnapshot>(
+                    stream: firestore.collection('booking').snapshots(),
+                    // ignore: missing_return
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return CircularProgressIndicator();
+                      } else {
+                        final bookings = snapshot.data!.docs;
+                        return Container(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: CarouselSlider(
+                            items: [
+                              for (var book in bookings)
+                                if (book['phoneNumber'] ==
+                                    _forumContreller.userSession.value)
+                                  GestureDetector(
+                                      child: Container(
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                              flex: 9,
+                                              child: Container(
+                                                  padding: EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                            color: Colors.black
+                                                                .withOpacity(
+                                                                    0.2),
+                                                            blurRadius: 5)
+                                                      ]),
+                                                  margin: EdgeInsets.all(10),
+                                                  height: 50,
+                                                  width: 300,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        DateFormat.jm()
+                                                            .format(book['time']
+                                                                .toDate())
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          fontSize: 20,
+                                                          color: book['time']
+                                                                          .toDate()
+                                                                          .difference(DateTime
+                                                                              .now())
+                                                                          .inSeconds <
+                                                                      600 &&
+                                                                  book['time']
+                                                                          .toDate()
+                                                                          .difference(DateTime
+                                                                              .now())
+                                                                          .inSeconds >
+                                                                      -60 * 60
+                                                              ? Colors
+                                                                  .pinkAccent
+                                                              : book['time']
+                                                                          .toDate()
+                                                                          .difference(DateTime
+                                                                              .now())
+                                                                          .inSeconds >
+                                                                      0
+                                                                  ? Colors.black
+                                                                  : Colors
+                                                                      .green,
+                                                        ),
+                                                      ),
+                                                      book['time']
+                                                                      .toDate()
+                                                                      .difference(
+                                                                          DateTime
+                                                                              .now())
+                                                                      .inSeconds <
+                                                                  600 &&
+                                                              book['time']
+                                                                      .toDate()
+                                                                      .difference(
+                                                                          DateTime
+                                                                              .now())
+                                                                      .inSeconds >
+                                                                  0
+                                                          ? Text(
+                                                              "JOIN NOW",
+                                                              style: TextStyle(
+                                                                fontSize: 20,
+                                                                color: book['time'].toDate().difference(DateTime.now()).inSeconds <
+                                                                            600 &&
+                                                                        book['time'].toDate().difference(DateTime.now()).inSeconds >
+                                                                            -60 *
+                                                                                60
+                                                                    ? Colors
+                                                                        .pinkAccent
+                                                                    : book['time'].toDate().difference(DateTime.now()).inSeconds >
+                                                                            0
+                                                                        ? Colors
+                                                                            .black
+                                                                        : Colors
+                                                                            .green,
+                                                              ),
+                                                            )
+                                                          : book['time']
+                                                                      .toDate()
+                                                                      .difference(
+                                                                          DateTime
+                                                                              .now())
+                                                                      .inSeconds >
+                                                                  0
+                                                              ? Text(
+                                                                  "NOT SCHEDULE",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        20,
+                                                                    color: book['time'].toDate().difference(DateTime.now()).inSeconds <
+                                                                                600 &&
+                                                                            book['time'].toDate().difference(DateTime.now()).inSeconds >
+                                                                                0
+                                                                        ? Colors
+                                                                            .pinkAccent
+                                                                        : book['time'].toDate().difference(DateTime.now()).inSeconds >
+                                                                                0
+                                                                            ? Colors.black
+                                                                            : Colors.green,
+                                                                  ),
+                                                                )
+                                                              : Text(
+                                                                  "MEETING COMPLETED",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        20,
+                                                                    color: book['time'].toDate().difference(DateTime.now()).inSeconds <
+                                                                                600 &&
+                                                                            book['time'].toDate().difference(DateTime.now()).inSeconds >
+                                                                                0
+                                                                        ? Colors
+                                                                            .pinkAccent
+                                                                        : book['time'].toDate().difference(DateTime.now()).inSeconds >
+                                                                                0
+                                                                            ? Colors.black
+                                                                            : Colors.green,
+                                                                  ),
+                                                                ),
+                                                    ],
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      onTap: book['time']
+                                                      .toDate()
+                                                      .difference(
+                                                          DateTime.now())
+                                                      .inSeconds <
+                                                  600 &&
+                                              book['time']
+                                                      .toDate()
+                                                      .difference(
+                                                          DateTime.now())
+                                                      .inSeconds >
+                                                  -60 * 60
+                                          ? () {
+                                              _launchURL(book['link']);
+                                            }
+                                          : book['time']
+                                                      .toDate()
+                                                      .difference(
+                                                          DateTime.now())
+                                                      .inSeconds >
+                                                  0
+                                              ? null
+                                              : null),
+                            ],
+                            //Slider Container properties
+                            options: CarouselOptions(
+                              enableInfiniteScroll: false,
+                              // height: 300.0,
+                              enlargeCenterPage: true,
+                              autoPlay: false,
+                              aspectRatio: 30 / 15,
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 800),
+                              viewportFraction: 0.7,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ],
