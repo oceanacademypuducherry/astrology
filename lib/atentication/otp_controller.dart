@@ -96,7 +96,7 @@ class OTPController extends GetxController {
 
       if (ourUser) {
         setBreake(true, context);
-        Get.to(() => BottomNavigation(),
+        Get.off(() => BottomNavigation(),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
             duration: Duration(milliseconds: 600));

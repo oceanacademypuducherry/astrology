@@ -852,7 +852,7 @@ class _RegisterState extends State<Register> {
                                   )),
                               TextButton(
                                   onPressed: () {
-                                    Get.to(() => Login(),
+                                    Get.off(() => Login(),
                                         transition: Transition.rightToLeft,
                                         curve: Curves.easeInToLinear,
                                         duration: Duration(milliseconds: 600));

@@ -4,6 +4,7 @@ import 'package:astrology_app/atentication/otp_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class OTP extends StatefulWidget {
@@ -32,83 +33,85 @@ class _OTPState extends State<OTP> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          color: Vx.white,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'images/otp 2.png',
-                  width: MediaQuery.of(context).size.width / 1.2,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Obx(
-                  () =>
-                      "Enter your OTP with in ${_otpController.otpCount.value.toString()} Second"
-                          .text
-                          .size(20)
-                          .blue400
-                          .make()
-                          .box
-                          .p4
-                          .alignCenter
-                          .make(),
-                ),
-                "OTP sent this number ${_otpController.userPhoneNumber.value}"
-                    .text
-                    .gray400
-                    .make()
-                    .box
-                    .alignCenter
-                    .make(),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    VxPinView(
-                      keyboardType: TextInputType.number,
-                      color: Vx.blue400,
-                      size: 40,
-                      obscureText: false,
-                      onChanged: (value) {
-                        smsCode.value = value;
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Obx(() => Text(
-                          _otpController.resend.value ? "Resend" : "Submit",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ))
-                    .box
-                    .p16
-                    .blue400
-                    .alignCenter
-                    .roundedSM
-                    .make()
-                    .px12()
-                    .onInkTap(() async {
-                  if (_otpController.resend.value) {
-                    VxDialog.showAlert(context,
-                        title: "Login Failed",
-                        content: "Request Timeout Try Again", onPressed: () {
-                      Get.off(Login());
-                      _otpController.resend.value = false;
-                    });
-                  } else {
-                    await _otpController.signWithPhoneNumber(
-                        smsCode.value, context);
-                  }
-                }).p12(),
-              ]),
+        child: KeyboardDismisser(
+          child: Container(
+            color: Vx.white,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'images/otp 2.png',
+                    width: MediaQuery.of(context).size.width / 1.2,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Obx(
+                    () =>
+                        "Enter your OTP with in ${_otpController.otpCount.value.toString()} Second"
+                            .text
+                            .size(20)
+                            .blue400
+                            .make()
+                            .box
+                            .p4
+                            .alignCenter
+                            .make(),
+                  ),
+                  "OTP sent this number ${_otpController.userPhoneNumber.value}"
+                      .text
+                      .gray400
+                      .make()
+                      .box
+                      .alignCenter
+                      .make(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      VxPinView(
+                        keyboardType: TextInputType.number,
+                        color: Vx.blue400,
+                        size: 40,
+                        obscureText: false,
+                        onChanged: (value) {
+                          smsCode.value = value;
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Obx(() => Text(
+                            _otpController.resend.value ? "Resend" : "Submit",
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ))
+                      .box
+                      .p16
+                      .blue400
+                      .alignCenter
+                      .roundedSM
+                      .make()
+                      .px12()
+                      .onInkTap(() async {
+                    if (_otpController.resend.value) {
+                      VxDialog.showAlert(context,
+                          title: "Login Failed",
+                          content: "Request Timeout Try Again", onPressed: () {
+                        Get.off(Login());
+                        _otpController.resend.value = false;
+                      });
+                    } else {
+                      await _otpController.signWithPhoneNumber(
+                          smsCode.value, context);
+                    }
+                  }).p12(),
+                ]),
+          ),
         ),
       ),
     );

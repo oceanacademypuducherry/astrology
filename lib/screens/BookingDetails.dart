@@ -1,7 +1,8 @@
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/payment%20info/payment_successfuly.dart';
+import 'package:astrology_app/screens/AppointmentScreen.dart';
 import 'package:astrology_app/screens/SomeoneElse.dart';
-import 'package:astrology_app/widgets/BottomNavigation.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class BookingDetails extends StatefulWidget {
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class _BookingDetailsState extends State<BookingDetails> {
+  late FlutterLocalNotificationsPlugin localNotification;
   ForumContreller _forumContreller = Get.find<ForumContreller>();
   late Razorpay _razorpay;
   Appointment _appointment = Appointment.ForMe;
@@ -91,6 +93,13 @@ class _BookingDetailsState extends State<BookingDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    var androidInitialize =
+        new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
+    var initialzationSetting =
+        new InitializationSettings(android: androidInitialize);
+    localNotification = new FlutterLocalNotificationsPlugin();
+    localNotification.initialize(initialzationSetting,
+        onSelectNotification: notificationSelected);
     getTime();
 
     _razorpay = Razorpay();
@@ -101,6 +110,17 @@ class _BookingDetailsState extends State<BookingDetails> {
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     print('************************************************');
     print(_forumContreller.userSession.value);
+  }
+
+  Future _showNotification() async {
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "channelName", "you booked",
+        importance: Importance.max);
+
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+    await localNotification.show(0, 'Hi User', 'You have booked the meeting ',
+        generalNotificationDetails);
   }
 
   @override
@@ -127,25 +147,32 @@ class _BookingDetailsState extends State<BookingDetails> {
     print('uploaded successfully');
 
     Get.off(() => PaymentSuccessfully(),
-        transition: Transition.rightToLeft, curve: Curves.easeInToLinear, duration: Duration(milliseconds: 600));
-    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+        transition: Transition.rightToLeft,
+        curve: Curves.easeInToLinear,
+        duration: Duration(milliseconds: 600));
+    print(
+        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
     print(response.paymentId);
     print(response.orderId);
     print(response.signature);
-    Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!, toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(
+        msg: "SUCCESS: " + response.paymentId!,
+        toastLength: Toast.LENGTH_SHORT);
+    _showNotification();
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
     print('*************Error******************');
     print(response.message);
-    Fluttertoast.showToast(
-        msg: "ERROR: " + response.code.toString() + " - " + response.message!, toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(msg: "ERROR");
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     print('*************WALLETETTETTE******************');
     print(response.walletName);
-    Fluttertoast.showToast(msg: "EXTERNAL_WALLET: " + response.walletName!, toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: " + response.walletName!,
+        toastLength: Toast.LENGTH_SHORT);
   }
 
   void openCheckout() async {
@@ -242,7 +269,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                           alignment: Alignment.center,
                           width: 80,
                           height: 40,
-                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -267,7 +295,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                         Container(
                           alignment: Alignment.center,
                           height: 40,
-                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -321,7 +350,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                         Container(
                           alignment: Alignment.center,
                           height: 40,
-                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -451,7 +481,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                   ///Condition  value == other means Textfield
                   _purpose == Purpose.Other
                       ? Container(
-                          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
                           decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                             boxShadow: [
@@ -572,7 +603,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                                 ///someone else page
                                 Get.to(
                                     () => SomeoneElseScreen(
-                                          appointmentFor: _appointment.toString(),
+                                          appointmentFor:
+                                              _appointment.toString(),
                                           purpose: _purpose.toString(),
                                           time: newDate,
                                           ruppess: rupees,
@@ -608,6 +640,15 @@ class _BookingDetailsState extends State<BookingDetails> {
           );
         },
       ),
+    );
+  }
+
+  Future notificationSelected(String? payload) async {
+    Get.to(
+      () => AppointmentScreen(),
+      transition: Transition.rightToLeft,
+      curve: Curves.easeInToLinear,
+      duration: Duration(milliseconds: 600),
     );
   }
 }

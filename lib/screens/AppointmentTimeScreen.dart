@@ -104,6 +104,14 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 120.0),
+                      child: Text('${widget.focusedDate}'),
+                      decoration: BoxDecoration(color: Colors.white60),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       children: [
                         Image.asset(

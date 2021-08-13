@@ -1,7 +1,9 @@
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_controller.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
+import 'package:astrology_app/screens/BooksScreen.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
+import 'package:astrology_app/widgets/notification_api.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +60,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     print('.......................');
     print(_forumContreller.userSession.value);
     print(_forumContreller.sessionUserInfo.value);

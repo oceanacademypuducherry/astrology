@@ -1,11 +1,13 @@
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
+import 'package:astrology_app/screens/BooksScreen.dart';
 import 'package:astrology_app/screens/FreeVideos.dart';
 import 'package:astrology_app/screens/PaidVedios.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
+import 'package:astrology_app/widgets/notification_api.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -24,6 +27,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   ForumContreller _forumContreller = Get.find<ForumContreller>();
+
+  late FlutterLocalNotificationsPlugin localNotification;
 
   setSessionDatas() async {
     var userDatas = await _firestore.collection('newusers').get();
@@ -48,12 +53,31 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    // var androidInitialize =
+    //     new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
+    // var initialzationSetting =
+    //     new InitializationSettings(android: androidInitialize);
+    // localNotification = new FlutterLocalNotificationsPlugin();
+    // localNotification.initialize(initialzationSetting,
+    //     onSelectNotification: notificationSelected);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
     setSessionDatas();
+
     print('==============================');
   }
+
+  // Future _showNotification() async {
+  //   var androidDetails = new AndroidNotificationDetails(
+  //       "channelId", "channelName", "you booked",
+  //       importance: Importance.max);
+  //
+  //   var generalNotificationDetails =
+  //       new NotificationDetails(android: androidDetails);
+  //   await localNotification.show(
+  //       0, 'Hi User', 'body of the notification', generalNotificationDetails);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -96,10 +120,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     //     },
                     //     child: Text('log out')),
                     // TextButton(
-                    //   child: Text('Payment'),
-                    //   onPressed: () async {
-                    //     Get.to(PaymentSuccessfully(), fullscreenDialog: true);
-                    //   },
+                    //   child: Text('notification'),
+                    //   onPressed: _showNotification,
                     // ),
                     //Article
                     Container(
@@ -433,6 +455,15 @@ class _HomeScreenState extends State<HomeScreen> {
       )),
     );
   }
+
+  // Future notificationSelected(String? payload) async {
+  //   Get.to(
+  //     () => BooksScreen(),
+  //     transition: Transition.rightToLeft,
+  //     curve: Curves.easeInToLinear,
+  //     duration: Duration(milliseconds: 600),
+  //   );
+  // }
 }
 
 class ArticleFromDb extends StatelessWidget {

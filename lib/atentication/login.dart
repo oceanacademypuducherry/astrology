@@ -115,27 +115,6 @@ class _LoginState extends State<Login> {
                         .border(color: Vx.blue400)
                         .leftRounded(value: 8)
                         .make(),
-                    // Obx(() => Text(_otpController.countryCode.value))
-                    //     .box
-                    //     .p16
-                    //     .gray200
-                    //     .border(color: Vx.blue400)
-                    //     .rounded
-                    //     .leftRounded(value: 8)
-                    //     .make()
-                    //     .onTap(() {
-                    //   VxBottomSheet.bottomSheetOptions(context,
-                    //       option: codes,
-                    //       defaultData: _otpController.countryCode.value,
-                    //       backgroundColor: Vx.white,
-                    //       roundedFromTop: true,
-                    //       enableDrag: true,
-                    //       isSafeAreaFromBottom: true, onSelect: (index, value) {
-                    //     print(value);
-                    //
-                    //     _otpController.countryCode.value = value;
-                    //   });
-                    // }),
                     SizedBox(
                       width: 5,
                     ),

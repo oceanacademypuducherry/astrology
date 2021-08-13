@@ -188,7 +188,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             headerVisible: true,
             focusedDay: selectedDay,
             firstDay: DateTime.now(),
-            lastDay: DateTime(2050),
+            lastDay: DateTime(DateTime.now().year, DateTime.now().month,
+                DateTime.now().day + 60),
             calendarFormat: format,
             onFormatChanged: (CalendarFormat _format) {
               setState(() {
@@ -305,6 +306,39 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                             .center,
                                                     children: [
                                                       Text(
+                                                          DateFormat.yMd()
+                                                              .format(
+                                                                  book['time']
+                                                                      .toDate())
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: book['time']
+                                                                            .toDate()
+                                                                            .difference(DateTime
+                                                                                .now())
+                                                                            .inSeconds <
+                                                                        600 &&
+                                                                    book['time']
+                                                                            .toDate()
+                                                                            .difference(DateTime
+                                                                                .now())
+                                                                            .inSeconds >
+                                                                        -60 * 60
+                                                                ? Colors
+                                                                    .pinkAccent
+                                                                : book['time']
+                                                                            .toDate()
+                                                                            .difference(DateTime
+                                                                                .now())
+                                                                            .inSeconds >
+                                                                        0
+                                                                    ? Colors
+                                                                        .black
+                                                                    : Colors
+                                                                        .green,
+                                                          )),
+                                                      Text(
                                                         DateFormat.jm()
                                                             .format(book['time']
                                                                 .toDate())
@@ -349,7 +383,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                                           DateTime
                                                                               .now())
                                                                       .inSeconds >
-                                                                  0
+                                                                  -60 * 60
                                                           ? Text(
                                                               "JOIN NOW",
                                                               style: TextStyle(
@@ -385,7 +419,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                                     color: book['time'].toDate().difference(DateTime.now()).inSeconds <
                                                                                 600 &&
                                                                             book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                                0
+                                                                                -60 *
+                                                                                    60
                                                                         ? Colors
                                                                             .pinkAccent
                                                                         : book['time'].toDate().difference(DateTime.now()).inSeconds >
@@ -403,7 +438,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                                     color: book['time'].toDate().difference(DateTime.now()).inSeconds <
                                                                                 600 &&
                                                                             book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                                0
+                                                                                -60 *
+                                                                                    60
                                                                         ? Colors
                                                                             .pinkAccent
                                                                         : book['time'].toDate().difference(DateTime.now()).inSeconds >
