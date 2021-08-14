@@ -93,13 +93,10 @@ class _BookingDetailsState extends State<BookingDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var androidInitialize =
-        new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
-    var initialzationSetting =
-        new InitializationSettings(android: androidInitialize);
+    var androidInitialize = new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
+    var initialzationSetting = new InitializationSettings(android: androidInitialize);
     localNotification = new FlutterLocalNotificationsPlugin();
-    localNotification.initialize(initialzationSetting,
-        onSelectNotification: notificationSelected);
+    localNotification.initialize(initialzationSetting, onSelectNotification: notificationSelected);
     getTime();
 
     _razorpay = Razorpay();
@@ -113,14 +110,11 @@ class _BookingDetailsState extends State<BookingDetails> {
   }
 
   Future _showNotification() async {
-    var androidDetails = new AndroidNotificationDetails(
-        "channelId", "channelName", "you booked",
-        importance: Importance.max);
+    var androidDetails =
+        new AndroidNotificationDetails("channelId", "channelName", "you booked", importance: Importance.max);
 
-    var generalNotificationDetails =
-        new NotificationDetails(android: androidDetails);
-    await localNotification.show(0, 'Hi User', 'You have booked the meeting ',
-        generalNotificationDetails);
+    var generalNotificationDetails = new NotificationDetails(android: androidDetails);
+    await localNotification.show(0, 'Hi User', 'You have booked the meeting ', generalNotificationDetails);
   }
 
   @override
@@ -147,17 +141,12 @@ class _BookingDetailsState extends State<BookingDetails> {
     print('uploaded successfully');
 
     Get.off(() => PaymentSuccessfully(),
-        transition: Transition.rightToLeft,
-        curve: Curves.easeInToLinear,
-        duration: Duration(milliseconds: 600));
-    print(
-        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+        transition: Transition.rightToLeft, curve: Curves.easeInToLinear, duration: Duration(milliseconds: 600));
+    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
     print(response.paymentId);
     print(response.orderId);
     print(response.signature);
-    Fluttertoast.showToast(
-        msg: "SUCCESS: " + response.paymentId!,
-        toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!, toastLength: Toast.LENGTH_SHORT);
     _showNotification();
   }
 
@@ -170,9 +159,7 @@ class _BookingDetailsState extends State<BookingDetails> {
   void _handleExternalWallet(ExternalWalletResponse response) {
     print('*************WALLETETTETTE******************');
     print(response.walletName);
-    Fluttertoast.showToast(
-        msg: "EXTERNAL_WALLET: " + response.walletName!,
-        toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(msg: "EXTERNAL_WALLET: " + response.walletName!, toastLength: Toast.LENGTH_SHORT);
   }
 
   void openCheckout() async {
@@ -269,8 +256,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                           alignment: Alignment.center,
                           width: 80,
                           height: 40,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -295,8 +281,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                         Container(
                           alignment: Alignment.center,
                           height: 40,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -350,8 +335,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                         Container(
                           alignment: Alignment.center,
                           height: 40,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -413,76 +397,276 @@ class _BookingDetailsState extends State<BookingDetails> {
                   ),
                   SizedBox(height: 10),
 
-                  ///radio button
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                    title: const Text(
-                      'Marriage',
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Ubuntu',
-                        fontSize: 14,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    leading: Radio(
-                      value: Purpose.Marriage,
-                      groupValue: _purpose,
-                      onChanged: (value) {
-                        setState(() {
-                          _purpose = Purpose.Marriage;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                    title: const Text(
-                      'Astrology',
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Ubuntu',
-                        fontSize: 14,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    leading: Radio(
-                      value: Purpose.Astrology,
-                      groupValue: _purpose,
-                      onChanged: (value) {
-                        setState(() {
-                          _purpose = Purpose.Astrology;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                    title: const Text(
-                      'Other',
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Ubuntu',
-                        fontSize: 14,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    leading: Radio(
-                      value: Purpose.Other,
-                      groupValue: _purpose,
-                      onChanged: (value) {
-                        setState(() {
-                          _purpose = Purpose.Other;
-                        });
-                      },
+                  ///Appointment button
+                  Container(
+                    // color: Colors.grey[300],
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    child: Wrap(
+                      alignment: WrapAlignment.start,
+                      runSpacing: 22,
+                      spacing: 20,
+                      children: [
+                        GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            // height: 40,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
+                                // border: Border.all(
+                                //   color: Colors.blue.shade700,
+                                //   width: 3,
+                                // ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0.5, 0.5),
+                                    color: Colors.grey.shade400,
+                                    blurRadius: 3,
+                                    // spreadRadius: 0.1,
+                                  ),
+                                ]),
+                            child: Text(
+                              "Marriage",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.blue[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            // height: 40,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
+                                // border: Border.all(
+                                //   color: Colors.blue.shade700,
+                                //   width: 3,
+                                // ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0.5, 0.5),
+                                    color: Colors.grey.shade400,
+                                    blurRadius: 3,
+                                    // spreadRadius: 0.1,
+                                  ),
+                                ]),
+                            child: Text(
+                              "Financial",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.blue[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            // height: 40,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
+                                // border: Border.all(
+                                //   color: Colors.blue.shade700,
+                                //   width: 3,
+                                // ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0.5, 0.5),
+                                    color: Colors.grey.shade400,
+                                    blurRadius: 3,
+                                    // spreadRadius: 0.1,
+                                  ),
+                                ]),
+                            child: Text(
+                              "Love",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.blue[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            // height: 40,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
+                                // border: Border.all(
+                                //   color: Colors.blue.shade700,
+                                //   width: 3,
+                                // ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0.5, 0.5),
+                                    color: Colors.grey.shade400,
+                                    blurRadius: 3,
+                                    // spreadRadius: 0.1,
+                                  ),
+                                ]),
+                            child: Text(
+                              "Jobs & Abroad",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.blue[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            // height: 40,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
+                                // border: Border.all(
+                                //   color: Colors.blue.shade700,
+                                //   width: 3,
+                                // ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0.5, 0.5),
+                                    color: Colors.grey.shade400,
+                                    blurRadius: 3,
+                                    // spreadRadius: 0.1,
+                                  ),
+                                ]),
+                            child: Text(
+                              "Studies",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.blue[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            // height: 40,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
+                                // border: Border.all(
+                                //   color: Colors.blue.shade700,
+                                //   width: 3,
+                                // ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0.5, 0.5),
+                                    color: Colors.grey.shade400,
+                                    blurRadius: 3,
+                                    // spreadRadius: 0.1,
+                                  ),
+                                ]),
+                            child: Text(
+                              "Health",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.blue[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            // height: 40,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
+                                // border: Border.all(
+                                //   color: Colors.blue.shade700,
+                                //   width: 3,
+                                // ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0.5, 0.5),
+                                    color: Colors.grey.shade400,
+                                    blurRadius: 3,
+                                    // spreadRadius: 0.1,
+                                  ),
+                                ]),
+                            child: Text(
+                              "Wealth",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.blue[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            // height: 40,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
+                                // border: Border.all(
+                                //   color: Colors.blue.shade700,
+                                //   width: 3,
+                                // ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0.5, 0.5),
+                                    color: Colors.grey.shade400,
+                                    blurRadius: 3,
+                                    // spreadRadius: 0.1,
+                                  ),
+                                ]),
+                            child: Text(
+                              "Home",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.blue[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            // height: 40,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
+                                // border: Border.all(
+                                //   color: Colors.blue.shade700,
+                                //   width: 3,
+                                // ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0.5, 0.5),
+                                    color: Colors.grey.shade400,
+                                    blurRadius: 3,
+                                    // spreadRadius: 0.1,
+                                  ),
+                                ]),
+                            child: Text(
+                              "Other",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.blue[400],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
 
                   ///Condition  value == other means Textfield
                   _purpose == Purpose.Other
                       ? Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                           decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                             boxShadow: [
@@ -603,8 +787,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                                 ///someone else page
                                 Get.to(
                                     () => SomeoneElseScreen(
-                                          appointmentFor:
-                                              _appointment.toString(),
+                                          appointmentFor: _appointment.toString(),
                                           purpose: _purpose.toString(),
                                           time: newDate,
                                           ruppess: rupees,
