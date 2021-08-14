@@ -13,7 +13,7 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:intl/intl.dart';
 
-enum Appointment { ForMe, SomeoneElse }
+enum Appointment { MySelf, others }
 enum Purpose { Marriage, Astrology, Other }
 
 class BookingDetails extends StatefulWidget {
@@ -30,7 +30,7 @@ class _BookingDetailsState extends State<BookingDetails> {
   late FlutterLocalNotificationsPlugin localNotification;
   ForumContreller _forumContreller = Get.find<ForumContreller>();
   late Razorpay _razorpay;
-  Appointment _appointment = Appointment.ForMe;
+  Appointment _appointment = Appointment.MySelf;
   Purpose _purpose = Purpose.Marriage;
 
   ///variable
@@ -40,6 +40,20 @@ class _BookingDetailsState extends State<BookingDetails> {
   ///controller
   TextEditingController? nameController = TextEditingController();
   DateTime newDate = Get.arguments;
+
+  List purpose = [
+    'Marriage',
+    'Financial',
+    'Love',
+    'Job&Abroad',
+    'Studies',
+    'Health',
+    'Character',
+    'Wealth',
+    'Personal'
+  ];
+  List userPurpose = [];
+  Map checking = {};
 
   ///widgets
   Widget _buildOther() {
@@ -93,10 +107,13 @@ class _BookingDetailsState extends State<BookingDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var androidInitialize = new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
-    var initialzationSetting = new InitializationSettings(android: androidInitialize);
+    var androidInitialize =
+        new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
+    var initialzationSetting =
+        new InitializationSettings(android: androidInitialize);
     localNotification = new FlutterLocalNotificationsPlugin();
-    localNotification.initialize(initialzationSetting, onSelectNotification: notificationSelected);
+    localNotification.initialize(initialzationSetting,
+        onSelectNotification: notificationSelected);
     getTime();
 
     _razorpay = Razorpay();
@@ -110,11 +127,14 @@ class _BookingDetailsState extends State<BookingDetails> {
   }
 
   Future _showNotification() async {
-    var androidDetails =
-        new AndroidNotificationDetails("channelId", "channelName", "you booked", importance: Importance.max);
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "channelName", "you booked",
+        importance: Importance.max);
 
-    var generalNotificationDetails = new NotificationDetails(android: androidDetails);
-    await localNotification.show(0, 'Hi User', 'You have booked the meeting ', generalNotificationDetails);
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+    await localNotification.show(0, 'Hi User', 'You have booked the meeting ',
+        generalNotificationDetails);
   }
 
   @override
@@ -136,17 +156,22 @@ class _BookingDetailsState extends State<BookingDetails> {
       'birthTime': _forumContreller.sessionUserInfo.value['birthTime'],
       'birthPlace': _forumContreller.sessionUserInfo.value['birthPlace'],
       'bookingFor': _appointment.toString(),
-      'purposeFor': _purpose.toString(),
+      'purposeFor': FieldValue.arrayUnion(checking.keys.toList()),
     });
     print('uploaded successfully');
 
     Get.off(() => PaymentSuccessfully(),
-        transition: Transition.rightToLeft, curve: Curves.easeInToLinear, duration: Duration(milliseconds: 600));
-    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+        transition: Transition.rightToLeft,
+        curve: Curves.easeInToLinear,
+        duration: Duration(milliseconds: 600));
+    print(
+        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
     print(response.paymentId);
     print(response.orderId);
     print(response.signature);
-    Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!, toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(
+        msg: "SUCCESS: " + response.paymentId!,
+        toastLength: Toast.LENGTH_SHORT);
     _showNotification();
   }
 
@@ -159,7 +184,9 @@ class _BookingDetailsState extends State<BookingDetails> {
   void _handleExternalWallet(ExternalWalletResponse response) {
     print('*************WALLETETTETTE******************');
     print(response.walletName);
-    Fluttertoast.showToast(msg: "EXTERNAL_WALLET: " + response.walletName!, toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: " + response.walletName!,
+        toastLength: Toast.LENGTH_SHORT);
   }
 
   void openCheckout() async {
@@ -183,6 +210,8 @@ class _BookingDetailsState extends State<BookingDetails> {
       debugPrint('Error: e');
     }
   }
+
+  bool hasClicked = false;
 
   var minute;
   String? monthFormat;
@@ -256,7 +285,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                           alignment: Alignment.center,
                           width: 80,
                           height: 40,
-                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -281,7 +311,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                         Container(
                           alignment: Alignment.center,
                           height: 40,
-                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -335,7 +366,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                         Container(
                           alignment: Alignment.center,
                           height: 40,
-                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -407,258 +439,53 @@ class _BookingDetailsState extends State<BookingDetails> {
                       runSpacing: 22,
                       spacing: 20,
                       children: [
-                        GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            // height: 40,
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(
-                                //   color: Colors.blue.shade700,
-                                //   width: 3,
-                                // ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0.5, 0.5),
-                                    color: Colors.grey.shade400,
-                                    blurRadius: 3,
-                                    // spreadRadius: 0.1,
-                                  ),
-                                ]),
-                            child: Text(
-                              "Marriage",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Ubuntu',
-                                fontSize: 14,
-                                color: Colors.blue[400],
+                        for (var i in purpose)
+                          GestureDetector(
+                            onTap: () {
+                              checking.containsKey(i)
+                                  ? checking.remove(i)
+                                  : checking.addAll({i: true});
+
+                              setState(() {
+                                hasClicked = !hasClicked;
+                              });
+
+                              print(checking);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              // height: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: checking.containsKey(i)
+                                      ? Border.all(
+                                          color: Colors.blue.shade700,
+                                          width: 3,
+                                        )
+                                      : Border.all(
+                                          color: Colors.grey.shade400,
+                                          width: 3,
+                                        ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: Offset(0.5, 0.5),
+                                      color: Colors.grey.shade400,
+                                      blurRadius: 3,
+                                      // spreadRadius: 0.1,
+                                    ),
+                                  ]),
+                              child: Text(
+                                "${i}",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: 'Ubuntu',
+                                  fontSize: 14,
+                                  color: Colors.blue[400],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            // height: 40,
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(
-                                //   color: Colors.blue.shade700,
-                                //   width: 3,
-                                // ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0.5, 0.5),
-                                    color: Colors.grey.shade400,
-                                    blurRadius: 3,
-                                    // spreadRadius: 0.1,
-                                  ),
-                                ]),
-                            child: Text(
-                              "Financial",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Ubuntu',
-                                fontSize: 14,
-                                color: Colors.blue[400],
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            // height: 40,
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(
-                                //   color: Colors.blue.shade700,
-                                //   width: 3,
-                                // ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0.5, 0.5),
-                                    color: Colors.grey.shade400,
-                                    blurRadius: 3,
-                                    // spreadRadius: 0.1,
-                                  ),
-                                ]),
-                            child: Text(
-                              "Love",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Ubuntu',
-                                fontSize: 14,
-                                color: Colors.blue[400],
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            // height: 40,
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(
-                                //   color: Colors.blue.shade700,
-                                //   width: 3,
-                                // ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0.5, 0.5),
-                                    color: Colors.grey.shade400,
-                                    blurRadius: 3,
-                                    // spreadRadius: 0.1,
-                                  ),
-                                ]),
-                            child: Text(
-                              "Jobs & Abroad",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Ubuntu',
-                                fontSize: 14,
-                                color: Colors.blue[400],
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            // height: 40,
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(
-                                //   color: Colors.blue.shade700,
-                                //   width: 3,
-                                // ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0.5, 0.5),
-                                    color: Colors.grey.shade400,
-                                    blurRadius: 3,
-                                    // spreadRadius: 0.1,
-                                  ),
-                                ]),
-                            child: Text(
-                              "Studies",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Ubuntu',
-                                fontSize: 14,
-                                color: Colors.blue[400],
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            // height: 40,
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(
-                                //   color: Colors.blue.shade700,
-                                //   width: 3,
-                                // ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0.5, 0.5),
-                                    color: Colors.grey.shade400,
-                                    blurRadius: 3,
-                                    // spreadRadius: 0.1,
-                                  ),
-                                ]),
-                            child: Text(
-                              "Health",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Ubuntu',
-                                fontSize: 14,
-                                color: Colors.blue[400],
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            // height: 40,
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(
-                                //   color: Colors.blue.shade700,
-                                //   width: 3,
-                                // ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0.5, 0.5),
-                                    color: Colors.grey.shade400,
-                                    blurRadius: 3,
-                                    // spreadRadius: 0.1,
-                                  ),
-                                ]),
-                            child: Text(
-                              "Wealth",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Ubuntu',
-                                fontSize: 14,
-                                color: Colors.blue[400],
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            // height: 40,
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(
-                                //   color: Colors.blue.shade700,
-                                //   width: 3,
-                                // ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0.5, 0.5),
-                                    color: Colors.grey.shade400,
-                                    blurRadius: 3,
-                                    // spreadRadius: 0.1,
-                                  ),
-                                ]),
-                            child: Text(
-                              "Home",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Ubuntu',
-                                fontSize: 14,
-                                color: Colors.blue[400],
-                              ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            // height: 40,
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(
-                                //   color: Colors.blue.shade700,
-                                //   width: 3,
-                                // ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0.5, 0.5),
-                                    color: Colors.grey.shade400,
-                                    blurRadius: 3,
-                                    // spreadRadius: 0.1,
-                                  ),
-                                ]),
-                            child: Text(
-                              "Other",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'Ubuntu',
-                                fontSize: 14,
-                                color: Colors.blue[400],
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -666,7 +493,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                   ///Condition  value == other means Textfield
                   _purpose == Purpose.Other
                       ? Container(
-                          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
                           decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                             boxShadow: [
@@ -713,11 +541,11 @@ class _BookingDetailsState extends State<BookingDetails> {
                       ),
                     ),
                     leading: Radio(
-                      value: Appointment.ForMe,
+                      value: Appointment.MySelf,
                       groupValue: _appointment,
                       onChanged: (value) {
                         setState(() {
-                          _appointment = Appointment.ForMe;
+                          _appointment = Appointment.MySelf;
                         });
                       },
                     ),
@@ -734,11 +562,11 @@ class _BookingDetailsState extends State<BookingDetails> {
                       ),
                     ),
                     leading: Radio(
-                      value: Appointment.SomeoneElse,
+                      value: Appointment.others,
                       groupValue: _appointment,
                       onChanged: (value) {
                         setState(() {
-                          _appointment = Appointment.SomeoneElse;
+                          _appointment = Appointment.others;
                         });
                       },
                     ),
@@ -766,7 +594,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                           )),
                       child: ElevatedButton(
                         ///checking For Me or SomeoneElse to Route to next Page
-                        onPressed: _appointment == Appointment.ForMe
+                        onPressed: _appointment == Appointment.MySelf
                             ? () {
                                 ///payment page
                                 openCheckout();
@@ -787,7 +615,8 @@ class _BookingDetailsState extends State<BookingDetails> {
                                 ///someone else page
                                 Get.to(
                                     () => SomeoneElseScreen(
-                                          appointmentFor: _appointment.toString(),
+                                          appointmentFor:
+                                              _appointment.toString(),
                                           purpose: _purpose.toString(),
                                           time: newDate,
                                           ruppess: rupees,
@@ -796,7 +625,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                                     // curve: Curves.ease,
                                     duration: Duration(milliseconds: 600));
                               },
-                        child: _appointment == Appointment.ForMe
+                        child: _appointment == Appointment.MySelf
                             ? Text('Proceed to Payment')
                             : Text('Update Their Document'),
                         style: ElevatedButton.styleFrom(
