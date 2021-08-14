@@ -1,4 +1,5 @@
 import 'package:astrology_app/screens/NativeVedioScreen.dart';
+import 'package:astrology_app/screens/player_meedu.dart';
 import 'package:astrology_app/screens/vedioPlayer/youtubeScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class PaidVedios extends StatelessWidget {
                                   vedioTitle: title,
                                   onpress: () {
                                     Get.to(
-                                        () => NativeVedioUrl(
+                                        () => NativePlayer(
                                               vedioUrl: vedioUrl,
                                               videoDescription: description,
                                               videoTitle: title,

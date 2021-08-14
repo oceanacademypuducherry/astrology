@@ -2,6 +2,7 @@ import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_controller.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/screens/BooksScreen.dart';
+import 'package:astrology_app/screens/player_meedu.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:astrology_app/widgets/notification_api.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
