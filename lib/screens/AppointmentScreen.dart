@@ -146,101 +146,101 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          TableCalendar(
-            rowHeight: 40,
-            daysOfWeekHeight: 40,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TableCalendar(
+              rowHeight: 40,
+              daysOfWeekHeight: 40,
 
-            ///Mon Tue Wed Thu Fri
-            daysOfWeekStyle: DaysOfWeekStyle(
-              weekdayStyle: TextStyle(
-                color: Colors.blue.withOpacity(0.9),
-                fontSize: 15,
-                fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.normal,
+              ///Mon Tue Wed Thu Fri
+              daysOfWeekStyle: DaysOfWeekStyle(
+                weekdayStyle: TextStyle(
+                  color: Colors.blue.withOpacity(0.9),
+                  fontSize: 15,
+                  fontFamily: 'Ubuntu',
+                  fontWeight: FontWeight.normal,
+                ),
+
+                ///Sat Sun
+                weekendStyle: TextStyle(
+                  color: Colors.blue.withOpacity(0.9),
+                  fontSize: 15,
+                  fontFamily: 'Ubuntu',
+                  fontWeight: FontWeight.normal,
+                ),
               ),
 
-              ///Sat Sun
-              weekendStyle: TextStyle(
-                color: Colors.blue.withOpacity(0.9),
-                fontSize: 15,
-                fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.normal,
+              ///Header 2 weeks Style
+              headerStyle: HeaderStyle(
+                titleTextStyle: TextStyle(
+                  color: Colors.black54.withOpacity(0.9),
+                  fontSize: 15,
+                  fontFamily: 'Ubuntu',
+                  fontWeight: FontWeight.normal,
+                ),
+                formatButtonTextStyle: TextStyle(
+                  color: Colors.black54.withOpacity(0.9),
+                  fontSize: 15,
+                  fontFamily: 'Ubuntu',
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              headerVisible: true,
+              focusedDay: selectedDay,
+              firstDay: DateTime.now(),
+              lastDay: DateTime(DateTime.now().year, DateTime.now().month,
+                  DateTime.now().day + 60),
+              calendarFormat: format,
+              onFormatChanged: (CalendarFormat _format) {
+                setState(() {
+                  format = _format;
+                });
+              },
+              startingDayOfWeek: StartingDayOfWeek.sunday,
+              daysOfWeekVisible: true,
+              selectedDayPredicate: (DateTime date) {
+                return isSameDay(selectedDay, date);
+              },
+              // Day Changed
+              onDaySelected: (DateTime selectDay, DateTime focusDay) {
+                setState(() {
+                  selectedDay = selectDay;
+                  focusedDay = focusDay;
+                });
+
+                formattedTime = DateFormat("yyyy-MM-dd").format(focusedDay);
+                // 2020-01-02 03:04:05.000
+
+                print(focusedDay);
+                print(formattedTime);
+                print('^^^^^^^^^^^^^^');
+                print(dbList);
+
+                getFree(formattedTime.toString());
+                Get.to(
+                    () => AppointmentTimeScreen(
+                          focusedDate: formattedTime.toString(),
+                          dbList: dbList,
+                          freeList: freeTime,
+                        ),
+                    // transition: Transition.cupertinoDialog,
+                    fullscreenDialog: true,
+                    curve: Curves.easeInToLinear,
+                    duration: Duration(milliseconds: 600));
+              },
+
+              //To style the Calendar
+              calendarStyle: CalendarStyle(
+                isTodayHighlighted: true,
+                selectedDecoration: BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.circle,
+                  // borderRadius: BorderRadius.circular(5.0),
+                ),
               ),
             ),
-
-            ///Header 2 weeks Style
-            headerStyle: HeaderStyle(
-              titleTextStyle: TextStyle(
-                color: Colors.black54.withOpacity(0.9),
-                fontSize: 15,
-                fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.normal,
-              ),
-              formatButtonTextStyle: TextStyle(
-                color: Colors.black54.withOpacity(0.9),
-                fontSize: 15,
-                fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            headerVisible: true,
-            focusedDay: selectedDay,
-            firstDay: DateTime.now(),
-            lastDay: DateTime(DateTime.now().year, DateTime.now().month,
-                DateTime.now().day + 60),
-            calendarFormat: format,
-            onFormatChanged: (CalendarFormat _format) {
-              setState(() {
-                format = _format;
-              });
-            },
-            startingDayOfWeek: StartingDayOfWeek.sunday,
-            daysOfWeekVisible: true,
-            selectedDayPredicate: (DateTime date) {
-              return isSameDay(selectedDay, date);
-            },
-            // Day Changed
-            onDaySelected: (DateTime selectDay, DateTime focusDay) {
-              setState(() {
-                selectedDay = selectDay;
-                focusedDay = focusDay;
-              });
-
-              formattedTime = DateFormat("yyyy-MM-dd").format(focusedDay);
-              // 2020-01-02 03:04:05.000
-
-              print(focusedDay);
-              print(formattedTime);
-              print('^^^^^^^^^^^^^^');
-              print(dbList);
-
-              getFree(formattedTime.toString());
-              Get.to(
-                  () => AppointmentTimeScreen(
-                        focusedDate: formattedTime.toString(),
-                        dbList: dbList,
-                        freeList: freeTime,
-                      ),
-                  // transition: Transition.cupertinoDialog,
-                  fullscreenDialog: true,
-                  curve: Curves.easeInToLinear,
-                  duration: Duration(milliseconds: 600));
-            },
-
-            //To style the Calendar
-            calendarStyle: CalendarStyle(
-              isTodayHighlighted: true,
-              selectedDecoration: BoxDecoration(
-                color: Colors.blue,
-                shape: BoxShape.circle,
-                // borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
-          ),
-          SingleChildScrollView(
-            child: Container(
+            Container(
               color: Colors.blue[50],
               padding: EdgeInsets.only(bottom: 10),
               // color: Colors.blue,
@@ -498,8 +498,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
