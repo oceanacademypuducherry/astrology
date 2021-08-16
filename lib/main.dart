@@ -5,6 +5,7 @@ import 'package:astrology_app/screens/BooksScreen.dart';
 import 'package:astrology_app/screens/player_meedu.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:astrology_app/widgets/notification_api.dart';
+import 'package:astrology_app/zoom/contentFromApi.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: MyApp()),
+      home: Scaffold(body: Testing()),
     ),
   );
 }
@@ -75,7 +76,9 @@ class _MyAppState extends State<MyApp> {
       child: Scaffold(
         backgroundColor: Colors.blue,
         resizeToAvoidBottomInset: false,
-        body: _forumContreller.userSession.value.isNotEmpty ? BottomNavigation() : Login(),
+        body: _forumContreller.userSession.value.isNotEmpty
+            ? BottomNavigation()
+            : Login(),
       ),
     );
   }
