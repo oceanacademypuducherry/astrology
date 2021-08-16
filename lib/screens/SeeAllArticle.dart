@@ -106,10 +106,7 @@ class SeeAllArticlesDb extends StatelessWidget {
   VoidCallback onpress;
   String description;
   SeeAllArticlesDb(
-      {required this.articleImage,
-      required this.onpress,
-      required this.articleName,
-      required this.description});
+      {required this.articleImage, required this.onpress, required this.articleName, required this.description});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

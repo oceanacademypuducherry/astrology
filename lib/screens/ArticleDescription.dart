@@ -48,19 +48,18 @@ class ArticleDescription extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                     return Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                      margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.blue.withOpacity(0.8),
+                            color: Colors.blue.withOpacity(0.7),
                             offset: const Offset(
                               1.0,
                               1.0,
                             ),
-                            blurRadius: 10.0,
-                            spreadRadius: 0.1,
+                            blurRadius: 5.0,
+                            spreadRadius: 0.2,
                           ), //BoxShadow
                         ],
                         color: Colors.white,
@@ -75,9 +74,10 @@ class ArticleDescription extends StatelessWidget {
                             width: double.infinity,
                             child: Text(
                               '${articleTitle}',
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.blue.withOpacity(0.9),
-                                fontSize: 20,
+                                fontSize: 17,
                                 fontFamily: 'Ubuntu',
                                 fontWeight: FontWeight.w600,
                               ),

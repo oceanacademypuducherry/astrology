@@ -1,3 +1,4 @@
+import 'package:astrology_app/screens/MarriageMatchesDetails.dart';
 import 'package:astrology_app/zoom/contentFromApi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -171,9 +172,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
               expandedHeight: 150.0,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
-                background: Image.asset(
-                  'images/marriage.png',
-                  fit: BoxFit.cover,
+                background: Hero(
+                  tag: "animation",
+                  child: Image.asset(
+                    'images/marriage.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -184,17 +188,27 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                     child: Container(
                       color: Colors.white,
                       // height: MediaQuery.of(context).size.height,
-                      height: 600,
+                      // height: 600,
                       width: MediaQuery.of(context).size.width,
                       child: Column(
                         children: [
+                          SizedBox(height: 20),
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 10),
+                            child: Text(
+                              'Boy\'s Details ',
+                              style: TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.lightBlue,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 70,
-                            decoration:
-                                BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.2, 0.2),
                                 blurRadius: 10,
@@ -223,7 +237,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                               fontFamily: 'Ubuntu',
                                               fontSize: 10,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.lightBlue,
+                                              color: Colors.red[200],
                                             ),
                                           )
                                         ]),
@@ -238,12 +252,10 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
-                            height: 80,
-                            decoration:
-                                BoxDecoration(color: Colors.white, boxShadow: [
+                            height: 68,
+                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.3, 0.3),
                                 blurRadius: 5,
@@ -255,6 +267,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
+                                  // color: Colors.black38,
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
@@ -267,21 +280,22 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                         ),
                                         children: [
                                           TextSpan(
-                                            text: "*",
+                                            text: " *",
                                             style: TextStyle(
                                               fontFamily: 'Ubuntu',
                                               fontSize: 10,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.lightBlue,
+                                              color: Colors.red[200],
                                             ),
                                           )
                                         ]),
                                   ),
                                 ),
                                 Container(
+                                  // margin: EdgeInsets.only(bottom: 10),
                                   height: 40,
                                   decoration: BoxDecoration(
-                                    // color: Colors.grey[300],
+                                    // color: Colors.black38,
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   child: DropdownButtonHideUnderline(
@@ -298,9 +312,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                       onChanged: (value) {
                                         setState(() {
                                           boyValue = value!;
-                                          boySelectedNum =
-                                              boyNatchatharam.indexOf(value) -
-                                                  1;
+                                          boySelectedNum = boyNatchatharam.indexOf(value) - 1;
                                         });
                                         print(value);
                                         print(boySelectedNum);
@@ -312,12 +324,99 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            padding: const EdgeInsets.only(left: 15, top: 5),
+                            height: 68,
+                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0.3, 0.3),
+                                blurRadius: 5,
+                                spreadRadius: 3,
+                                color: Colors.black12,
+                              ),
+                            ]),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  // color: Colors.black38,
+                                  alignment: Alignment.centerLeft,
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: 'Boy Pada',
+                                        style: TextStyle(
+                                          fontFamily: 'Ubuntu',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: " *",
+                                            style: TextStyle(
+                                              fontFamily: 'Ubuntu',
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.red[200],
+                                            ),
+                                          )
+                                        ]),
+                                  ),
+                                ),
+                                Container(
+                                  // margin: EdgeInsets.only(bottom: 10),
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    // color: Colors.black38,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Ubuntu',
+                                        color: Colors.grey,
+                                      ),
+                                      value: boyValue,
+                                      isExpanded: true,
+                                      items: getBoyDropdown(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          boyValue = value!;
+                                          boySelectedNum = boyNatchatharam.indexOf(value) - 1;
+                                        });
+                                        print(value);
+                                        print(boySelectedNum);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            height: 50,
+                            color: Colors.grey[400],
+                            thickness: 0.3,
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            child: Text(
+                              'Girl\'s Details ',
+                              style: TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.lightBlue,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 70,
-                            decoration:
-                                BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.2, 0.2),
                                 blurRadius: 10,
@@ -341,12 +440,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                         ),
                                         children: [
                                           TextSpan(
-                                            text: "*",
+                                            text: " *",
                                             style: TextStyle(
                                               fontFamily: 'Ubuntu',
                                               fontSize: 10,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.lightBlue,
+                                              color: Colors.red[200],
                                             ),
                                           )
                                         ]),
@@ -361,12 +460,10 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
-                            height: 80,
-                            decoration:
-                                BoxDecoration(color: Colors.white, boxShadow: [
+                            height: 70,
+                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.3, 0.3),
                                 blurRadius: 5,
@@ -390,12 +487,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                         ),
                                         children: [
                                           TextSpan(
-                                            text: "*",
+                                            text: " *",
                                             style: TextStyle(
                                               fontFamily: 'Ubuntu',
                                               fontSize: 10,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.lightBlue,
+                                              color: Colors.red[200],
                                             ),
                                           )
                                         ]),
@@ -421,9 +518,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                       onChanged: (value) {
                                         setState(() {
                                           girlValue = value!;
-                                          girlSelectedNum = boyNatchatharam
-                                                  .indexOf(girlValue) -
-                                              1;
+                                          girlSelectedNum = boyNatchatharam.indexOf(girlValue) - 1;
                                         });
                                         print(value);
                                         print(girlSelectedNum);
@@ -435,29 +530,91 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            width: double.infinity,
-                            height: 50,
-                            margin: const EdgeInsets.only(
-                              top: 25,
-                              left: 20,
-                              right: 20,
+                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            padding: const EdgeInsets.only(left: 15, top: 5),
+                            height: 68,
+                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0.3, 0.3),
+                                blurRadius: 5,
+                                spreadRadius: 3,
+                                color: Colors.black12,
+                              ),
+                            ]),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  // color: Colors.black38,
+                                  alignment: Alignment.centerLeft,
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: 'Girl Pada',
+                                        style: TextStyle(
+                                          fontFamily: 'Ubuntu',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: " *",
+                                            style: TextStyle(
+                                              fontFamily: 'Ubuntu',
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.red[200],
+                                            ),
+                                          )
+                                        ]),
+                                  ),
+                                ),
+                                Container(
+                                  // margin: EdgeInsets.only(bottom: 10),
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    // color: Colors.black38,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Ubuntu',
+                                        color: Colors.grey,
+                                      ),
+                                      value: boyValue,
+                                      isExpanded: true,
+                                      items: getBoyDropdown(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          boyValue = value!;
+                                          boySelectedNum = boyNatchatharam.indexOf(value) - 1;
+                                        });
+                                        print(value);
+                                        print(boySelectedNum);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: 55,
+                            margin: const EdgeInsets.only(top: 22),
                             child: ElevatedButton(
                               onPressed: () {
-                                Get.off(
-                                  Testing(
-                                    boyNatchathiram: boySelectedNum!,
-                                    girlNatchathiram: girlSelectedNum!,
-                                    boyPada: 2,
-                                    girlPada: 2,
-                                  ),
+                                Get.to(
+                                  MarriageMatchesDetails(),
                                   transition: Transition.downToUp,
                                   duration: Duration(milliseconds: 500),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                                 elevation: 2,
                                 primary: Color(0xff045de9),
                                 onPrimary: Colors.white,

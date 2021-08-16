@@ -252,15 +252,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     ///marriage matches
                     GestureDetector(
                       onTap: () {
-                        Get.to(MarriageMatches());
+                        Get.to(
+                          MarriageMatches(),
+                          transition: Transition.downToUp,
+                          duration: Duration(milliseconds: 500),
+                          fullscreenDialog: true,
+                        );
                       },
-                      child: Container(
-                        width: double.infinity,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("images/marriage.png"),
-                            fit: BoxFit.fill,
+                      child: Hero(
+                        tag: "animation",
+                        child: Container(
+                          width: double.infinity,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("images/marriage.png"),
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
                       ),
