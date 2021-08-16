@@ -1,5 +1,7 @@
+import 'package:astrology_app/zoom/contentFromApi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class MarriageMatches extends StatefulWidget {
@@ -92,11 +94,13 @@ class _MarriageMatchesState extends State<MarriageMatches> {
 
   List<String> girlNatchatharam = [
     'Select',
-    'Natcharam1',
+    'Ashwini',
     'Natcharam2',
     'Natcharam3',
     'Natcharam4',
   ];
+  int? boySelectedNum;
+  int? girlSelectedNum;
 
   getGirlDropdown() {
     List<DropdownMenuItem<String>> dropList = [];
@@ -185,10 +189,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                       child: Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 70,
-                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.2, 0.2),
                                 blurRadius: 10,
@@ -232,10 +238,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 80,
-                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.3, 0.3),
                                 blurRadius: 5,
@@ -284,14 +292,18 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                         fontFamily: 'Ubuntu',
                                         color: Colors.grey,
                                       ),
-                                      value: girlValue,
+                                      value: boyValue,
                                       isExpanded: true,
                                       items: getBoyDropdown(),
                                       onChanged: (value) {
                                         setState(() {
                                           boyValue = value!;
+                                          boySelectedNum =
+                                              boyNatchatharam.indexOf(value) -
+                                                  1;
                                         });
                                         print(value);
+                                        print(boySelectedNum);
                                       },
                                     ),
                                   ),
@@ -300,10 +312,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 70,
-                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.2, 0.2),
                                 blurRadius: 10,
@@ -347,10 +361,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 80,
-                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.3, 0.3),
                                 blurRadius: 5,
@@ -404,9 +420,13 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                       items: getBoyDropdown(),
                                       onChanged: (value) {
                                         setState(() {
-                                          boyValue = value!;
+                                          girlValue = value!;
+                                          girlSelectedNum = boyNatchatharam
+                                                  .indexOf(girlValue) -
+                                              1;
                                         });
                                         print(value);
+                                        print(girlSelectedNum);
                                       },
                                     ),
                                   ),
@@ -423,9 +443,21 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                               right: 20,
                             ),
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.off(
+                                  Testing(
+                                    boyNatchathiram: boySelectedNum!,
+                                    girlNatchathiram: girlSelectedNum!,
+                                    boyPada: 2,
+                                    girlPada: 2,
+                                  ),
+                                  transition: Transition.downToUp,
+                                  duration: Duration(milliseconds: 500),
+                                );
+                              },
                               style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)),
                                 elevation: 2,
                                 primary: Color(0xff045de9),
                                 onPrimary: Colors.white,

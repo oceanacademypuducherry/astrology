@@ -43,7 +43,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Testing()),
+      home: Scaffold(body: MyApp()),
     ),
   );
 }
