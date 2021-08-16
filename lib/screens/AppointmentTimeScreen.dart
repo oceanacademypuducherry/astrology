@@ -109,7 +109,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                           padding: EdgeInsets.all(10),
                           alignment: Alignment.center,
                           child: Text(
-                            'Selected Time',
+                            'Selected Date',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontFamily: 'Ubuntu',
