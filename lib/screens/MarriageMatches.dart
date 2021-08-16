@@ -19,8 +19,15 @@ class _MarriageMatchesState extends State<MarriageMatches> {
   FocusNode messageFocusNode1 = FocusNode();
   bool validation = false;
   var boyName;
+  String boyValue = 'Select';
+  String girlValue = 'Select';
+  String boyPada = 'Select';
+  String girlPada = 'Select';
 
-  List<String> boyNatchatharam = [
+  int? boySelectedNum;
+  int? girlSelectedNum;
+
+  List<String> natchatharam = [
     'Select',
     'Natcharam1',
     'Natcharam2',
@@ -28,12 +35,18 @@ class _MarriageMatchesState extends State<MarriageMatches> {
     'Natcharam4',
   ];
 
-  String boyValue = 'Select';
+  List<String> pada = [
+    'Select',
+    '1',
+    '2',
+    '3',
+    '4',
+  ];
 
   getBoyDropdown() {
     List<DropdownMenuItem<String>> dropList = [];
 
-    for (var enquerys in boyNatchatharam) {
+    for (var enquerys in natchatharam) {
       var newList = DropdownMenuItem(
         child: Text(enquerys),
         value: enquerys,
@@ -90,30 +103,6 @@ class _MarriageMatchesState extends State<MarriageMatches> {
   ///girl widgets and fields
 
   TextEditingController? girlNameController = TextEditingController();
-  String girlValue = 'Select';
-
-  List<String> girlNatchatharam = [
-    'Select',
-    'Ashwini',
-    'Natcharam2',
-    'Natcharam3',
-    'Natcharam4',
-  ];
-  int? boySelectedNum;
-  int? girlSelectedNum;
-
-  getGirlDropdown() {
-    List<DropdownMenuItem<String>> dropList = [];
-
-    for (var enquerys in boyNatchatharam) {
-      var newList = DropdownMenuItem(
-        child: Text(enquerys),
-        value: enquerys,
-      );
-      dropList.add(newList);
-    }
-    return dropList;
-  }
 
   Widget _buildGirlName() {
     return TextFormField(
@@ -232,7 +221,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                 Container(
                                   height: 30,
                                   // color: Colors.pinkAccent,
-                                  child: _buildGirlName(),
+                                  child: _buildBoyName(),
                                 ),
                               ],
                             ),
@@ -299,8 +288,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                         setState(() {
                                           boyValue = value!;
                                           boySelectedNum =
-                                              boyNatchatharam.indexOf(value) -
-                                                  1;
+                                              natchatharam.indexOf(value) - 1;
                                         });
                                         print(value);
                                         print(boySelectedNum);
@@ -415,15 +403,15 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                         fontFamily: 'Ubuntu',
                                         color: Colors.grey,
                                       ),
-                                      value: girlValue,
+                                      value: girlPada,
                                       isExpanded: true,
                                       items: getBoyDropdown(),
                                       onChanged: (value) {
                                         setState(() {
-                                          girlValue = value!;
-                                          girlSelectedNum = boyNatchatharam
-                                                  .indexOf(girlValue) -
-                                              1;
+                                          girlPada = value!;
+                                          girlSelectedNum =
+                                              natchatharam.indexOf(girlPada) -
+                                                  1;
                                         });
                                         print(value);
                                         print(girlSelectedNum);
@@ -444,7 +432,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                             child: ElevatedButton(
                               onPressed: () {
-                                Get.off(
+                                Get.to(
                                   Testing(
                                     boyNatchathiram: boySelectedNum!,
                                     girlNatchathiram: girlSelectedNum!,

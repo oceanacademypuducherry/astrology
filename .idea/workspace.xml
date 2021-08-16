@@ -25,19 +25,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="added porutham">
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="added changes 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/MarriageMatches.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/MarriageMatches.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/zoom/contentFromApi.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/zoom/contentFromApi.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,13 +98,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627472263977</updated>
-    </task>
-    <task id="LOCAL-00012" summary="updated books screen">
-      <created>1627730888742</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1627730888742</updated>
     </task>
     <task id="LOCAL-00013" summary="updated books screen">
       <created>1627733202158</created>
@@ -446,7 +435,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629092796803</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="added changes 1">
+      <created>1629101041941</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1629101041941</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -462,7 +458,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="books page completed with razorpay" />
     <MESSAGE value="pdf chnecking" />
     <MESSAGE value="vedio razorpay connected" />
     <MESSAGE value="change apointment" />
@@ -487,7 +482,8 @@
     <MESSAGE value="purpose completed" />
     <MESSAGE value="changed appoint,ment" />
     <MESSAGE value="added porutham" />
-    <option name="LAST_COMMIT_MESSAGE" value="added porutham" />
+    <MESSAGE value="added changes 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="added changes 1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="383" key="#Notifications" timestamp="1628317220045">
@@ -514,22 +510,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1877" height="310" key="GridCell.Tab.0.bottom" timestamp="1629099698534">
+    <state width="1877" height="310" key="GridCell.Tab.0.bottom" timestamp="1629117212801">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="310" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1629099698534" />
-    <state width="1877" height="310" key="GridCell.Tab.0.center" timestamp="1629099698534">
+    <state width="1877" height="310" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1629117212801" />
+    <state width="1877" height="310" key="GridCell.Tab.0.center" timestamp="1629117212800">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="310" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1629099698534" />
-    <state width="1877" height="310" key="GridCell.Tab.0.left" timestamp="1629099698534">
+    <state width="1877" height="310" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1629117212800" />
+    <state width="1877" height="310" key="GridCell.Tab.0.left" timestamp="1629117212800">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="310" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1629099698534" />
-    <state width="1877" height="310" key="GridCell.Tab.0.right" timestamp="1629099698534">
+    <state width="1877" height="310" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1629117212800" />
+    <state width="1877" height="310" key="GridCell.Tab.0.right" timestamp="1629117212801">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="310" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1629099698534" />
+    <state width="1877" height="310" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1629117212801" />
     <state x="184" y="86" key="MergeDialog" timestamp="1628919104572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -546,10 +542,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628919047163" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1629092872979">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1629101046089">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629092872979" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629101046089" />
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1628841082712">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -558,10 +554,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1628912744643" />
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1629092883744">
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1629117181589">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629092883744" />
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629117181589" />
     <state x="667" y="67" width="615" height="744" key="find.popup" timestamp="1628832264804">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -681,6 +677,16 @@
           <url>file://$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart</url>
           <line>96</line>
           <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
+          <line>282</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
+          <line>404</line>
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
