@@ -154,13 +154,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                     child: Text(
                                       'See All',
-                                      style: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Ubuntu'),
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 15,
+                                          fontFamily: 'Ubuntu'),
                                     ))
                               ],
                             ),
                           ),
                           StreamBuilder<QuerySnapshot>(
-                            stream: _firestore.collection('articles').snapshots(),
+                            stream:
+                                _firestore.collection('articles').snapshots(),
                             // ignore: missing_return
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
@@ -180,10 +184,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     flex: 4,
                                                     child: Container(
                                                       width: 500,
-                                                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-                                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                                                        BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 5)
-                                                      ]),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 4,
+                                                              horizontal: 4),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.1),
+                                                                blurRadius: 5)
+                                                          ]),
                                                       // margin: EdgeInsets.symmetric(horizontal: 10),
                                                       child: Image.network(
                                                         article['articleImage'],
@@ -193,25 +207,39 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                   Expanded(
                                                     child: Container(
-                                                      alignment: Alignment.center,
+                                                      alignment:
+                                                          Alignment.center,
                                                       // margin: EdgeInsets.symmetric(horizontal: 10),
-                                                      padding: EdgeInsets.symmetric(horizontal: 4),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 4),
                                                       width: double.infinity,
 
-                                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                                                        BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10)
-                                                      ]),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.1),
+                                                                blurRadius: 10)
+                                                          ]),
                                                       child: Text(
-                                                        article['articleName'].toUpperCase(),
+                                                        article['articleName']
+                                                            .toUpperCase(),
                                                         style: TextStyle(
                                                           color: Colors.grey,
                                                           height: 1.3,
-                                                          fontWeight: FontWeight.w500,
+                                                          fontWeight:
+                                                              FontWeight.w500,
                                                           fontSize: 15,
                                                           fontFamily: 'Ubuntu',
                                                         ),
-                                                        textAlign: TextAlign.center,
-                                                        overflow: TextOverflow.ellipsis,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       ),
                                                     ),
                                                   )
@@ -221,12 +249,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                             onTap: () {
                                               Get.to(
                                                   () => ArticleDescription(
-                                                        description: article['content'],
-                                                        articleTitle: article['articleName'],
+                                                        description:
+                                                            article['content'],
+                                                        articleTitle: article[
+                                                            'articleName'],
                                                       ),
-                                                  transition: Transition.rightToLeft,
+                                                  transition:
+                                                      Transition.rightToLeft,
                                                   curve: Curves.easeInToLinear,
-                                                  duration: Duration(milliseconds: 400));
+                                                  duration: Duration(
+                                                      milliseconds: 400));
                                             }),
                                     ],
                                     //Slider Container properties
@@ -237,7 +269,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       // autoPlay: true,
                                       aspectRatio: 17 / 15,
                                       autoPlayCurve: Curves.fastOutSlowIn,
-                                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                      autoPlayAnimationDuration:
+                                          Duration(milliseconds: 800),
                                       viewportFraction: 0.7,
                                     ),
                                   ),
@@ -342,7 +375,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Container(
                             padding: EdgeInsets.only(bottom: 20),
-                            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 15),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -361,7 +395,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             items: [
                               GestureDetector(
                                 onTap: () {
-                                  _forumContreller.sessionUserInfo.value['subscribe']
+                                  _forumContreller
+                                          .sessionUserInfo.value['subscribe']
                                       ? Get.to(() => PaidVedios(),
                                           // transition: Transition.cupertinoDialog,
                                           fullscreenDialog: true,
@@ -371,7 +406,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           // transition: Transition.cupertinoDialog,
                                           fullscreenDialog: true,
                                           curve: Curves.easeInToLinear,
-                                          duration: Duration(milliseconds: 600));
+                                          duration:
+                                              Duration(milliseconds: 600));
                                 },
                                 child: Stack(
                                   children: [
@@ -390,10 +426,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                         left: 20,
                                         top: 20,
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(40),
+                                          borderRadius:
+                                              BorderRadius.circular(40),
                                           child: Container(
                                             padding: EdgeInsets.all(10),
-                                            color: Colors.black.withOpacity(0.6),
+                                            color:
+                                                Colors.black.withOpacity(0.6),
                                             child: Icon(
                                               Icons.lock,
                                               color: Colors.white,
@@ -419,7 +457,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       // margin: EdgeInsets.all(10.0),
                                       decoration: BoxDecoration(
                                         // color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                         image: DecorationImage(
                                           image: AssetImage(
                                             "images/thumbnail_2.png",
@@ -432,7 +471,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         left: 10,
                                         top: 25,
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           child: Container(
                                             padding: EdgeInsets.all(5),
                                             color: Colors.white,
@@ -459,7 +499,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               autoPlay: false,
                               aspectRatio: 16 / 8,
                               autoPlayCurve: Curves.fastOutSlowIn,
-                              autoPlayAnimationDuration: Duration(milliseconds: 800),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 800),
                               viewportFraction: 0.8,
                             ),
                           ),
