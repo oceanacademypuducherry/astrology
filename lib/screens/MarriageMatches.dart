@@ -1,8 +1,11 @@
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/MarriageMatchesDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MarriageMatches extends StatefulWidget {
   const MarriageMatches({Key? key}) : super(key: key);
@@ -161,6 +164,36 @@ class _MarriageMatchesState extends State<MarriageMatches> {
       },
     );
   }
+
+  ///matches
+  ForumContreller _forumContreller = Get.find<ForumContreller>();
+  Future createToken() async {
+    final http.Response response = await http.post(
+      Uri.parse('https://api.prokerala.com/token'),
+      body: {
+        'client_id': '7a7a7f65-fdd5-4499-9b0f-5afb178295ff',
+        'client_secret': 'oGTDRcX1sXNCSC0KovUMeWru4cTcY15YS63KVbAH',
+        'grant_type': 'client_credentials',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      print('0000000000000000000000000000000000000000000000');
+      Map valueMap = json.decode(response.body);
+      print(valueMap);
+      _forumContreller.setMatchingToken(valueMap['access_token']);
+      print('0000000000000000000000000000000000000000000000');
+    } else {
+      print(response.statusCode);
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+      throw Exception('Failed to create album.');
+    }
+  }
+
+  ///matches
 
   @override
   Widget build(BuildContext context) {
@@ -619,7 +652,10 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             height: 55,
                             margin: const EdgeInsets.only(top: 22),
                             child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
+                                await createToken();
+                                print('uuuuuuuuuuuuuuuuuuuuuuuuuuu');
+
                                 Get.to(
                                   MarriageMatchesDetails(
                                     boyPada: boyPada,

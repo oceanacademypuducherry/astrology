@@ -249,6 +249,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             onTap: () {
                                               Get.to(
                                                   () => ArticleDescription(
+                                                        articleFile:
+                                                            article['link'],
                                                         description:
                                                             article['content'],
                                                         articleTitle: article[

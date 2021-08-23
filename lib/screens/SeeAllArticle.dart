@@ -59,6 +59,7 @@ class SeeAllArticle extends StatelessWidget {
                                 final articleImage = message['articleImage'];
                                 final articleName = message['articleName'];
                                 final articleDescription = message['content'];
+                                final articleFile = message['link'];
                                 final articles = SeeAllArticlesDb(
                                   articleImage: articleImage,
                                   articleName: articleName,
@@ -66,6 +67,7 @@ class SeeAllArticle extends StatelessWidget {
                                   onpress: () {
                                     Get.to(
                                         () => ArticleDescription(
+                                              articleFile: articleFile,
                                               articleTitle: articleName,
                                               description: articleDescription,
                                             ),
@@ -106,7 +108,10 @@ class SeeAllArticlesDb extends StatelessWidget {
   VoidCallback onpress;
   String description;
   SeeAllArticlesDb(
-      {required this.articleImage, required this.onpress, required this.articleName, required this.description});
+      {required this.articleImage,
+      required this.onpress,
+      required this.articleName,
+      required this.description});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

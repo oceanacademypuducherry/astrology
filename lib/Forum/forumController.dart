@@ -10,6 +10,15 @@ class ForumContreller extends GetxController {
   final userDocumentId = ''.obs;
   final isShow = false.obs;
 
+  ///matchs
+  final matchingToken = ''.obs;
+
+  setMatchingToken(token) {
+    matchingToken(token);
+  }
+
+  ///
+
   setIsShow(show) {
     isShow(show);
   }

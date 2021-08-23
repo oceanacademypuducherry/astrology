@@ -29,6 +29,28 @@ Future<GetData> fetchLink(int boyNatchathiram, int girlNatchathiram,
   }
 }
 
+// Future<GetData> generateToken(String title) async {
+//   final response = await http.post(
+//     Uri.parse('https://api.prokerala.com/token'),
+//     headers: <String, String>{
+//       'Content-Type': 'application/json; charset=UTF-8',
+//     },
+//     body: jsonEncode(<String, String>{
+//       'title': title,
+//     }),
+//   );
+//
+//   if (response.statusCode == 201) {
+//     // If the server did return a 201 CREATED response,
+//     // then parse the JSON.
+//     return GetData.fromJson(jsonDecode(response.body));
+//   } else {
+//     // If the server did not return a 201 CREATED response,
+//     // then throw an exception.
+//     throw Exception('Failed to create album.');
+//   }
+// }
+
 class GetData {
   final String title;
 

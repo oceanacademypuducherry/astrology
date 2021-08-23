@@ -1,10 +1,13 @@
+import 'package:astrology_app/screens/PdfView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ArticleDescription extends StatelessWidget {
   String? description;
   String? articleTitle;
-  ArticleDescription({this.description, this.articleTitle});
+  String? articleFile;
+  ArticleDescription({this.description, this.articleTitle, this.articleFile});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,8 @@ class ArticleDescription extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                     return Container(
-                      margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
@@ -99,6 +103,32 @@ class ArticleDescription extends StatelessWidget {
                               ),
                             ),
                           ),
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            padding: EdgeInsets.all(20),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Get.to(
+                                      () => PdfView(
+                                            pdfLink: articleFile.toString(),
+                                            appBarName: "VIEW ARTICLE",
+                                          ),
+                                      transition: Transition.rightToLeft,
+                                      curve: Curves.easeInToLinear,
+                                      duration: Duration(milliseconds: 600));
+                                },
+                                child: Text(
+                                  'READ FULL ARTICLES',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontFamily: 'Ubuntu',
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.blueAccent[400],
+                                    fixedSize: Size(double.infinity, 50))),
+                          )
                         ],
                       ),
                     );

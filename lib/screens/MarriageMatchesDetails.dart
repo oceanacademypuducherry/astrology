@@ -1,20 +1,24 @@
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
+ForumContreller _forumContreller = Get.find<ForumContreller>();
 Future<GetDataForPorutham> fetchLink(String boyNatchathiram,
     String girlNatchathiram, String boyPada, String girlPada) async {
+  print(_forumContreller.matchingToken.value.toString());
   final response = await http.get(
     Uri.parse(
-        'https://api.prokerala.com/v2/astrology/thirumana-porutham?girl_nakshatra=2&girl_nakshatra_pada=3&boy_nakshatra=5&boy_nakshatra_pada=1'),
+        'https://api.prokerala.com/v2/astrology/thirumana-porutham?girl_nakshatra=${girlNatchathiram}&girl_nakshatra_pada=${girlPada}&boy_nakshatra=${boyNatchathiram}&boy_nakshatra_pada=${boyPada}'),
     // Send authorization headers to the backend.
 
     headers: {
       // Authorization:
       HttpHeaders.authorizationHeader:
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI3YTdhN2Y2NS1mZGQ1LTQ0OTktOWIwZi01YWZiMTc4Mjk1ZmYiLCJqdGkiOiIwMTBlZTQ3MGVlZDRlYTA0ZmYwYjQ4ODU0OWQzMmIwYzg0ZWZhNjY2YjI2NjY1OWMzYjE2MDdmODA1NDNiNTgyNTAxNWZlNjg0MGZkOWQ3OCIsImlhdCI6MTYyOTEyNjQxMCwibmJmIjoxNjI5MTI2NDEwLCJleHAiOjE2MjkxMzAwMTAsInN1YiI6ImRlZjk2Yjc0LWEwMWQtNDk2NS1hYjhjLTQ2N2MxZTU4MGJhMiIsInNjb3BlcyI6W10sImNyZWRpdHNfcmVtYWluaW5nIjo0MjI5LCJyYXRlX2xpbWl0cyI6W3sicmF0ZSI6NSwiaW50ZXJ2YWwiOjYwfV19.jaQn5HbfRfMkBAzVaTu2fBaf7-zBJezsTcmceW-vrctbBO8M5rlKJPuh9ngeAg6IOIewcqpAv2Y1d7iZIax-Q3Bag0hURm-tNm4gavGOfE1F4I4H3TdUJoSrgoLiQGdP_An4sWfrXJAFz_nrdt1hXwTjn7QtWD3OyqWG_S6HbpXvuAoVC_3rEvYk7yb7JnlRAAXOfQcBCCMQaqQ313IZtIyj4hR7pHSzEiELD6QpzzBvnZQZNHr1i6eIP66hH-oo267olleW3JpDxxV-9mX8dC3UJl9gd84ewEj7o-gF4IcoQW4QLcjm4SIDfyxr0L89IGIbnCqu5H871xylOxZ5hQ',
+          'Bearer ${_forumContreller.matchingToken.value.toString().trim()}',
     },
   );
 
@@ -30,16 +34,22 @@ Future<GetDataForPorutham> fetchLink(String boyNatchathiram,
 }
 
 class GetDataForPorutham {
-  List title = [];
+  List matches = [];
+  double maximumPoints;
+  double obtainPointrs;
 
   GetDataForPorutham({
-    required this.title,
+    required this.matches,
+    required this.maximumPoints,
+    required this.obtainPointrs,
   });
 
   factory GetDataForPorutham.fromJson(Map<String, dynamic> json) {
+    print('^^^^^^^^^^^^^^^^^^^^^^^^^^');
     return GetDataForPorutham(
-      title: json['data']['matches'] as List,
-    );
+        matches: json['data']['matches'] as List,
+        maximumPoints: json['data']['maximum_points'],
+        obtainPointrs: json['data']['obtained_points']);
   }
 }
 
@@ -70,7 +80,8 @@ class MarriageMatchesDetails extends StatefulWidget {
 
 class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
   late Future<GetDataForPorutham> futureLink;
-  var count = 0;
+  var total;
+  var score;
   @override
   void initState() {
     // TODO: implement initState
@@ -284,24 +295,23 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                       future: futureLink,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          print('++++++++++++++++++');
-                          print(snapshot.data!.title[1]['name']);
+                          print('jjjjjjjjjjjjjjjjjjjjjj');
+                          total = snapshot.data!.maximumPoints;
+                          score = snapshot.data!.obtainPointrs;
 
                           return ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: snapshot.data!.title.length,
+                            itemCount: snapshot.data!.matches.length,
                             itemBuilder: (context, index) {
-                              count = snapshot.data!.title[index]
-                                  .where((e) => e['has_porutham'] == true)
-                                  .length;
                               return Card(
                                 child: ListTile(
                                   title: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(snapshot.data!.title[index]['name']),
-                                      snapshot.data!.title[index]
+                                      Text(snapshot.data!.matches[index]
+                                          ['name']),
+                                      snapshot.data!.matches[index]
                                               ['has_porutham']
                                           ? Icon(
                                               Icons.done_all_outlined,
@@ -350,7 +360,7 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                       ),
                     ),
                     Text(
-                      "(${count.toString()}/11)",
+                      "(${score.toString().substring(0, 1)}/12)",
                       style: TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.w500,
