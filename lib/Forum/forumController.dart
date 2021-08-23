@@ -13,6 +13,11 @@ class ForumContreller extends GetxController {
   ///matchs
   final matchingToken = ''.obs;
 
+  final maximunPoint = 0.0.obs;
+  setMaximumPoint(token) {
+    maximunPoint(token);
+  }
+
   setMatchingToken(token) {
     matchingToken(token);
   }

@@ -25,6 +25,9 @@ Future<GetDataForPorutham> fetchLink(String boyNatchathiram,
   if (response.statusCode == 200) {
     print(response.statusCode);
     print('************************************');
+    Map valueMap = json.decode(response.body);
+    print(valueMap);
+    _forumContreller.setMaximumPoint(valueMap['data']['obtained_points']);
     return GetDataForPorutham.fromJson(jsonDecode(response.body));
   } else {
     print(response.statusCode);
@@ -82,6 +85,7 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
   late Future<GetDataForPorutham> futureLink;
   var total;
   var score;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -359,15 +363,17 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                         fontFamily: 'Ubuntu',
                       ),
                     ),
-                    Text(
-                      "(${score.toString().substring(0, 1)}/12)",
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        fontFamily: 'Ubuntu',
+                    Obx(
+                      () => Text(
+                        "(${_forumContreller.maximunPoint.value}/12)",
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          fontFamily: 'Ubuntu',
+                        ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
