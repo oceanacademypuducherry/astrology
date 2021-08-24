@@ -1,10 +1,13 @@
+import 'package:astrology_app/screens/PdfView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ArticleDescription extends StatelessWidget {
   String? description;
   String? articleTitle;
-  ArticleDescription({this.description, this.articleTitle});
+  String? articleFile;
+  ArticleDescription({this.description, this.articleTitle, this.articleFile});
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +57,13 @@ class ArticleDescription extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.blue.withOpacity(0.8),
+                            color: Colors.blue.withOpacity(0.7),
                             offset: const Offset(
                               1.0,
                               1.0,
                             ),
-                            blurRadius: 10.0,
-                            spreadRadius: 0.1,
+                            blurRadius: 5.0,
+                            spreadRadius: 0.2,
                           ), //BoxShadow
                         ],
                         color: Colors.white,
@@ -75,9 +78,10 @@ class ArticleDescription extends StatelessWidget {
                             width: double.infinity,
                             child: Text(
                               '${articleTitle}',
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.blue.withOpacity(0.9),
-                                fontSize: 20,
+                                fontSize: 17,
                                 fontFamily: 'Ubuntu',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -99,6 +103,32 @@ class ArticleDescription extends StatelessWidget {
                               ),
                             ),
                           ),
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            padding: EdgeInsets.all(20),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Get.to(
+                                      () => PdfView(
+                                            pdfLink: articleFile.toString(),
+                                            appBarName: "VIEW ARTICLE",
+                                          ),
+                                      transition: Transition.rightToLeft,
+                                      curve: Curves.easeInToLinear,
+                                      duration: Duration(milliseconds: 600));
+                                },
+                                child: Text(
+                                  'READ FULL ARTICLES',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontFamily: 'Ubuntu',
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.blueAccent[400],
+                                    fixedSize: Size(double.infinity, 50))),
+                          )
                         ],
                       ),
                     );

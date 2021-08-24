@@ -10,6 +10,20 @@ class ForumContreller extends GetxController {
   final userDocumentId = ''.obs;
   final isShow = false.obs;
 
+  ///matchs
+  final matchingToken = ''.obs;
+
+  final maximunPoint = 0.0.obs;
+  setMaximumPoint(token) {
+    maximunPoint(token);
+  }
+
+  setMatchingToken(token) {
+    matchingToken(token);
+  }
+
+  ///
+
   setIsShow(show) {
     isShow(show);
   }

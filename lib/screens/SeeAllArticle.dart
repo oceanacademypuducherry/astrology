@@ -59,6 +59,7 @@ class SeeAllArticle extends StatelessWidget {
                                 final articleImage = message['articleImage'];
                                 final articleName = message['articleName'];
                                 final articleDescription = message['content'];
+                                final articleFile = message['link'];
                                 final articles = SeeAllArticlesDb(
                                   articleImage: articleImage,
                                   articleName: articleName,
@@ -66,6 +67,7 @@ class SeeAllArticle extends StatelessWidget {
                                   onpress: () {
                                     Get.to(
                                         () => ArticleDescription(
+                                              articleFile: articleFile,
                                               articleTitle: articleName,
                                               description: articleDescription,
                                             ),

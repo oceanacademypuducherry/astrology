@@ -146,107 +146,112 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          TableCalendar(
-            rowHeight: 40,
-            daysOfWeekHeight: 40,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TableCalendar(
+              rowHeight: 40,
+              daysOfWeekHeight: 40,
 
-            ///Mon Tue Wed Thu Fri
-            daysOfWeekStyle: DaysOfWeekStyle(
-              weekdayStyle: TextStyle(
-                color: Colors.blue.withOpacity(0.9),
-                fontSize: 15,
-                fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.normal,
+              ///Mon Tue Wed Thu Fri
+              daysOfWeekStyle: DaysOfWeekStyle(
+                weekdayStyle: TextStyle(
+                  color: Colors.blue.withOpacity(0.9),
+                  fontSize: 15,
+                  fontFamily: 'Ubuntu',
+                  fontWeight: FontWeight.normal,
+                ),
+
+                ///Sat Sun
+                weekendStyle: TextStyle(
+                  color: Colors.blue.withOpacity(0.9),
+                  fontSize: 15,
+                  fontFamily: 'Ubuntu',
+                  fontWeight: FontWeight.normal,
+                ),
               ),
 
-              ///Sat Sun
-              weekendStyle: TextStyle(
-                color: Colors.blue.withOpacity(0.9),
-                fontSize: 15,
-                fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.normal,
+              ///Header 2 weeks Style
+              headerStyle: HeaderStyle(
+                titleTextStyle: TextStyle(
+                  color: Colors.blue.withOpacity(0.9),
+                  fontSize: 15,
+                  fontFamily: 'Ubuntu',
+                  fontWeight: FontWeight.bold,
+                ),
+                formatButtonShowsNext: false,
+                formatButtonVisible: false,
+                titleCentered: true,
+
+                // formatButtonTextStyle: TextStyle(
+                //   color: Colors.black54.withOpacity(0.9),
+                //   fontSize: 15,
+                //   fontFamily: 'Ubuntu',
+                //   fontWeight: FontWeight.normal,
+                // ),
+              ),
+              headerVisible: true,
+              focusedDay: selectedDay,
+              firstDay: DateTime.now(),
+              lastDay: DateTime(DateTime.now().year, DateTime.now().month,
+                  DateTime.now().day + 60),
+              calendarFormat: format,
+              onFormatChanged: (CalendarFormat _format) {
+                setState(() {
+                  format = _format;
+                });
+              },
+              startingDayOfWeek: StartingDayOfWeek.sunday,
+              daysOfWeekVisible: true,
+              selectedDayPredicate: (DateTime date) {
+                return isSameDay(selectedDay, date);
+              },
+              // Day Changed
+              onDaySelected: (DateTime selectDay, DateTime focusDay) {
+                setState(() {
+                  selectedDay = selectDay;
+                  focusedDay = focusDay;
+                });
+
+                formattedTime = DateFormat("yyyy-MM-dd").format(focusedDay);
+                // 2020-01-02 03:04:05.000
+
+                print(focusedDay);
+                print(formattedTime);
+                print('^^^^^^^^^^^^^^');
+                print(dbList);
+
+                getFree(formattedTime.toString());
+                Get.to(
+                    () => AppointmentTimeScreen(
+                          focusedDate: formattedTime.toString(),
+                          dbList: dbList,
+                          freeList: freeTime,
+                        ),
+                    // transition: Transition.cupertinoDialog,
+                    fullscreenDialog: true,
+                    curve: Curves.easeInToLinear,
+                    duration: Duration(milliseconds: 600));
+              },
+
+              //To style the Calendar
+              calendarStyle: CalendarStyle(
+                isTodayHighlighted: true,
+                selectedDecoration: BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.circle,
+                  // borderRadius: BorderRadius.circular(5.0),
+                ),
               ),
             ),
-
-            ///Header 2 weeks Style
-            headerStyle: HeaderStyle(
-              titleTextStyle: TextStyle(
-                color: Colors.black54.withOpacity(0.9),
-                fontSize: 15,
-                fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.normal,
-              ),
-              formatButtonTextStyle: TextStyle(
-                color: Colors.black54.withOpacity(0.9),
-                fontSize: 15,
-                fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            headerVisible: true,
-            focusedDay: selectedDay,
-            firstDay: DateTime.now(),
-            lastDay: DateTime(2050),
-            calendarFormat: format,
-            onFormatChanged: (CalendarFormat _format) {
-              setState(() {
-                format = _format;
-              });
-            },
-            startingDayOfWeek: StartingDayOfWeek.sunday,
-            daysOfWeekVisible: true,
-            selectedDayPredicate: (DateTime date) {
-              return isSameDay(selectedDay, date);
-            },
-            // Day Changed
-            onDaySelected: (DateTime selectDay, DateTime focusDay) {
-              setState(() {
-                selectedDay = selectDay;
-                focusedDay = focusDay;
-              });
-
-              formattedTime = DateFormat("yyyy-MM-dd").format(focusedDay);
-              // 2020-01-02 03:04:05.000
-
-              print(focusedDay);
-              print(formattedTime);
-              print('^^^^^^^^^^^^^^');
-              print(dbList);
-
-              getFree(formattedTime.toString());
-              Get.to(
-                  () => AppointmentTimeScreen(
-                        focusedDate: formattedTime.toString(),
-                        dbList: dbList,
-                        freeList: freeTime,
-                      ),
-                  // transition: Transition.cupertinoDialog,
-                  fullscreenDialog: true,
-                  curve: Curves.easeInToLinear,
-                  duration: Duration(milliseconds: 600));
-            },
-
-            //To style the Calendar
-            calendarStyle: CalendarStyle(
-              isTodayHighlighted: true,
-              selectedDecoration: BoxDecoration(
-                color: Colors.blue,
-                shape: BoxShape.circle,
-                // borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              color: Colors.blue[50],
-              padding: EdgeInsets.only(bottom: 10),
+            Container(
+              color: Colors.white60,
+              padding: EdgeInsets.only(bottom: 70),
               // color: Colors.blue,
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -255,7 +260,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           style: TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                              fontSize: 20,
                               fontFamily: 'Ubuntu'),
                         ),
                       ],
@@ -283,135 +288,135 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                             Expanded(
                                               flex: 9,
                                               child: Container(
-                                                  padding: EdgeInsets.all(5),
+                                                  padding:
+                                                      EdgeInsets.only(top: 20),
                                                   decoration: BoxDecoration(
-                                                      color: Colors.white,
+                                                      color: Colors.blue[50],
                                                       boxShadow: [
                                                         BoxShadow(
                                                             color: Colors.black
                                                                 .withOpacity(
                                                                     0.2),
-                                                            blurRadius: 5)
-                                                      ]),
+                                                            blurRadius: 8),
+                                                      ],
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
                                                   margin: EdgeInsets.all(10),
                                                   height: 50,
                                                   width: 300,
                                                   child: Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
-                                                            .center,
+                                                            .start,
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
+                                                        MainAxisAlignment.start,
                                                     children: [
-                                                      Text(
-                                                        DateFormat.jm()
-                                                            .format(book['time']
-                                                                .toDate())
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                          fontSize: 20,
-                                                          color: book['time']
-                                                                          .toDate()
-                                                                          .difference(DateTime
-                                                                              .now())
-                                                                          .inSeconds <
-                                                                      600 &&
-                                                                  book['time']
-                                                                          .toDate()
-                                                                          .difference(DateTime
-                                                                              .now())
-                                                                          .inSeconds >
-                                                                      -60 * 60
-                                                              ? Colors
-                                                                  .pinkAccent
-                                                              : book['time']
-                                                                          .toDate()
-                                                                          .difference(DateTime
-                                                                              .now())
-                                                                          .inSeconds >
-                                                                      0
-                                                                  ? Colors.black
-                                                                  : Colors
-                                                                      .green,
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 10.0,
+                                                            right: 10.0),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            book['time']
+                                                                            .toDate()
+                                                                            .difference(DateTime
+                                                                                .now())
+                                                                            .inSeconds <
+                                                                        600 &&
+                                                                    book['time']
+                                                                            .toDate()
+                                                                            .difference(DateTime
+                                                                                .now())
+                                                                            .inSeconds >
+                                                                        -60 * 60
+                                                                ? CircleAvatar(
+                                                                    backgroundColor:
+                                                                        Colors.blue[
+                                                                            50],
+                                                                    radius: 45,
+                                                                    backgroundImage:
+                                                                        AssetImage(
+                                                                            'images/zoom.png'),
+                                                                  )
+                                                                : book['time']
+                                                                            .toDate()
+                                                                            .difference(DateTime.now())
+                                                                            .inSeconds >
+                                                                        0
+                                                                    ? CircleAvatar(
+                                                                        backgroundColor:
+                                                                            Colors.blue[50],
+                                                                        radius:
+                                                                            50,
+                                                                        child:
+                                                                            Image(
+                                                                          image:
+                                                                              AssetImage('images/comming.png'),
+                                                                        ),
+                                                                      )
+                                                                    : CircleAvatar(
+                                                                        backgroundColor:
+                                                                            Colors.blue[50],
+                                                                        radius:
+                                                                            45,
+                                                                        backgroundImage:
+                                                                            AssetImage('images/payment_success.png'),
+                                                                      ),
+                                                            Container(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                      DateFormat
+                                                                              .yMMMMd()
+                                                                          .format(book['time']
+                                                                              .toDate())
+                                                                          .toString(),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            20,
+                                                                        fontFamily:
+                                                                            'Ubuntu',
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        color: Colors
+                                                                            .blue
+                                                                            .shade400,
+                                                                      )),
+                                                                  Text(
+                                                                    DateFormat
+                                                                            .jm()
+                                                                        .format(
+                                                                            book['time'].toDate())
+                                                                        .toString(),
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          20,
+                                                                      fontFamily:
+                                                                          'Ubuntu',
+                                                                      height: 2,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .blue
+                                                                          .shade400,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                      book['time']
-                                                                      .toDate()
-                                                                      .difference(
-                                                                          DateTime
-                                                                              .now())
-                                                                      .inSeconds <
-                                                                  600 &&
-                                                              book['time']
-                                                                      .toDate()
-                                                                      .difference(
-                                                                          DateTime
-                                                                              .now())
-                                                                      .inSeconds >
-                                                                  0
-                                                          ? Text(
-                                                              "JOIN NOW",
-                                                              style: TextStyle(
-                                                                fontSize: 20,
-                                                                color: book['time'].toDate().difference(DateTime.now()).inSeconds <
-                                                                            600 &&
-                                                                        book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                            -60 *
-                                                                                60
-                                                                    ? Colors
-                                                                        .pinkAccent
-                                                                    : book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                            0
-                                                                        ? Colors
-                                                                            .black
-                                                                        : Colors
-                                                                            .green,
-                                                              ),
-                                                            )
-                                                          : book['time']
-                                                                      .toDate()
-                                                                      .difference(
-                                                                          DateTime
-                                                                              .now())
-                                                                      .inSeconds >
-                                                                  0
-                                                              ? Text(
-                                                                  "NOT SCHEDULE",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        20,
-                                                                    color: book['time'].toDate().difference(DateTime.now()).inSeconds <
-                                                                                600 &&
-                                                                            book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                                0
-                                                                        ? Colors
-                                                                            .pinkAccent
-                                                                        : book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                                0
-                                                                            ? Colors.black
-                                                                            : Colors.green,
-                                                                  ),
-                                                                )
-                                                              : Text(
-                                                                  "MEETING COMPLETED",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        20,
-                                                                    color: book['time'].toDate().difference(DateTime.now()).inSeconds <
-                                                                                600 &&
-                                                                            book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                                0
-                                                                        ? Colors
-                                                                            .pinkAccent
-                                                                        : book['time'].toDate().difference(DateTime.now()).inSeconds >
-                                                                                0
-                                                                            ? Colors.black
-                                                                            : Colors.green,
-                                                                  ),
-                                                                ),
                                                     ],
                                                   )),
                                             ),
@@ -448,8 +453,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                               // height: 300.0,
                               enlargeCenterPage: true,
                               autoPlay: false,
-                              aspectRatio: 30 / 15,
+                              aspectRatio: 35 / 15,
                               autoPlayCurve: Curves.fastOutSlowIn,
+
                               autoPlayAnimationDuration:
                                   Duration(milliseconds: 800),
                               viewportFraction: 0.7,
@@ -462,32 +468,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
-  }
-}
-
-class TimeButton extends StatelessWidget {
-  String? dayTime;
-  int? minuteFormat;
-  int? hourFormat;
-  VoidCallback? onpress;
-
-  TimeButton({this.minuteFormat, this.hourFormat, this.dayTime, this.onpress});
-  @override
-  Widget build(BuildContext context) {
-    print('$minuteFormat 000000000000000000000');
-    return ElevatedButton(
-        child: Container(
-          child: Text(
-              '${hourFormat! <= 9 ? '0${hourFormat}' : hourFormat}:${minuteFormat! <= 9 ? '0${minuteFormat}' : minuteFormat} ${dayTime}'),
-          margin: EdgeInsets.all(12.0),
-          padding: EdgeInsets.all(15.0),
-          // decoration:
-          //     BoxDecoration(border: Border.all(color: Colors.grey)),
-        ),
-        onPressed: onpress);
   }
 }
