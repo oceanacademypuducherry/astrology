@@ -44,7 +44,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: BottomNavigation()),
+      home: Scaffold(body: MyApp()),
     ),
   );
 }
