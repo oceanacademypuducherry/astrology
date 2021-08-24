@@ -47,8 +47,8 @@ class FreeVideos extends StatelessWidget {
                               List<FreeVedioDb> vedioList = [];
 
                               for (var message in messages) {
-                                final vedioImage = message['imageLink'];
-                                final vedioUrl = message['vedioUrl'];
+                                final vedioImage = message['videoImage'];
+                                final vedioUrl = message['videoUrl'];
                                 final title = message['title'];
                                 final description = message['description'];
 

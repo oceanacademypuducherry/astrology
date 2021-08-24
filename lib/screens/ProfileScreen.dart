@@ -373,11 +373,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     child: Container(
                                                       decoration: BoxDecoration(
                                                           image: DecorationImage(
-                                                              image: NetworkImage(
-                                                                  updatedProfile ==
-                                                                          null
-                                                                      ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
-                                                                      : '${updatedProfile}'),
+                                                              image: NetworkImage(_forumContreller
+                                                                              .sessionUserInfo
+                                                                              .value[
+                                                                          'profile'] ==
+                                                                      null
+                                                                  ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
+                                                                  : '${_forumContreller.sessionUserInfo.value['profile'].toString()}'),
                                                               fit:
                                                                   BoxFit.cover),
                                                           border: Border.all(
@@ -443,11 +445,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     child: Container(
                                                       decoration: BoxDecoration(
                                                           image: DecorationImage(
-                                                              image: NetworkImage(
-                                                                  updatedJadhagam ==
-                                                                          null
-                                                                      ? '${getJadhagam}'
-                                                                      : '${updatedJadhagam}'),
+                                                              image: NetworkImage(_forumContreller
+                                                                              .sessionUserInfo
+                                                                              .value[
+                                                                          'jadhagam'] ==
+                                                                      null
+                                                                  ? '${getJadhagam}'
+                                                                  : '${_forumContreller.sessionUserInfo.value['jadhagam']}'),
                                                               fit:
                                                                   BoxFit.cover),
                                                           border: Border.all(
@@ -854,7 +858,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             right: 20,
                                           ),
                                           child: ElevatedButton(
-                                            onPressed: () {
+                                            onPressed: () async {
                                               ///for unfocus everykeyboard
                                               if (messageFocusNode1.hasFocus ||
                                                   messageFocusNode2.hasFocus ||
@@ -894,9 +898,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       phoneNumberController!
                                                           .text,
                                                 });
-
+                                                var update = await _firestore
+                                                    .collection("newusers")
+                                                    .doc(Get.find<
+                                                            ForumContreller>()
+                                                        .userDocumentId
+                                                        .toString())
+                                                    .get();
+                                                _forumContreller
+                                                    .setUserInfo(update.data());
                                                 Get.snackbar(
-                                                  "Hello user!",
+                                                  "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
                                                   "Docuemnts are Updated",
                                                   icon: Icon(Icons.person,
                                                       color: Colors.white),
@@ -918,7 +930,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 );
                                               } else {
                                                 Get.snackbar(
-                                                  "Hello user!",
+                                                  "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
                                                   "Please provide your documents",
                                                   icon: Icon(Icons.person,
                                                       color: Colors.white),
@@ -1286,7 +1298,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     final snapshot = await task!.whenComplete(() {
       Get.snackbar(
-        "Hello user!",
+        "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
         "Jadhagam uploaded successfully",
         icon: Icon(Icons.person, color: Colors.white),
         snackPosition: SnackPosition.TOP,
@@ -1302,6 +1314,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       print('profile picture uploaded');
     });
     final urlDownload = await snapshot.ref.getDownloadURL();
+    _firestore
+        .collection('newusers')
+        .doc(_forumContreller.userDocumentId.value.toString())
+        .update({'jadhagam': urlDownload});
+    var update = await _firestore
+        .collection("newusers")
+        .doc(Get.find<ForumContreller>().userDocumentId.toString())
+        .get();
+    _forumContreller.setUserInfo(update.data());
 
     setState(() {
       updatedJadhagam = urlDownload;
@@ -1336,7 +1357,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       ///Todo snakbar upload
       Get.snackbar(
-        "Hello user!",
+        "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
         "profile uploaded successfully",
         icon: Icon(Icons.person, color: Colors.white),
         snackPosition: SnackPosition.TOP,
@@ -1351,6 +1372,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
     });
     final urlDownload = await snapshot.ref.getDownloadURL();
+
+    _firestore
+        .collection('newusers')
+        .doc(_forumContreller.userDocumentId.value.toString())
+        .update({'profile': urlDownload});
+    var update = await _firestore
+        .collection("newusers")
+        .doc(Get.find<ForumContreller>().userDocumentId.toString())
+        .get();
+    _forumContreller.setUserInfo(update.data());
 
     setState(() {
       updatedProfile = urlDownload;
