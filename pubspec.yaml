@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.3
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -52,7 +52,6 @@ dependencies:
   image_picker: ^0.8.2
   carousel_slider: ^4.0.0
   font_awesome_flutter: ^9.1.0
-  auto_orientation: ^2.0.2
   table_calendar: ^3.0.1
   file_picker: ^3.0.0
   intl: ^0.17.0
@@ -77,10 +76,10 @@ dependencies:
 #  permission_handler: ^8.1.4+2
 
 
+  #keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore
 
-
-#  keytool -genkey -v -keystore c:\Users\jass0\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
-
+#  keytool -genkey -v -keystore c:\Users\ocean\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+  #keytool -list -v -keystore "C:\Users\yourusernamehere\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
 
 
 dev_dependencies:

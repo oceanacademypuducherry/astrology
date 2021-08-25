@@ -49,8 +49,8 @@ class PaidVedios extends StatelessWidget {
                               List<PaidVediosDb> vedioList = [];
 
                               for (var message in messages) {
-                                final vedioImage = message['vedioImage'];
-                                final vedioUrl = message['vedioUrl'];
+                                final vedioImage = message['videoImage'];
+                                final vedioUrl = message['videoUrl'];
                                 final title = message['title'];
                                 final description = message['description'];
 

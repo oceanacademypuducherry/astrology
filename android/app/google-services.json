@@ -14,6 +14,62 @@
       },
       "oauth_client": [
         {
+          "client_id": "165698073340-25savsd5cejj3sv9ttqmf2rs1bp2i32h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.astrology_app",
+            "certificate_hash": "e4203511f399c6b0e4ad270e46007ced558fa26b"
+          }
+        },
+        {
+          "client_id": "165698073340-6ecbt9aoouepqde9rj4m41rb9jhe679t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.astrology_app",
+            "certificate_hash": "9c32cc489315e470cd19fe12d701492d5502bfb1"
+          }
+        },
+        {
+          "client_id": "165698073340-9p00iimpd8gvd65b3s4bmdds86e56s40.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.astrology_app",
+            "certificate_hash": "5c03a2690388d48c8b549861de513267604ca7f0"
+          }
+        },
+        {
+          "client_id": "165698073340-fs8pnajbqsb5ltl41g18inrpgi2ftc4c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.astrology_app",
+            "certificate_hash": "e3aeb5593fa6a3b13de5cbf6c26773a58a3bcf81"
+          }
+        },
+        {
+          "client_id": "165698073340-gs7fqm6ppaapf63d9g4na8mgu09quge5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.astrology_app",
+            "certificate_hash": "bc2473c5c7f1d7237ee05810bfaa7780e85dc29d"
+          }
+        },
+        {
+          "client_id": "165698073340-me9u6ikpiqovh6lg8eu15u29onv1qga8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.astrology_app",
+            "certificate_hash": "163c717158f64e93c6347a82a4331b05f4506814"
+          }
+        },
+        {
+          "client_id": "165698073340-tcpq775t8kimqd8s03ufrpccj9gh8m8b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.astrology_app",
+            "certificate_hash": "017843b30c2931970d90c7fa003070c7162cc2ba"
+          }
+        },
+        {
           "client_id": "165698073340-g6fktacgg0tahmefh0kqgrdt1bsnuj28.apps.googleusercontent.com",
           "client_type": 3
         }
