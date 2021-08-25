@@ -25,10 +25,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="completed everything">
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="completed 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Forum/forumController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Forum/forumController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/MarriageMatchesDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/MarriageMatchesDetails.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,13 +92,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627472263977</updated>
-    </task>
-    <task id="LOCAL-00016" summary="query pracctice">
-      <created>1627881654850</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1627881654850</updated>
     </task>
     <task id="LOCAL-00017" summary="login completed">
       <created>1627902279463</created>
@@ -438,7 +429,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629716612163</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="completed 1">
+      <created>1629723482806</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1629723482806</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -454,7 +452,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the variable in loginscreen.dart" />
     <MESSAGE value="aug 9 checking 2" />
     <MESSAGE value="profile completed" />
     <MESSAGE value="today testing 1" />
@@ -479,7 +476,8 @@
     <MESSAGE value="added changes 2" />
     <MESSAGE value="marrige matches completed" />
     <MESSAGE value="completed everything" />
-    <option name="LAST_COMMIT_MESSAGE" value="completed everything" />
+    <MESSAGE value="completed 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="completed 1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="383" key="#Notifications" timestamp="1628317220045">
@@ -506,22 +504,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="213" key="GridCell.Tab.0.bottom" timestamp="1629715832632">
+    <state width="1860" height="213" key="GridCell.Tab.0.bottom" timestamp="1629723502842">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1629715832632" />
-    <state width="1860" height="213" key="GridCell.Tab.0.center" timestamp="1629715832631">
+    <state width="1860" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1629723502842" />
+    <state width="1860" height="213" key="GridCell.Tab.0.center" timestamp="1629723502842">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="213" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1629715832631" />
-    <state width="1860" height="213" key="GridCell.Tab.0.left" timestamp="1629715832631">
+    <state width="1860" height="213" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1629723502842" />
+    <state width="1860" height="213" key="GridCell.Tab.0.left" timestamp="1629723502842">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="213" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1629715832631" />
-    <state width="1860" height="213" key="GridCell.Tab.0.right" timestamp="1629715832631">
+    <state width="1860" height="213" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1629723502842" />
+    <state width="1860" height="213" key="GridCell.Tab.0.right" timestamp="1629723502842">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="213" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1629715832631" />
+    <state width="1860" height="213" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1629723502842" />
     <state x="184" y="86" key="MergeDialog" timestamp="1629119073769">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -538,10 +536,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628919047163" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1629716707318">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1629723488189">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629716707318" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629723488189" />
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1628841082712">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
