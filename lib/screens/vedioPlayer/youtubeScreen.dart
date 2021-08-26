@@ -127,13 +127,16 @@ class _YoutubeScreenState extends State<YoutubeScreen> {
                     SizedBox(
                       width: 20,
                     ),
-                    Text(
-                      '${widget.vedioName}',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 18,
-                        fontFamily: 'Ubuntu',
-                        fontWeight: FontWeight.w600,
+                    Container(
+                      width: MediaQuery.of(context).size.width - 100,
+                      child: Text(
+                        '${widget.vedioName}',
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 18,
+                          fontFamily: 'Ubuntu',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
@@ -146,7 +149,7 @@ class _YoutubeScreenState extends State<YoutubeScreen> {
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     color: Colors.black54,
-                    fontSize: 18,
+                    fontSize: 15,
                     fontFamily: 'Ubuntu',
                     fontWeight: FontWeight.w600,
                   ),
