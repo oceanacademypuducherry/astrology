@@ -39,9 +39,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
   void getFree(String date) async {
     print("---------------------------");
-    await for (var snapshot in firestore
-        .collection('availableTime')
-        .snapshots(includeMetadataChanges: true)) {
+    await for (var snapshot in firestore.collection('availableTime').snapshots(includeMetadataChanges: true)) {
       for (var message in snapshot.docs) {
         print('available time');
         String getTime = message['time'];
@@ -59,9 +57,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
   void getAvailable() async {
     print("---------------------------");
-    await for (var snapshot in firestore
-        .collection('availableTime')
-        .snapshots(includeMetadataChanges: true)) {
+    await for (var snapshot in firestore.collection('availableTime').snapshots(includeMetadataChanges: true)) {
       for (var message in snapshot.docs) {
         print('going');
         String getTime = message['time'];
@@ -75,9 +71,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
   void getItem() async {
     print("---------------------------");
-    await for (var snapshot in firestore
-        .collection('booking')
-        .snapshots(includeMetadataChanges: true)) {
+    await for (var snapshot in firestore.collection('booking').snapshots(includeMetadataChanges: true)) {
       for (var message in snapshot.docs) {
         print('going');
         dynamic getTime = message['time'];
@@ -103,8 +97,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         dayTime = daytime.format(getTime.toDate());
         print(dayTime);
         //
-        var dt = DateTime(yearFormat, monthFormat, dayFormat,
-            dayTime == 'AM' ? hourFormat : hourFormat + 12, minuteFormat);
+        var dt =
+            DateTime(yearFormat, monthFormat, dayFormat, dayTime == 'AM' ? hourFormat : hourFormat + 12, minuteFormat);
         dbList.add(dt);
         print(dt);
       }
@@ -193,8 +187,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               headerVisible: true,
               focusedDay: selectedDay,
               firstDay: DateTime.now(),
-              lastDay: DateTime(DateTime.now().year, DateTime.now().month,
-                  DateTime.now().day + 60),
+              lastDay: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 60),
               calendarFormat: format,
               onFormatChanged: (CalendarFormat _format) {
                 setState(() {
@@ -245,7 +238,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               ),
             ),
             Container(
-              color: Colors.white60,
+              color: Colors.grey.shade100,
               padding: EdgeInsets.only(bottom: 70),
               // color: Colors.blue,
               child: Column(
@@ -258,10 +251,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                         Text(
                           "Booking Details",
                           style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              fontFamily: 'Ubuntu'),
+                              color: Colors.blue, fontWeight: FontWeight.w600, fontSize: 18, fontFamily: 'Ubuntu'),
                         ),
                       ],
                     ),
@@ -275,190 +265,139 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                       } else {
                         final bookings = snapshot.data!.docs;
                         return Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
                           child: CarouselSlider(
                             items: [
                               for (var book in bookings)
-                                if (book['phoneNumber'] ==
-                                    _forumContreller.userSession.value)
+                                if (book['phoneNumber'] == _forumContreller.userSession.value)
                                   GestureDetector(
-                                      child: Container(
-                                        child: Column(
-                                          children: [
-                                            Expanded(
-                                              flex: 9,
-                                              child: Container(
-                                                  padding:
-                                                      EdgeInsets.only(top: 20),
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.blue[50],
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                            color: Colors.black
-                                                                .withOpacity(
-                                                                    0.2),
-                                                            blurRadius: 8),
-                                                      ],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15.0)),
-                                                  margin: EdgeInsets.all(10),
-                                                  height: 50,
-                                                  width: 300,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                            left: 10.0,
-                                                            right: 10.0),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            book['time']
-                                                                            .toDate()
-                                                                            .difference(DateTime
-                                                                                .now())
-                                                                            .inSeconds <
-                                                                        600 &&
-                                                                    book['time']
-                                                                            .toDate()
-                                                                            .difference(DateTime
-                                                                                .now())
-                                                                            .inSeconds >
-                                                                        -60 * 60
-                                                                ? CircleAvatar(
-                                                                    backgroundColor:
-                                                                        Colors.blue[
-                                                                            50],
-                                                                    radius: 45,
-                                                                    backgroundImage:
-                                                                        AssetImage(
-                                                                            'images/zoom.png'),
-                                                                  )
-                                                                : book['time']
-                                                                            .toDate()
-                                                                            .difference(DateTime.now())
-                                                                            .inSeconds >
-                                                                        0
-                                                                    ? CircleAvatar(
-                                                                        backgroundColor:
-                                                                            Colors.blue[50],
-                                                                        radius:
-                                                                            50,
-                                                                        child:
-                                                                            Image(
-                                                                          image:
-                                                                              AssetImage('images/comming.png'),
-                                                                        ),
-                                                                      )
-                                                                    : CircleAvatar(
-                                                                        backgroundColor:
-                                                                            Colors.blue[50],
-                                                                        radius:
-                                                                            45,
-                                                                        backgroundImage:
-                                                                            AssetImage('images/payment_success.png'),
-                                                                      ),
-                                                            Container(
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                      DateFormat
-                                                                              .yMMMMd()
-                                                                          .format(book['time']
-                                                                              .toDate())
-                                                                          .toString(),
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontFamily:
-                                                                            'Ubuntu',
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        color: Colors
-                                                                            .blue
-                                                                            .shade400,
-                                                                      )),
-                                                                  Text(
-                                                                    DateFormat
-                                                                            .jm()
-                                                                        .format(
-                                                                            book['time'].toDate())
-                                                                        .toString(),
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontSize:
-                                                                          20,
-                                                                      fontFamily:
-                                                                          'Ubuntu',
-                                                                      height: 2,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      color: Colors
-                                                                          .blue
-                                                                          .shade400,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
+                                    onTap: book['time'].toDate().difference(DateTime.now()).inSeconds < 600 &&
+                                            book['time'].toDate().difference(DateTime.now()).inSeconds > -60 * 60
+                                        ? () {
+                                            _launchURL(book['link']);
+                                          }
+                                        : book['time'].toDate().difference(DateTime.now()).inSeconds > 0
+                                            ? null
+                                            : null,
+                                    child: Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 10),
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomRight,
+                                            colors: [
+                                              Colors.blue.shade700,
+                                              Colors.blue.shade600,
+                                              Colors.blue.shade500,
+                                              Colors.blue.shade200,
+                                            ]),
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.shade500,
+                                            offset: Offset(0.4, 0.4),
+                                            blurRadius: 5,
+                                            spreadRadius: 0.8,
+                                          ),
+                                        ],
                                       ),
-                                      onTap: book['time']
-                                                      .toDate()
-                                                      .difference(
-                                                          DateTime.now())
-                                                      .inSeconds <
-                                                  600 &&
-                                              book['time']
-                                                      .toDate()
-                                                      .difference(
-                                                          DateTime.now())
-                                                      .inSeconds >
-                                                  -60 * 60
-                                          ? () {
-                                              _launchURL(book['link']);
-                                            }
-                                          : book['time']
-                                                      .toDate()
-                                                      .difference(
-                                                          DateTime.now())
-                                                      .inSeconds >
-                                                  0
-                                              ? null
-                                              : null),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.symmetric(vertical: 10),
+                                                child: Text(
+                                                  "Your Booking is Confirmed ",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 14,
+                                                      fontFamily: 'Ubuntu'),
+                                                ),
+                                              ),
+                                              Icon(
+                                                Icons.celebration,
+                                                color: Colors.blue.shade900,
+                                              )
+                                            ],
+                                          ),
+                                          Icon(
+                                            Icons.done_all_outlined,
+                                            color: Colors.green,
+                                            size: 40,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.video_call_outlined,
+                                                color: Colors.white,
+                                                size: 28,
+                                              ),
+                                              Container(
+                                                  margin: EdgeInsets.symmetric(vertical: 10),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                        text:
+                                                            " ${DateFormat.yMMMMd().format(book['time'].toDate()).toString()}",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontSize: 13,
+                                                            fontFamily: 'Ubuntu'),
+                                                        children: [
+                                                          TextSpan(
+                                                            text:
+                                                                " ${DateFormat.jm().format(book['time'].toDate()).toString()}",
+                                                          ),
+                                                        ]),
+                                                  )),
+                                            ],
+                                          ),
+                                          Container(
+                                              width: MediaQuery.of(context).size.width,
+                                              alignment: Alignment.center,
+                                              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                                              child: RichText(
+                                                textAlign: TextAlign.center,
+                                                text: TextSpan(
+                                                    text: "Note : ",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.w600,
+                                                        fontSize: 10,
+                                                        fontFamily: 'Ubuntu'),
+                                                    children: [
+                                                      TextSpan(
+                                                        text: " Zoom link will be updated before 10 minutes",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight: FontWeight.w300,
+                                                            fontSize: 10,
+                                                            fontFamily: 'Ubuntu'),
+                                                      ),
+                                                    ]),
+                                              ))
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                             ],
                             //Slider Container properties
                             options: CarouselOptions(
                               enableInfiniteScroll: false,
                               // height: 300.0,
-                              enlargeCenterPage: true,
+                              enlargeCenterPage: false,
                               autoPlay: false,
                               aspectRatio: 35 / 15,
                               autoPlayCurve: Curves.fastOutSlowIn,
 
-                              autoPlayAnimationDuration:
-                                  Duration(milliseconds: 800),
-                              viewportFraction: 0.7,
+                              autoPlayAnimationDuration: Duration(milliseconds: 800),
+                              viewportFraction: 0.8,
                             ),
                           ),
                         );

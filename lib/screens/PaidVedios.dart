@@ -38,8 +38,7 @@ class PaidVedios extends StatelessWidget {
                     child: Column(
                       children: [
                         StreamBuilder<QuerySnapshot>(
-                          stream:
-                              _firestore.collection('PaidVedios').snapshots(),
+                          stream: _firestore.collection('PaidVedios').snapshots(),
                           // ignore: missing_return
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
@@ -49,8 +48,8 @@ class PaidVedios extends StatelessWidget {
                               List<PaidVediosDb> vedioList = [];
 
                               for (var message in messages) {
-                                final vedioImage = message['vedioImage'];
-                                final vedioUrl = message['vedioUrl'];
+                                final vedioImage = message['videoImage'];
+                                final vedioUrl = message['videoUrl'];
                                 final title = message['title'];
                                 final description = message['description'];
 
@@ -100,11 +99,7 @@ class PaidVediosDb extends StatelessWidget {
   String vedioTitle;
   VoidCallback onpress;
 
-  PaidVediosDb(
-      {required this.onpress,
-      required this.vedioImage,
-      required this.vediolink,
-      required this.vedioTitle});
+  PaidVediosDb({required this.onpress, required this.vedioImage, required this.vediolink, required this.vedioTitle});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -127,8 +122,8 @@ class PaidVediosDb extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: 100,
-              width: 100,
+              height: 80,
+              width: 125,
               child: Image(
                 image: NetworkImage('$vedioImage'),
                 fit: BoxFit.cover,

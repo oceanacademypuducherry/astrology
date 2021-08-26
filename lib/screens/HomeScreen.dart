@@ -1,4 +1,6 @@
+import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:astrology_app/Forum/forumController.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/BooksScreen.dart';
@@ -15,6 +17,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -88,11 +91,35 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: [
           SliverAppBar(
             floating: false,
-            expandedHeight: 170,
+            expandedHeight: 150,
             toolbarHeight: 50,
             // pinned: true,
             collapsedHeight: 60,
             flexibleSpace: FlexibleSpaceBar(
+              // titlePadding: EdgeInsets.all(10),
+              centerTitle: true,
+              title: Column(
+                children: [
+                  Text(
+                    "Hi User",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                      fontFamily: 'Ubuntu',
+                    ),
+                  ),
+                  Text(
+                    "Hi User",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                      fontFamily: 'Ubuntu',
+                    ),
+                  ),
+                ],
+              ),
               background: Image.asset(
                 'images/background_image.png',
                 fit: BoxFit.cover,
@@ -104,26 +131,6 @@ class _HomeScreenState extends State<HomeScreen> {
               (BuildContext context, int index) {
                 return Column(
                   children: [
-                    // TextButton(
-                    //     onPressed: () async {
-                    //       SharedPreferences pref =
-                    //           await SharedPreferences.getInstance();
-                    //
-                    //       pref.clear();
-                    //
-                    //       Get.to(
-                    //         () => Login(),
-                    //         transition: Transition.rightToLeft,
-                    //         curve: Curves.easeInToLinear,
-                    //         duration: Duration(milliseconds: 600),
-                    //       );
-                    //       print('logout');
-                    //     },
-                    //     child: Text('log out')),
-                    // TextButton(
-                    //   child: Text('notification'),
-                    //   onPressed: _showNotification,
-                    // ),
                     ///Article
                     Container(
                       color: Colors.grey[200],
@@ -154,17 +161,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                     child: Text(
                                       'See All',
-                                      style: TextStyle(
-                                          color: Colors.blue,
-                                          fontSize: 15,
-                                          fontFamily: 'Ubuntu'),
+                                      style: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Ubuntu'),
                                     ))
                               ],
                             ),
                           ),
                           StreamBuilder<QuerySnapshot>(
-                            stream:
-                                _firestore.collection('articles').snapshots(),
+                            stream: _firestore.collection('articles').snapshots(),
                             // ignore: missing_return
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
@@ -184,20 +187,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     flex: 4,
                                                     child: Container(
                                                       width: 500,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 4,
-                                                              horizontal: 4),
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                                color: Colors
-                                                                    .black
-                                                                    .withOpacity(
-                                                                        0.1),
-                                                                blurRadius: 5)
-                                                          ]),
+                                                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                                        BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 5)
+                                                      ]),
                                                       // margin: EdgeInsets.symmetric(horizontal: 10),
                                                       child: Image.network(
                                                         article['articleImage'],
@@ -207,39 +200,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                   Expanded(
                                                     child: Container(
-                                                      alignment:
-                                                          Alignment.center,
+                                                      alignment: Alignment.center,
                                                       // margin: EdgeInsets.symmetric(horizontal: 10),
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 4),
+                                                      padding: EdgeInsets.symmetric(horizontal: 4),
                                                       width: double.infinity,
 
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                                color: Colors
-                                                                    .black
-                                                                    .withOpacity(
-                                                                        0.1),
-                                                                blurRadius: 10)
-                                                          ]),
+                                                      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                                        BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10)
+                                                      ]),
                                                       child: Text(
-                                                        article['articleName']
-                                                            .toUpperCase(),
+                                                        article['articleName'].toUpperCase(),
                                                         style: TextStyle(
                                                           color: Colors.grey,
                                                           height: 1.3,
-                                                          fontWeight:
-                                                              FontWeight.w500,
+                                                          fontWeight: FontWeight.w500,
                                                           fontSize: 15,
                                                           fontFamily: 'Ubuntu',
                                                         ),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
+                                                        textAlign: TextAlign.center,
+                                                        overflow: TextOverflow.ellipsis,
                                                       ),
                                                     ),
                                                   )
@@ -249,18 +228,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                             onTap: () {
                                               Get.to(
                                                   () => ArticleDescription(
-                                                        articleFile:
-                                                            article['link'],
-                                                        description:
-                                                            article['content'],
-                                                        articleTitle: article[
-                                                            'articleName'],
+                                                        articleFile: article['link'],
+                                                        description: article['content'],
+                                                        articleTitle: article['articleName'],
                                                       ),
-                                                  transition:
-                                                      Transition.rightToLeft,
+                                                  transition: Transition.rightToLeft,
                                                   curve: Curves.easeInToLinear,
-                                                  duration: Duration(
-                                                      milliseconds: 400));
+                                                  duration: Duration(milliseconds: 400));
                                             }),
                                     ],
                                     //Slider Container properties
@@ -271,8 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       // autoPlay: true,
                                       aspectRatio: 17 / 15,
                                       autoPlayCurve: Curves.fastOutSlowIn,
-                                      autoPlayAnimationDuration:
-                                          Duration(milliseconds: 800),
+                                      autoPlayAnimationDuration: Duration(milliseconds: 800),
                                       viewportFraction: 0.7,
                                     ),
                                   ),
@@ -372,13 +345,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ///Video
                     Container(
                       // padding: EdgeInsets.only(bottom: 10),
-                      // color: Colors.blue,
+                      // color: Colors.grey,
                       child: Column(
                         children: [
                           Container(
                             padding: EdgeInsets.only(bottom: 20),
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 15),
+                            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -395,100 +367,104 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           CarouselSlider(
                             items: [
-                              GestureDetector(
-                                onTap: () {
-                                  _forumContreller
-                                          .sessionUserInfo.value['subscribe']
-                                      ? Get.to(() => PaidVedios(),
-                                          // transition: Transition.cupertinoDialog,
-                                          fullscreenDialog: true,
-                                          curve: Curves.easeInToLinear,
-                                          duration: Duration(milliseconds: 600))
-                                      : Get.to(() => SubscribeVideoScreen(),
-                                          // transition: Transition.cupertinoDialog,
-                                          fullscreenDialog: true,
-                                          curve: Curves.easeInToLinear,
-                                          duration:
-                                              Duration(milliseconds: 600));
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      // margin: EdgeInsets.all(10.0),
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Image.asset(
-                                        "images/thumbnail_.png",
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Positioned(
-                                        left: 20,
-                                        top: 20,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(40),
-                                          child: Container(
-                                            padding: EdgeInsets.all(10),
-                                            color:
-                                                Colors.black.withOpacity(0.6),
-                                            child: Icon(
-                                              Icons.lock,
-                                              color: Colors.white,
-                                              size: 20,
-                                            ),
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  print('ontap');
-                                  Get.to(() => FreeVideos(),
-                                      transition: Transition.topLevel,
-                                      // fullscreenDialog: true,
-                                      curve: Curves.easeInToLinear,
-                                      duration: Duration(milliseconds: 600));
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      // margin: EdgeInsets.all(10.0),
-                                      decoration: BoxDecoration(
-                                        // color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                            "images/thumbnail_2.png",
-                                          ),
+                              Container(
+                                // color: Colors.blue,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    _forumContreller.sessionUserInfo.value['subscribe']
+                                        ? Get.to(() => PaidVedios(),
+                                            // transition: Transition.cupertinoDialog,
+                                            fullscreenDialog: true,
+                                            curve: Curves.easeInToLinear,
+                                            duration: Duration(milliseconds: 600))
+                                        : Get.to(() => SubscribeVideoScreen(),
+                                            // transition: Transition.cupertinoDialog,
+                                            fullscreenDialog: true,
+                                            curve: Curves.easeInToLinear,
+                                            duration: Duration(milliseconds: 600));
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          // color: Colors.red,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Image.asset(
+                                          "images/thumbnail_.png",
                                           fit: BoxFit.contain,
                                         ),
                                       ),
-                                    ),
-                                    Positioned(
-                                        left: 10,
-                                        top: 25,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Container(
-                                            padding: EdgeInsets.all(5),
-                                            color: Colors.white,
-                                            child: Text(
-                                              'FREE',
-                                              style: TextStyle(
-                                                  color: Colors.blue,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 13,
-                                                  fontFamily: 'Ubuntu'),
+                                      Positioned(
+                                          left: 10,
+                                          top: 30,
+                                          child: _forumContreller.sessionUserInfo.value["subscribe"] == false
+                                              ? ClipRRect(
+                                                  borderRadius: BorderRadius.circular(30),
+                                                  child: Container(
+                                                      padding: EdgeInsets.all(10),
+                                                      color: Colors.black.withOpacity(0.5),
+                                                      child: Icon(
+                                                        FluentSystemIcons.ic_fluent_lock_regular,
+                                                        color: Colors.white70,
+                                                        size: 20,
+                                                      )),
+                                                )
+                                              : Text("")),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                // color: Colors.blue,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    print('ontap');
+                                    Get.to(() => FreeVideos(),
+                                        transition: Transition.topLevel,
+                                        // fullscreenDialog: true,
+                                        curve: Curves.easeInToLinear,
+                                        duration: Duration(milliseconds: 600));
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                              "images/thumbnail_2.png",
                                             ),
+                                            fit: BoxFit.contain,
                                           ),
-                                        )),
-                                  ],
+                                        ),
+                                      ),
+                                      Positioned(
+                                          left: 10,
+                                          top: 30,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(10),
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              height: 22,
+                                              width: 40,
+                                              padding: EdgeInsets.all(5),
+                                              color: Colors.white,
+                                              child: Text(
+                                                'FREE',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.blue,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 11,
+                                                    fontFamily: 'Ubuntu'),
+                                              ),
+                                            ),
+                                          )),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -499,10 +475,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               // height: 230.0,
                               enlargeCenterPage: true,
                               autoPlay: false,
-                              aspectRatio: 16 / 8,
+                              aspectRatio: 16 / 9,
                               autoPlayCurve: Curves.fastOutSlowIn,
-                              autoPlayAnimationDuration:
-                                  Duration(milliseconds: 800),
+                              autoPlayAnimationDuration: Duration(milliseconds: 800),
                               viewportFraction: 0.8,
                             ),
                           ),

@@ -125,9 +125,7 @@ class _BooksScreenState extends State<BooksScreen> {
                                   bookType: bookType,
                                   description: bookDescription,
                                   pdfLink: pdfLink,
-                                  userPurchased: _forumContreller
-                                          .sessionUserInfo.value['books']
-                                          .contains(bookName)
+                                  userPurchased: _forumContreller.sessionUserInfo.value['books'].contains(bookName)
                                       ? 'success'
                                       : 'failure',
 
@@ -258,9 +256,7 @@ class _BooksDbState extends State<BooksDb> {
                             Container(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                widget.bookType == 'free'
-                                    ? widget.bookType
-                                    : "₹ ${widget.bookType}",
+                                widget.bookType == 'free' ? widget.bookType : "₹ ${widget.bookType}",
                                 style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 10,
@@ -296,8 +292,7 @@ class _BooksDbState extends State<BooksDb> {
                                 elevation: 5,
                                 backgroundColor: Colors.white,
                                 primary: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                             child: Text(
                               'View',
                               style: TextStyle(
@@ -353,8 +348,7 @@ class _BooksDbState extends State<BooksDb> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      color: widget.bookType == 'free' ||
-                              widget.userPurchased == 'success'
+                      color: widget.bookType == 'free' || widget.userPurchased == 'success'
                           ? Colors.transparent
                           : Colors.black26,
                       height: 180,
@@ -364,8 +358,7 @@ class _BooksDbState extends State<BooksDb> {
                   Container(
                     child: widget.bookType == 'free'
                         ? Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 5.0, horizontal: 5.0),
+                            margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -375,36 +368,17 @@ class _BooksDbState extends State<BooksDb> {
                             width: 40,
                             child: Text(
                               'FREE',
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.blue.withOpacity(0.8),
-                                fontSize: 12,
+                                fontSize: 9,
                                 fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           )
-                        : widget.bookType != 'free' &&
-                                widget.userPurchased == 'success'
-                            ? Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 5.0, horizontal: 5.0),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                padding: EdgeInsets.all(5.0),
-                                height: 23,
-                                width: 40,
-                                child: Text(
-                                  'SUCCESS',
-                                  style: TextStyle(
-                                    color: Colors.blue.withOpacity(0.8),
-                                    fontSize: 12,
-                                    fontFamily: 'Ubuntu',
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              )
+                        : widget.bookType != 'free' && widget.userPurchased == 'success'
+                            ? Text('')
                             : Positioned(
                                 left: 3,
                                 top: 3,

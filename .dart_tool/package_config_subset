@@ -1,3 +1,7 @@
+astrology_app
+2.12
+file:///C:/Users/jass0/Desktop/astrology/
+file:///C:/Users/jass0/Desktop/astrology/lib/
 archive
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.1.2/
@@ -146,6 +150,10 @@ firebase_storage_web
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage_web-3.0.0/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage_web-3.0.0/lib/
+fluentui_icons
+2.12
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/fluentui_icons-1.0.0/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/fluentui_icons-1.0.0/lib/
 flutter_datetime_picker
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_datetime_picker-1.5.1/
@@ -246,6 +254,10 @@ keyboard_dismisser
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/keyboard_dismisser-2.0.0/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/keyboard_dismisser-2.0.0/lib/
+line_icons
+2.12
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/line_icons-2.0.1/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/line_icons-2.0.1/lib/
 lints
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/
@@ -554,8 +566,4 @@ flutter_web_plugins
 2.12
 file:///C:/src/flutter/packages/flutter_web_plugins/
 file:///C:/src/flutter/packages/flutter_web_plugins/lib/
-astrology_app
-2.12
-file:///F:/project/astro_after_icon_error/
-file:///F:/project/astro_after_icon_error/lib/
 2

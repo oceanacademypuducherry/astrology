@@ -72,6 +72,8 @@ dependencies:
   url_launcher: ^6.0.9
 #  flutter_oauth: "^0.0.1"
   meedu_player: ^0.5.0-nullsafety.1
+  line_icons: ^2.0.1
+  fluentui_icons: ^1.0.0
 #  webview_flutter: ^2.0.10
 #  agora_rtc_engine: ^4.0.6
 #  permission_handler: ^8.1.4+2
