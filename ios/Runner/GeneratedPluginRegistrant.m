@@ -60,22 +60,10 @@
 @import flutter_pdfview;
 #endif
 
-#if __has_include(<flutter_tts/FlutterTtsPlugin.h>)
-#import <flutter_tts/FlutterTtsPlugin.h>
-#else
-@import flutter_tts;
-#endif
-
 #if __has_include(<fluttertoast/FluttertoastPlugin.h>)
 #import <fluttertoast/FluttertoastPlugin.h>
 #else
 @import fluttertoast;
-#endif
-
-#if __has_include(<image_picker/FLTImagePickerPlugin.h>)
-#import <image_picker/FLTImagePickerPlugin.h>
-#else
-@import image_picker;
 #endif
 
 #if __has_include(<meedu_player/MeeduPlayerPlugin.h>)
@@ -100,12 +88,6 @@
 #import <shared_preferences/FLTSharedPreferencesPlugin.h>
 #else
 @import shared_preferences;
-#endif
-
-#if __has_include(<sms_autofill/SmsAutoFillPlugin.h>)
-#import <sms_autofill/SmsAutoFillPlugin.h>
-#else
-@import sms_autofill;
 #endif
 
 #if __has_include(<syncfusion_flutter_pdfviewer/SyncfusionFlutterPdfViewerPlugin.h>)
@@ -144,14 +126,11 @@
   [InAppWebViewFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"InAppWebViewFlutterPlugin"]];
   [FlutterLocalNotificationsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterLocalNotificationsPlugin"]];
   [FLTPDFViewFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPDFViewFlutterPlugin"]];
-  [FlutterTtsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterTtsPlugin"]];
   [FluttertoastPlugin registerWithRegistrar:[registry registrarForPlugin:@"FluttertoastPlugin"]];
-  [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
   [MeeduPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"MeeduPlayerPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [RazorpayFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"RazorpayFlutterPlugin"]];
   [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
-  [SmsAutoFillPlugin registerWithRegistrar:[registry registrarForPlugin:@"SmsAutoFillPlugin"]];
   [SyncfusionFlutterPdfViewerPlugin registerWithRegistrar:[registry registrarForPlugin:@"SyncfusionFlutterPdfViewerPlugin"]];
   [FLTURLLauncherPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTURLLauncherPlugin"]];
   [FLTVideoPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTVideoPlayerPlugin"]];

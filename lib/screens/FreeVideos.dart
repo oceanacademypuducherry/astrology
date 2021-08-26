@@ -1,10 +1,9 @@
-import 'package:astrology_app/screens/vedioPlayer/youtubeScreen.dart';
+import 'youtubeScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FreeVideos extends StatelessWidget {
-  // FreeVideos({Key? key}) : super(key: key);
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
@@ -35,7 +34,9 @@ class FreeVideos extends StatelessWidget {
                     child: Column(
                       children: [
                         StreamBuilder<QuerySnapshot>(
-                          stream: _firestore.collection('youtubeVedios').snapshots(),
+                          stream: _firestore
+                              .collection('youtubeVedios')
+                              .snapshots(),
                           // ignore: missing_return
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
@@ -96,7 +97,11 @@ class FreeVedioDb extends StatelessWidget {
   String vedioTitle;
   VoidCallback onpress;
 
-  FreeVedioDb({required this.onpress, required this.vedioImage, required this.vediolink, required this.vedioTitle});
+  FreeVedioDb(
+      {required this.onpress,
+      required this.vedioImage,
+      required this.vediolink,
+      required this.vedioTitle});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

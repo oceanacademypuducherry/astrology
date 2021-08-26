@@ -1,11 +1,9 @@
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/payment%20info/payment_successfuly.dart';
 import 'package:astrology_app/screens/PdfView.dart';
-import 'package:astrology_app/widgets/BottomNavigation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
