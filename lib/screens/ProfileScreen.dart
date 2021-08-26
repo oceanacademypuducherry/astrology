@@ -1170,6 +1170,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         Container(
                                           width:
                                               MediaQuery.of(context).size.width,
+                                          margin: EdgeInsets.all(10.0),
                                           child: ElevatedButton(
                                               onPressed: () async {
                                                 // SharedPreferences pref =
@@ -1186,57 +1187,71 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 // print('logout');
                                                 Get.defaultDialog(
                                                   title: "Hi User",
-                                                  content: Column(
-                                                    children: [
-                                                      Text(
-                                                        "Are you sure Want to logout",
-                                                      ),
-                                                      SizedBox(
-                                                        height: 30,
-                                                      ),
-                                                      Container(
-                                                        margin:
-                                                            EdgeInsets.all(10),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            ElevatedButton(
-                                                                onPressed:
-                                                                    () async {
-                                                                  SharedPreferences
-                                                                      pref =
-                                                                      await SharedPreferences
-                                                                          .getInstance();
-
-                                                                  pref.clear();
-
-                                                                  Get.off(
-                                                                    () =>
-                                                                        Login(),
-                                                                    transition:
-                                                                        Transition
-                                                                            .rightToLeft,
-                                                                    curve: Curves
-                                                                        .easeInToLinear,
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            600),
-                                                                  );
-                                                                },
-                                                                child: Text(
-                                                                    'YES')),
-                                                            ElevatedButton(
-                                                                onPressed: () {
-                                                                  Get.back();
-                                                                },
-                                                                child:
-                                                                    Text('NO')),
-                                                          ],
+                                                  titlePadding: EdgeInsets.only(
+                                                      top: 40.0),
+                                                  content: Container(
+                                                    margin:
+                                                        EdgeInsets.all(10.0),
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          "Are you sure Want to logout",
                                                         ),
-                                                      )
-                                                    ],
+                                                        // SizedBox(
+                                                        //   height: 10,
+                                                        // ),
+                                                        Container(
+                                                          // color: Colors.blue,
+                                                          // margin:
+                                                          //     EdgeInsets.all(
+                                                          //         20),
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  top: 20,
+                                                                  left: 10.0,
+                                                                  right: 10.0),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              ElevatedButton(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    SharedPreferences
+                                                                        pref =
+                                                                        await SharedPreferences
+                                                                            .getInstance();
+
+                                                                    pref.clear();
+
+                                                                    Get.off(
+                                                                      () =>
+                                                                          Login(),
+                                                                      transition:
+                                                                          Transition
+                                                                              .rightToLeft,
+                                                                      curve: Curves
+                                                                          .easeInToLinear,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              600),
+                                                                    );
+                                                                  },
+                                                                  child: Text(
+                                                                      'YES')),
+                                                              ElevatedButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    Get.back();
+                                                                  },
+                                                                  child: Text(
+                                                                      'NO')),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 );
                                               },
