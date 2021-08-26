@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
-Future<GetDataForPorutham> fetchLink(
-    String boyNatchathiram, String girlNatchathiram, String boyPada, String girlPada) async {
+Future<GetDataForPorutham> fetchLink(String boyNatchathiram,
+    String girlNatchathiram, String boyPada, String girlPada) async {
   final response = await http.get(
     Uri.parse(
         'https://api.prokerala.com/v2/astrology/thirumana-porutham?girl_nakshatra=2&girl_nakshatra_pada=3&boy_nakshatra=5&boy_nakshatra_pada=1'),
@@ -75,7 +75,8 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    futureLink = fetchLink(widget.boyNatchathiram, widget.girlNatchathiram, widget.boyPada, widget.girlPada);
+    futureLink = fetchLink(widget.boyNatchathiram, widget.girlNatchathiram,
+        widget.boyPada, widget.girlPada);
   }
 
   @override
@@ -115,7 +116,9 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                               ),
                             ),
                           ],
-                          image: DecorationImage(image: AssetImage("images/client.jpg"), fit: BoxFit.cover),
+                          image: DecorationImage(
+                              image: AssetImage("images/client.jpg"),
+                              fit: BoxFit.cover),
                         ),
                       ),
                     ),
@@ -288,14 +291,18 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: snapshot.data!.title.length,
                             itemBuilder: (context, index) {
-                              count = snapshot.data!.title[index].where((e) => e['has_porutham'] == true).length;
+                              count = snapshot.data!.title[index]
+                                  .where((e) => e['has_porutham'] == true)
+                                  .length;
                               return Card(
                                 child: ListTile(
                                   title: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(snapshot.data!.title[index]['name']),
-                                      snapshot.data!.title[index]['has_porutham']
+                                      snapshot.data!.title[index]
+                                              ['has_porutham']
                                           ? Icon(
                                               Icons.done_all_outlined,
                                               color: Colors.green[300],
@@ -379,23 +386,34 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
-                child: Text(
-                  "Wish You Happy Marriage Life",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                    fontFamily: 'Ubuntu',
-                  ),
-                ),
+                child: count >= 8
+                    ? Text(
+                        "இருவருக்கும் திருமண பொருத்தம் இருக்கு",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          fontFamily: 'Ubuntu',
+                        ),
+                      )
+                    : Text(
+                        "இருவருக்கும் திருமண பொருத்தம் இல்லை",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          fontFamily: 'Ubuntu',
+                        ),
+                      ),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                  "** நாம் மேலே காண்பது ஞானபானு பாம்பன் சுவாமிகள் இயற்றிய துவிதநாக பந்தம் ஆகும். இதை நம்மில் பலர் பார்த்திருக்கலாம். துவிதம் என்பதன் பொருள் இரண்டு ஆகும் **",
+                  "** திருமணம் என்பது ஒரு ஆண், ஒரு பெண் சேர்ந்து வாழ்ந்து அனைத்து சுக, துக்கங்களைப் பகிர்ந்து கொண்டு வாழ்வதாகும். **",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black54,
