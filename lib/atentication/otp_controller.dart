@@ -22,6 +22,8 @@ class OTPController extends GetxController {
   final getCountryCode = '+91'.obs;
   final isSubmited = false.obs;
 
+  final isLoading = true.obs;
+
   setBreake(stopTimer, BuildContext context) {
     isSubmited(stopTimer);
     VxToast.show(context, msg: 'timerBreaked');
@@ -33,12 +35,15 @@ class OTPController extends GetxController {
 
   Future<void> verifyPhoneNumber(
       String phoneNumber, BuildContext context) async {
+    dynamic close = context.showLoading(msg: "Loading");
+
     PhoneVerificationCompleted verificationCompleted =
         (PhoneAuthCredential phoneAuthCredential) async {
       VxToast.show(context, msg: 'verification completed');
     };
     PhoneVerificationFailed verificationFailed =
         (FirebaseAuthException exception) {
+      Future.delayed(0.100.seconds, close);
       VxDialog.showAlert(
         context,
         title: "Request Failed",
@@ -48,13 +53,16 @@ class OTPController extends GetxController {
     };
     PhoneCodeSent codeSent =
         (String verificationID, [int? forceResendingToken]) {
+      Future.delayed(0.100.seconds, close);
       VxToast.show(context, msg: 'verification code sent on the phone number');
+
       verifyId.value = verificationID;
       countdown(context);
       Get.to(OTP());
     };
     PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
         (String verificationID) {
+      Future.delayed(0.100.seconds, close);
       print(
           '..........................................timeOut .......................................');
     };
@@ -63,7 +71,7 @@ class OTPController extends GetxController {
           phoneNumber: phoneNumber,
           verificationCompleted: verificationCompleted,
           verificationFailed: verificationFailed,
-          codeSent: codeSent,
+          codeSent: codeSent != null ? codeSent : codeSent,
           codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
     } on FirebaseAuthException catch (e) {
       VxToast.show(context, msg: e.message.toString());

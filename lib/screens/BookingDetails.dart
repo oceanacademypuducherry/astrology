@@ -107,13 +107,10 @@ class _BookingDetailsState extends State<BookingDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var androidInitialize =
-        new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
-    var initialzationSetting =
-        new InitializationSettings(android: androidInitialize);
+    var androidInitialize = new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
+    var initialzationSetting = new InitializationSettings(android: androidInitialize);
     localNotification = new FlutterLocalNotificationsPlugin();
-    localNotification.initialize(initialzationSetting,
-        onSelectNotification: notificationSelected);
+    localNotification.initialize(initialzationSetting, onSelectNotification: notificationSelected);
     getTime();
 
     _razorpay = Razorpay();
@@ -127,14 +124,11 @@ class _BookingDetailsState extends State<BookingDetails> {
   }
 
   Future _showNotification() async {
-    var androidDetails = new AndroidNotificationDetails(
-        "channelId", "channelName", "you booked",
-        importance: Importance.max);
+    var androidDetails =
+        new AndroidNotificationDetails("channelId", "channelName", "you booked", importance: Importance.max);
 
-    var generalNotificationDetails =
-        new NotificationDetails(android: androidDetails);
-    await localNotification.show(0, 'Hi User', 'You have booked the meeting ',
-        generalNotificationDetails);
+    var generalNotificationDetails = new NotificationDetails(android: androidDetails);
+    await localNotification.show(0, 'Hi User', 'You have booked the meeting ', generalNotificationDetails);
   }
 
   @override
@@ -161,17 +155,12 @@ class _BookingDetailsState extends State<BookingDetails> {
     print('uploaded successfully');
 
     Get.off(() => PaymentSuccessfully(),
-        transition: Transition.rightToLeft,
-        curve: Curves.easeInToLinear,
-        duration: Duration(milliseconds: 600));
-    print(
-        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+        transition: Transition.rightToLeft, curve: Curves.easeInToLinear, duration: Duration(milliseconds: 600));
+    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
     print(response.paymentId);
     print(response.orderId);
     print(response.signature);
-    Fluttertoast.showToast(
-        msg: "SUCCESS: " + response.paymentId!,
-        toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!, toastLength: Toast.LENGTH_SHORT);
     _showNotification();
   }
 
@@ -184,9 +173,7 @@ class _BookingDetailsState extends State<BookingDetails> {
   void _handleExternalWallet(ExternalWalletResponse response) {
     print('*************WALLETETTETTE******************');
     print(response.walletName);
-    Fluttertoast.showToast(
-        msg: "EXTERNAL_WALLET: " + response.walletName!,
-        toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(msg: "EXTERNAL_WALLET: " + response.walletName!, toastLength: Toast.LENGTH_SHORT);
   }
 
   void openCheckout() async {
@@ -285,8 +272,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                           alignment: Alignment.center,
                           width: 80,
                           height: 40,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -311,8 +297,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                         Container(
                           alignment: Alignment.center,
                           height: 40,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -366,8 +351,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                         Container(
                           alignment: Alignment.center,
                           height: 40,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -436,15 +420,13 @@ class _BookingDetailsState extends State<BookingDetails> {
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Wrap(
                       alignment: WrapAlignment.start,
-                      runSpacing: 22,
-                      spacing: 20,
+                      runSpacing: 13,
+                      spacing: 12,
                       children: [
                         for (var i in purpose)
                           GestureDetector(
                             onTap: () {
-                              checking.containsKey(i)
-                                  ? checking.remove(i)
-                                  : checking.addAll({i: true});
+                              checking.containsKey(i) ? checking.remove(i) : checking.addAll({i: true});
 
                               setState(() {
                                 hasClicked = !hasClicked;
@@ -493,8 +475,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                   ///Condition  value == other means Textfield
                   _purpose == Purpose.Other
                       ? Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                           decoration: BoxDecoration(
                             color: Colors.grey.shade100,
                             boxShadow: [
@@ -529,46 +510,57 @@ class _BookingDetailsState extends State<BookingDetails> {
                   ),
 
                   ///radio button
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                    title: const Text(
-                      'For me',
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Ubuntu',
-                        fontSize: 14,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    leading: Radio(
-                      value: Appointment.MySelf,
-                      groupValue: _appointment,
-                      onChanged: (value) {
-                        setState(() {
-                          _appointment = Appointment.MySelf;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                    title: const Text(
-                      'Someone else',
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Ubuntu',
-                        fontSize: 14,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    leading: Radio(
-                      value: Appointment.others,
-                      groupValue: _appointment,
-                      onChanged: (value) {
-                        setState(() {
-                          _appointment = Appointment.others;
-                        });
-                      },
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Radio(
+                              value: Appointment.MySelf,
+                              groupValue: _appointment,
+                              onChanged: (value) {
+                                setState(() {
+                                  _appointment = Appointment.MySelf;
+                                });
+                              },
+                            ),
+                            Text(
+                              'For me',
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 10),
+                        Row(
+                          children: [
+                            Radio(
+                              value: Appointment.others,
+                              groupValue: _appointment,
+                              onChanged: (value) {
+                                setState(() {
+                                  _appointment = Appointment.others;
+                                });
+                              },
+                            ),
+                            Text(
+                              'Someone else',
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 14,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                   Divider(
@@ -615,8 +607,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                                 ///someone else page
                                 Get.to(
                                     () => SomeoneElseScreen(
-                                          appointmentFor:
-                                              _appointment.toString(),
+                                          appointmentFor: _appointment.toString(),
                                           purpose: _purpose.toString(),
                                           time: newDate,
                                           ruppess: rupees,

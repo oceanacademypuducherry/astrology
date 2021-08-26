@@ -35,9 +35,7 @@ class FreeVideos extends StatelessWidget {
                     child: Column(
                       children: [
                         StreamBuilder<QuerySnapshot>(
-                          stream: _firestore
-                              .collection('youtubeVedios')
-                              .snapshots(),
+                          stream: _firestore.collection('youtubeVedios').snapshots(),
                           // ignore: missing_return
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
@@ -98,11 +96,7 @@ class FreeVedioDb extends StatelessWidget {
   String vedioTitle;
   VoidCallback onpress;
 
-  FreeVedioDb(
-      {required this.onpress,
-      required this.vedioImage,
-      required this.vediolink,
-      required this.vedioTitle});
+  FreeVedioDb({required this.onpress, required this.vedioImage, required this.vediolink, required this.vedioTitle});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -125,8 +119,8 @@ class FreeVedioDb extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: 100,
-              width: 100,
+              height: 80,
+              width: 130,
               child: Image(
                 image: NetworkImage('$vedioImage'),
                 fit: BoxFit.cover,

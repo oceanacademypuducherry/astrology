@@ -21,6 +21,8 @@ class _OTPState extends State<OTP> {
 
   final countDown = 60.obs;
 
+  int timeCount = 0;
+
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
@@ -77,8 +79,13 @@ class _OTPState extends State<OTP> {
                         color: Vx.blue400,
                         size: 40,
                         obscureText: false,
-                        onChanged: (value) {
+                        onChanged: (value) async {
                           smsCode.value = value;
+
+                          if (smsCode.value.length == 6) {
+                            await _otpController.signWithPhoneNumber(
+                                smsCode.value, context);
+                          }
                         },
                       ),
                     ],

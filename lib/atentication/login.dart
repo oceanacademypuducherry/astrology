@@ -162,6 +162,7 @@ class _LoginState extends State<Login> {
                       '.........................${_otpController.userPhoneNumber.value} ........................');
                   _otpController.verifyPhoneNumber(
                       _otpController.userPhoneNumber.value.toString(), context);
+                  // Removes toast after 2 seconds
                 }).p12(),
               ],
             ),

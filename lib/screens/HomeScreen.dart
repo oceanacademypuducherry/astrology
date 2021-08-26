@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/atentication/login.dart';
+import 'package:astrology_app/check_pdf.dart';
+import 'package:astrology_app/pdfapi.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/BooksScreen.dart';
 import 'package:astrology_app/screens/FreeVideos.dart';
 import 'package:astrology_app/screens/MarriageMatches.dart';
 import 'package:astrology_app/screens/PaidVedios.dart';
+import 'package:astrology_app/screens/PdfView.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
@@ -50,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print('☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻☻');
   }
 
+  String urlPDFPath = "";
   @override
   void initState() {
     // TODO: implement initState
@@ -121,9 +127,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     //     },
                     //     child: Text('log out')),
                     // TextButton(
-                    //   child: Text('notification'),
-                    //   onPressed: _showNotification,
+                    //   child: Text('pdf'),
+                    //   onPressed: () {
+                    //     Get.to(
+                    //       () => PdfViewerPage2(),
+                    //       transition: Transition.rightToLeft,
+                    //       curve: Curves.easeInToLinear,
+                    //       duration: Duration(milliseconds: 600),
+                    //     );
+                    //   },
+                    //   // onPressed: () async {
+                    //   //   final url =
+                    //   //       'https://firebasestorage.googleapis.com/v0/b/astrology-7cec1.appspot.com/o/profile%2FHow%20to%20get%20started%20with%20Drive?alt=media&token=8c551e99-3d93-4960-882b-56f5b91e16db';
+                    //   //   final file = await PdfApi.loadNetwork(url);
+                    //   //
+                    //   //   openPDF(context, file);
+                    //   // },
                     // ),
+
                     ///Article
                     Container(
                       color: Colors.grey[200],
@@ -539,14 +560,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Future notificationSelected(String? payload) async {
-  //   Get.to(
-  //     () => BooksScreen(),
-  //     transition: Transition.rightToLeft,
-  //     curve: Curves.easeInToLinear,
-  //     duration: Duration(milliseconds: 600),
-  //   );
-  // }
+  void openPDF(BuildContext context, File file) => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)),
+      );
 }
 
 class ArticleFromDb extends StatelessWidget {
