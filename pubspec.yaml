@@ -69,6 +69,7 @@ dependencies:
   velocity_x: ^3.3.0
   http: ^0.13.3
   flutter_local_notifications: ^8.1.1
+  flutter_pdfview: ^1.2.1
   url_launcher: ^6.0.9
 #  flutter_oauth: "^0.0.1"
   meedu_player: ^0.5.0-nullsafety.1
