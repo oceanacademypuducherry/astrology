@@ -104,12 +104,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "cross_file",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/cross_file-0.3.1+4",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "crypto",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.1",
       "packageUri": "lib/",
@@ -308,12 +302,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "flutter_tts",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_tts-3.2.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "flutter_web_plugins",
       "rootUri": "file:///C:/src/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
@@ -364,24 +352,6 @@
     {
       "name": "image",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "image_picker",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.3+2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "image_picker_for_web",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "image_picker_platform_interface",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_platform_interface-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -452,12 +422,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "otp_text_field",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/otp_text_field-1.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "path",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
       "packageUri": "lib/",
@@ -514,18 +478,6 @@
     {
       "name": "petitparser",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-4.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "pin_input_text_field",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/pin_input_text_field-4.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.13"
-    },
-    {
-      "name": "pinput",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/pinput-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -610,12 +562,6 @@
     {
       "name": "sky_engine",
       "rootUri": "file:///C:/src/flutter/bin/cache/pkg/sky_engine",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "sms_autofill",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/sms_autofill-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -706,12 +652,6 @@
     {
       "name": "timezone",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/timezone-0.7.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "translator",
-      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/translator-0.1.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -872,7 +812,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-08-26T05:27:56.581364Z",
+  "generated": "2021-08-26T09:19:09.508331Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

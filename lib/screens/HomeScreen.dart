@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/atentication/login.dart';
-import 'package:astrology_app/check_pdf.dart';
-import 'package:astrology_app/pdfapi.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/BooksScreen.dart';
 import 'package:astrology_app/screens/FreeVideos.dart';
@@ -13,7 +11,6 @@ import 'package:astrology_app/screens/PdfView.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
-import 'package:astrology_app/widgets/notification_api.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
