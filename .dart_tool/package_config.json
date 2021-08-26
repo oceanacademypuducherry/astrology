@@ -224,6 +224,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "fluentui_icons",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/fluentui_icons-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///C:/src/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -388,6 +394,12 @@
     {
       "name": "keyboard_dismisser",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/keyboard_dismisser-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "line_icons",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/line_icons-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -842,7 +854,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-08-24T06:43:59.521461Z",
+  "generated": "2021-08-25T14:45:12.695679Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

@@ -3,10 +3,7 @@ import 'package:meedu_player/meedu_player.dart';
 import 'package:wakelock/wakelock.dart';
 
 class NativePlayer extends StatefulWidget {
-  NativePlayer(
-      {required this.vedioUrl,
-      required this.videoDescription,
-      required this.videoTitle});
+  NativePlayer({required this.vedioUrl, required this.videoDescription, required this.videoTitle});
 
   final String vedioUrl;
   final String videoTitle;
@@ -17,9 +14,8 @@ class NativePlayer extends StatefulWidget {
 }
 
 class _NativePlayerState extends State<NativePlayer> {
-  final _meeduPlayerController = MeeduPlayerController(
-      controlsStyle: ControlsStyle.primary,
-      enabledButtons: EnabledButtons(videoFit: false));
+  final _meeduPlayerController =
+      MeeduPlayerController(controlsStyle: ControlsStyle.primary, enabledButtons: EnabledButtons(videoFit: false));
 
   @override
   void initState() {
@@ -57,7 +53,16 @@ class _NativePlayerState extends State<NativePlayer> {
     var m = MediaQuery.of(context).size.width / 5;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Free Vedio"),
+        centerTitle: true,
+        title: Text(
+          "Enrolled Videos",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontFamily: 'Ubuntu',
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -91,8 +96,8 @@ class _NativePlayerState extends State<NativePlayer> {
                         child: Text(
                           '${widget.videoTitle}',
                           style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: 18,
+                            color: Colors.black45,
+                            fontSize: 13,
                             fontFamily: 'Ubuntu',
                             fontWeight: FontWeight.w600,
                           ),
@@ -109,9 +114,11 @@ class _NativePlayerState extends State<NativePlayer> {
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     color: Colors.black54,
-                    fontSize: 18,
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                    height: 1.4,
                     fontFamily: 'Ubuntu',
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
