@@ -699,20 +699,20 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                         girlSelectedNum.toString() != -1 &&
                                         boySelectedNum.toString() != -1 ||
                                     boySelectedNum.toString() != null && boyName != null && girlName != "select") {
-                                  // Get.to(
-                                  //   MarriageMatchesDetails(
-                                  //     boyPada: boyPada,
-                                  //     natchathiramGirlValue: girlValue,
-                                  //     natchathiramBoyValue: boyValue,
-                                  //     girlPada: girlPada,
-                                  //     girlNatchathiram: girlSelectedNum.toString(),
-                                  //     boyNatchathiram: boySelectedNum.toString(),
-                                  //     boyName: boyName,
-                                  //     girlName: girlName,
-                                  //   ),
-                                  //   transition: Transition.downToUp,
-                                  //   duration: Duration(milliseconds: 500),
-                                  // );
+                                  Get.to(
+                                    MarriageMatchesDetails(
+                                      boyPada: boyPada,
+                                      natchathiramGirlValue: girlValue,
+                                      natchathiramBoyValue: boyValue,
+                                      girlPada: girlPada,
+                                      girlNatchathiram: girlSelectedNum.toString(),
+                                      boyNatchathiram: boySelectedNum.toString(),
+                                      boyName: boyName,
+                                      girlName: girlName,
+                                    ),
+                                    transition: Transition.downToUp,
+                                    duration: Duration(milliseconds: 500),
+                                  );
                                 } else {
                                   Get.snackbar(
                                     "Thirumana Porutham",
