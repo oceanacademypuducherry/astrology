@@ -25,29 +25,38 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca1a6d01-0eb2-47e1-a7ab-7530a0395483" name="Default Changelist" comment="chages the natchathiram">
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="added changes 2">
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/MarriageMatchesDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/MarriageMatchesDetails.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/MarriageMatches.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/MarriageMatches.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_3_API_28]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\jass0\.android\avd\Pixel_4_XL_API_30.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -71,22 +80,21 @@
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="eu.ydp.idea.ts.spec.generator.settings.spec.template" value="import {$ClassName$} from '$TestsRelativePath$../src/$classRelativePath$/$ClassName$';&#10;&#10;describe('$ClassName$', () =&gt; {&#10;  let $ObjName$:$ClassName$;&#10;&#10;  beforeEach(() =&gt; {&#10;    $ObjName$ = new $ClassName$();&#10;  });&#10;&#10;  describe('', () =&gt; {&#10;    it('', () =&gt; {&#10;      // given&#10;&#10;      // when&#10;&#10;      // then&#10;    });&#10;  });&#10;});&#10;" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/images" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\kjaya\Documents\flutter\astrology\images" />
-      <recent name="C:\Users\kjaya\Documents\flutter\astrology\lib" />
-      <recent name="C:\Users\jass0\Desktop\astrology\images" />
-      <recent name="C:\Users\kjaya\Documents\flutter\astrology\android\app" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\kjaya\Documents\flutter\astrology\images" />
       <recent name="C:\Users\jass0\Desktop\astrology\images" />
       <recent name="C:\Users\jass0\StudioProjects\astrology_app\images" />
       <recent name="C:\Users\jass0\StudioProjects\astrology_app\fonts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kjaya\Documents\flutter\astrology\lib" />
+      <recent name="C:\Users\jass0\Desktop\astrology\images" />
+      <recent name="C:\Users\kjaya\Documents\flutter\astrology\android\app" />
     </key>
   </component>
   <component name="RunManager">
@@ -95,7 +103,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -106,6 +114,34 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627472263977</updated>
+    </task>
+    <task id="LOCAL-00014" summary="home is completed">
+      <created>1627877226934</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1627877226934</updated>
+    </task>
+    <task id="LOCAL-00015" summary="articles finished">
+      <created>1627879560385</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1627879560385</updated>
+    </task>
+    <task id="LOCAL-00016" summary="query pracctice">
+      <created>1627881654850</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1627881654850</updated>
+    </task>
+    <task id="LOCAL-00017" summary="login completed">
+      <created>1627902279463</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1627902279464</updated>
     </task>
     <task id="LOCAL-00018" summary="login completed 1 with otp">
       <created>1627902622968</created>
@@ -422,35 +458,7 @@
       <option name="project" value="LOCAL" />
       <updated>1629118701894</updated>
     </task>
-    <task id="LOCAL-00063" summary="marrige matches completed">
-      <created>1629175613816</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1629175613816</updated>
-    </task>
-    <task id="LOCAL-00064" summary="completed everything">
-      <created>1629716612162</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1629716612163</updated>
-    </task>
-    <task id="LOCAL-00065" summary="completed 1">
-      <created>1629723482806</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1629723482806</updated>
-    </task>
-    <task id="LOCAL-00066" summary="chages the natchathiram">
-      <created>1629952769641</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1629952769641</updated>
-    </task>
-    <option name="localTasksCounter" value="67" />
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -466,6 +474,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="vedio razorpay connected" />
+    <MESSAGE value="change apointment" />
+    <MESSAGE value="changed the variable in loginscreen.dart" />
+    <MESSAGE value="aug 9 checking 2" />
     <MESSAGE value="profile completed" />
     <MESSAGE value="today testing 1" />
     <MESSAGE value="today testing 2" />
@@ -487,21 +499,17 @@
     <MESSAGE value="added porutham" />
     <MESSAGE value="added changes 1" />
     <MESSAGE value="added changes 2" />
-    <MESSAGE value="marrige matches completed" />
-    <MESSAGE value="completed everything" />
-    <MESSAGE value="completed 1" />
-    <MESSAGE value="chages the natchathiram" />
-    <option name="LAST_COMMIT_MESSAGE" value="chages the natchathiram" />
+    <option name="LAST_COMMIT_MESSAGE" value="added changes 2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="383" key="#Notifications" timestamp="1628317220045">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="845" y="383" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1628317220045" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1629352945031">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1627881964327">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1629352945031" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627881964327" />
     <state x="689" y="310" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1627881962294">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -518,22 +526,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="279" key="GridCell.Tab.0.bottom" timestamp="1629954202097">
+    <state width="1865" height="224" key="GridCell.Tab.0.bottom" timestamp="1629955698562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1629954202097" />
-    <state width="1860" height="279" key="GridCell.Tab.0.center" timestamp="1629954202096">
+    <state width="1865" height="224" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1629955698562" />
+    <state width="1865" height="224" key="GridCell.Tab.0.center" timestamp="1629955698562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1629954202096" />
-    <state width="1860" height="279" key="GridCell.Tab.0.left" timestamp="1629954202096">
+    <state width="1865" height="224" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1629955698562" />
+    <state width="1865" height="224" key="GridCell.Tab.0.left" timestamp="1629955698562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1629954202096" />
-    <state width="1860" height="279" key="GridCell.Tab.0.right" timestamp="1629954202096">
+    <state width="1865" height="224" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1629955698562" />
+    <state width="1865" height="224" key="GridCell.Tab.0.right" timestamp="1629955698562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1629954202096" />
+    <state width="1865" height="224" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1629955698562" />
     <state x="184" y="86" key="MergeDialog" timestamp="1629119073769">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -542,42 +550,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1629092866628" />
-    <state x="336" y="77" key="SettingsEditor" timestamp="1629953407417">
+    <state x="336" y="77" key="SettingsEditor" timestamp="1629882579803">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="336" y="77" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1629953407417" />
+    <state x="336" y="77" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1629882579803" />
     <state x="744" y="236" key="VCS.ChangeListViewerDialog" timestamp="1628919047163">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628919047163" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1629723488189">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1629118708554">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629723488189" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629118708554" />
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1628841082712">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628841082712" />
-    <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1629354927945">
+    <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1628912744643">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1629354927945" />
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1629175577839">
+    <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1628912744643" />
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1629954490921">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629175577839" />
-    <state x="667" y="67" width="726" height="744" key="find.popup" timestamp="1629711073491">
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629954490921" />
+    <state x="667" y="67" width="615" height="744" key="find.popup" timestamp="1628832264804">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="667" y="67" width="726" height="744" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1629711073491" />
+    <state x="667" y="67" width="615" height="744" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1628832264804" />
     <state x="416" y="126" key="new project wizard" timestamp="1627575717306">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="416" y="126" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1627575717306" />
-    <state x="532" y="237" key="run.anything.popup" timestamp="1629124066393">
+    <state x="532" y="237" key="run.anything.popup" timestamp="1629887969758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="532" y="237" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1629124066393" />
+    <state x="532" y="237" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1629887969758" />
     <state x="623" y="229" width="840" height="678" key="search.everywhere.popup" timestamp="1628668287170">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -602,6 +610,11 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/AppointmentScreen.dart</url>
+          <line>266</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/loginscreen.dart</url>
           <line>311</line>
           <option name="timeStamp" value="22" />
@@ -613,37 +626,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>746</line>
+          <line>647</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>747</line>
+          <line>648</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>783</line>
+          <line>680</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>784</line>
+          <line>681</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>785</line>
+          <line>682</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>786</line>
+          <line>683</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>787</line>
+          <line>684</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
@@ -662,105 +675,14 @@
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/BookingDetails.dart</url>
-          <line>441</line>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/BookingDetails.dart</url>
-          <line>146</line>
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart</url>
           <line>96</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>442</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>579</line>
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>258</line>
+          <line>228</line>
           <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>446</line>
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>440</line>
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>444</line>
-          <option name="timeStamp" value="63" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>676</line>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>680</line>
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>681</line>
-          <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>692</line>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>694</line>
-          <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <condition expression="api" language="Dart" />
-          <url>file://$PROJECT_DIR$/lib/widgets/postData.dart</url>
-          <line>13</line>
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
-          <line>677</line>
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/AppointmentScreen.dart</url>
-          <line>455</line>
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/AppointmentScreen.dart</url>
-          <line>456</line>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/AppointmentScreen.dart</url>
-          <line>458</line>
-          <option name="timeStamp" value="77" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/AppointmentScreen.dart</url>
-          <line>268</line>
-          <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
