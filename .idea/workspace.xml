@@ -25,7 +25,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca1a6d01-0eb2-47e1-a7ab-7530a0395483" name="Default Changelist" comment="delete all unwanted packages">
+    <list default="true" id="ca1a6d01-0eb2-47e1-a7ab-7530a0395483" name="Default Changelist" comment="changes the matches">
+      <change afterPath="$PROJECT_DIR$/fonts/st_137.TTF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/htmlpage.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/webview.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/zoomapi.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
@@ -36,12 +40,22 @@
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/MarriageMatchesDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/MarriageMatchesDetails.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Forum/forumController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Forum/forumController.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/ArticleDescription.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/ArticleDescription.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/QueryScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/QueryScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,18 +92,18 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\kjaya\Documents\flutter\astrology\lib\screens" />
-      <recent name="C:\Users\kjaya\Documents\flutter\astrology\images" />
-      <recent name="C:\Users\jass0\Desktop\astrology\images" />
-      <recent name="C:\Users\jass0\StudioProjects\astrology_app\images" />
-      <recent name="C:\Users\jass0\StudioProjects\astrology_app\fonts" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kjaya\Documents\flutter\astrology\images" />
       <recent name="C:\Users\kjaya\Documents\flutter\astrology\lib" />
       <recent name="C:\Users\jass0\Desktop\astrology\images" />
       <recent name="C:\Users\kjaya\Documents\flutter\astrology\android\app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kjaya\Documents\flutter\astrology\fonts" />
+      <recent name="C:\Users\kjaya\Documents\flutter\astrology\lib\screens" />
+      <recent name="C:\Users\kjaya\Documents\flutter\astrology\images" />
+      <recent name="C:\Users\jass0\Desktop\astrology\images" />
+      <recent name="C:\Users\jass0\StudioProjects\astrology_app\images" />
     </key>
   </component>
   <component name="RunManager">
@@ -109,13 +123,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627472263977</updated>
-    </task>
-    <task id="LOCAL-00022" summary="pdf to next page">
-      <created>1627991164271</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1627991164271</updated>
     </task>
     <task id="LOCAL-00023" summary="updated books screen video screen">
       <created>1628061874018</created>
@@ -453,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629969810259</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="changes the matches">
+      <created>1630070679125</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1630070679127</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -469,7 +483,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="testing 4" />
     <MESSAGE value="11-08 checking 1" />
     <MESSAGE value="11-08 checking 2" />
     <MESSAGE value="11-08 checking 3" />
@@ -494,7 +507,8 @@
     <MESSAGE value="changes 2" />
     <MESSAGE value="changes 3" />
     <MESSAGE value="delete all unwanted packages" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete all unwanted packages" />
+    <MESSAGE value="changes the matches" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes the matches" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="383" key="#Notifications" timestamp="1628317220045">
@@ -525,22 +539,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="372" key="GridCell.Tab.0.bottom" timestamp="1630068785747">
+    <state width="1877" height="259" key="GridCell.Tab.0.bottom" timestamp="1630144573091">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="372" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630068785747" />
-    <state width="1860" height="372" key="GridCell.Tab.0.center" timestamp="1630068785747">
+    <state width="1877" height="259" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630144573091" />
+    <state width="1877" height="259" key="GridCell.Tab.0.center" timestamp="1630144573090">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="372" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630068785747" />
-    <state width="1860" height="372" key="GridCell.Tab.0.left" timestamp="1630068785747">
+    <state width="1877" height="259" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630144573090" />
+    <state width="1877" height="259" key="GridCell.Tab.0.left" timestamp="1630144573090">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="372" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630068785747" />
-    <state width="1860" height="372" key="GridCell.Tab.0.right" timestamp="1630068785747">
+    <state width="1877" height="259" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630144573090" />
+    <state width="1877" height="259" key="GridCell.Tab.0.right" timestamp="1630144573090">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="372" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630068785747" />
+    <state width="1877" height="259" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630144573090" />
     <state x="184" y="86" key="MergeDialog" timestamp="1629987765776">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -557,14 +571,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628919047163" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1629969817180">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1630070679339">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1629969817180" />
-    <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1630070072288">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630070679339" />
+    <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1630070713234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1630070072288" />
+    <state x="100" y="100" width="1720" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1630070713234" />
     <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1629354927945">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -581,10 +595,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="416" y="126" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1627575717306" />
-    <state x="532" y="237" key="run.anything.popup" timestamp="1629124066393">
+    <state x="532" y="237" key="run.anything.popup" timestamp="1630074090227">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="532" y="237" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1629124066393" />
+    <state x="532" y="237" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1630074090227" />
     <state x="623" y="229" width="840" height="678" key="search.everywhere.popup" timestamp="1628668287170">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -595,7 +609,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/main.dart</url>
-          <line>50</line>
+          <line>51</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
@@ -650,27 +664,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart</url>
-          <line>357</line>
+          <line>387</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart</url>
-          <line>364</line>
+          <line>394</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/BookingDetails.dart</url>
-          <line>441</line>
+          <line>455</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/BookingDetails.dart</url>
-          <line>146</line>
+          <line>149</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart</url>
-          <line>96</line>
+          <line>100</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
@@ -758,6 +772,21 @@
           <url>file://$PROJECT_DIR$/lib/screens/AppointmentScreen.dart</url>
           <line>268</line>
           <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/htmlpage.dart</url>
+          <line>23</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/BookingDetails.dart</url>
+          <line>346</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/MarriageMatches.dart</url>
+          <line>73</line>
+          <option name="timeStamp" value="82" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

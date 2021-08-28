@@ -11,6 +11,17 @@ class ForumContreller extends GetxController {
   final isShow = false.obs;
 
   ///matchs
+  final htmlContent = ''.obs;
+  final htmlTitle = ''.obs;
+
+  setHtmlContent(content) {
+    htmlContent(content);
+  }
+
+  setHtmlTitle(title) {
+    htmlTitle(title);
+  }
+
   final matchingToken = ''.obs;
 
   final maximunPoint = 0.0.obs;

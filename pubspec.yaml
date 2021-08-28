@@ -69,6 +69,9 @@ dependencies:
   meedu_player: ^0.5.0-nullsafety.1
   line_icons: ^2.0.1
   fluentui_icons: ^1.0.0
+  webview_flutter: ^2.0.12
+  html: ^0.15.0
+  flutter_html: ^2.1.1
 
 
 
@@ -124,6 +127,10 @@ flutter:
     - family: Ubuntu
       fonts:
         - asset: fonts/Ubuntu/Ubuntu-Regular.ttf
+    - family: st_137
+      fonts:
+        - asset: fonts/st_137.ttf
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

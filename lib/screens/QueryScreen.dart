@@ -1,4 +1,5 @@
 import 'package:astrology_app/screens/PdfView.dart';
+import 'package:astrology_app/screens/htmlpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,16 +61,16 @@ class _QueryScreenState extends State<QueryScreen> {
                                     final queryImage = message['queryImage'];
                                     final question = message['question'];
                                     final answerLink = message['pdfLink'];
+                                    final postId = message['postId'];
                                     final queries = QueryDb(
                                       question: question,
                                       image: queryImage,
                                       pdfLink: answerLink,
                                       onpress: () {
                                         Get.to(
-                                            () => PdfView(
-                                                  pdfLink: answerLink,
-                                                  appBarName: 'VIEW ANSWER',
-                                                ),
+                                            () => HtmlPageArticle(
+                                                appBarName: 'View Answer',
+                                                postId: postId),
                                             transition: Transition.rightToLeft,
                                             curve: Curves.easeInToLinear,
                                             duration:
@@ -106,6 +107,7 @@ class QueryDb extends StatelessWidget {
   String question;
   String pdfLink;
   VoidCallback onpress;
+
   QueryDb(
       {required this.pdfLink,
       required this.onpress,
@@ -113,7 +115,7 @@ class QueryDb extends StatelessWidget {
       required this.question});
   @override
   Widget build(BuildContext context) {
-    var newString = question.substring(0, 150);
+    var newString = question.substring(0, 20);
     return GestureDetector(
       onTap: onpress,
       child: Container(
@@ -159,7 +161,7 @@ class QueryDb extends StatelessWidget {
                   Container(
                     width: 200,
                     child: Text(
-                      newString,
+                      question,
                       style: TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.normal,

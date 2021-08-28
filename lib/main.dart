@@ -1,6 +1,7 @@
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_controller.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
+import 'package:astrology_app/screens/htmlpage.dart';
 
 import 'package:astrology_app/widgets/BottomNavigation.dart';
 
@@ -74,7 +75,9 @@ class _MyAppState extends State<MyApp> {
       child: Scaffold(
         backgroundColor: Colors.blue,
         resizeToAvoidBottomInset: false,
-        body: _forumContreller.userSession.value.isNotEmpty ? BottomNavigation() : Login(),
+        body: _forumContreller.userSession.value.isNotEmpty
+            ? BottomNavigation()
+            : Login(),
       ),
     );
   }
