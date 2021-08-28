@@ -1,4 +1,6 @@
 import 'package:astrology_app/screens/PdfView.dart';
+import 'package:astrology_app/screens/htmlpage.dart';
+import 'package:astrology_app/screens/webview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -109,10 +111,9 @@ class ArticleDescription extends StatelessWidget {
                             child: ElevatedButton(
                                 onPressed: () {
                                   Get.to(
-                                      () => PdfView(
-                                            pdfLink: articleFile.toString(),
-                                            appBarName: "VIEW ARTICLE",
-                                          ),
+                                      () => HtmlPageArticle(
+                                          appBarName: 'Article Description',
+                                          postId: '6153841115433219639'),
                                       transition: Transition.rightToLeft,
                                       curve: Curves.easeInToLinear,
                                       duration: Duration(milliseconds: 600));

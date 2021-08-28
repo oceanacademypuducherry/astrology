@@ -68,6 +68,9 @@ dependencies:
   meedu_player: ^0.5.0-nullsafety.1
   line_icons: ^2.0.1
   fluentui_icons: ^1.0.0
+  webview_flutter: ^2.0.12
+  html: ^0.15.0
+  flutter_html: ^2.1.1
 
 
 
@@ -91,12 +94,7 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-flutter_icons:
-  android: true
-  ios: true
-  image_path: "images/afternoon.png"
-  adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "images/afternoon.png"
+
 
 # The following section is specific to Flutter.
 flutter:
@@ -128,6 +126,10 @@ flutter:
     - family: Ubuntu
       fonts:
         - asset: fonts/Ubuntu/Ubuntu-Regular.ttf
+    - family: st_137
+      fonts:
+        - asset: fonts/st_137.ttf
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
