@@ -1,3 +1,6 @@
+// ignore: file_names
+// ignore_for_file: file_names
+
 import 'dart:convert';
 
 import 'package:astrology_app/Forum/forumController.dart';
@@ -59,25 +62,49 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
 
   ///zoom link
   ForumContreller _forumContreller = Get.find<ForumContreller>();
-  Future createToken() async {
+  createZoomToken(startTime) async {
     final http.Response response = await http.post(
-      Uri.parse('https://api.prokerala.com/token'),
-      body: {
-        'client_id': '7a7a7f65-fdd5-4499-9b0f-5afb178295ff',
-        'client_secret': 'oGTDRcX1sXNCSC0KovUMeWru4cTcY15YS63KVbAH',
-        'grant_type': 'client_credentials',
+      Uri.parse(
+          'https://api.zoom.us/v2/users/brindaspringnet@gmail.com/meetings'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IlFFMlNaTGhCUUhLX1BwUDI1dEl6ZnciLCJleHAiOjE2MzA4MjU5NzAsImlhdCI6MTYzMDIyMTE3MH0.Q1m0yG52SMRXBBxQSUp7Njr1gqf9r88dcnR82WwAh8U'
       },
+      body: jsonEncode(
+        <String, dynamic>{
+          "topic": "The title of your zoom meeting",
+          "type": 2,
+          "start_time": "${startTime}",
+          "duration": 45,
+          "timezone": "Asia/Calcutta",
+          "agenda": "test",
+          "recurrence": {
+            "type": "1",
+            "repeat_interval": "1",
+            // "end_date_time": "2021-08-29T01:21:57Z"
+            "end_date_time": ""
+          }
+        },
+
+        //     headers: {
+        //       'Authorization':
+        //           'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IlFFMlNaTGhCUUhLX1BwUDI1dEl6ZnciLCJleHAiOjE2MzAxNjEzNDQsImlhdCI6MTYzMDE1NTk0NH0.S2SIOi9D34YOUUKJ5COyp0Pj0uRsiqSiEzT_ducS7UY'
+        //     }
+      ),
     );
 
-    if (response.statusCode == 200) {
-      // If the server did return a 201 CREATED response,
-      // then parse the JSON.
+    if (response.statusCode == 201) {
+      print(response.statusCode);
       print('0000000000000000000000000000000000000000000000');
       Map valueMap = json.decode(response.body);
-      print(valueMap);
-      _forumContreller.setMatchingToken(valueMap['access_token']);
+      // print(valueMap);
+      _forumContreller.setJoinUrl(valueMap['join_url']);
+      _forumContreller.setStartUrl(valueMap['start_url']);
+
+      print("///////////////////////joinurl ${_forumContreller.joinUrl.value}");
       print(
-          "///////////////////////token${_forumContreller.matchingToken.value}");
+          "///////////////////////starturl ${_forumContreller.startUrl.value}");
       print('0000000000000000000000000000000000000000000000');
     } else {
       print(response.statusCode);
@@ -94,7 +121,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
     // getAvailable(widget.focusedDate);
     print(widget.freeList);
     print(
-        '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+        '@@@@@@@@@@@@@@@@@@@@@@@@@@@${widget.focusedDate}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
     List time_slot = [
       DateTime.parse('${widget.focusedDate} 09:00'),
       DateTime.parse('${widget.focusedDate} 10:00'),
@@ -140,6 +167,14 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    ElevatedButton(
+                      child: Text('checking'),
+                      onPressed: () async {
+                        print(orderTime);
+                        print('SSSSSSSSSSS');
+                        await createZoomToken(orderTime);
+                      },
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -559,9 +594,11 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                         primary: Color(0xff045de9),
                       ),
                       onPressed: isOpen
-                          ? () {
-                              print('>>>>>>>>>>>>>>>>>>>>>>>');
+                          ? () async {
                               print(orderTime);
+                              print('>>>>>>>>>>>>>>>>>>>>>>>');
+                              await createZoomToken(orderTime);
+
                               setState(() {
                                 colorChange.updateAll(
                                     (key, value) => colorChange[key] = false);

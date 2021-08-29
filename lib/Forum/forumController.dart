@@ -9,6 +9,9 @@ class ForumContreller extends GetxController {
   final sessionUserInfo = {}.obs;
   final userDocumentId = ''.obs;
   final isShow = false.obs;
+  final joinUrl = ''.obs;
+  final startUrl = ''.obs;
+  final startDate = ''.obs;
 
   ///matchs
   final htmlContent = ''.obs;
@@ -18,8 +21,16 @@ class ForumContreller extends GetxController {
     htmlContent(content);
   }
 
+  setStartUrl(url) {
+    startUrl(url);
+  }
+
   setHtmlTitle(title) {
     htmlTitle(title);
+  }
+
+  setJoinUrl(url) {
+    joinUrl(url);
   }
 
   final matchingToken = ''.obs;

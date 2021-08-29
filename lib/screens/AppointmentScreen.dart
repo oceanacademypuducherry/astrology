@@ -1,12 +1,14 @@
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/AppointmentTimeScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class AppointmentScreen extends StatefulWidget {
   @override
@@ -39,7 +41,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
   void getFree(String date) async {
     print("---------------------------");
-    await for (var snapshot in firestore.collection('availableTime').snapshots(includeMetadataChanges: true)) {
+    await for (var snapshot in firestore
+        .collection('availableTime')
+        .snapshots(includeMetadataChanges: true)) {
       for (var message in snapshot.docs) {
         print('available time');
         String getTime = message['time'];
@@ -57,7 +61,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
   void getAvailable() async {
     print("---------------------------");
-    await for (var snapshot in firestore.collection('availableTime').snapshots(includeMetadataChanges: true)) {
+    await for (var snapshot in firestore
+        .collection('availableTime')
+        .snapshots(includeMetadataChanges: true)) {
       for (var message in snapshot.docs) {
         print('going');
         String getTime = message['time'];
@@ -71,7 +77,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
   void getItem() async {
     print("---------------------------");
-    await for (var snapshot in firestore.collection('booking').snapshots(includeMetadataChanges: true)) {
+    await for (var snapshot in firestore
+        .collection('booking')
+        .snapshots(includeMetadataChanges: true)) {
       for (var message in snapshot.docs) {
         print('going');
         dynamic getTime = message['time'];
@@ -97,8 +105,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         dayTime = daytime.format(getTime.toDate());
         print(dayTime);
         //
-        var dt =
-            DateTime(yearFormat, monthFormat, dayFormat, dayTime == 'AM' ? hourFormat : hourFormat + 12, minuteFormat);
+        var dt = DateTime(yearFormat, monthFormat, dayFormat,
+            dayTime == 'AM' ? hourFormat : hourFormat + 12, minuteFormat);
         dbList.add(dt);
         print(dt);
       }
@@ -119,15 +127,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     getItem();
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.notifications_none_sharp,
-              color: Colors.blue,
-            ),
-          ),
-        ],
         backgroundColor: Colors.white,
         title: Text(
           "Schedule Appointment",
@@ -187,7 +186,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               headerVisible: true,
               focusedDay: selectedDay,
               firstDay: DateTime.now(),
-              lastDay: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 60),
+              lastDay: DateTime(DateTime.now().year, DateTime.now().month,
+                  DateTime.now().day + 60),
               calendarFormat: format,
               onFormatChanged: (CalendarFormat _format) {
                 setState(() {
@@ -251,7 +251,10 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                         Text(
                           "Booking Details",
                           style: TextStyle(
-                              color: Colors.blue, fontWeight: FontWeight.w600, fontSize: 18, fontFamily: 'Ubuntu'),
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                              fontFamily: 'Ubuntu'),
                         ),
                       ],
                     ),
@@ -268,18 +271,41 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           child: CarouselSlider(
                             items: [
                               for (var book in bookings)
-                                if (book['phoneNumber'] == _forumContreller.userSession.value)
+                                if (book['phoneNumber'] ==
+                                    _forumContreller.userSession.value)
                                   GestureDetector(
-                                    onTap: book['time'].toDate().difference(DateTime.now()).inSeconds < 600 &&
-                                            book['time'].toDate().difference(DateTime.now()).inSeconds > -60 * 60
+                                    onTap: book['time']
+                                                    .toDate()
+                                                    .difference(DateTime.now())
+                                                    .inSeconds <
+                                                600 &&
+                                            book['time']
+                                                    .toDate()
+                                                    .difference(DateTime.now())
+                                                    .inSeconds >
+                                                -60 * 60
                                         ? () {
-                                            _launchURL(book['link']);
+                                            _launchURL(book['userZoomLink']);
                                           }
-                                        : book['time'].toDate().difference(DateTime.now()).inSeconds > 0
-                                            ? null
-                                            : null,
+                                        : book['time']
+                                                    .toDate()
+                                                    .difference(DateTime.now())
+                                                    .inSeconds >
+                                                0
+                                            ? () => {
+                                                  VxToast.show(context,
+                                                      msg:
+                                                          'Zoom link will be updated before 10 minutes of your booked time',
+                                                      showTime: 5),
+                                                }
+                                            : () => {
+                                                  VxToast.show(context,
+                                                      msg:
+                                                          'this meeting was completed')
+                                                },
                                     child: Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 10),
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 10),
                                       width: MediaQuery.of(context).size.width,
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
@@ -302,19 +328,23 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                         ],
                                       ),
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
-                                                margin: EdgeInsets.symmetric(vertical: 10),
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 10),
                                                 child: Text(
                                                   "Your Booking is Confirmed ",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Colors.white,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       fontSize: 14,
                                                       fontFamily: 'Ubuntu'),
                                                 ),
@@ -325,13 +355,42 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                               )
                                             ],
                                           ),
-                                          Icon(
-                                            Icons.done_all_outlined,
-                                            color: Colors.green,
-                                            size: 40,
-                                          ),
+                                          book['time']
+                                                          .toDate()
+                                                          .difference(
+                                                              DateTime.now())
+                                                          .inSeconds <
+                                                      600 &&
+                                                  book['time']
+                                                          .toDate()
+                                                          .difference(
+                                                              DateTime.now())
+                                                          .inSeconds >
+                                                      -60 * 60
+                                              ? Icon(
+                                                  FontAwesomeIcons.video,
+                                                  color: Colors.white,
+                                                  size: 40,
+                                                )
+                                              : book['time']
+                                                          .toDate()
+                                                          .difference(
+                                                              DateTime.now())
+                                                          .inSeconds >
+                                                      0
+                                                  ? Icon(
+                                                      FontAwesomeIcons.walking,
+                                                      color: Colors.white,
+                                                      size: 40,
+                                                    )
+                                                  : Icon(
+                                                      Icons.done_all_outlined,
+                                                      color: Colors.white,
+                                                      size: 40,
+                                                    ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Icon(
                                                 Icons.video_call_outlined,
@@ -339,16 +398,19 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                 size: 28,
                                               ),
                                               Container(
-                                                  margin: EdgeInsets.symmetric(vertical: 10),
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 10),
                                                   child: RichText(
                                                     text: TextSpan(
                                                         text:
                                                             " ${DateFormat.yMMMMd().format(book['time'].toDate()).toString()}",
                                                         style: TextStyle(
                                                             color: Colors.white,
-                                                            fontWeight: FontWeight.w500,
+                                                            fontWeight:
+                                                                FontWeight.w500,
                                                             fontSize: 13,
-                                                            fontFamily: 'Ubuntu'),
+                                                            fontFamily:
+                                                                'Ubuntu'),
                                                         children: [
                                                           TextSpan(
                                                             text:
@@ -359,26 +421,33 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                             ],
                                           ),
                                           Container(
-                                              width: MediaQuery.of(context).size.width,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
                                               alignment: Alignment.center,
-                                              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 10, horizontal: 5),
                                               child: RichText(
                                                 textAlign: TextAlign.center,
                                                 text: TextSpan(
                                                     text: "Note : ",
                                                     style: TextStyle(
                                                         color: Colors.white,
-                                                        fontWeight: FontWeight.w600,
+                                                        fontWeight:
+                                                            FontWeight.w600,
                                                         fontSize: 10,
                                                         fontFamily: 'Ubuntu'),
                                                     children: [
                                                       TextSpan(
-                                                        text: " Zoom link will be updated before 10 minutes",
+                                                        text:
+                                                            " Zoom link will be updated before 10 minutes",
                                                         style: TextStyle(
                                                             color: Colors.white,
-                                                            fontWeight: FontWeight.w300,
+                                                            fontWeight:
+                                                                FontWeight.w300,
                                                             fontSize: 10,
-                                                            fontFamily: 'Ubuntu'),
+                                                            fontFamily:
+                                                                'Ubuntu'),
                                                       ),
                                                     ]),
                                               ))
@@ -396,7 +465,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                               aspectRatio: 35 / 15,
                               autoPlayCurve: Curves.fastOutSlowIn,
 
-                              autoPlayAnimationDuration: Duration(milliseconds: 800),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 800),
                               viewportFraction: 0.8,
                             ),
                           ),

@@ -84,6 +84,15 @@ class _HomeScreenState extends State<HomeScreen> {
   //       0, 'Hi User', 'body of the notification', generalNotificationDetails);
   // }
 
+  var hour = DateTime.now().hour;
+  // if (hour < 12) {
+  // return 'Morning';
+  // }
+  // if (hour < 17) {
+  // return 'Afternoon';
+  // }
+  // return 'Evening';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -91,12 +100,36 @@ class _HomeScreenState extends State<HomeScreen> {
           body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            centerTitle: true,
+            title: Text(
+              "Makarajothi",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  fontFamily: 'Ubuntu'),
+            ),
             floating: false,
-            expandedHeight: 170,
-            toolbarHeight: 50,
+            expandedHeight: 160,
+            toolbarHeight: 40,
             // pinned: true,
-            collapsedHeight: 60,
+            collapsedHeight: 50,
+            backwardsCompatibility: true,
             flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.parallax,
+              titlePadding: EdgeInsets.symmetric(vertical: 45),
+              title: Text(
+                "${hour < 12 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Morning !" : hour < 17 ? "Hi ${_forumContreller.sessionUserInfo['name']}r, Good Afternoon !" : "Hi ${_forumContreller.sessionUserInfo['name']}, Good Evening !"}",
+                style: TextStyle(
+                    color: Colors.white.withOpacity(0.8),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 12,
+                    fontFamily: 'Ubuntu'),
+              ),
+              stretchModes: [
+                StretchMode.fadeTitle,
+              ],
+              centerTitle: true,
               background: Image.asset(
                 'images/background_image.png',
                 fit: BoxFit.cover,
@@ -279,13 +312,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                               onTap: () {
                                                 Get.to(
                                                     () => ArticleDescription(
-                                                          articleFile:
-                                                              article['link'],
-                                                          description: article[
-                                                              'content'],
-                                                          articleTitle: article[
-                                                              'articleName'],
-                                                        ),
+                                                        articleFile:
+                                                            article['link'],
+                                                        description:
+                                                            article['content'],
+                                                        articleTitle: article[
+                                                            'articleName'],
+                                                        articlePostId:
+                                                            article['postId']),
                                                     transition:
                                                         Transition.rightToLeft,
                                                     curve:

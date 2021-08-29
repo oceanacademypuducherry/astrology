@@ -1,7 +1,3 @@
-astrology_app
-2.12
-file:///C:/Users/kjaya/Documents/flutter/astrology/
-file:///C:/Users/kjaya/Documents/flutter/astrology/lib/
 archive
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.1.2/
@@ -12,12 +8,8 @@ file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.2.0/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.2.0/lib/
 async
 2.12
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.6.1/
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.6.1/lib/
-auto_orientation
-2.12
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/auto_orientation-2.0.2/
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/auto_orientation-2.0.2/lib/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.7.0/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.7.0/lib/
 auto_size_text_pk
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/auto_size_text_pk-3.0.0/
@@ -40,8 +32,8 @@ file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0/lib/
 charcode
 2.12
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.2.0/
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.2.0/lib/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.3.1/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.3.1/lib/
 chewie
 2.13
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/chewie-1.2.2/
@@ -266,6 +258,10 @@ lints
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/lib/
+logger
+2.12
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/logger-1.1.0/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/logger-1.1.0/lib/
 matcher
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.10/
@@ -280,8 +276,8 @@ file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/meedu_player-0.5.0-nul
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/meedu_player-0.5.0-nullsafety.1/lib/
 meta
 2.12
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.3.0/
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.3.0/lib/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0/lib/
 modal_bottom_sheet
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/modal_bottom_sheet-2.0.0/
@@ -358,6 +354,10 @@ razorpay_flutter
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/razorpay_flutter-1.2.7/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/razorpay_flutter-1.2.7/lib/
+rename
+2.4
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/rename-1.3.1/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/rename-1.3.1/lib/
 rxdart
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.1/
@@ -440,8 +440,8 @@ file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.0/
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.0/lib/
 test_api
 2.12
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.3.0/
-file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.3.0/lib/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.2/
+file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.2/lib/
 timer_count_down
 2.12
 file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/timer_count_down-2.2.0/
@@ -574,4 +574,8 @@ flutter_web_plugins
 2.12
 file:///C:/src/flutter/packages/flutter_web_plugins/
 file:///C:/src/flutter/packages/flutter_web_plugins/lib/
+astrology_app
+2.12
+file:///E:/astro_new/
+file:///E:/astro_new/lib/
 2

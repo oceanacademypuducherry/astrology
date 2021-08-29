@@ -1,4 +1,4 @@
-package com.example.astrology_app
+package com.makarajothi.astrolab
 
 import io.flutter.embedding.android.FlutterActivity
 

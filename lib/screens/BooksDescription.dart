@@ -141,7 +141,7 @@ class _BooksDescriptionState extends State<BooksDescription> {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   IconButton(
                     splashRadius: 10,
@@ -150,12 +150,6 @@ class _BooksDescriptionState extends State<BooksDescription> {
                     },
                     icon: Icon(
                       Icons.arrow_back,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.favorite_border,
                     ),
                   ),
                 ],

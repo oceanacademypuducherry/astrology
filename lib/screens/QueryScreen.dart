@@ -1,3 +1,6 @@
+// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:astrology_app/screens/PdfView.dart';
 import 'package:astrology_app/screens/htmlpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -115,7 +118,6 @@ class QueryDb extends StatelessWidget {
       required this.question});
   @override
   Widget build(BuildContext context) {
-    var newString = question.substring(0, 20);
     return GestureDetector(
       onTap: onpress,
       child: Container(

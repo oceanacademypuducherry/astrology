@@ -9,7 +9,12 @@ class ArticleDescription extends StatelessWidget {
   String? description;
   String? articleTitle;
   String? articleFile;
-  ArticleDescription({this.description, this.articleTitle, this.articleFile});
+  String? articlePostId;
+  ArticleDescription(
+      {this.description,
+      this.articleTitle,
+      this.articleFile,
+      this.articlePostId});
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +118,7 @@ class ArticleDescription extends StatelessWidget {
                                   Get.to(
                                       () => HtmlPageArticle(
                                           appBarName: 'Article Description',
-                                          postId: '6153841115433219639'),
+                                          postId: articlePostId.toString()),
                                       transition: Transition.rightToLeft,
                                       curve: Curves.easeInToLinear,
                                       duration: Duration(milliseconds: 600));

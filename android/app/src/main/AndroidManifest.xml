@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.astrology_app">
+    package="com.makarajothi.astrolab">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
@@ -14,7 +14,7 @@
 <!--    <uses-permission android:name="android.permission.BLUETOOTH" />-->
 
     <application
-        android:label="astrology_app"
+        android:label="Makarajothi"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
 

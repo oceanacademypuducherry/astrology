@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/payment%20info/payment_successfuly.dart';
 import 'package:astrology_app/screens/AppointmentScreen.dart';
@@ -103,6 +105,8 @@ class _BookingDetailsState extends State<BookingDetails> {
   @override
   void initState() {
     // TODO: implement initState
+    print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+    print('${_forumContreller.startUrl.value}');
     super.initState();
     var androidInitialize =
         new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
@@ -154,8 +158,8 @@ class _BookingDetailsState extends State<BookingDetails> {
       'birthPlace': _forumContreller.sessionUserInfo.value['birthPlace'],
       'bookingFor': _appointment.toString(),
       'purposeFor': FieldValue.arrayUnion(checking.keys.toList()),
-      'adminZoomLink': '',
-      'userZoomLink': '',
+      'adminZoomLink': '${_forumContreller.startUrl.value}',
+      'userZoomLink': '${_forumContreller.joinUrl.value}',
     });
     print('uploaded successfully');
 
