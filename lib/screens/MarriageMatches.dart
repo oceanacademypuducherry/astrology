@@ -208,7 +208,8 @@ class _MarriageMatchesState extends State<MarriageMatches> {
       Map valueMap = json.decode(response.body);
       print(valueMap);
       _forumContreller.setMatchingToken(valueMap['access_token']);
-      print("///////////////////////token${_forumContreller.matchingToken.value}");
+      print(
+          "///////////////////////token${_forumContreller.matchingToken.value}");
       print('0000000000000000000000000000000000000000000000');
     } else {
       print(response.statusCode);
@@ -265,10 +266,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 70,
-                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.2, 0.2),
                                 blurRadius: 10,
@@ -312,10 +315,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 68,
-                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.3, 0.3),
                                 blurRadius: 5,
@@ -376,7 +381,8 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                       onChanged: (value) {
                                         setState(() {
                                           boyValue = value!;
-                                          boySelectedNum = natchatharam.indexOf(value) - 1;
+                                          boySelectedNum =
+                                              natchatharam.indexOf(value) - 1;
                                         });
                                         print(value);
                                         print(boySelectedNum);
@@ -388,10 +394,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 68,
-                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.3, 0.3),
                                 blurRadius: 5,
@@ -478,10 +486,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 70,
-                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.2, 0.2),
                                 blurRadius: 10,
@@ -525,10 +535,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 70,
-                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.3, 0.3),
                                 blurRadius: 5,
@@ -587,7 +599,9 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                       onChanged: (value) {
                                         setState(() {
                                           girlValue = value!;
-                                          girlSelectedNum = natchatharam.indexOf(girlValue) - 1;
+                                          girlSelectedNum =
+                                              natchatharam.indexOf(girlValue) -
+                                                  1;
                                         });
                                         print(value);
                                         print(girlSelectedNum);
@@ -599,10 +613,12 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 68,
-                            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
                               BoxShadow(
                                 offset: Offset(0.3, 0.3),
                                 blurRadius: 5,
@@ -691,39 +707,55 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                 await createToken();
 
                                 print('uuuuuuuuuuuuuuuuuuuuuuuuuuu');
+                                Get.to(
+                                  MarriageMatchesDetails(
+                                    boyPada: boyPada,
+                                    natchathiramGirlValue: girlValue,
+                                    natchathiramBoyValue: boyValue,
+                                    girlPada: girlPada,
+                                    girlNatchathiram:
+                                        girlSelectedNum.toString(),
+                                    boyNatchathiram: boySelectedNum.toString(),
+                                    boyName: boyName,
+                                    girlName: girlName,
+                                  ),
+                                  transition: Transition.downToUp,
+                                  duration: Duration(milliseconds: 500),
+                                );
 
-                                if (boyPada != "select" &&
-                                        girlValue != "null" &&
-                                        boyValue != "select" &&
-                                        girlPada != "null" &&
-                                        girlSelectedNum.toString() != -1 &&
-                                        boySelectedNum.toString() != -1 ||
-                                    boySelectedNum.toString() != null && boyName != null && girlName != "select") {
-                                  Get.to(
-                                    MarriageMatchesDetails(
-                                      boyPada: boyPada,
-                                      natchathiramGirlValue: girlValue,
-                                      natchathiramBoyValue: boyValue,
-                                      girlPada: girlPada,
-                                      girlNatchathiram: girlSelectedNum.toString(),
-                                      boyNatchathiram: boySelectedNum.toString(),
-                                      boyName: boyName,
-                                      girlName: girlName,
-                                    ),
-                                    transition: Transition.downToUp,
-                                    duration: Duration(milliseconds: 500),
-                                  );
-                                } else {
-                                  Get.snackbar(
-                                    "Thirumana Porutham",
-                                    "You missed some fields",
-                                    icon: Icon(Icons.person, color: Colors.white),
-                                    snackPosition: SnackPosition.TOP,
-                                  );
-                                }
+                                // if (boyPada != "select" &&
+                                //         girlValue != "null" &&
+                                //         boyValue != "select" &&
+                                //         girlPada != "null" &&
+                                //         girlSelectedNum.toString() != -1 &&
+                                //         boySelectedNum.toString() != -1 ||
+                                //     boySelectedNum.toString() != null && boyName != null && girlName != "select") {
+                                //   Get.to(
+                                //     MarriageMatchesDetails(
+                                //       boyPada: boyPada,
+                                //       natchathiramGirlValue: girlValue,
+                                //       natchathiramBoyValue: boyValue,
+                                //       girlPada: girlPada,
+                                //       girlNatchathiram: girlSelectedNum.toString(),
+                                //       boyNatchathiram: boySelectedNum.toString(),
+                                //       boyName: boyName,
+                                //       girlName: girlName,
+                                //     ),
+                                //     transition: Transition.downToUp,
+                                //     duration: Duration(milliseconds: 500),
+                                //   );
+                                // } else {
+                                //   Get.snackbar(
+                                //     "Thirumana Porutham",
+                                //     "You missed some fields",
+                                //     icon: Icon(Icons.person, color: Colors.white),
+                                //     snackPosition: SnackPosition.TOP,
+                                //   );
+                                // }
                               },
                               style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)),
                                 elevation: 2,
                                 primary: Color(0xff045de9),
                                 onPrimary: Colors.white,

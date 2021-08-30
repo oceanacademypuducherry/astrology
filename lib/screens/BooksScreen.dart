@@ -113,11 +113,11 @@ class _BooksScreenState extends State<BooksScreen> {
                               List<BooksDb> Books = [];
 
                               for (var message in messages) {
-                                final booksLink = message['bookLink'];
-                                final bookType = message['type'];
+                                final booksLink = message['image'];
+                                final bookType = message['bookType'];
                                 final bookName = message['bookName'];
                                 final bookDescription = message['description'];
-                                final pdfLink = message['link'];
+                                final pdfLink = message['pdfLink'];
 
                                 final items = BooksDb(
                                   bookImage: booksLink,
@@ -125,7 +125,9 @@ class _BooksScreenState extends State<BooksScreen> {
                                   bookType: bookType,
                                   description: bookDescription,
                                   pdfLink: pdfLink,
-                                  userPurchased: _forumContreller.sessionUserInfo.value['books'].contains(bookName)
+                                  userPurchased: _forumContreller
+                                          .sessionUserInfo.value['books']
+                                          .contains(bookName)
                                       ? 'success'
                                       : 'failure',
 
@@ -256,7 +258,9 @@ class _BooksDbState extends State<BooksDb> {
                             Container(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                widget.bookType == 'free' ? widget.bookType : "₹ ${widget.bookType}",
+                                widget.bookType == 'free'
+                                    ? widget.bookType
+                                    : "₹ ${widget.bookType}",
                                 style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 10,
@@ -292,7 +296,8 @@ class _BooksDbState extends State<BooksDb> {
                                 elevation: 5,
                                 backgroundColor: Colors.white,
                                 primary: Colors.white,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
                             child: Text(
                               'View',
                               style: TextStyle(
@@ -348,7 +353,8 @@ class _BooksDbState extends State<BooksDb> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      color: widget.bookType == 'free' || widget.userPurchased == 'success'
+                      color: widget.bookType == 'free' ||
+                              widget.userPurchased == 'success'
                           ? Colors.transparent
                           : Colors.black26,
                       height: 180,
@@ -358,7 +364,8 @@ class _BooksDbState extends State<BooksDb> {
                   Container(
                     child: widget.bookType == 'free'
                         ? Container(
-                            margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 5.0, horizontal: 5.0),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -377,7 +384,8 @@ class _BooksDbState extends State<BooksDb> {
                               ),
                             ),
                           )
-                        : widget.bookType != 'free' && widget.userPurchased == 'success'
+                        : widget.bookType != 'free' &&
+                                widget.userPurchased == 'success'
                             ? Text('')
                             : Positioned(
                                 left: 3,

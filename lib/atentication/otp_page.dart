@@ -61,15 +61,16 @@ class _OTPState extends State<OTP> {
                       height: 20,
                     ),
                     Obx(
-                      () => "Enter your OTP with in ${_otpController.otpCount.value.toString()} Second"
-                          .text
-                          .size(20)
-                          .blue400
-                          .make()
-                          .box
-                          .p4
-                          .alignCenter
-                          .make(),
+                      () =>
+                          "Enter your OTP with in ${_otpController.otpCount.value.toString()} Second"
+                              .text
+                              .size(20)
+                              .blue400
+                              .make()
+                              .box
+                              .p4
+                              .alignCenter
+                              .make(),
                     ),
                     "OTP sent this number ${_otpController.userPhoneNumber.value}"
                         .text
@@ -94,7 +95,11 @@ class _OTPState extends State<OTP> {
                             smsCode.value = value;
 
                             if (smsCode.value.length == 6) {
-                              await _otpController.signWithPhoneNumber(smsCode.value, context);
+                              dynamic close =
+                                  context.showLoading(msg: "Loading");
+                              Future.delayed(1.seconds, close);
+                              await _otpController.signWithPhoneNumber(
+                                  smsCode.value, context);
                             }
                           },
                         ),
@@ -104,18 +109,30 @@ class _OTPState extends State<OTP> {
                       height: 15,
                     ),
                     Obx(() => Text(
-                          _otpController.resend.value ? "Resend" : "Submit",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        )).box.p16.blue400.alignCenter.roundedSM.make().px12().onInkTap(() async {
+                              _otpController.resend.value ? "Resend" : "Submit",
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ))
+                        .box
+                        .p16
+                        .blue400
+                        .alignCenter
+                        .roundedSM
+                        .make()
+                        .px12()
+                        .onInkTap(() async {
                       if (_otpController.resend.value) {
-                        VxDialog.showAlert(context, title: "Login Failed", content: "Request Timeout Try Again",
+                        VxDialog.showAlert(context,
+                            title: "Login Failed",
+                            content: "Request Timeout Try Again",
                             onPressed: () {
                           messageFocusNode1.unfocus();
                           Get.off(Login());
                           _otpController.resend.value = false;
                         });
                       } else {
-                        await _otpController.signWithPhoneNumber(smsCode.value, context);
+                        await _otpController.signWithPhoneNumber(
+                            smsCode.value, context);
                       }
                     }).p12(),
                   ]),

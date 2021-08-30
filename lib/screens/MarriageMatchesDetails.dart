@@ -83,8 +83,6 @@ class MarriageMatchesDetails extends StatefulWidget {
 
 class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
   late Future<GetDataForPorutham> futureLink;
-  var total;
-  var score;
 
   @override
   void initState() {
@@ -299,8 +297,6 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         print('jjjjjjjjjjjjjjjjjjjjjj');
-                        total = snapshot.data!.maximumPoints;
-                        score = snapshot.data!.obtainPointrs;
 
                         return ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
@@ -396,31 +392,33 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
-              child: score >= 8
-                  ? Text(
-                      "இருவருக்கும் திருமண பொருத்தம் இருக்கு",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                        fontFamily: 'Ubuntu',
+            Obx(
+              () => Container(
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                child: _forumContreller.maximunPoint.value > 6
+                    ? Text(
+                        "இருவருக்கும் திருமண பொருத்தம் இருக்கு",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          fontFamily: 'Ubuntu',
+                        ),
+                      )
+                    : Text(
+                        "இருவருக்கும் திருமண பொருத்தம் இல்லை",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          fontFamily: 'Ubuntu',
+                        ),
                       ),
-                    )
-                  : Text(
-                      "இருவருக்கும் திருமண பொருத்தம் இல்லை",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                        fontFamily: 'Ubuntu',
-                      ),
-                    ),
+              ),
             ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),

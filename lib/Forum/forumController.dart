@@ -12,6 +12,7 @@ class ForumContreller extends GetxController {
   final joinUrl = ''.obs;
   final startUrl = ''.obs;
   final startDate = ''.obs;
+  final freeTime = [].obs;
 
   ///matchs
   final htmlContent = ''.obs;
@@ -19,6 +20,10 @@ class ForumContreller extends GetxController {
 
   setHtmlContent(content) {
     htmlContent(content);
+  }
+
+  setFreeTime(listValue) {
+    freeTime(listValue);
   }
 
   setStartUrl(url) {

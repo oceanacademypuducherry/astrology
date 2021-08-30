@@ -20,9 +20,9 @@ Future createToken() async {
     print('0000000000000000000000000000000000000000000000');
     Map valueMap = json.decode(response.body);
     print(valueMap);
-    _forumContreller.setMatchingToken(valueMap['access_token']);
-    print(
-        "///////////////////////token${_forumContreller.matchingToken.value}");
+    // _forumContreller.setMatchingToken(valueMap['access_token']);
+    // print(
+    //     "///////////////////////token${_forumContreller.matchingToken.value}");
     print('0000000000000000000000000000000000000000000000');
   } else {
     print(response.statusCode);

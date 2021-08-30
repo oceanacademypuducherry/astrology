@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
@@ -66,6 +68,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int? yearFormat;
   var newHour;
   var newMinute;
+
+  List bookIds = [];
+
+  void bookingid() async {
+    await for (var snapshot in _firestore
+        .collection('booking')
+        .where("phoneNumber",
+            isEqualTo: _forumContreller.sessionUserInfo.value['phoneNumber'])
+        .snapshots(includeMetadataChanges: true)) {
+      for (var message in snapshot.docs) {
+        //print(message.documentID);
+        String id = message.id;
+        bookIds.add(id);
+      }
+      print('hgjkggfhjhjkjhgggggggggggggggggggggggggggggg');
+      print(bookIds);
+    }
+  }
 
   ///widgets
 
@@ -898,6 +918,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       phoneNumberController!
                                                           .text,
                                                 });
+                                                for (var i in bookIds) {
+                                                  _firestore
+                                                      .collection('booking')
+                                                      .doc(i)
+                                                      .update({
+                                                    "userName":
+                                                        nameController!.text,
+                                                    "birthPlace":
+                                                        birthPlaceController!
+                                                            .text,
+                                                    "jadhagam":
+                                                        updatedJadhagam == null
+                                                            ? getJadhagam
+                                                            : updatedJadhagam,
+                                                    'profile':
+                                                        updatedProfile == null
+                                                            ? getProfilePicture
+                                                            : updatedProfile,
+                                                    'phoneNumber':
+                                                        phoneNumberController!
+                                                            .text,
+                                                  });
+                                                }
                                                 var update = await _firestore
                                                     .collection("newusers")
                                                     .doc(Get.find<
@@ -974,199 +1017,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           color: Colors.black54,
                                           thickness: 0.2,
                                         ),
-                                        // Container(
-                                        //   margin: EdgeInsets.symmetric(
-                                        //       horizontal: 20, vertical: 10),
-                                        //   width:
-                                        //       MediaQuery.of(context).size.width,
-                                        //   child: Column(
-                                        //     children: [
-                                        //       Container(
-                                        //         margin: EdgeInsets.symmetric(
-                                        //             horizontal: 10),
-                                        //         alignment: Alignment.centerLeft,
-                                        //         width: MediaQuery.of(context)
-                                        //             .size
-                                        //             .width,
-                                        //         child: Text(
-                                        //           'History of Appointment',
-                                        //           style: TextStyle(
-                                        //             color: Colors.blue,
-                                        //             fontSize: 15,
-                                        //             fontFamily: 'Ubuntu',
-                                        //             fontWeight: FontWeight.w600,
-                                        //           ),
-                                        //         ),
-                                        //       ),
-                                        //       SingleChildScrollView(
-                                        //         scrollDirection:
-                                        //             Axis.horizontal,
-                                        //         child: Container(
-                                        //           alignment:
-                                        //               Alignment.centerLeft,
-                                        //           child: Row(
-                                        //             mainAxisAlignment:
-                                        //                 MainAxisAlignment.start,
-                                        //             children: [
-                                        //               Container(
-                                        //                 margin: EdgeInsets
-                                        //                     .symmetric(
-                                        //                         horizontal: 10,
-                                        //                         vertical: 20),
-                                        //                 alignment:
-                                        //                     Alignment.center,
-                                        //                 decoration:
-                                        //                     BoxDecoration(
-                                        //                   boxShadow: [
-                                        //                     BoxShadow(
-                                        //                       color:
-                                        //                           Colors.grey,
-                                        //                       offset: Offset(
-                                        //                           0.1, 0.2),
-                                        //                     )
-                                        //                   ],
-                                        //                   color:
-                                        //                       Colors.grey[100],
-                                        //                   borderRadius:
-                                        //                       BorderRadius
-                                        //                           .circular(10),
-                                        //                 ),
-                                        //                 height: 40,
-                                        //                 width: 100,
-                                        //                 child: Text(
-                                        //                   'Wed 1 Jul',
-                                        //                   style: TextStyle(
-                                        //                     color: Colors.grey,
-                                        //                     fontSize: 13,
-                                        //                     fontFamily:
-                                        //                         'Ubuntu',
-                                        //                     fontWeight:
-                                        //                         FontWeight
-                                        //                             .normal,
-                                        //                   ),
-                                        //                 ),
-                                        //               ),
-                                        //               Container(
-                                        //                 margin: EdgeInsets
-                                        //                     .symmetric(
-                                        //                         horizontal: 10,
-                                        //                         vertical: 20),
-                                        //                 alignment:
-                                        //                     Alignment.center,
-                                        //                 decoration:
-                                        //                     BoxDecoration(
-                                        //                   boxShadow: [
-                                        //                     BoxShadow(
-                                        //                       color:
-                                        //                           Colors.grey,
-                                        //                       offset: Offset(
-                                        //                           0.1, 0.2),
-                                        //                     )
-                                        //                   ],
-                                        //                   color:
-                                        //                       Colors.grey[100],
-                                        //                   borderRadius:
-                                        //                       BorderRadius
-                                        //                           .circular(10),
-                                        //                 ),
-                                        //                 height: 40,
-                                        //                 width: 100,
-                                        //                 child: Text(
-                                        //                   'Wed 1 Jul',
-                                        //                   style: TextStyle(
-                                        //                     color: Colors.grey,
-                                        //                     fontSize: 13,
-                                        //                     fontFamily:
-                                        //                         'Ubuntu',
-                                        //                     fontWeight:
-                                        //                         FontWeight
-                                        //                             .normal,
-                                        //                   ),
-                                        //                 ),
-                                        //               ),
-                                        //               Container(
-                                        //                 margin: EdgeInsets
-                                        //                     .symmetric(
-                                        //                         horizontal: 10,
-                                        //                         vertical: 20),
-                                        //                 alignment:
-                                        //                     Alignment.center,
-                                        //                 decoration:
-                                        //                     BoxDecoration(
-                                        //                   boxShadow: [
-                                        //                     BoxShadow(
-                                        //                       color:
-                                        //                           Colors.grey,
-                                        //                       offset: Offset(
-                                        //                           0.1, 0.2),
-                                        //                     )
-                                        //                   ],
-                                        //                   color:
-                                        //                       Colors.grey[100],
-                                        //                   borderRadius:
-                                        //                       BorderRadius
-                                        //                           .circular(10),
-                                        //                 ),
-                                        //                 height: 40,
-                                        //                 width: 100,
-                                        //                 child: Text(
-                                        //                   'Wed 1 Jul',
-                                        //                   style: TextStyle(
-                                        //                     color: Colors.grey,
-                                        //                     fontSize: 13,
-                                        //                     fontFamily:
-                                        //                         'Ubuntu',
-                                        //                     fontWeight:
-                                        //                         FontWeight
-                                        //                             .normal,
-                                        //                   ),
-                                        //                 ),
-                                        //               ),
-                                        //               Container(
-                                        //                 margin: EdgeInsets
-                                        //                     .symmetric(
-                                        //                         horizontal: 10,
-                                        //                         vertical: 20),
-                                        //                 alignment:
-                                        //                     Alignment.center,
-                                        //                 decoration:
-                                        //                     BoxDecoration(
-                                        //                   boxShadow: [
-                                        //                     BoxShadow(
-                                        //                       color:
-                                        //                           Colors.grey,
-                                        //                       offset: Offset(
-                                        //                           0.1, 0.2),
-                                        //                     )
-                                        //                   ],
-                                        //                   color:
-                                        //                       Colors.grey[100],
-                                        //                   borderRadius:
-                                        //                       BorderRadius
-                                        //                           .circular(10),
-                                        //                 ),
-                                        //                 height: 40,
-                                        //                 width: 100,
-                                        //                 child: Text(
-                                        //                   'Wed 1 Jul',
-                                        //                   style: TextStyle(
-                                        //                     color: Colors.grey,
-                                        //                     fontSize: 13,
-                                        //                     fontFamily:
-                                        //                         'Ubuntu',
-                                        //                     fontWeight:
-                                        //                         FontWeight
-                                        //                             .normal,
-                                        //                   ),
-                                        //                 ),
-                                        //               ),
-                                        //             ],
-                                        //           ),
-                                        //         ),
-                                        //       ),
-                                        //     ],
-                                        //   ),
-                                        // ),
+
                                         Container(
                                           width:
                                               MediaQuery.of(context).size.width,
@@ -1225,7 +1076,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                                                                     pref.clear();
 
-                                                                    Get.off(
+                                                                    Get.offAll(
                                                                       () =>
                                                                           Login(),
                                                                       transition:
@@ -1255,7 +1106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   ),
                                                 );
                                               },
-                                              child: Text(
+                                              child: const Text(
                                                 'LOG OUT',
                                                 style: TextStyle(
                                                     color: Colors.white,
@@ -1333,6 +1184,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .collection('newusers')
         .doc(_forumContreller.userDocumentId.value.toString())
         .update({'jadhagam': urlDownload});
+    for (var i in bookIds) {
+      _firestore.collection('booking').doc(i).update({'jadhagam': urlDownload});
+    }
     var update = await _firestore
         .collection("newusers")
         .doc(Get.find<ForumContreller>().userDocumentId.toString())
@@ -1397,6 +1251,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .doc(Get.find<ForumContreller>().userDocumentId.toString())
         .get();
     _forumContreller.setUserInfo(update.data());
+
+    for (var i in bookIds) {
+      _firestore.collection('booking').doc(i).update({'profile': urlDownload});
+    }
 
     setState(() {
       updatedProfile = urlDownload;

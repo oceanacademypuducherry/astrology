@@ -1,5 +1,5 @@
 // ignore: file_names
-// ignore_for_file: file_names
+// ignore_for_file: file_names, avoid_print
 
 import 'dart:convert';
 
@@ -57,7 +57,8 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(widget.dbList);
+    print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+    print(_forumContreller.freeTime.value);
   }
 
   ///zoom link
@@ -119,7 +120,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
   @override
   Widget build(BuildContext context) {
     // getAvailable(widget.focusedDate);
-    print(widget.freeList);
+    print(_forumContreller.freeTime.value);
     print(
         '@@@@@@@@@@@@@@@@@@@@@@@@@@@${widget.focusedDate}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
     List time_slot = [
@@ -134,6 +135,12 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
       DateTime.parse('${widget.focusedDate} 17:00'),
       DateTime.parse('${widget.focusedDate} 18:00'),
     ];
+    print(time_slot);
+    print('_________________________________');
+    // time_slot = _forumContreller.freeTime.value;
+    print(time_slot);
+    print('_________________________________');
+
     // print(widget.dbList);
     // print(freeTime);
 
@@ -167,14 +174,14 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ElevatedButton(
-                      child: Text('checking'),
-                      onPressed: () async {
-                        print(orderTime);
-                        print('SSSSSSSSSSS');
-                        await createZoomToken(orderTime);
-                      },
-                    ),
+                    // ElevatedButton(
+                    //   child: Text('checking'),
+                    //   onPressed: () async {
+                    //     print(orderTime);
+                    //     print('SSSSSSSSSSS');
+                    //     await createZoomToken(orderTime);
+                    //   },
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -258,6 +265,10 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                       2) ==
                               'AM')
                             GestureDetector(
+                              // onTap: () {
+                              //   print(widget.dbList);
+                              //   print(time_slot[i]);
+                              // },
                               onTap: widget.dbList.contains(time_slot[i])
                                   ? null
                                   : () {
@@ -268,8 +279,10 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                         colorChange[i] = true;
                                         isOpen = true;
                                       });
+
                                       orderTime = time_slot[i];
                                       print(orderTime);
+                                      print(isOpen);
                                     },
                               child: Card(
                                 shadowColor: Colors.grey[100],
@@ -593,6 +606,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xff045de9),
                       ),
+                      // onPressed: () {},
                       onPressed: isOpen
                           ? () async {
                               print(orderTime);

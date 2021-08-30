@@ -21,7 +21,11 @@ class SomeoneElseScreen extends StatefulWidget {
   String purpose;
   String ruppess;
   DateTime time;
-  SomeoneElseScreen({required this.appointmentFor, required this.purpose, required this.ruppess, required this.time});
+  SomeoneElseScreen(
+      {required this.appointmentFor,
+      required this.purpose,
+      required this.ruppess,
+      required this.time});
   @override
   State<SomeoneElseScreen> createState() => _SomeoneElseScreenState();
 }
@@ -74,7 +78,9 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
       autovalidate: validation,
       validator: (value) {
         validationEmail = value;
-        return EmailValidator.validate(value!) ? null : "please enter a valid email";
+        return EmailValidator.validate(value!)
+            ? null
+            : "please enter a valid email";
       },
       decoration: const InputDecoration(
         // prefixIcon: Icon(Icons.email_outlined),
@@ -153,7 +159,8 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
       inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
       // ignore: deprecated_member_use
       autovalidate: validation,
-      validator: (value) => EmailValidator.validate(value!) ? null : "please enter a valid email",
+      validator: (value) =>
+          EmailValidator.validate(value!) ? null : "please enter a valid email",
       decoration: const InputDecoration(
         // prefixIcon: Icon(Icons.email_outlined),
         errorStyle: TextStyle(color: Colors.redAccent, fontSize: 12),
@@ -244,7 +251,8 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
 
   ///RAZORPAY START
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    date = DateTime(selectedDate.year, selectedDate.month, selectedDate.day, _time.hour, _time.minute);
+    date = DateTime(selectedDate.year, selectedDate.month, selectedDate.day,
+        _time.hour, _time.minute);
     _firestore.collection("booking").add({
       'time': widget.time,
       'payment': widget.ruppess,
@@ -257,22 +265,31 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
       'purposeFor': widget.purpose,
       "birthPlace": birthPlace,
       "birthTime": date,
+      'adminZoomLink': '${_forumContreller.startUrl.value}',
+      'userZoomLink': '${_forumContreller.joinUrl.value}',
     });
 
     Get.to(() => PaymentSuccessfully(),
-        transition: Transition.rightToLeft, curve: Curves.easeInToLinear, duration: Duration(milliseconds: 600));
-    Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!, toastLength: Toast.LENGTH_SHORT);
+        transition: Transition.rightToLeft,
+        curve: Curves.easeInToLinear,
+        duration: Duration(milliseconds: 600));
+    Fluttertoast.showToast(
+        msg: "SUCCESS: " + response.paymentId!,
+        toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
     print(response.message);
     Fluttertoast.showToast(
-        msg: "ERROR: " + response.code.toString() + " - " + response.message!, toastLength: Toast.LENGTH_SHORT);
+        msg: "ERROR: " + response.code.toString() + " - " + response.message!,
+        toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     print(response.walletName);
-    Fluttertoast.showToast(msg: "EXTERNAL_WALLET: " + response.walletName!, toastLength: Toast.LENGTH_SHORT);
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: " + response.walletName!,
+        toastLength: Toast.LENGTH_SHORT);
   }
 
   void openCheckout() async {
@@ -373,12 +390,14 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                       children: [
                         ///circle avatar
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 25),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 // crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
@@ -390,7 +409,8 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                       maxRadius: 55,
                                       child: Container(
                                         decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(40)),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: Colors.black26,
@@ -405,10 +425,12 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                         child: CircleAvatar(
                                           maxRadius: 48,
                                           backgroundColor: Colors.white,
-                                          backgroundImage: profilePictureLink == null
+                                          backgroundImage: profilePictureLink ==
+                                                  null
                                               ? NetworkImage(
                                                   'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png')
-                                              : NetworkImage("${profilePictureLink.toString()}"),
+                                              : NetworkImage(
+                                                  "${profilePictureLink.toString()}"),
                                         ),
                                       ),
                                     ),
@@ -433,7 +455,8 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                 ],
                               ),
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     height: 100,
@@ -450,7 +473,9 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                                   "$jadhagamLink",
                                                 ),
                                         ),
-                                        border: Border.all(color: Colors.blue.shade900, width: 1.2),
+                                        border: Border.all(
+                                            color: Colors.blue.shade900,
+                                            width: 1.2),
                                         borderRadius: BorderRadius.circular(12),
                                         boxShadow: [
                                           BoxShadow(
@@ -468,7 +493,9 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                   ElevatedButton(
                                     onPressed: selectJadhagamFile,
                                     style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
                                       elevation: 2,
                                       onPrimary: Colors.white,
                                       textStyle: const TextStyle(
@@ -493,7 +520,8 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                               Container(
                                 decoration: const BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black12,
@@ -505,11 +533,13 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                         ),
                                       ),
                                     ]),
-                                padding: const EdgeInsets.only(left: 15, top: 5),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
                                 width: 150,
                                 height: 70,
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                       alignment: Alignment.centerLeft,
@@ -533,10 +563,12 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.only(left: 15, top: 5),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
                                 decoration: const BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black12,
@@ -551,7 +583,8 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                 width: 150,
                                 height: 70,
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                       alignment: Alignment.centerLeft,
@@ -577,10 +610,12 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 25),
                           decoration: const BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black12,
@@ -595,11 +630,13 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                           child: Column(
                             children: [
                               Container(
-                                padding: const EdgeInsets.only(left: 15, top: 5),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
                                 color: Colors.white,
                                 height: 70,
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                       alignment: Alignment.centerLeft,
@@ -625,10 +662,12 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 25),
                           decoration: const BoxDecoration(
                               color: Colors.red,
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black12,
@@ -643,11 +682,13 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                           child: Column(
                             children: [
                               Container(
-                                padding: const EdgeInsets.only(left: 15, top: 5),
+                                padding:
+                                    const EdgeInsets.only(left: 15, top: 5),
                                 color: Colors.white,
                                 height: 70,
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                       alignment: Alignment.centerLeft,
@@ -688,7 +729,8 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                         //   ),
                         // ),
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                           width: MediaQuery.of(context).size.width,
                           child: ElevatedButton(
                             onPressed: () async {
@@ -713,7 +755,8 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                             },
                             style: ElevatedButton.styleFrom(
                               fixedSize: Size(double.infinity, 50),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
                               elevation: 2,
                               primary: Colors.blue,
                               onPrimary: Colors.white,
@@ -760,7 +803,8 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                   colorText: Colors.white,
                                   duration: Duration(seconds: 4),
                                   isDismissible: true,
-                                  dismissDirection: SnackDismissDirection.HORIZONTAL,
+                                  dismissDirection:
+                                      SnackDismissDirection.HORIZONTAL,
                                   forwardAnimationCurve: Curves.easeOutBack,
                                 );
                               }
@@ -783,16 +827,17 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                               ///route
                             },
                             style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
                               elevation: 2,
                               primary: Color(0xff045de9),
                               onPrimary: Colors.white,
-                              textStyle: const TextStyle(
+                              textStyle: TextStyle(
                                 fontFamily: 'Ubuntu',
                                 fontSize: 15,
                               ),
                             ),
-                            child: const Text('Proceed To Pay'),
+                            child: Text('Proceed To Pay'),
                           ),
                         ),
                         SizedBox(height: 50),

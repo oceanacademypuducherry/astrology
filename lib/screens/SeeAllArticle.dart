@@ -1,7 +1,9 @@
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+// import 'package:html/dom.dart';
 
 class SeeAllArticle extends StatelessWidget {
   // const SeeAllArticle({Key? key}) : super(key: key);
@@ -59,7 +61,7 @@ class SeeAllArticle extends StatelessWidget {
                                 final articleImage = message['articleImage'];
                                 final articleName = message['articleName'];
                                 final articleDescription = message['content'];
-                                final articleFile = message['link'];
+                                final postId = message['postId'];
                                 final articles = SeeAllArticlesDb(
                                   articleImage: articleImage,
                                   articleName: articleName,
@@ -67,9 +69,9 @@ class SeeAllArticle extends StatelessWidget {
                                   onpress: () {
                                     Get.to(
                                         () => ArticleDescription(
-                                              articleFile: articleFile,
                                               articleTitle: articleName,
                                               description: articleDescription,
+                                              articlePostId: postId,
                                             ),
                                         transition: Transition.rightToLeft,
                                         curve: Curves.easeInToLinear,
@@ -117,28 +119,47 @@ class SeeAllArticlesDb extends StatelessWidget {
     return GestureDetector(
       onTap: onpress,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        height: 200,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black45,
-              offset: const Offset(
-                5.0,
-                5.0,
-              ),
-              blurRadius: 10.0,
-              spreadRadius: 2.0,
-            ), //BoxShadow
-          ],
-          color: Colors.black45,
-        ),
-        child: Image.network(
-          articleImage,
-          fit: BoxFit.cover,
-        ),
-      ),
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          // height: 200,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade300,
+                offset: const Offset(
+                  2.0,
+                  2.0,
+                ),
+                blurRadius: 20.0,
+                spreadRadius: 2.0,
+              ), //BoxShadow
+            ],
+            color: Colors.white,
+          ),
+          child: Container(
+            child: Column(
+              children: [
+                Image.network(
+                  articleImage,
+                  fit: BoxFit.cover,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                  child: Text(
+                    articleName,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontFamily: 'Ubuntu',
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )),
     );
   }
 }

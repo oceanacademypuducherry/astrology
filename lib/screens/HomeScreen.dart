@@ -58,13 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // var androidInitialize =
-    //     new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
-    // var initialzationSetting =
-    //     new InitializationSettings(android: androidInitialize);
-    // localNotification = new FlutterLocalNotificationsPlugin();
-    // localNotification.initialize(initialzationSetting,
-    //     onSelectNotification: notificationSelected);
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
@@ -73,25 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print('==============================');
   }
 
-  // Future _showNotification() async {
-  //   var androidDetails = new AndroidNotificationDetails(
-  //       "channelId", "channelName", "you booked",
-  //       importance: Importance.max);
-  //
-  //   var generalNotificationDetails =
-  //       new NotificationDetails(android: androidDetails);
-  //   await localNotification.show(
-  //       0, 'Hi User', 'body of the notification', generalNotificationDetails);
-  // }
-
   var hour = DateTime.now().hour;
-  // if (hour < 12) {
-  // return 'Morning';
-  // }
-  // if (hour < 17) {
-  // return 'Afternoon';
-  // }
-  // return 'Evening';
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: 20,
                   fontFamily: 'Ubuntu'),
             ),
             floating: false,
@@ -119,12 +95,13 @@ class _HomeScreenState extends State<HomeScreen> {
               collapseMode: CollapseMode.parallax,
               titlePadding: EdgeInsets.symmetric(vertical: 45),
               title: Text(
-                "${hour < 12 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Morning !" : hour < 17 ? "Hi ${_forumContreller.sessionUserInfo['name']}r, Good Afternoon !" : "Hi ${_forumContreller.sessionUserInfo['name']}, Good Evening !"}",
+                "${hour < 12 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Morning !" : hour < 17 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Afternoon !" : "Hi ${_forumContreller.sessionUserInfo['name']}, Good Evening !"}",
                 style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
-                    fontWeight: FontWeight.normal,
-                    fontSize: 12,
-                    fontFamily: 'Ubuntu'),
+                  color: Colors.white.withOpacity(0.8),
+                  fontWeight: FontWeight.normal,
+                  fontSize: 13,
+                  fontFamily: 'Ubuntu',
+                ),
               ),
               stretchModes: [
                 StretchMode.fadeTitle,
@@ -312,8 +289,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                               onTap: () {
                                                 Get.to(
                                                     () => ArticleDescription(
-                                                        articleFile:
-                                                            article['link'],
                                                         description:
                                                             article['content'],
                                                         articleTitle: article[
@@ -419,7 +394,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 200,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage("images/askquery.jpg"),
+                                    image: AssetImage("images/questions.jpg"),
                                     fit: BoxFit.cover,
                                   ),
                                   borderRadius: BorderRadius.circular(10),
@@ -463,6 +438,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               items: [
                                 GestureDetector(
                                   onTap: () {
+                                    print(_forumContreller
+                                        .sessionUserInfo.value['subscribe']);
                                     _forumContreller
                                             .sessionUserInfo.value['subscribe']
                                         ? Get.to(() => PaidVedios(),
@@ -488,7 +465,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               BorderRadius.circular(10),
                                         ),
                                         child: Image.asset(
-                                          "images/thumbnail_.png",
+                                          "images/paid video.jpg",
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -531,7 +508,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               BorderRadius.circular(8.0),
                                           image: DecorationImage(
                                             image: AssetImage(
-                                              "images/thumbnail_2.png",
+                                              "images/freevideo.jpg",
                                             ),
                                             fit: BoxFit.contain,
                                           ),

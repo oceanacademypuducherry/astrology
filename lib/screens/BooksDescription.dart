@@ -242,7 +242,11 @@ class _BooksDescriptionState extends State<BooksDescription> {
                           margin: EdgeInsets.symmetric(
                               horizontal: 15, vertical: 20),
                           child: OutlinedButton(
-                              onPressed: widget.bookType == 'free'
+                              onPressed: widget.bookType == 'free' ||
+                                      (widget.bookType != 'free' &&
+                                          _forumContreller
+                                              .sessionUserInfo.value['books']
+                                              .contains(widget.bookName))
                                   ? () {
                                       print('jayatha');
                                       setState(() {
@@ -251,14 +255,12 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                       Get.to(
                                           () => PdfView(
                                                 pdfLink: widget.pdfLink,
-                                                appBarName: "VIEW BOOK",
+                                                appBarName: "View Full Book",
                                               ),
                                           transition: Transition.rightToLeft,
                                           curve: Curves.easeInToLinear,
                                           duration:
                                               Duration(milliseconds: 600));
-                                      // _pdfViewerKey.currentState
-                                      //     ?.openBookmarkView();
                                     }
                                   : () {
                                       // _firestore
@@ -278,8 +280,12 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                   height: 1,
                                 ),
                               ),
-                              child: widget.bookType == 'free'
-                                  ? Text('View Pdf')
+                              child: widget.bookType == 'free' ||
+                                      (widget.bookType != 'free' &&
+                                          _forumContreller
+                                              .sessionUserInfo.value['books']
+                                              .contains(widget.bookName))
+                                  ? Text('View Full Book')
                                   : Text('Proceed to pay')),
                         ),
                       ],

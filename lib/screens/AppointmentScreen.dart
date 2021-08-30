@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/AppointmentTimeScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -39,23 +41,35 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   List dbList = [];
   List freeTime = [];
 
-  void getFree(String date) async {
+  getFree(String date) async {
     print("---------------------------");
     await for (var snapshot in firestore
         .collection('availableTime')
         .snapshots(includeMetadataChanges: true)) {
+      print(snapshot.docs);
+      print('sowthri');
       for (var message in snapshot.docs) {
-        print('available time');
         String getTime = message['time'];
-        print(getTime);
-        print('+++++++++++++');
         freeTime.add(DateTime.parse('${date} ${getTime}'));
-        print(freeTime);
+        // freeTime.add(message['time']);
       }
+      print(freeTime);
+      print('&&&&&&&&&&&&&&&&&');
+      await _forumContreller.setFreeTime(freeTime);
+      Get.to(
+          () => AppointmentTimeScreen(
+                focusedDate: formattedTime.toString(),
+                dbList: dbList,
+                freeList: freeTime,
+              ),
+          // transition: Transition.cupertinoDialog,
+          fullscreenDialog: true,
+          curve: Curves.easeInToLinear,
+          duration: Duration(milliseconds: 600));
 
       print('++++++++++++++++++');
 
-      print("---------------------------");
+      print("-----------end available----------------");
     }
   }
 
@@ -205,26 +219,14 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   selectedDay = selectDay;
                   focusedDay = focusDay;
                 });
-
                 formattedTime = DateFormat("yyyy-MM-dd").format(focusedDay);
-                // 2020-01-02 03:04:05.000
-
-                print(focusedDay);
-                print(formattedTime);
-                print('^^^^^^^^^^^^^^');
-                print(dbList);
-
-                getFree(formattedTime.toString());
-                Get.to(
-                    () => AppointmentTimeScreen(
-                          focusedDate: formattedTime.toString(),
-                          dbList: dbList,
-                          freeList: freeTime,
-                        ),
-                    // transition: Transition.cupertinoDialog,
-                    fullscreenDialog: true,
-                    curve: Curves.easeInToLinear,
-                    duration: Duration(milliseconds: 600));
+                print('+++++++++++++++Start+++++++++++++++');
+                // getFree(formattedTime.toString());
+                Get.to(() => AppointmentTimeScreen(
+                      focusedDate: formattedTime.toString(),
+                      dbList: dbList,
+                      freeList: freeTime,
+                    ));
               },
 
               //To style the Calendar

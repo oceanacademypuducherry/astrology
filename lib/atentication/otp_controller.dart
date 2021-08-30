@@ -104,16 +104,14 @@ class OTPController extends GetxController {
 
       if (ourUser) {
         setBreake(true, context);
-        Get.off(() => BottomNavigation(),
+        Get.offAll(() => BottomNavigation(),
             transition: Transition.rightToLeft,
             curve: Curves.easeInToLinear,
             duration: Duration(milliseconds: 600));
-        Get.snackbar('success', "You are loged in",
-            backgroundColor: Colors.black, colorText: Colors.white);
       } else {
         print('else working ');
         setBreake(true, context);
-        Get.off(
+        Get.offAll(
             () => Register(
                   userNumber: userPhoneNumber.value,
                 ),
@@ -123,7 +121,7 @@ class OTPController extends GetxController {
       }
       print('${_forumContreller.userSession} uuuuuuuuuuuuuuuuuuuuuuuuu');
 
-      VxToast.show(context, msg: 'loged in');
+      // VxToast.show(context, msg: 'loged in');
     } on FirebaseAuthException catch (e) {
       print(e.toString());
       VxDialog.showAlert(context,
