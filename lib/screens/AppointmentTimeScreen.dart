@@ -423,8 +423,11 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                       children: [
                                         Text(
                                           '${DateFormat.jm().format(time_slot[i])}',
-                                          style: widget.dbList
-                                                  .contains(time_slot[i])
+                                          style: (widget.dbList
+                                                      .contains(time_slot[i]) ||
+                                                  time_slot[i].compareTo(
+                                                          DateTime.now()) <
+                                                      0)
                                               ? TextStyle(
                                                   fontWeight: FontWeight.w300,
                                                   fontFamily: 'Ubuntu',
@@ -439,7 +442,10 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                                 ),
                                         ),
                                         SizedBox(height: 2),
-                                        widget.dbList.contains(time_slot[i])
+                                        (widget.dbList.contains(time_slot[i]) ||
+                                                time_slot[i].compareTo(
+                                                        DateTime.now()) <
+                                                    0)
                                             ? Text(
                                                 'Unavailable',
                                                 style: TextStyle(
@@ -539,23 +545,29 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                     children: [
                                       Text(
                                         '${DateFormat.jm().format(time_slot[i])}',
-                                        style:
-                                            widget.dbList.contains(time_slot[i])
-                                                ? TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    fontFamily: 'Ubuntu',
-                                                    fontSize: 16,
-                                                    color: Colors.pink[200],
-                                                  )
-                                                : TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    fontFamily: 'Ubuntu',
-                                                    fontSize: 16,
-                                                    color: Colors.black54,
-                                                  ),
+                                        style: (widget.dbList
+                                                    .contains(time_slot[i]) ||
+                                                time_slot[i].compareTo(
+                                                        DateTime.now()) <
+                                                    0)
+                                            ? TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 16,
+                                                color: Colors.pink[200],
+                                              )
+                                            : TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 16,
+                                                color: Colors.black54,
+                                              ),
                                       ),
                                       SizedBox(height: 2),
-                                      widget.dbList.contains(time_slot[i])
+                                      (widget.dbList.contains(time_slot[i]) ||
+                                              time_slot[i].compareTo(
+                                                      DateTime.now()) <
+                                                  0)
                                           ? Text(
                                               'Unavailable',
                                               style: TextStyle(

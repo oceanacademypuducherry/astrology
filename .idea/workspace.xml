@@ -25,40 +25,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca1a6d01-0eb2-47e1-a7ab-7530a0395483" name="Default Changelist" comment="started zoom api">
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/version" afterDir="false" />
+    <list default="true" id="ca1a6d01-0eb2-47e1-a7ab-7530a0395483" name="Default Changelist" comment="article drawer doubt">
+      <change afterPath="$PROJECT_DIR$/lib/controller/article_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/articleView.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Forum/forumController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Forum/forumController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/AppointmentScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/AppointmentScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/AppointmentTimeScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/ArticleDescription.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/ArticleDescription.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/BooksScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BooksScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/ProfileScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/ProfileScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/SomeoneElse.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/SomeoneElse.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/htmlpage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/htmlpage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/registerscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/registerscreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/zoomapi.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,13 +109,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627472263977</updated>
-    </task>
-    <task id="LOCAL-00024" summary="updated video orientation issue">
-      <created>1628062538725</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1628062538725</updated>
     </task>
     <task id="LOCAL-00025" summary="updated profile screen">
       <created>1628137732793</created>
@@ -470,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630227701401</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="article drawer doubt">
+      <created>1630404957556</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1630404957557</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -486,7 +469,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="11-08 checking 2" />
     <MESSAGE value="11-08 checking 3" />
     <MESSAGE value="11-08 checking 4" />
     <MESSAGE value="11-08 checking 5" />
@@ -511,7 +493,8 @@
     <MESSAGE value="delete all unwanted packages" />
     <MESSAGE value="changes the matches" />
     <MESSAGE value="app released" />
-    <option name="LAST_COMMIT_MESSAGE" value="app released" />
+    <MESSAGE value="article drawer doubt" />
+    <option name="LAST_COMMIT_MESSAGE" value="article drawer doubt" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="383" key="#Notifications" timestamp="1630227723689">
@@ -542,22 +525,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="363" key="GridCell.Tab.0.bottom" timestamp="1630403080404">
+    <state width="1877" height="254" key="GridCell.Tab.0.bottom" timestamp="1630423983073">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="363" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630403080404" />
-    <state width="1860" height="363" key="GridCell.Tab.0.center" timestamp="1630403080404">
+    <state width="1877" height="254" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630423983073" />
+    <state width="1877" height="254" key="GridCell.Tab.0.center" timestamp="1630423983073">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="363" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630403080404" />
-    <state width="1860" height="363" key="GridCell.Tab.0.left" timestamp="1630403080404">
+    <state width="1877" height="254" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630423983073" />
+    <state width="1877" height="254" key="GridCell.Tab.0.left" timestamp="1630423983072">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="363" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630403080404" />
-    <state width="1860" height="363" key="GridCell.Tab.0.right" timestamp="1630403080404">
+    <state width="1877" height="254" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630423983072" />
+    <state width="1877" height="254" key="GridCell.Tab.0.right" timestamp="1630423983073">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="363" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630403080404" />
+    <state width="1877" height="254" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630423983073" />
     <state x="184" y="86" key="MergeDialog" timestamp="1629987765776">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -574,14 +557,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628919047163" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1630227734392">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1630404972990">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630227734392" />
-    <state x="-79" y="98" width="1940" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1630232429781">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630404972990" />
+    <state x="-289" y="192" width="1940" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1630424066797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="-79" y="98" width="1940" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1630232429781" />
+    <state x="-289" y="192" width="1940" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1630424066797" />
     <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1630392422039">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -590,10 +573,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630221529193" />
-    <state x="666" y="69" width="726" height="744" key="find.popup" timestamp="1630394088294">
+    <state x="666" y="69" width="726" height="744" key="find.popup" timestamp="1630421698513">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="666" y="69" width="726" height="744" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1630394088294" />
+    <state x="666" y="69" width="726" height="744" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1630421698513" />
     <state x="416" y="126" key="new project wizard" timestamp="1627575717306">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -612,7 +595,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/main.dart</url>
-          <line>51</line>
+          <line>52</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
@@ -662,7 +645,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/SomeoneElse.dart</url>
-          <line>934</line>
+          <line>956</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
@@ -748,7 +731,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/htmlpage.dart</url>
-          <line>24</line>
+          <line>18</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">

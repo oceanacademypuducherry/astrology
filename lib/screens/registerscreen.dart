@@ -42,6 +42,7 @@ class _RegisterState extends State<Register> {
   final birthPlaceController = TextEditingController();
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   UploadTask? task;
+  var textDate;
   File? file;
   String? profilePictureLink;
   String? jadhagamLink;
@@ -251,8 +252,13 @@ class _RegisterState extends State<Register> {
   onTimeChanged(newTime) {
     setState(() {
       _time = newTime;
-      // print(_time);
     });
+    print('_time////////////////// ${_time}');
+    textDate = DateTime(selectedDate.year, selectedDate.month, selectedDate.day,
+        _time.hour, _time.minute);
+    print('date in button  ${textDate}');
+    print(DateFormat.jm().format(textDate));
+    print(DateFormat.yMMMd().format(textDate));
   }
 
   @override
@@ -640,58 +646,121 @@ class _RegisterState extends State<Register> {
                         ),
 
                         ///DOB
-                        Container(
-                          alignment: Alignment.topLeft,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          padding: EdgeInsets.all(10),
-                          width: MediaQuery.of(context).size.width,
-                          height: 80,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 20,
-                                  spreadRadius: 5,
-                                  offset: Offset(
-                                    2.0,
-                                    2.0,
-                                  ),
-                                ),
-                              ]),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(bottom: 15),
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  'DOB',
-                                  style: TextStyle(
-                                    fontFamily: 'Ubuntu',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue,
-                                  ),
-                                ),
+                        GestureDetector(
+                          onTap: () async {
+                            if (messageFocusNode1.hasFocus ||
+                                messageFocusNode2.hasFocus ||
+                                messageFocusNode3.hasFocus ||
+                                messageFocusNode4.hasFocus) {
+                              messageFocusNode1.unfocus();
+                              messageFocusNode2.unfocus();
+                              messageFocusNode3.unfocus();
+                              messageFocusNode4.unfocus();
+                            }
+
+                            await _selectDate(context);
+                            Navigator.of(context).push(
+                              showPicker(
+                                context: context,
+                                value: _time,
+                                onChange: onTimeChanged,
                               ),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  '${monthFormat} ${selectedDate.day} ,'
-                                  ' ${selectedDate.year} at ${_time.hour}:${_time.minute}',
-                                  style: TextStyle(
-                                    fontFamily: 'Ubuntu',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.black54,
+                            );
+                          },
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            padding: EdgeInsets.all(10),
+                            width: MediaQuery.of(context).size.width,
+                            height: 80,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 20,
+                                    spreadRadius: 5,
+                                    offset: Offset(
+                                      2.0,
+                                      2.0,
+                                    ),
                                   ),
+                                ]),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 15),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'DOB',
+                                        style: TextStyle(
+                                          fontFamily: 'Ubuntu',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () async {
+                                        if (messageFocusNode1.hasFocus ||
+                                            messageFocusNode2.hasFocus ||
+                                            messageFocusNode3.hasFocus ||
+                                            messageFocusNode4.hasFocus) {
+                                          messageFocusNode1.unfocus();
+                                          messageFocusNode2.unfocus();
+                                          messageFocusNode3.unfocus();
+                                          messageFocusNode4.unfocus();
+                                        }
+
+                                        await _selectDate(context);
+                                        Navigator.of(context).push(
+                                          showPicker(
+                                            context: context,
+                                            value: _time,
+                                            onChange: onTimeChanged,
+                                          ),
+                                        );
+                                      },
+                                      child: Icon(
+                                        Icons.calendar_today_outlined,
+                                        color: Colors.blue,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              ),
-                            ],
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: textDate == null
+                                      ? Text(
+                                          'Pick the date',
+                                          style: TextStyle(
+                                            fontFamily: 'Ubuntu',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.black54,
+                                          ),
+                                        )
+                                      : Text(
+                                          "${DateFormat.yMMMd().format(textDate)} @ ${DateFormat.jm().format(textDate)}",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: 'Ubuntu',
+                                            fontSize: 14,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Container(
