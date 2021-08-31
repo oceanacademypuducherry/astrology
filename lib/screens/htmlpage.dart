@@ -1,4 +1,5 @@
 import 'package:astrology_app/Forum/forumController.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -63,13 +64,72 @@ class _HtmlPageArticleState extends State<HtmlPageArticle> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print(_forumContreller.articleData.value);
   }
 
   @override
   Widget build(BuildContext context) {
+    print('jayalathakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
     futureLink = fetchLink(widget.postId);
     // const String htmlData = "${_forumContreller.htmlContent.value.toString().trim()}";
     return Scaffold(
+      endDrawer: Drawer(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          child: Column(
+            children: [
+              for (var article in _forumContreller.articleData.value)
+                Column(
+                  children: [
+                    ListTile(
+                      onTap: () {
+                        print('jayalatha');
+                        HtmlPageArticle(
+                            appBarName: 'Article Description',
+                            postId: article['postId']);
+                        Get.to(
+                            () => HtmlPageArticle(
+                                appBarName: 'Article Description',
+                                postId: article['postId']),
+                            transition: Transition.rightToLeft,
+                            curve: Curves.easeInToLinear,
+                            duration: Duration(milliseconds: 600));
+                        Navigator.pop(context);
+                      },
+                      title: Text(
+                        article['articleName'],
+                        maxLines: 2,
+                        style: TextStyle(
+                          color: Colors.grey,
+                          // height: 2,
+
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          fontFamily: 'Ubuntu',
+                        ),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      leading: Container(
+                        width: 50,
+                        height: 50,
+                        child: CachedNetworkImage(
+                          imageUrl: article['articleImage'],
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Divider()
+                  ],
+                ),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: Text(widget.appBarName),
       ),
@@ -114,6 +174,74 @@ class _HtmlPageArticleState extends State<HtmlPageArticle> {
               return CircularProgressIndicator();
             },
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class Ending extends StatefulWidget {
+  @override
+  _EndingState createState() => _EndingState();
+}
+
+class _EndingState extends State<Ending> {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        child: Column(
+          children: [
+            for (var article in _forumContreller.articleData.value)
+              Column(
+                children: [
+                  ListTile(
+                    onTap: () {
+                      print('jayalatha');
+                      HtmlPageArticle(
+                          appBarName: 'Article Description',
+                          postId: article['postId']);
+                      Get.to(
+                          () => HtmlPageArticle(
+                              appBarName: 'Article Description',
+                              postId: article['postId']),
+                          transition: Transition.rightToLeft,
+                          curve: Curves.easeInToLinear,
+                          duration: Duration(milliseconds: 600));
+                      Navigator.pop(context);
+                    },
+                    title: Text(
+                      article['articleName'],
+                      maxLines: 2,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        // height: 2,
+
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        fontFamily: 'Ubuntu',
+                      ),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    leading: Container(
+                      width: 50,
+                      height: 50,
+                      child: CachedNetworkImage(
+                        imageUrl: article['articleImage'],
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Divider()
+                ],
+              ),
+          ],
         ),
       ),
     );

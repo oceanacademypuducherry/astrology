@@ -39,7 +39,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   }
 
   List dbList = [];
-  List freeTime = [];
 
   getFree(String date) async {
     print("---------------------------");
@@ -48,6 +47,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         .snapshots(includeMetadataChanges: true)) {
       print(snapshot.docs);
       print('sowthri');
+      List freeTime = [];
       for (var message in snapshot.docs) {
         String getTime = message['time'];
         freeTime.add(DateTime.parse('${date} ${getTime}'));
@@ -221,12 +221,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 });
                 formattedTime = DateFormat("yyyy-MM-dd").format(focusedDay);
                 print('+++++++++++++++Start+++++++++++++++');
-                // getFree(formattedTime.toString());
-                Get.to(() => AppointmentTimeScreen(
-                      focusedDate: formattedTime.toString(),
-                      dbList: dbList,
-                      freeList: freeTime,
-                    ));
+                getFree(formattedTime.toString());
+                // Get.to(() => AppointmentTimeScreen(
+                //       focusedDate: formattedTime.toString(),
+                //       dbList: dbList,
+                //       freeList: freeTime,
+                //     ));
               },
 
               //To style the Calendar
@@ -294,16 +294,18 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                     .difference(DateTime.now())
                                                     .inSeconds >
                                                 0
-                                            ? () => {
-                                                  VxToast.show(context,
-                                                      msg:
-                                                          'Zoom link will be updated before 10 minutes of your booked time',
-                                                      showTime: 5),
-                                                }
+                                            ? () {
+                                                print('waiting');
+                                                VxToast.show(context,
+                                                    msg:
+                                                        'Zoom link will be updated before 10 minutes of your booked time',
+                                                    showTime: 5000);
+                                              }
                                             : () => {
                                                   VxToast.show(context,
                                                       msg:
-                                                          'this meeting was completed')
+                                                          'this meeting was completed',
+                                                      showTime: 2000)
                                                 },
                                     child: Container(
                                       margin:
@@ -357,11 +359,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                               )
                                             ],
                                           ),
-                                          book['time']
-                                                          .toDate()
-                                                          .difference(
-                                                              DateTime.now())
-                                                          .inSeconds <
+                                          book['time'].toDate().difference(DateTime.now()).inSeconds <
                                                       600 &&
                                                   book['time']
                                                           .toDate()
@@ -369,27 +367,34 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                               DateTime.now())
                                                           .inSeconds >
                                                       -60 * 60
-                                              ? Icon(
-                                                  FontAwesomeIcons.video,
-                                                  color: Colors.white,
-                                                  size: 40,
-                                                )
+                                              ? Text('Join Live',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 13,
+                                                      fontFamily: 'Ubuntu'))
                                               : book['time']
                                                           .toDate()
                                                           .difference(
                                                               DateTime.now())
                                                           .inSeconds >
                                                       0
-                                                  ? Icon(
-                                                      FontAwesomeIcons.walking,
-                                                      color: Colors.white,
-                                                      size: 40,
-                                                    )
-                                                  : Icon(
-                                                      Icons.done_all_outlined,
-                                                      color: Colors.white,
-                                                      size: 40,
-                                                    ),
+                                                  ? Text(
+                                                      'Wait for ur time to join zoom',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 13,
+                                                          fontFamily: 'Ubuntu'))
+                                                  : Text("Completed",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 13,
+                                                          fontFamily: 'Ubuntu')),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,

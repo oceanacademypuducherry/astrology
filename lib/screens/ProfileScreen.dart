@@ -1037,7 +1037,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 // );
                                                 // print('logout');
                                                 Get.defaultDialog(
-                                                  title: "Hi User",
+                                                  title:
+                                                      "Hi ${_forumContreller.sessionUserInfo.value['name']}",
                                                   titlePadding: EdgeInsets.only(
                                                       top: 40.0),
                                                   content: Container(

@@ -2,8 +2,6 @@
 //  Generated file. Do not edit.
 //
 
-// clang-format off
-
 #import "GeneratedPluginRegistrant.h"
 
 #if __has_include(<better_player/BetterPlayerPlugin.h>)
@@ -90,6 +88,12 @@
 @import shared_preferences;
 #endif
 
+#if __has_include(<sqflite/SqflitePlugin.h>)
+#import <sqflite/SqflitePlugin.h>
+#else
+@import sqflite;
+#endif
+
 #if __has_include(<syncfusion_flutter_pdfviewer/SyncfusionFlutterPdfViewerPlugin.h>)
 #import <syncfusion_flutter_pdfviewer/SyncfusionFlutterPdfViewerPlugin.h>
 #else
@@ -137,6 +141,7 @@
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [RazorpayFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"RazorpayFlutterPlugin"]];
   [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
+  [SqflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"SqflitePlugin"]];
   [SyncfusionFlutterPdfViewerPlugin registerWithRegistrar:[registry registrarForPlugin:@"SyncfusionFlutterPdfViewerPlugin"]];
   [FLTURLLauncherPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTURLLauncherPlugin"]];
   [FLTVideoPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTVideoPlayerPlugin"]];

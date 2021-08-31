@@ -53,6 +53,13 @@ class ArticleDescription extends StatelessWidget {
                     ),
                   )),
                 ),
+                // actions: <Widget>[
+                //   IconButton(
+                //     icon: const Icon(Icons.menu),
+                //     tooltip: 'See ALL Article',
+                //     onPressed: Drawer(),
+                //   ),
+                // ],
               ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(

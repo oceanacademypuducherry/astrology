@@ -20,6 +20,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -202,6 +203,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return CircularProgressIndicator();
                                 } else {
                                   final articles = snapshot.data!.docs;
+                                  _forumContreller.setArticleData(articles);
+                                  print(
+                                      '-----------------------------------------');
+                                  print(articles[0]['articleName']);
                                   return Container(
                                     padding: EdgeInsets.symmetric(vertical: 10),
                                     child: CarouselSlider(
@@ -232,9 +237,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   blurRadius: 5)
                                                             ]),
                                                         // margin: EdgeInsets.symmetric(horizontal: 10),
-                                                        child: Image.network(
-                                                          article[
+                                                        // child: Image.network(
+                                                        //   article[
+                                                        //       'articleImage'],
+                                                        //   fit: BoxFit.cover,
+                                                        // ),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl: article[
                                                               'articleImage'],
+                                                          progressIndicatorBuilder: (context,
+                                                                  url,
+                                                                  downloadProgress) =>
+                                                              CircularProgressIndicator(
+                                                                  value: downloadProgress
+                                                                      .progress),
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),

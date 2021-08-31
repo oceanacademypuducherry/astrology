@@ -803,7 +803,7 @@ class _RegisterState extends State<Register> {
                                     duration: Duration(milliseconds: 600));
                               } else {
                                 Get.snackbar(
-                                  "Hello user!",
+                                  "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
                                   "Please provide your documents",
                                   icon: Icon(Icons.person, color: Colors.white),
                                   snackPosition: SnackPosition.TOP,
@@ -900,7 +900,7 @@ class _RegisterState extends State<Register> {
 
     final snapshot = await task!.whenComplete(() {
       Get.snackbar(
-        "Hello user!",
+        "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
         "Jadhagam uploaded successfully",
         icon: Icon(Icons.person, color: Colors.white),
         snackPosition: SnackPosition.TOP,
@@ -948,7 +948,7 @@ class _RegisterState extends State<Register> {
     final snapshot = await task!.whenComplete(() {
       print('profile picture uploaded');
       Get.snackbar(
-        "Hello user!",
+        "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
         "profile uploaded successfully",
         icon: Icon(Icons.person, color: Colors.white),
         snackPosition: SnackPosition.TOP,

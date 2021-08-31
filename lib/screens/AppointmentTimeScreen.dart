@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:velocity_x/velocity_x.dart';
 
 class AppointmentTimeScreen extends StatefulWidget {
   String focusedDate;
@@ -50,14 +51,21 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
     8: false,
     9: false,
   };
-  List timing = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  bool _hasBeenPressed = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+    var now = new DateTime.now();
+    var berlinWallFellDate = DateTime.parse('2021-08-31 03:00:00.000');
+// 0 denotes being equal positive value greater and negative value being less
+    if (berlinWallFellDate.compareTo(now) < 0) {
+      print('true');
+    } else {
+      print('false');
+    }
+
     print(_forumContreller.freeTime.value);
   }
 
@@ -137,15 +145,9 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
     ];
     print(time_slot);
     print('_________________________________');
-    // time_slot = _forumContreller.freeTime.value;
+    time_slot = _forumContreller.freeTime.value;
     print(time_slot);
     print('_________________________________');
-
-    // print(widget.dbList);
-    // print(freeTime);
-
-    // minTime(time_slot);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff045de9),
@@ -174,14 +176,6 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ElevatedButton(
-                    //   child: Text('checking'),
-                    //   onPressed: () async {
-                    //     print(orderTime);
-                    //     print('SSSSSSSSSSS');
-                    //     await createZoomToken(orderTime);
-                    //   },
-                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -265,25 +259,28 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                       2) ==
                               'AM')
                             GestureDetector(
-                              // onTap: () {
-                              //   print(widget.dbList);
-                              //   print(time_slot[i]);
-                              // },
                               onTap: widget.dbList.contains(time_slot[i])
                                   ? null
-                                  : () {
-                                      setState(() {
-                                        print('$i 000000000000');
-                                        colorChange.updateAll((key, value) =>
-                                            colorChange[key] = false);
-                                        colorChange[i] = true;
-                                        isOpen = true;
-                                      });
+                                  : time_slot[i].compareTo(DateTime.now()) < 0
+                                      ? () {
+                                          VxDialog.showAlert(context,
+                                              title: "Can not book",
+                                              content: "Time is over",
+                                              onPressed: () {});
+                                        }
+                                      : () {
+                                          setState(() {
+                                            print('$i 000000000000');
+                                            colorChange.updateAll(
+                                                (key, value) =>
+                                                    colorChange[key] = false);
+                                            colorChange[i] = true;
+                                            isOpen = true;
+                                          });
 
-                                      orderTime = time_slot[i];
-                                      print(orderTime);
-                                      print(isOpen);
-                                    },
+                                          orderTime = time_slot[i];
+                                          print(orderTime);
+                                        },
                               child: Card(
                                 shadowColor: Colors.grey[100],
                                 color: widget.dbList.contains(time_slot[i])
@@ -302,23 +299,29 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                     children: [
                                       Text(
                                         '${DateFormat.jm().format(time_slot[i])}',
-                                        style:
-                                            widget.dbList.contains(time_slot[i])
-                                                ? TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    fontFamily: 'Ubuntu',
-                                                    fontSize: 16,
-                                                    color: Colors.pink[200],
-                                                  )
-                                                : TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    fontFamily: 'Ubuntu',
-                                                    fontSize: 16,
-                                                    color: Colors.black54,
-                                                  ),
+                                        style: (widget.dbList
+                                                    .contains(time_slot[i]) ||
+                                                time_slot[i].compareTo(
+                                                        DateTime.now()) <
+                                                    0)
+                                            ? TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 16,
+                                                color: Colors.pink[200],
+                                              )
+                                            : TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 16,
+                                                color: Colors.black54,
+                                              ),
                                       ),
                                       SizedBox(height: 2),
-                                      widget.dbList.contains(time_slot[i])
+                                      (widget.dbList.contains(time_slot[i]) ||
+                                              time_slot[i].compareTo(
+                                                      DateTime.now()) <
+                                                  0)
                                           ? Text(
                                               'Unavailable',
                                               style: TextStyle(
@@ -387,7 +390,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                                 time_slot[i].hour > 12 &&
                                 time_slot[i].hour < 16)
                               GestureDetector(
-                                onTap: widget.dbList.contains(i)
+                                onTap: widget.dbList.contains(time_slot[i])
                                     ? null
                                     : () {
                                         setState(() {
@@ -609,6 +612,9 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                       // onPressed: () {},
                       onPressed: isOpen
                           ? () async {
+                              dynamic close =
+                                  context.showLoading(msg: "Loading");
+                              Future.delayed(2.seconds, close);
                               print(orderTime);
                               print('>>>>>>>>>>>>>>>>>>>>>>>');
                               await createZoomToken(orderTime);
