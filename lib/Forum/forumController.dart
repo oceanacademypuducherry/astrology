@@ -13,6 +13,11 @@ class ForumContreller extends GetxController {
   final startUrl = ''.obs;
   final startDate = ''.obs;
   final freeTime = [].obs;
+  final articleData = [].obs;
+
+  setArticleData(collection) {
+    articleData(collection);
+  }
 
   ///matchs
   final htmlContent = ''.obs;

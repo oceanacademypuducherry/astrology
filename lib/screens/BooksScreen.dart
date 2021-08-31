@@ -344,7 +344,7 @@ class _BooksDbState extends State<BooksDb> {
                       width: 135,
                       child: Image.network(
                         widget.bookImage,
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
 
                         // alignment: Alignment.center,
                       ),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/atentication/login.dart';
+import 'package:astrology_app/controller/article_controller.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/BooksScreen.dart';
 import 'package:astrology_app/screens/FreeVideos.dart';
@@ -11,6 +12,7 @@ import 'package:astrology_app/screens/PdfView.dart';
 import 'package:astrology_app/screens/QueryScreen.dart';
 import 'package:astrology_app/screens/SeeAllArticle.dart';
 import 'package:astrology_app/screens/SubscribeVideo.dart';
+import 'package:astrology_app/screens/articleView.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,6 +22,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -31,6 +34,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   ForumContreller _forumContreller = Get.find<ForumContreller>();
+  ArticleController _articleController = Get.find<ArticleController>();
 
   late FlutterLocalNotificationsPlugin localNotification;
 
@@ -119,22 +123,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 return KeyboardDismisser(
                   child: Column(
                     children: [
-                      // TextButton(
-                      //     onPressed: () async {
-                      //       SharedPreferences pref =
-                      //           await SharedPreferences.getInstance();
-                      //
-                      //       pref.clear();
-                      //
-                      //       Get.to(
-                      //         () => Login(),
-                      //         transition: Transition.rightToLeft,
-                      //         curve: Curves.easeInToLinear,
-                      //         duration: Duration(milliseconds: 600),
-                      //       );
-                      //       print('logout');
-                      //     },
-                      //     child: Text('log out')),
+                      TextButton(
+                          onPressed: () async {
+                            Get.to(ArticleView());
+                            // print('checking');
+                            // // print(_articleController.allBlog.value);
+                            // for (var i in _articleController.allBlog.value) {
+                            //   print(i['kind']);
+                            //   print(i);
+                            //   print('%%%%%%%%%%%%(((((((((((((((');
+                            // }
+                          },
+                          child: Text('checking')),
                       // TextButton(
                       //   child: Text('pdf'),
                       //   onPressed: () {
@@ -202,6 +202,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return CircularProgressIndicator();
                                 } else {
                                   final articles = snapshot.data!.docs;
+                                  _forumContreller.setArticleData(articles);
+                                  print(
+                                      '-----------------------------------------');
+                                  print(articles[0]['articleName']);
                                   return Container(
                                     padding: EdgeInsets.symmetric(vertical: 10),
                                     child: CarouselSlider(
@@ -232,9 +236,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   blurRadius: 5)
                                                             ]),
                                                         // margin: EdgeInsets.symmetric(horizontal: 10),
-                                                        child: Image.network(
-                                                          article[
+                                                        // child: Image.network(
+                                                        //   article[
+                                                        //       'articleImage'],
+                                                        //   fit: BoxFit.cover,
+                                                        // ),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl: article[
                                                               'articleImage'],
+                                                          progressIndicatorBuilder: (context,
+                                                                  url,
+                                                                  downloadProgress) =>
+                                                              CircularProgressIndicator(
+                                                                  value: downloadProgress
+                                                                      .progress),
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),
@@ -287,14 +303,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ),
                                               ),
                                               onTap: () {
-                                                Get.to(
-                                                    () => ArticleDescription(
-                                                        description:
-                                                            article['content'],
-                                                        articleTitle: article[
-                                                            'articleName'],
-                                                        articlePostId:
-                                                            article['postId']),
+                                                _articleController.setPostId(
+                                                    article['postId']);
+                                                Get.to(() => ArticleView(),
+                                                    // ArticleDescription(
+                                                    // description:
+                                                    //     article['content'],
+                                                    // articleTitle: article[
+                                                    //     'articleName'],
+                                                    // articlePostId:
+                                                    //     article['postId']),
                                                     transition:
                                                         Transition.rightToLeft,
                                                     curve:

@@ -1,5 +1,6 @@
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_controller.dart';
+import 'package:astrology_app/controller/article_controller.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/screens/htmlpage.dart';
 
@@ -22,7 +23,7 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await Firebase.initializeApp();
-  Get.put(OtpController());
+  Get.put(ArticleController());
 
   Get.put(ForumContreller());
   Get.put(OTPController());
