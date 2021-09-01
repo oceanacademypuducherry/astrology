@@ -123,18 +123,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 return KeyboardDismisser(
                   child: Column(
                     children: [
-                      TextButton(
-                          onPressed: () async {
-                            Get.to(ArticleView());
-                            // print('checking');
-                            // // print(_articleController.allBlog.value);
-                            // for (var i in _articleController.allBlog.value) {
-                            //   print(i['kind']);
-                            //   print(i);
-                            //   print('%%%%%%%%%%%%(((((((((((((((');
-                            // }
-                          },
-                          child: Text('checking')),
+                      // TextButton(
+                      //     onPressed: () async {
+                      //       Get.to(ArticleView());
+                      //       // print('checking');
+                      //       // // print(_articleController.allBlog.value);
+                      //       // for (var i in _articleController.allBlog.value) {
+                      //       //   print(i['kind']);
+                      //       //   print(i);
+                      //       //   print('%%%%%%%%%%%%(((((((((((((((');
+                      //       // }
+                      //     },
+                      //     child: Text('checking')),
                       // TextButton(
                       //   child: Text('pdf'),
                       //   onPressed: () {
@@ -306,13 +306,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 _articleController.setPostId(
                                                     article['postId']);
                                                 Get.to(() => ArticleView(),
-                                                    // ArticleDescription(
-                                                    // description:
-                                                    //     article['content'],
-                                                    // articleTitle: article[
-                                                    //     'articleName'],
-                                                    // articlePostId:
-                                                    //     article['postId']),
                                                     transition:
                                                         Transition.rightToLeft,
                                                     curve:

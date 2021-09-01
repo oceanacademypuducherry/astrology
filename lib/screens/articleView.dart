@@ -16,52 +16,62 @@ class _ArticleViewState extends State<ArticleView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Center(child: Text('View Article')),
+          leading: GestureDetector(
+            child: Icon(Icons.arrow_back),
+            onTap: () {
+              Get.back();
+            },
+          ),
+        ),
         endDrawer: Drawer(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-            child: Column(
-              children: [
-                for (var article in _forumContreller.articleData.value)
-                  Column(
-                    children: [
-                      ListTile(
-                        onTap: () {
-                          print(article['postId']);
-                          _articleController.setPostId(article['postId']);
-                          Get.back();
-                        },
-                        title: Text(
-                          article['articleName'],
-                          maxLines: 2,
-                          style: TextStyle(
-                            color: Colors.grey,
-                            // height: 2,
+          child: SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              child: Column(
+                children: [
+                  for (var article in _forumContreller.articleData.value)
+                    Column(
+                      children: [
+                        ListTile(
+                          onTap: () {
+                            print(article['postId']);
+                            _articleController.setPostId(article['postId']);
+                            Get.back();
+                          },
+                          title: Text(
+                            article['articleName'],
+                            maxLines: 2,
+                            style: TextStyle(
+                              color: Colors.grey,
+                              // height: 2,
 
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                            fontFamily: 'Ubuntu',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                              fontFamily: 'Ubuntu',
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        leading: Container(
-                          width: 50,
-                          height: 50,
-                          child: CachedNetworkImage(
-                            imageUrl: article['articleImage'],
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) =>
-                                    CircularProgressIndicator(
-                                        value: downloadProgress.progress),
-                            fit: BoxFit.cover,
+                          leading: Container(
+                            width: 50,
+                            height: 50,
+                            child: CachedNetworkImage(
+                              imageUrl: article['articleImage'],
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      CircularProgressIndicator(
+                                          value: downloadProgress.progress),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                      Divider()
-                    ],
-                  ),
-              ],
+                        Divider()
+                      ],
+                    ),
+                ],
+              ),
             ),
           ),
         ),

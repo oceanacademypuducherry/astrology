@@ -1,4 +1,6 @@
+import 'package:astrology_app/controller/article_controller.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
+import 'package:astrology_app/screens/articleView.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:get/get.dart';
 class SeeAllArticle extends StatelessWidget {
   // const SeeAllArticle({Key? key}) : super(key: key);
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  ArticleController _articleController = Get.find<ArticleController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -67,15 +70,11 @@ class SeeAllArticle extends StatelessWidget {
                                   articleName: articleName,
                                   description: articleDescription,
                                   onpress: () {
-                                    Get.to(
-                                        () => ArticleDescription(
-                                              articleTitle: articleName,
-                                              description: articleDescription,
-                                              articlePostId: postId,
-                                            ),
+                                    _articleController.setPostId(postId);
+                                    Get.to(() => ArticleView(),
                                         transition: Transition.rightToLeft,
                                         curve: Curves.easeInToLinear,
-                                        duration: Duration(milliseconds: 600));
+                                        duration: Duration(milliseconds: 400));
                                   },
                                 );
                                 // Text('$messageText from $messageSender');

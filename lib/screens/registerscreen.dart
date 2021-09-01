@@ -85,7 +85,10 @@ class _RegisterState extends State<Register> {
         fontSize: 14,
         color: Colors.black54,
       ),
-      inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
+      inputFormatters: [
+        FilteringTextInputFormatter.deny(RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
+      ],
       // ignore: deprecated_member_use
       autovalidate: validation,
       validator: (value) =>
@@ -760,50 +763,6 @@ class _RegisterState extends State<Register> {
                                         ),
                                 ),
                               ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          width: MediaQuery.of(context).size.width,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              if (messageFocusNode1.hasFocus ||
-                                  messageFocusNode2.hasFocus ||
-                                  messageFocusNode3.hasFocus ||
-                                  messageFocusNode4.hasFocus) {
-                                messageFocusNode1.unfocus();
-                                messageFocusNode2.unfocus();
-                                messageFocusNode3.unfocus();
-                                messageFocusNode4.unfocus();
-                              }
-
-                              await _selectDate(context);
-                              Navigator.of(context).push(
-                                showPicker(
-                                  context: context,
-                                  value: _time,
-                                  onChange: onTimeChanged,
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              fixedSize: Size(double.infinity, 50),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              elevation: 2,
-                              primary: Color(0xff045de9),
-                              onPrimary: Colors.white,
-                              textStyle: const TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            child: Text(
-                              "Select Birth Day and Birth Time",
-                              style: TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
