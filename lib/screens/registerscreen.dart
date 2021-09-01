@@ -86,11 +86,11 @@ class _RegisterState extends State<Register> {
         color: Colors.black54,
       ),
       inputFormatters: [
-        FilteringTextInputFormatter.deny(RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
+        FilteringTextInputFormatter.deny(RegExp(r"\s")),
+        // FilteringTextInputFormatter.deny(RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
       ],
       // ignore: deprecated_member_use
-      autovalidate: validation,
+      // autovalidate: validation,
       validator: (value) =>
           EmailValidator.validate(value!) ? null : "please enter a valid email",
       decoration: const InputDecoration(
@@ -798,11 +798,18 @@ class _RegisterState extends State<Register> {
                               }
 
                               ///firebase
+
                               if (nameController.text.isNotEmpty &&
                                   emailController.text.isNotEmpty &&
                                   widget.userNumber!.isNotEmpty &&
                                   birthPlace != null &&
-                                  date != null) {
+                                  textDate != null &&
+                                  EmailValidator.validate(
+                                      emailController.text)) {
+                                print(
+                                    "${selectedDate} ///////////////////////////////////////////////////////////////date///");
+                                print(
+                                    "${DateTime.now()} ///////////////////////////////////////////////////////////////date");
                                 _firestore.collection("newusers").add({
                                   "name": nameController.text,
                                   "email": emailController.text,
@@ -831,8 +838,8 @@ class _RegisterState extends State<Register> {
                                     duration: Duration(milliseconds: 600));
                               } else {
                                 Get.snackbar(
-                                  "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
-                                  "Please provide your documents",
+                                  "Hello User !",
+                                  "Please check your documents",
                                   icon: Icon(Icons.person, color: Colors.white),
                                   snackPosition: SnackPosition.TOP,
                                   backgroundColor: Colors.blue[500],

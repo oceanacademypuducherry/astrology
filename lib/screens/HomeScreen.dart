@@ -93,15 +93,15 @@ class _HomeScreenState extends State<HomeScreen> {
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
               titlePadding: EdgeInsets.symmetric(vertical: 45),
-              title: Text(
-                "${hour < 12 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Morning !" : hour < 17 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Afternoon !" : "Hi ${_forumContreller.sessionUserInfo['name']}, Good Evening !"}",
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.8),
-                  fontWeight: FontWeight.normal,
-                  fontSize: 13,
-                  fontFamily: 'Ubuntu',
-                ),
-              ),
+              title: Obx(() => Text(
+                    "${hour < 12 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Morning !" : hour < 17 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Afternoon !" : "Hi ${_forumContreller.sessionUserInfo['name']}, Good Evening !"}",
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.8),
+                      fontWeight: FontWeight.normal,
+                      fontSize: 13,
+                      fontFamily: 'Ubuntu',
+                    ),
+                  )),
               stretchModes: [
                 StretchMode.fadeTitle,
               ],
