@@ -866,7 +866,7 @@ class _RegisterState extends State<Register> {
                                 prefs.setString(
                                     'user', widget.userNumber.toString());
 
-                                Get.off(() => BottomNavigation(),
+                                Get.offAll(() => BottomNavigation(),
                                     transition: Transition.rightToLeft,
                                     curve: Curves.easeInToLinear,
                                     duration: Duration(milliseconds: 600));

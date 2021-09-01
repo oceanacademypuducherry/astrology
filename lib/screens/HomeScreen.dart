@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:astrology_app/Forum/forumController.dart';
@@ -245,12 +247,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             CachedNetworkImage(
                                                           imageUrl: article[
                                                               'articleImage'],
-                                                          progressIndicatorBuilder: (context,
-                                                                  url,
-                                                                  downloadProgress) =>
-                                                              CircularProgressIndicator(
-                                                                  value: downloadProgress
-                                                                      .progress),
+                                                          placeholder: (context,
+                                                                  url) =>
+                                                              Center(
+                                                                  child:
+                                                                      CircularProgressIndicator()),
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),
