@@ -855,8 +855,9 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                             onPressed: () {
                               if (nameController.text.isNotEmpty &&
                                   emailController.text.isNotEmpty &&
-                                  // jadhagamLink!.isNotEmpty &&
-                                  // profilePictureLink!.isNotEmpty &&
+                                  textDate != null &&
+                                  EmailValidator.validate(
+                                      emailController.text) &&
                                   birthPlaceController.text.isNotEmpty) {
                                 openCheckout();
                                 print(validationEmail);

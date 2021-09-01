@@ -14,6 +14,11 @@ class ForumContreller extends GetxController {
   final startDate = ''.obs;
   final freeTime = [].obs;
   final articleData = [].obs;
+  final userName = ''.obs;
+
+  setUserName(name) {
+    userName(name);
+  }
 
   setArticleData(collection) {
     articleData(collection);

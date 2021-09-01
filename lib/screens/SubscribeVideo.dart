@@ -39,7 +39,7 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
 
   ///RAZORPAY START
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    _firestore.collection('booking').add({
+    _firestore.collection('subscribeList').add({
       'time': DateTime.now(),
       'phoneNumber': _forumContreller.userSession.value,
       'email': _forumContreller.sessionUserInfo.value['email'],

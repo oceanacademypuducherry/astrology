@@ -85,9 +85,12 @@ class _RegisterState extends State<Register> {
         fontSize: 14,
         color: Colors.black54,
       ),
-      inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
+      inputFormatters: [
+        FilteringTextInputFormatter.deny(RegExp(r"\s")),
+        // FilteringTextInputFormatter.deny(RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))
+      ],
       // ignore: deprecated_member_use
-      autovalidate: validation,
+      // autovalidate: validation,
       validator: (value) =>
           EmailValidator.validate(value!) ? null : "please enter a valid email",
       decoration: const InputDecoration(
@@ -763,50 +766,6 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          width: MediaQuery.of(context).size.width,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              if (messageFocusNode1.hasFocus ||
-                                  messageFocusNode2.hasFocus ||
-                                  messageFocusNode3.hasFocus ||
-                                  messageFocusNode4.hasFocus) {
-                                messageFocusNode1.unfocus();
-                                messageFocusNode2.unfocus();
-                                messageFocusNode3.unfocus();
-                                messageFocusNode4.unfocus();
-                              }
-
-                              await _selectDate(context);
-                              Navigator.of(context).push(
-                                showPicker(
-                                  context: context,
-                                  value: _time,
-                                  onChange: onTimeChanged,
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              fixedSize: Size(double.infinity, 50),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              elevation: 2,
-                              primary: Color(0xff045de9),
-                              onPrimary: Colors.white,
-                              textStyle: const TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            child: Text(
-                              "Select Birth Day and Birth Time",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
 
                         ///Register button
                         Container(
@@ -839,11 +798,18 @@ class _RegisterState extends State<Register> {
                               }
 
                               ///firebase
+
                               if (nameController.text.isNotEmpty &&
                                   emailController.text.isNotEmpty &&
                                   widget.userNumber!.isNotEmpty &&
                                   birthPlace != null &&
-                                  date != null) {
+                                  textDate != null &&
+                                  EmailValidator.validate(
+                                      emailController.text)) {
+                                print(
+                                    "${selectedDate} ///////////////////////////////////////////////////////////////date///");
+                                print(
+                                    "${DateTime.now()} ///////////////////////////////////////////////////////////////date");
                                 _firestore.collection("newusers").add({
                                   "name": nameController.text,
                                   "email": emailController.text,
@@ -872,8 +838,8 @@ class _RegisterState extends State<Register> {
                                     duration: Duration(milliseconds: 600));
                               } else {
                                 Get.snackbar(
-                                  "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
-                                  "Please provide your documents",
+                                  "Hello User !",
+                                  "Please check your documents",
                                   icon: Icon(Icons.person, color: Colors.white),
                                   snackPosition: SnackPosition.TOP,
                                   backgroundColor: Colors.blue[500],
