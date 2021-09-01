@@ -1,6 +1,7 @@
 import 'package:astrology_app/controller/article_controller.dart';
 import 'package:astrology_app/screens/ArticleDescription.dart';
 import 'package:astrology_app/screens/articleView.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -138,8 +139,15 @@ class SeeAllArticlesDb extends StatelessWidget {
           child: Container(
             child: Column(
               children: [
-                Image.network(
-                  articleImage,
+                CachedNetworkImage(
+                  imageUrl: articleImage,
+                  placeholder: (context, url) => Center(
+                    child: Container(
+                      child: CircularProgressIndicator(),
+                      height: 50,
+                      width: 50,
+                    ),
+                  ),
                   fit: BoxFit.cover,
                 ),
                 Container(
@@ -162,28 +170,3 @@ class SeeAllArticlesDb extends StatelessWidget {
     );
   }
 }
-
-//flexible space => sliver
-
-// Container(
-// decoration: BoxDecoration(
-// color: Colors.blue,
-// image: DecorationImage(
-// image: AssetImage("images/background_image.png"),
-// fit: BoxFit.cover,
-// ),
-// ),
-// width: double.infinity,
-// height: double.infinity,
-// child: Center(
-// child: Text(
-// 'See all Article',
-// style: TextStyle(
-// color: Colors.white.withOpacity(0.9),
-// fontSize: 22,
-// fontFamily: 'Ubuntu',
-// fontWeight: FontWeight.w600,
-// ),
-// ),
-// ),
-// ),

@@ -1,10 +1,6 @@
 import 'dart:io';
-
 import 'package:astrology_app/Forum/forumController.dart';
-import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/controller/article_controller.dart';
-import 'package:astrology_app/screens/ArticleDescription.dart';
-import 'package:astrology_app/screens/BooksScreen.dart';
 import 'package:astrology_app/screens/FreeVideos.dart';
 import 'package:astrology_app/screens/MarriageMatches.dart';
 import 'package:astrology_app/screens/PaidVedios.dart';
@@ -23,7 +19,6 @@ import 'package:get/get.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -245,12 +240,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             CachedNetworkImage(
                                                           imageUrl: article[
                                                               'articleImage'],
-                                                          progressIndicatorBuilder: (context,
-                                                                  url,
-                                                                  downloadProgress) =>
-                                                              CircularProgressIndicator(
-                                                                  value: downloadProgress
-                                                                      .progress),
+                                                          placeholder:
+                                                              (context, url) =>
+                                                                  Center(
+                                                            child: Container(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                              height: 50,
+                                                              width: 50,
+                                                            ),
+                                                          ),
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),

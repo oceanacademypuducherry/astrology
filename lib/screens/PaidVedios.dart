@@ -1,5 +1,6 @@
 import 'package:astrology_app/screens/NativeVedioScreen.dart';
 import 'package:astrology_app/screens/player_meedu.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'youtubeScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -129,8 +130,15 @@ class PaidVediosDb extends StatelessWidget {
             Container(
               height: 80,
               width: 125,
-              child: Image(
-                image: NetworkImage('$vedioImage'),
+              child: CachedNetworkImage(
+                imageUrl: vedioImage,
+                placeholder: (context, url) => Center(
+                  child: Container(
+                    child: CircularProgressIndicator(),
+                    height: 50,
+                    width: 50,
+                  ),
+                ),
                 fit: BoxFit.cover,
               ),
             ),

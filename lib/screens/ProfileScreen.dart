@@ -5,6 +5,7 @@ import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/services/storage_service.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:email_validator/email_validator.dart';
@@ -390,41 +391,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     width: 120,
                                                     // color: Colors.amberAccent,
                                                     alignment: Alignment.center,
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                          image: DecorationImage(
-                                                              image: NetworkImage(_forumContreller
-                                                                              .sessionUserInfo
-                                                                              .value[
-                                                                          'profile'] ==
-                                                                      null
-                                                                  ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
-                                                                  : '${_forumContreller.sessionUserInfo.value['profile'].toString()}'),
-                                                              fit:
-                                                                  BoxFit.cover),
-                                                          border: Border.all(
-                                                            width: 2,
-                                                            color: Colors
-                                                                .blue.shade900,
-                                                          ),
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          10)),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              blurRadius: 10,
-                                                              spreadRadius: 0,
-                                                              offset: Offset(
-                                                                5.0,
-                                                                5.0,
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: _forumContreller
+                                                                      .sessionUserInfo
+                                                                      .value[
+                                                                  'profile'] ==
+                                                              null
+                                                          ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
+                                                          : '${_forumContreller.sessionUserInfo.value['profile'].toString()}',
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Container(
+                                                        height: 150.0,
+                                                        child:
+                                                            Icon(Icons.error),
+                                                      ),
+                                                      imageBuilder: (context,
+                                                              imageProvider) =>
+                                                          Container(
+                                                        height: 150.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                image: DecorationImage(
+                                                                    image:
+                                                                        imageProvider,
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                                border:
+                                                                    Border.all(
+                                                                  width: 2,
+                                                                  color: Colors
+                                                                      .blue
+                                                                      .shade900,
+                                                                ),
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10)),
+                                                                boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors
+                                                                    .black26,
+                                                                blurRadius: 10,
+                                                                spreadRadius: 0,
+                                                                offset: Offset(
+                                                                  5.0,
+                                                                  5.0,
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ]),
+                                                            ]),
+                                                      ),
                                                     ),
                                                   ),
                                                   SizedBox(height: 13),
@@ -462,41 +480,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     width: 120,
                                                     // color: Colors.amberAccent,
                                                     alignment: Alignment.center,
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                          image: DecorationImage(
-                                                              image: NetworkImage(_forumContreller
-                                                                              .sessionUserInfo
-                                                                              .value[
-                                                                          'jadhagam'] ==
-                                                                      null
-                                                                  ? '${getJadhagam}'
-                                                                  : '${_forumContreller.sessionUserInfo.value['jadhagam']}'),
-                                                              fit:
-                                                                  BoxFit.cover),
-                                                          border: Border.all(
-                                                            width: 2,
-                                                            color: Colors
-                                                                .blue.shade900,
-                                                          ),
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          10)),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              blurRadius: 10,
-                                                              spreadRadius: 0,
-                                                              offset: Offset(
-                                                                5.0,
-                                                                5.0,
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: _forumContreller
+                                                                      .sessionUserInfo
+                                                                      .value[
+                                                                  'jadhagam'] ==
+                                                              null
+                                                          ? '${getJadhagam}'
+                                                          : '${_forumContreller.sessionUserInfo.value['jadhagam']}',
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Container(
+                                                        height: 150.0,
+                                                        child:
+                                                            Icon(Icons.error),
+                                                      ),
+                                                      imageBuilder: (context,
+                                                              imageProvider) =>
+                                                          Container(
+                                                        height: 150.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                image: DecorationImage(
+                                                                    image:
+                                                                        imageProvider,
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                                border:
+                                                                    Border.all(
+                                                                  width: 2,
+                                                                  color: Colors
+                                                                      .blue
+                                                                      .shade900,
+                                                                ),
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10)),
+                                                                boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors
+                                                                    .black26,
+                                                                blurRadius: 10,
+                                                                spreadRadius: 0,
+                                                                offset: Offset(
+                                                                  5.0,
+                                                                  5.0,
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ]),
+                                                            ]),
+                                                      ),
                                                     ),
                                                   ),
                                                   SizedBox(height: 13),
@@ -742,128 +777,169 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           color: Colors.black38,
                                           thickness: 0.2,
                                         ),
-                                        Container(
-                                          alignment: Alignment.topLeft,
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 10),
-                                          padding: EdgeInsets.all(10),
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 80,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5)),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black12,
-                                                  blurRadius: 20,
-                                                  spreadRadius: 5,
-                                                  offset: Offset(
-                                                    2.0,
-                                                    2.0,
+                                        GestureDetector(
+                                          onTap: () async {
+                                            if (messageFocusNode1.hasFocus ||
+                                                messageFocusNode2.hasFocus ||
+                                                messageFocusNode3.hasFocus ||
+                                                messageFocusNode4.hasFocus) {
+                                              messageFocusNode1.unfocus();
+                                              messageFocusNode2.unfocus();
+                                              messageFocusNode3.unfocus();
+                                              messageFocusNode4.unfocus();
+                                            }
+
+                                            await _selectDate(context);
+                                            await Navigator.of(context).push(
+                                              showPicker(
+                                                context: context,
+                                                value: _time,
+                                                onChange: onTimeChanged,
+                                              ),
+                                            );
+
+                                            date = DateTime(
+                                                selectedDate.year,
+                                                selectedDate.month,
+                                                selectedDate.day,
+                                                _time.hour,
+                                                _time.minute);
+                                            print('date in button  ${date}');
+
+                                            ///update only date and time
+                                            _firestore
+                                                .collection("newusers")
+                                                .doc(Get.find<ForumContreller>()
+                                                    .userDocumentId
+                                                    .toString())
+                                                .update({
+                                              "birthTime": date,
+                                            });
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.topLeft,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 20, vertical: 10),
+                                            padding: EdgeInsets.all(10),
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 80,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5)),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black12,
+                                                    blurRadius: 20,
+                                                    spreadRadius: 5,
+                                                    offset: Offset(
+                                                      2.0,
+                                                      2.0,
+                                                    ),
                                                   ),
+                                                ]),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          bottom: 15),
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        'DOB',
+                                                        style: TextStyle(
+                                                          fontFamily: 'Ubuntu',
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.blue,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        '${monthFormat} ${dayFormat} ,'
+                                                        ' ${yearFormat} at ${newHour}:${newMinute} ${dayTime}',
+                                                        style: TextStyle(
+                                                          fontFamily: 'Ubuntu',
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color: Colors.black54,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ]),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 15),
-                                                alignment: Alignment.topLeft,
-                                                child: Text(
-                                                  'DOB',
-                                                  style: TextStyle(
-                                                    fontFamily: 'Ubuntu',
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
+                                                IconButton(
+                                                  icon: Icon(
+                                                    Icons
+                                                        .calendar_today_outlined,
                                                     color: Colors.blue,
                                                   ),
-                                                ),
-                                              ),
-                                              Container(
-                                                alignment: Alignment.topLeft,
-                                                child: Text(
-                                                  '${monthFormat} ${dayFormat} ,'
-                                                  ' ${yearFormat} at ${newHour}:${newMinute} ${dayTime}',
-                                                  style: TextStyle(
-                                                    fontFamily: 'Ubuntu',
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    color: Colors.black54,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 10),
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: ElevatedButton(
-                                            onPressed: () async {
-                                              if (messageFocusNode1.hasFocus ||
-                                                  messageFocusNode2.hasFocus ||
-                                                  messageFocusNode3.hasFocus ||
-                                                  messageFocusNode4.hasFocus) {
-                                                messageFocusNode1.unfocus();
-                                                messageFocusNode2.unfocus();
-                                                messageFocusNode3.unfocus();
-                                                messageFocusNode4.unfocus();
-                                              }
+                                                  onPressed: () async {
+                                                    if (messageFocusNode1.hasFocus ||
+                                                        messageFocusNode2
+                                                            .hasFocus ||
+                                                        messageFocusNode3
+                                                            .hasFocus ||
+                                                        messageFocusNode4
+                                                            .hasFocus) {
+                                                      messageFocusNode1
+                                                          .unfocus();
+                                                      messageFocusNode2
+                                                          .unfocus();
+                                                      messageFocusNode3
+                                                          .unfocus();
+                                                      messageFocusNode4
+                                                          .unfocus();
+                                                    }
 
-                                              await _selectDate(context);
-                                              await Navigator.of(context).push(
-                                                showPicker(
-                                                  context: context,
-                                                  value: _time,
-                                                  onChange: onTimeChanged,
-                                                ),
-                                              );
+                                                    await _selectDate(context);
+                                                    await Navigator.of(context)
+                                                        .push(
+                                                      showPicker(
+                                                        context: context,
+                                                        value: _time,
+                                                        onChange: onTimeChanged,
+                                                      ),
+                                                    );
 
-                                              date = DateTime(
-                                                  selectedDate.year,
-                                                  selectedDate.month,
-                                                  selectedDate.day,
-                                                  _time.hour,
-                                                  _time.minute);
-                                              print('date in button  ${date}');
+                                                    date = DateTime(
+                                                        selectedDate.year,
+                                                        selectedDate.month,
+                                                        selectedDate.day,
+                                                        _time.hour,
+                                                        _time.minute);
+                                                    print(
+                                                        'date in button  ${date}');
 
-                                              ///update only date and time
-                                              _firestore
-                                                  .collection("newusers")
-                                                  .doc(Get.find<
-                                                          ForumContreller>()
-                                                      .userDocumentId
-                                                      .toString())
-                                                  .update({
-                                                "birthTime": date,
-                                              });
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              fixedSize:
-                                                  Size(double.infinity, 50),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
-                                              elevation: 2,
-                                              primary: Color(0xff045de9),
-                                              onPrimary: Colors.white,
-                                              textStyle: const TextStyle(
-                                                fontFamily: 'Ubuntu',
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            child: Text(
-                                              "Update Birth Day and Birth Time",
-                                              style: TextStyle(
-                                                  color: Colors.white),
+                                                    ///update only date and time
+                                                    _firestore
+                                                        .collection("newusers")
+                                                        .doc(Get.find<
+                                                                ForumContreller>()
+                                                            .userDocumentId
+                                                            .toString())
+                                                        .update({
+                                                      "birthTime": date,
+                                                    });
+                                                  },
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ),
