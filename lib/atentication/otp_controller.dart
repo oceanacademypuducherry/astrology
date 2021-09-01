@@ -26,7 +26,7 @@ class OTPController extends GetxController {
 
   setBreake(stopTimer, BuildContext context) {
     isSubmited(stopTimer);
-    VxToast.show(context, msg: 'timerBreaked');
+    // VxToast.show(context, msg: 'timerBreaked');
   }
 
   setUserPhoneNumber(PhoneNumber) {
@@ -148,6 +148,5 @@ class OTPController extends GetxController {
         resend.value = true;
       }
     }
-    print('timer breaked kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
   }
 }

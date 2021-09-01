@@ -25,30 +25,24 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="app released&#10;2">
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/version" afterDir="false" />
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="app released 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/atentication/otp_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/atentication/otp_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/registerscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/registerscreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/Payment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/Payment.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/SomeoneElse.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/SomeoneElse.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,13 +110,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627472263977</updated>
-    </task>
-    <task id="LOCAL-00026" summary="edit completed">
-      <created>1628157495982</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1628157495982</updated>
     </task>
     <task id="LOCAL-00027" summary="app icon changed">
       <created>1628226709483</created>
@@ -460,7 +447,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630425352316</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="app released 3">
+      <created>1630492880816</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1630492880817</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -476,7 +470,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="11-08 checking 4" />
     <MESSAGE value="11-08 checking 5" />
     <MESSAGE value="11-08 checking 6" />
     <MESSAGE value="11-08 checking 7" />
@@ -501,7 +494,8 @@
     <MESSAGE value="app released" />
     <MESSAGE value="app released1" />
     <MESSAGE value="app released&#10;2" />
-    <option name="LAST_COMMIT_MESSAGE" value="app released&#10;2" />
+    <MESSAGE value="app released 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="app released 3" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="383" key="#Notifications" timestamp="1630227723689">
@@ -532,30 +526,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="338" key="GridCell.Tab.0.bottom" timestamp="1630428475263">
+    <state width="1860" height="314" key="GridCell.Tab.0.bottom" timestamp="1630495884297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="338" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630428475263" />
-    <state width="1860" height="338" key="GridCell.Tab.0.center" timestamp="1630428475263">
+    <state width="1860" height="314" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630495884297" />
+    <state width="1860" height="314" key="GridCell.Tab.0.center" timestamp="1630495884297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="338" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630428475263" />
-    <state width="1860" height="338" key="GridCell.Tab.0.left" timestamp="1630428475262">
+    <state width="1860" height="314" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630495884297" />
+    <state width="1860" height="314" key="GridCell.Tab.0.left" timestamp="1630495884297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="338" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630428475262" />
-    <state width="1860" height="338" key="GridCell.Tab.0.right" timestamp="1630428475263">
+    <state width="1860" height="314" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630495884297" />
+    <state width="1860" height="314" key="GridCell.Tab.0.right" timestamp="1630495884297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="338" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630428475263" />
+    <state width="1860" height="314" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630495884297" />
     <state x="184" y="86" key="MergeDialog" timestamp="1629987765776">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="184" y="86" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1629987765776" />
-    <state x="591" y="281" key="MultipleFileMergeDialog" timestamp="1630425400394">
+    <state x="591" y="281" key="MultipleFileMergeDialog" timestamp="1630492914279">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1630425400394" />
+    <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1630492914279" />
     <state x="336" y="77" key="SettingsEditor" timestamp="1630326776572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -564,10 +558,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628919047163" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1630425414161">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1630492927629">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630425414161" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630492927629" />
     <state x="-79" y="98" width="1940" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1630232429781">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -576,14 +570,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1629354927945" />
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1630425431075">
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1630493569821">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630425431075" />
-    <state x="666" y="69" width="726" height="744" key="find.popup" timestamp="1630428461018">
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630493569821" />
+    <state x="666" y="69" width="726" height="744" key="find.popup" timestamp="1630496871371">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="666" y="69" width="726" height="744" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1630428461018" />
+    <state x="666" y="69" width="726" height="744" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1630496871371" />
     <state x="416" y="126" key="new project wizard" timestamp="1627575717306">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -617,42 +611,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>766</line>
+          <line>886</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>767</line>
+          <line>887</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>803</line>
+          <line>909</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>804</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>805</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>806</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/screens/ProfileScreen.dart</url>
-          <line>807</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/SomeoneElse.dart</url>
-          <line>956</line>
+          <line>954</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">

@@ -181,7 +181,7 @@ class _BookingDetailsState extends State<BookingDetails> {
   void _handlePaymentError(PaymentFailureResponse response) {
     print('*************Error******************');
     print(response.message);
-    Fluttertoast.showToast(msg: "ERROR");
+    // Fluttertoast.showToast(msg: "ERROR");
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {

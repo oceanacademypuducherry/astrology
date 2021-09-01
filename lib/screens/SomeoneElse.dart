@@ -282,9 +282,6 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
 
   void _handlePaymentError(PaymentFailureResponse response) {
     print(response.message);
-    Fluttertoast.showToast(
-        msg: "ERROR: " + response.code.toString() + " - " + response.message!,
-        toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {

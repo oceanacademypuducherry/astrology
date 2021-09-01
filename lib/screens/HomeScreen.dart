@@ -100,13 +100,15 @@ class _HomeScreenState extends State<HomeScreen> {
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
               titlePadding: EdgeInsets.symmetric(vertical: 45),
-              title: Text(
-                "${hour < 12 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Morning !" : hour < 17 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Afternoon !" : "Hi ${_forumContreller.sessionUserInfo['name']}, Good Evening !"}",
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.8),
-                  fontWeight: FontWeight.normal,
-                  fontSize: 13,
-                  fontFamily: 'Ubuntu',
+              title: Obx(
+                () => Text(
+                  "${hour < 12 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Morning !" : hour < 17 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Afternoon !" : "Hi ${_forumContreller.sessionUserInfo['name']}, Good Evening !"}",
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.8),
+                    fontWeight: FontWeight.normal,
+                    fontSize: 13,
+                    fontFamily: 'Ubuntu',
+                  ),
                 ),
               ),
               stretchModes: [
@@ -125,18 +127,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 return KeyboardDismisser(
                   child: Column(
                     children: [
-                      TextButton(
-                          onPressed: () async {
-                            Get.to(ArticleView());
-                            // print('checking');
-                            // // print(_articleController.allBlog.value);
-                            // for (var i in _articleController.allBlog.value) {
-                            //   print(i['kind']);
-                            //   print(i);
-                            //   print('%%%%%%%%%%%%(((((((((((((((');
-                            // }
-                          },
-                          child: Text('checking')),
+                      // TextButton(
+                      //     onPressed: () async {
+                      //       Get.to(ArticleView());
+                      //       // print('checking');
+                      //       // // print(_articleController.allBlog.value);
+                      //       // for (var i in _articleController.allBlog.value) {
+                      //       //   print(i['kind']);
+                      //       //   print(i);
+                      //       //   print('%%%%%%%%%%%%(((((((((((((((');
+                      //       // }
+                      //     },
+                      //     child: Text('checking')),
                       // TextButton(
                       //   child: Text('pdf'),
                       //   onPressed: () {
