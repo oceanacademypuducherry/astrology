@@ -233,7 +233,8 @@ class _ForumState extends State<Forum> {
                                             if (forum['auth'] ==
                                                 user['email']) {
                                               username = user['name'];
-                                              userProfile = user['profile'];
+                                              userProfile =
+                                                  user['profile'].toString();
                                             }
                                           }
                                           return Row(

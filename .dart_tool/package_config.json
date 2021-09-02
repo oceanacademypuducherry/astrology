@@ -26,6 +26,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "badges",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/badges-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "better_player",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/better_player-0.0.72",
       "packageUri": "lib/",
@@ -932,7 +938,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-09-02T04:54:15.176622Z",
+  "generated": "2021-09-02T12:23:16.806940Z",
   "generator": "pub",
   "generatorVersion": "2.14.0-368.0.dev"
 }

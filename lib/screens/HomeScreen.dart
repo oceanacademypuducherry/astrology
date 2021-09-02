@@ -2,6 +2,10 @@
 
 import 'dart:io';
 
+import 'package:astrology_app/AstroEcom/ProductCard.dart';
+import 'package:astrology_app/AstroEcom/ViewProduct.dart';
+import 'package:astrology_app/AstroEcom/productController.dart';
+import 'package:astrology_app/AstroEcom/productSwiperCard.dart';
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/controller/article_controller.dart';
@@ -26,6 +30,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -37,6 +42,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ForumContreller _forumContreller = Get.find<ForumContreller>();
   ArticleController _articleController = Get.find<ArticleController>();
+  ProductController _productController = Get.find<ProductController>();
 
   late FlutterLocalNotificationsPlugin localNotification;
 
@@ -85,7 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
             centerTitle: true,
             title: Text(
               "Makarajothi",
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'Ubuntu'),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  fontFamily: 'Ubuntu'),
             ),
             floating: false,
             expandedHeight: 160,
@@ -163,7 +173,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "Article Collection",
@@ -184,13 +195,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                       },
                                       child: Text(
                                         'See All',
-                                        style: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Ubuntu'),
+                                        style: TextStyle(
+                                            color: Colors.blue,
+                                            fontSize: 15,
+                                            fontFamily: 'Ubuntu'),
                                       ))
                                 ],
                               ),
                             ),
                             StreamBuilder<QuerySnapshot>(
-                              stream: _firestore.collection('articles').snapshots(),
+                              stream:
+                                  _firestore.collection('articles').snapshots(),
                               // ignore: missing_return
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
@@ -198,7 +213,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 } else {
                                   final articles = snapshot.data!.docs;
                                   _forumContreller.setArticleData(articles);
-                                  print('-----------------------------------------');
+                                  print(
+                                      '-----------------------------------------');
                                   print(articles[0]['articleName']);
                                   return Container(
                                     padding: EdgeInsets.symmetric(vertical: 10),
@@ -213,48 +229,82 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       flex: 4,
                                                       child: Container(
                                                         width: 500,
-                                                        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-                                                        decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                                                          BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 5)
-                                                        ]),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 4,
+                                                                horizontal: 4),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color: Colors
+                                                                    .white,
+                                                                boxShadow: [
+                                                              BoxShadow(
+                                                                  color: Colors
+                                                                      .black
+                                                                      .withOpacity(
+                                                                          0.1),
+                                                                  blurRadius: 5)
+                                                            ]),
                                                         // margin: EdgeInsets.symmetric(horizontal: 10),
                                                         // child: Image.network(
                                                         //   article[
                                                         //       'articleImage'],
                                                         //   fit: BoxFit.cover,
                                                         // ),
-                                                        child: CachedNetworkImage(
-                                                          imageUrl: article['articleImage'],
-                                                          placeholder: (context, url) =>
-                                                              Center(child: CircularProgressIndicator()),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl: article[
+                                                              'articleImage'],
+                                                          placeholder: (context,
+                                                                  url) =>
+                                                              Center(
+                                                                  child:
+                                                                      CircularProgressIndicator()),
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),
                                                     ),
                                                     Expanded(
                                                       child: Container(
-                                                        alignment: Alignment.center,
+                                                        alignment:
+                                                            Alignment.center,
                                                         // margin: EdgeInsets.symmetric(horizontal: 10),
-                                                        padding: EdgeInsets.symmetric(horizontal: 4),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 4),
                                                         width: double.infinity,
 
-                                                        decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                                                          BoxShadow(
-                                                              color: Colors.black.withOpacity(0.1), blurRadius: 10)
-                                                        ]),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color: Colors
+                                                                    .white,
+                                                                boxShadow: [
+                                                              BoxShadow(
+                                                                  color: Colors
+                                                                      .black
+                                                                      .withOpacity(
+                                                                          0.1),
+                                                                  blurRadius:
+                                                                      10)
+                                                            ]),
                                                         child: Text(
-                                                          article['articleName'].toUpperCase(),
+                                                          article['articleName']
+                                                              .toUpperCase(),
                                                           maxLines: 2,
                                                           style: TextStyle(
                                                             color: Colors.grey,
                                                             // height: 2,
 
-                                                            fontWeight: FontWeight.w500,
+                                                            fontWeight:
+                                                                FontWeight.w500,
                                                             fontSize: 15,
-                                                            fontFamily: 'Ubuntu',
+                                                            fontFamily:
+                                                                'Ubuntu',
                                                           ),
-                                                          textAlign: TextAlign.center,
-                                                          overflow: TextOverflow.ellipsis,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                         ),
                                                       ),
                                                     )
@@ -262,7 +312,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ),
                                               ),
                                               onTap: () {
-                                                _articleController.setPostId(article['postId']);
+                                                _articleController.setPostId(
+                                                    article['postId']);
                                                 Get.to(() => ArticleView(),
                                                     // ArticleDescription(
                                                     // description:
@@ -271,9 +322,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     //     'articleName'],
                                                     // articlePostId:
                                                     //     article['postId']),
-                                                    transition: Transition.rightToLeft,
-                                                    curve: Curves.easeInToLinear,
-                                                    duration: Duration(milliseconds: 400));
+                                                    transition:
+                                                        Transition.rightToLeft,
+                                                    curve:
+                                                        Curves.easeInToLinear,
+                                                    duration: Duration(
+                                                        milliseconds: 400));
                                               }),
                                       ],
                                       //Slider Container properties
@@ -284,7 +338,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         // autoPlay: true,
                                         aspectRatio: 17 / 15,
                                         autoPlayCurve: Curves.fastOutSlowIn,
-                                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                        autoPlayAnimationDuration:
+                                            Duration(milliseconds: 800),
                                         viewportFraction: 0.7,
                                       ),
                                     ),
@@ -297,29 +352,115 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
 
                       ///marriage matches
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(
-                            MarriageMatches(),
-                            transition: Transition.downToUp,
-                            duration: Duration(milliseconds: 500),
-                            fullscreenDialog: true,
-                          );
-                        },
-                        child: Hero(
-                          tag: "animation",
-                          child: Container(
-                            width: double.infinity,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("images/marriage.png"),
-                                fit: BoxFit.fill,
-                              ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 30, horizontal: 8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Marriage Matching",
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      fontFamily: 'Ubuntu'),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(
+                                MarriageMatches(),
+                                transition: Transition.downToUp,
+                                duration: Duration(milliseconds: 500),
+                                fullscreenDialog: true,
+                              );
+                            },
+                            child: Hero(
+                              tag: "animation",
+                              child: Container(
+                                width: context.screenWidth / 1.2,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage("images/marriage.png"),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ).cornerRadius(10),
+                            ),
+                          ),
+                        ],
                       ),
+
+                      ///products
+                      // VxSwiper.builder(itemCount: _productController.swiperList.value.length, itemBuilder: (context,index){
+                      //   return  Container(
+                      //     child: Text(index),
+                      //   );
+                      // })
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "New Products",
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      fontFamily: 'Ubuntu'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          VxSwiper(
+                            height: 350,
+                            enableInfiniteScroll: false,
+                            autoPlay: true,
+                            aspectRatio: 1,
+                            viewportFraction: 0.6,
+                            autoPlayCurve: Curves.easeInOut,
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 500),
+                            items: [
+                              for (var i in _productController.swiperList.value)
+                                ProductSwiperCard(
+                                  title: i['productName'],
+                                  price: i['productPrice'],
+                                  image: i['productDisplayImage'],
+                                  rating: i['productRating'],
+                                  addTocart: () async {
+                                    // ignore: invalid_use_of_protected_member
+                                    if (_productController
+                                        .checkingCart(i['docId'])) {
+                                      VxToast.show(context,
+                                          msg:
+                                              'you already added this product in you cart');
+                                    } else {
+                                      _productController.setCartProductList(i);
+                                    }
+                                  },
+                                  productView: () {
+                                    _productController.setProductView(i);
+                                    print(i);
+                                    Get.to(ViewProduct(),
+                                        transition: Transition.cupertino,
+                                        duration: Duration(milliseconds: 500));
+                                  },
+                                ).marginSymmetric(horizontal: 10),
+                            ],
+                          ),
+                        ],
+                      ).marginOnly(top: 15),
 
                       ///Query
                       Container(
@@ -342,14 +483,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         fontSize: 15,
                                         fontFamily: 'Ubuntu'),
                                   ),
-                                  // TextButton(
-                                  //     onPressed: () async {
-                                  //       Get.to(QueryScreen());
-                                  //     },
-                                  //     child: Text(
-                                  //       'See All',
-                                  //       style: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Ubuntu'),
-                                  //     ))
                                 ],
                               ),
                             ),
@@ -367,7 +500,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                        offset: Offset(2, 2), blurRadius: 10, spreadRadius: 2, color: Colors.grey),
+                                        offset: Offset(2, 2),
+                                        blurRadius: 10,
+                                        spreadRadius: 2,
+                                        color: Colors.grey),
                                   ],
                                   image: DecorationImage(
                                     image: AssetImage("images/questions.jpg"),
@@ -393,9 +529,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Container(
                               padding: EdgeInsets.only(bottom: 20),
-                              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 15),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "Videos Collection",
@@ -412,27 +550,33 @@ class _HomeScreenState extends State<HomeScreen> {
                               items: [
                                 GestureDetector(
                                   onTap: () {
-                                    print(_forumContreller.sessionUserInfo.value['subscribe']);
-                                    _forumContreller.sessionUserInfo.value['subscribe']
+                                    print(_forumContreller
+                                        .sessionUserInfo.value['subscribe']);
+                                    _forumContreller
+                                            .sessionUserInfo.value['subscribe']
                                         ? Get.to(() => PaidVedios(),
                                             // transition: Transition.cupertinoDialog,
                                             fullscreenDialog: true,
                                             curve: Curves.easeInToLinear,
-                                            duration: Duration(milliseconds: 600))
+                                            duration:
+                                                Duration(milliseconds: 600))
                                         : Get.to(() => SubscribeVideoScreen(),
                                             // transition: Transition.cupertinoDialog,
                                             fullscreenDialog: true,
                                             curve: Curves.easeInToLinear,
-                                            duration: Duration(milliseconds: 600));
+                                            duration:
+                                                Duration(milliseconds: 600));
                                   },
                                   child: Stack(
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           child: Image.asset(
                                             "images/paid video.jpg",
                                             fit: BoxFit.cover,
@@ -443,10 +587,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                           left: 13,
                                           top: 13,
                                           child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(40),
+                                            borderRadius:
+                                                BorderRadius.circular(40),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                color: Colors.black.withOpacity(0.6),
+                                                color: Colors.black
+                                                    .withOpacity(0.6),
                                                 boxShadow: [
                                                   BoxShadow(
                                                       offset: Offset(2, 2),
@@ -482,10 +628,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Container(
                                         // margin: EdgeInsets.all(10.0),
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           child: Image.asset(
                                             "images/freevideo.jpg",
                                             fit: BoxFit.cover,
@@ -496,7 +644,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           left: 13,
                                           top: 13,
                                           child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(10),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                             child: Container(
                                               alignment: Alignment.center,
                                               color: Colors.white,
@@ -526,7 +675,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 autoPlay: false,
                                 aspectRatio: 16 / 8,
                                 autoPlayCurve: Curves.fastOutSlowIn,
-                                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 800),
                                 viewportFraction: 0.8,
                               ),
                             ),

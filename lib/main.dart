@@ -1,3 +1,7 @@
+import 'package:astrology_app/AstroEcom/astro_ecom.dart';
+import 'package:astrology_app/AstroEcom/orderController.dart';
+import 'package:astrology_app/AstroEcom/productController.dart';
+import 'package:astrology_app/AstroEcom/yourOrderController.dart';
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_controller.dart';
 import 'package:astrology_app/controller/article_controller.dart';
@@ -23,14 +27,18 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await Firebase.initializeApp();
-  Get.put(ArticleController());
 
+  Get.put(ArticleController());
   Get.put(ForumContreller());
   Get.put(OTPController());
+  Get.put(YourOrderController());
+  Get.put(ProductController());
+  Get.put(OrderController());
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   String userNumber = prefs.getString('user').toString();
-  // String userNumber = '+91 9342364952';
+  // String userNumber = '+91 8015122373';
 
   var userDatas = await _firestore.collection('newusers').get();
   for (var i in userDatas.docs) {
@@ -40,6 +48,7 @@ void main() async {
       Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
     }
   }
+
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -79,6 +88,8 @@ class _MyAppState extends State<MyApp> {
         body: _forumContreller.userSession.value.isNotEmpty
             ? BottomNavigation()
             : Login(),
+        // ? AstroEcom()
+        // : AstroEcom(),
       ),
     );
   }
