@@ -224,13 +224,14 @@ class _BooksDbState extends State<BooksDb> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
+                        // color: Colors.grey,
                         alignment: Alignment.centerLeft,
                         margin: EdgeInsets.symmetric(horizontal: 15),
-                        height: 55,
                         width: 140,
                         child: Column(
                           children: [
                             Container(
+                              // color: Colors.grey,
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 widget.bookName,
