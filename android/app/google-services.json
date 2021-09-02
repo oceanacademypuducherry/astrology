@@ -7,17 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:165698073340:android:456243369d31092fd45d79",
+        "mobilesdk_app_id": "1:165698073340:android:37ffdeb4f091a9bfd45d79",
         "android_client_info": {
-          "package_name": "com.makarajothi.astrolab"
+          "package_name": "com.Makarajothi.AstroLab"
         }
       },
       "oauth_client": [
         {
-          "client_id": "165698073340-mh1crvia8eks5m7ao2ubs9vggtj51ref.apps.googleusercontent.com",
+          "client_id": "165698073340-7pekeliodg068tqilphnbgv0l8ogerd5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.makarajothi.astrolab",
+            "package_name": "com.Makarajothi.AstroLab",
+            "certificate_hash": "286c29ff0965a23d1cdf1f200a20283bdbaa7fa3"
+          }
+        },
+        {
+          "client_id": "165698073340-s8hs2p9lrqeijgrh05598napo9j9225d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Makarajothi.AstroLab",
             "certificate_hash": "5c03a2690388d48c8b549861de513267604ca7f0"
           }
         },
@@ -37,6 +45,57 @@
             {
               "client_id": "165698073340-g6fktacgg0tahmefh0kqgrdt1bsnuj28.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "165698073340-k63cpbie4v0dbivnqt5k49n57ukv5skr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bala.dev"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165698073340:android:3ba29297cf4584ccd45d79",
+        "android_client_info": {
+          "package_name": "com.anew.ecom_sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165698073340-4gppti5iquaji0egq23jg16l3h9ul7k3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anew.ecom_sample",
+            "certificate_hash": "bc2473c5c7f1d7237ee05810bfaa7780e85dc29d"
+          }
+        },
+        {
+          "client_id": "165698073340-g6fktacgg0tahmefh0kqgrdt1bsnuj28.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3FV0Ee-dl-etdLZwhF6ClqWWMVvl5zwU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165698073340-g6fktacgg0tahmefh0kqgrdt1bsnuj28.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "165698073340-k63cpbie4v0dbivnqt5k49n57ukv5skr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bala.dev"
+              }
             }
           ]
         }
