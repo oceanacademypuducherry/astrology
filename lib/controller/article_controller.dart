@@ -29,12 +29,6 @@ class ArticleController extends GetxController {
     if (response.statusCode == 200) {
       print(response.statusCode);
       final allBlog = json.decode(response.body);
-
-      // for (var i in allBlog) {
-      //   print(i);
-      //   print('1111111111111111111111111');
-      // }
-
       print('================api==============');
       print(allBlog['items']);
       setAllBlog(allBlog['items']);
