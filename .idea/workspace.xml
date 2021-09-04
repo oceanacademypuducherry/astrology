@@ -25,14 +25,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="checking 1 04/09">
+    <list default="true" id="ca1a6d01-0eb2-47e1-a7ab-7530a0395483" name="Default Changelist" comment="change 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/ProfileScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/ProfileScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/SubscribeVideo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/SubscribeVideo.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +43,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_2_API_29]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[6d34bb18]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -461,7 +464,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="checking 1" />
     <MESSAGE value="vedio player changed" />
     <MESSAGE value="purpose completed" />
     <MESSAGE value="changed appoint,ment" />
@@ -486,7 +488,8 @@
     <MESSAGE value="updated home screen" />
     <MESSAGE value="product added" />
     <MESSAGE value="checking 1 04/09" />
-    <option name="LAST_COMMIT_MESSAGE" value="checking 1 04/09" />
+    <MESSAGE value="change 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="change 3" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="383" key="#Notifications" timestamp="1630227723689">
@@ -517,22 +520,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="353" key="GridCell.Tab.0.bottom" timestamp="1630757973683">
+    <state width="1860" height="326" key="GridCell.Tab.0.bottom" timestamp="1630760821800">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="353" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630757973683" />
-    <state width="1860" height="353" key="GridCell.Tab.0.center" timestamp="1630757973683">
+    <state width="1860" height="326" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630760821800" />
+    <state width="1860" height="326" key="GridCell.Tab.0.center" timestamp="1630760821800">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="353" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630757973683" />
-    <state width="1860" height="353" key="GridCell.Tab.0.left" timestamp="1630757973683">
+    <state width="1860" height="326" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630760821800" />
+    <state width="1860" height="326" key="GridCell.Tab.0.left" timestamp="1630760821800">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="353" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630757973683" />
-    <state width="1860" height="353" key="GridCell.Tab.0.right" timestamp="1630757973683">
+    <state width="1860" height="326" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630760821800" />
+    <state width="1860" height="326" key="GridCell.Tab.0.right" timestamp="1630760821800">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="353" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630757973683" />
+    <state width="1860" height="326" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630760821800" />
     <state x="184" y="86" key="MergeDialog" timestamp="1629987765776">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -549,10 +552,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628919047163" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1630756770509">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1630760751778">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630756770509" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630760751778" />
     <state x="-79" y="98" width="1940" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1630232429781">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -561,10 +564,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="561" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1630592733323" />
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1630493569821">
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1630760793334">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630493569821" />
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630760793334" />
     <state x="666" y="69" width="726" height="744" key="find.popup" timestamp="1630739860474">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

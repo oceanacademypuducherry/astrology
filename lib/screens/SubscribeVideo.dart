@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class SubscribeVideoScreen extends StatefulWidget {
@@ -20,11 +21,26 @@ FirebaseFirestore _firestore = FirebaseFirestore.instance;
 class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
   ForumContreller _forumContreller = Get.find<ForumContreller>();
   late Razorpay _razorpay;
+  var smsNumber;
   String rupees = " \$50";
+  smsData(String number, String message) async {
+    final response = await http.get(
+      Uri.parse(
+          'https://sms.nettyfish.com/vendorsms/pushsms.aspx?apikey=6b980394-3890-4102-a739-c43c8548801f&clientId=a0b0e595-2cfb-4dc6-bba1-641ad1af1c1c&msisdn=${number}&sid=AKSPDY&msg=${message}&fl=0&gwid=2'),
+    );
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed *********************');
+    }
+  }
 
   void initState() {
     // TODO: implement initState
     super.initState();
+    var alteredPhone = _forumContreller.userSession.value;
+    smsNumber = (alteredPhone.substring(1, 3) + alteredPhone.substring(4, 14));
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -53,6 +69,9 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
         .update({
       'subscribe': true,
     });
+    var message =
+        "Hi ${_forumContreller.sessionUserInfo.value['name']} you have Subscribe for vedio";
+    smsData(smsNumber, message);
 
     Get.to(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
