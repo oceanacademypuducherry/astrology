@@ -599,7 +599,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       alignment:
                                                           Alignment.centerLeft,
                                                       child: RichText(
-                                                        text: TextSpan(
+                                                        text: const TextSpan(
                                                             text: 'Full Name ',
                                                             style: TextStyle(
                                                               fontFamily:
@@ -613,18 +613,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                             ),
                                                             children: [
                                                               TextSpan(
-                                                                text:
-                                                                    "(Editable)",
+                                                                text: "*",
                                                                 style:
                                                                     TextStyle(
                                                                   fontFamily:
                                                                       'Ubuntu',
-                                                                  fontSize: 10,
+                                                                  fontSize: 12,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
                                                                   color: Colors
-                                                                      .lightBlue,
+                                                                      .redAccent,
                                                                 ),
                                                               )
                                                             ]),
@@ -641,12 +640,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ],
                                           ),
                                         ),
-                                        Divider(
+                                        const Divider(
                                           color: Colors.black26,
                                           thickness: 0.2,
                                         ),
                                         Container(
-                                          margin: EdgeInsets.symmetric(
+                                          margin: const EdgeInsets.symmetric(
                                               horizontal: 33, vertical: 10),
                                           child: Column(
                                             children: [
@@ -654,7 +653,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 width: MediaQuery.of(context)
                                                     .size
                                                     .width,
-                                                child: Text(
+                                                child: const Text(
                                                   'Mobile Phone',
                                                   style: TextStyle(
                                                     color: Colors.blue,
@@ -668,12 +667,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ],
                                           ),
                                         ),
-                                        Divider(
+                                        const Divider(
                                           color: Colors.black26,
                                           thickness: 0.2,
                                         ),
                                         Container(
-                                          margin: EdgeInsets.symmetric(
+                                          margin: const EdgeInsets.symmetric(
                                               horizontal: 33, vertical: 10),
                                           child: Column(
                                             children: [
@@ -681,7 +680,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 width: MediaQuery.of(context)
                                                     .size
                                                     .width,
-                                                child: Text(
+                                                child: const Text(
                                                   'Email',
                                                   style: TextStyle(
                                                     color: Colors.blue,
@@ -695,7 +694,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ],
                                           ),
                                         ),
-                                        Divider(
+                                        const Divider(
                                           color: Colors.black26,
                                           thickness: 0.2,
                                         ),
@@ -733,7 +732,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       alignment:
                                                           Alignment.centerLeft,
                                                       child: RichText(
-                                                        text: TextSpan(
+                                                        text: const TextSpan(
                                                             text:
                                                                 'Birth Place ',
                                                             style: TextStyle(
@@ -776,7 +775,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ],
                                           ),
                                         ),
-                                        Divider(
+                                        const Divider(
                                           color: Colors.black38,
                                           thickness: 0.2,
                                         ),
@@ -821,7 +820,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           },
                                           child: Container(
                                             alignment: Alignment.topLeft,
-                                            margin: EdgeInsets.symmetric(
+                                            margin: const EdgeInsets.symmetric(
                                                 horizontal: 20, vertical: 10),
                                             padding: EdgeInsets.all(10),
                                             width: MediaQuery.of(context)
