@@ -45,7 +45,7 @@ void main() async {
   for (var i in userDatas.docs) {
     if (i['phoneNumber'] == userNumber) {
       Get.find<ForumContreller>().setUserSession(userNumber.toString());
-      Get.find<YourOrderController>().userAuth(userNumber.toString());
+
       Get.find<ForumContreller>().setUserInfo(i.data());
       Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
     }

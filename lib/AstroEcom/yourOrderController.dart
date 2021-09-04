@@ -2,6 +2,7 @@ import 'package:astrology_app/AstroEcom/productController.dart';
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class YourOrderController extends GetxController {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -24,13 +25,14 @@ class YourOrderController extends GetxController {
   }
 
   getMyOrderDetails() async {
-    printWarning(userAuth.toString());
-    String authNember = userAuth.value.toString().trim();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userNumber = prefs.getString('user').toString();
+
     final getOrderData = await _firestore
         .collection('buyer')
 
         ///TODO Product userNumber
-        .where('userAuth', isEqualTo: authNember)
+        .where('userAuth', isEqualTo: userNumber.toString())
         .get();
     var allProducts = [];
     for (var i in getOrderData.docs) {
@@ -44,8 +46,8 @@ class YourOrderController extends GetxController {
 
   @override
   void onInit() {
-    getMyOrderDetails();
     // TODO: implement onInit
     super.onInit();
+    getMyOrderDetails();
   }
 }

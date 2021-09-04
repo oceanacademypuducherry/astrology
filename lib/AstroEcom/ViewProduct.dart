@@ -30,7 +30,7 @@ class ViewProduct extends StatelessWidget {
                       )
                           .box
                           .height(
-                            context.screenWidth / 1.6,
+                            context.screenWidth,
                           )
                           .width(context.screenWidth)
                           .shadow2xl

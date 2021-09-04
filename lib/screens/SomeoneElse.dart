@@ -767,76 +767,82 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                     ),
                                   ),
                                 ]),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      margin: EdgeInsets.only(bottom: 15),
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        'DOB',
-                                        style: TextStyle(
-                                          fontFamily: 'Ubuntu',
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue,
-                                        ),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () async {
-                                        if (messageFocusNode1.hasFocus ||
-                                            messageFocusNode2.hasFocus ||
-                                            messageFocusNode3.hasFocus ||
-                                            messageFocusNode4.hasFocus) {
-                                          messageFocusNode1.unfocus();
-                                          messageFocusNode2.unfocus();
-                                          messageFocusNode3.unfocus();
-                                          messageFocusNode4.unfocus();
-                                        }
-
-                                        await _selectDate(context);
-                                        Navigator.of(context).push(
-                                          showPicker(
-                                            context: context,
-                                            value: _time,
-                                            onChange: onTimeChanged,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(bottom: 15),
+                                          alignment: Alignment.topLeft,
+                                          child: Text(
+                                            'DOB',
+                                            style: TextStyle(
+                                              fontFamily: 'Ubuntu',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.blue,
+                                            ),
                                           ),
-                                        );
-                                      },
-                                      child: Icon(
-                                        Icons.calendar_today_outlined,
-                                        color: Colors.blue,
-                                      ),
-                                    )
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      child: textDate == null
+                                          ? Text(
+                                              'Pick the date',
+                                              style: TextStyle(
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.normal,
+                                                color: Colors.black54,
+                                              ),
+                                            )
+                                          : Text(
+                                              "${DateFormat.yMMMd().format(textDate)} @ ${DateFormat.jm().format(textDate)}",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.normal,
+                                                fontFamily: 'Ubuntu',
+                                                fontSize: 14,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                    ),
                                   ],
                                 ),
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  child: textDate == null
-                                      ? Text(
-                                          'Pick the date',
-                                          style: TextStyle(
-                                            fontFamily: 'Ubuntu',
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.black54,
-                                          ),
-                                        )
-                                      : Text(
-                                          "${DateFormat.yMMMd().format(textDate)} @ ${DateFormat.jm().format(textDate)}",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.normal,
-                                            fontFamily: 'Ubuntu',
-                                            fontSize: 14,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    if (messageFocusNode1.hasFocus ||
+                                        messageFocusNode2.hasFocus ||
+                                        messageFocusNode3.hasFocus ||
+                                        messageFocusNode4.hasFocus) {
+                                      messageFocusNode1.unfocus();
+                                      messageFocusNode2.unfocus();
+                                      messageFocusNode3.unfocus();
+                                      messageFocusNode4.unfocus();
+                                    }
+
+                                    await _selectDate(context);
+                                    Navigator.of(context).push(
+                                      showPicker(
+                                        context: context,
+                                        value: _time,
+                                        onChange: onTimeChanged,
+                                      ),
+                                    );
+                                  },
+                                  child: Icon(
+                                    Icons.calendar_today_outlined,
+                                    color: Colors.blue,
+                                  ),
+                                )
                               ],
                             ),
                           ),

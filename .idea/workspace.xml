@@ -25,9 +25,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="product added">
+    <list default="true" id="a4f987e7-2451-48db-abfe-637c23bf0818" name="Default Changelist" comment="checking 1 04/09">
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
@@ -41,76 +40,18 @@
       <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/anyquestion.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/article1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/article2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/article3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/article4.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/article5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/askquery.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book12.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book13.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/books/book9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/client.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/comming.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/free.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/freevideo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/gif.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lock.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/locking.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/nature1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/nature2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/nature3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/nature4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/nature5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/nature6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/otp 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/p.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/premiumlock.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/razorpay.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/rose.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/smartphone-case.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/subimage.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/thumbnail_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/thumbnail_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/tree-276014__340.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/video.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/zoom.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/Generated.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Generated.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/AstroEcom/CartEdit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/CartEdit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/AstroEcom/CheckoutDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/CheckoutDetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/AstroEcom/OrderDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/OrderDetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/AstroEcom/ProductCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/ProductCard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/AstroEcom/MyOderWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/MyOderWidget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/AstroEcom/ViewProduct.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/ViewProduct.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/AstroEcom/YourOrders.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/YourOrders.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/AstroEcom/astro_ecom.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/astro_ecom.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/AstroEcom/productController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/productController.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/AstroEcom/productSwiperCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/productSwiperCard.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/AstroEcom/yourOrderController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AstroEcom/yourOrderController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/atentication/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/atentication/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/atentication/otp_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/atentication/otp_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BookingDetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/BooksDescription.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/BooksDescription.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/HomeScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/MarriageMatchesDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/MarriageMatchesDetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/PdfView.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/PdfView.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/ProfileScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/ProfileScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/SomeoneElse.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/SomeoneElse.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/SubscribeVideo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/SubscribeVideo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/htmlpage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/htmlpage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/registerscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/registerscreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/BottomNavigation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/BottomNavigation.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +59,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_2_API_29]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[c0d14b6a]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -179,13 +120,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1627472263977</updated>
-    </task>
-    <task id="LOCAL-00031" summary="checking 2">
-      <created>1628264596677</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1628264596677</updated>
     </task>
     <task id="LOCAL-00032" summary="checking 3">
       <created>1628265020529</created>
@@ -523,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630597307029</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="checking 1 04/09">
+      <created>1630733584954</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1630733584955</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +480,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="book changed checking" />
     <MESSAGE value="checking 1" />
     <MESSAGE value="vedio player changed" />
     <MESSAGE value="purpose completed" />
@@ -564,7 +504,8 @@
     <MESSAGE value="app released 5" />
     <MESSAGE value="updated home screen" />
     <MESSAGE value="product added" />
-    <option name="LAST_COMMIT_MESSAGE" value="product added" />
+    <MESSAGE value="checking 1 04/09" />
+    <option name="LAST_COMMIT_MESSAGE" value="checking 1 04/09" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="383" key="#Notifications" timestamp="1630227723689">
@@ -587,30 +528,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="652" y="256" key="#main.dart/0.0.1920.1040@0.0.1920.1040" timestamp="1627637499606" />
-    <state x="92" y="92" width="1736" height="856" key="AVDManager" timestamp="1630676909211">
+    <state x="92" y="92" width="1736" height="856" key="AVDManager" timestamp="1630755972116">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="AVDManager/0.0.1920.1040@0.0.1920.1040" timestamp="1630676909210" />
+    <state x="92" y="92" width="1736" height="856" key="AVDManager/0.0.1920.1040@0.0.1920.1040" timestamp="1630755972116" />
     <state x="686" y="196" key="FileChooserDialogImpl" timestamp="1627541249527">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="686" y="196" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627541249527" />
-    <state width="1860" height="258" key="GridCell.Tab.0.bottom" timestamp="1630733199028">
+    <state width="1860" height="353" key="GridCell.Tab.0.bottom" timestamp="1630754192685">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="258" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630733199028" />
-    <state width="1860" height="258" key="GridCell.Tab.0.center" timestamp="1630733199028">
+    <state width="1860" height="353" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1630754192685" />
+    <state width="1860" height="353" key="GridCell.Tab.0.center" timestamp="1630754192685">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="258" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630733199028" />
-    <state width="1860" height="258" key="GridCell.Tab.0.left" timestamp="1630733199028">
+    <state width="1860" height="353" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1630754192685" />
+    <state width="1860" height="353" key="GridCell.Tab.0.left" timestamp="1630754192685">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="258" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630733199028" />
-    <state width="1860" height="258" key="GridCell.Tab.0.right" timestamp="1630733199028">
+    <state width="1860" height="353" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1630754192685" />
+    <state width="1860" height="353" key="GridCell.Tab.0.right" timestamp="1630754192685">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="258" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630733199028" />
+    <state width="1860" height="353" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1630754192685" />
     <state x="184" y="86" key="MergeDialog" timestamp="1629987765776">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -619,18 +560,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="591" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1630492914279" />
-    <state x="336" y="77" key="SettingsEditor" timestamp="1630326776572">
+    <state x="336" y="77" key="SettingsEditor" timestamp="1630754500692">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="336" y="77" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1630326776572" />
+    <state x="336" y="77" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1630754500692" />
     <state x="744" y="236" key="VCS.ChangeListViewerDialog" timestamp="1628919047163">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="744" y="236" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1628919047163" />
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1630597318318">
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2" timestamp="1630733673737">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630597318318" />
+    <state x="452" y="186" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630733673737" />
     <state x="-79" y="98" width="1940" height="840" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1630232429781">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -643,10 +584,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1630493569821" />
-    <state x="666" y="69" width="726" height="744" key="find.popup" timestamp="1630684102290">
+    <state x="666" y="69" width="726" height="744" key="find.popup" timestamp="1630739860474">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="666" y="69" width="726" height="744" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1630684102290" />
+    <state x="666" y="69" width="726" height="744" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1630739860474" />
     <state x="416" y="126" key="new project wizard" timestamp="1627575717306">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -699,7 +640,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/lib/screens/SomeoneElse.dart</url>
-          <line>957</line>
+          <line>963</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
@@ -787,6 +728,11 @@
           <url>file://$PROJECT_DIR$/lib/screens/SomeoneElse.dart</url>
           <line>106</line>
           <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/registerscreen.dart</url>
+          <line>458</line>
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/android/app/build.gradle</url>

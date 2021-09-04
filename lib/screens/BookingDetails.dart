@@ -362,13 +362,6 @@ class _BookingDetailsState extends State<BookingDetails> {
               margin: EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
-                  TextButton(
-                      onPressed: () {
-                        _showNotification();
-                        _scheduleMinutesNotification();
-                      },
-                      child: Text('jihiuoi')),
-
                   ///date and time
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),

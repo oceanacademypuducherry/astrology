@@ -70,47 +70,44 @@ class _HtmlPageArticleState extends State<HtmlPageArticle> {
       appBar: AppBar(
         title: Text(widget.appBarName),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: FutureBuilder<GetData>(
-            future: futureLink,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: Text(
-                        _forumContreller.htmlTitle.value.toString().trim(),
-                        style: TextStyle(
-                            fontFamily: 'st_137',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.blueAccent),
-                      ),
-                    ),
-                    Html(
-                      data:
-                          _forumContreller.htmlContent.value.toString().trim(),
-                      style: {
-                        'p': Style(
-                          textAlign: TextAlign.start,
-                          margin: EdgeInsets.only(bottom: 20.0),
+      body: SingleChildScrollView(
+        child: FutureBuilder<GetData>(
+          future: futureLink,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    child: Text(
+                      _forumContreller.htmlTitle.value.toString().trim(),
+                      style: TextStyle(
                           fontFamily: 'st_137',
-                        )
-                      },
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.blueAccent),
                     ),
-                  ],
-                );
-              } else if (snapshot.hasError) {
-                print('error${snapshot.error}');
-                return Text('error${snapshot.error}');
-              }
+                  ),
+                  Html(
+                    data: _forumContreller.htmlContent.value.toString().trim(),
+                    style: {
+                      'p': Style(
+                        textAlign: TextAlign.start,
+                        margin: EdgeInsets.only(bottom: 20.0),
+                        fontFamily: 'st_137',
+                      )
+                    },
+                  ),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              print('error${snapshot.error}');
+              return Text('error${snapshot.error}');
+            }
 
-              // By default, show a loading spinner.
-              return CircularProgressIndicator();
-            },
-          ),
+            // By default, show a loading spinner.
+            return CircularProgressIndicator();
+          },
         ),
       ),
     );

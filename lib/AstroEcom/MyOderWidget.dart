@@ -24,11 +24,13 @@ class MyOrderWidget extends StatelessWidget {
             // height: context.screenWidth / (screenSize! * 1.5),
             child: Image.network(
               image!,
-              height: 200,
+              height: context.screenWidth / 2,
+              width: context.screenWidth,
               fit: BoxFit.cover,
             ),
           ),
-          title!.text
+          '${title!.substring(0, 30)}...'
+              .text
               .size(18)
               .overflow(TextOverflow.clip)
               .make()

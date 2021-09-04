@@ -23,28 +23,27 @@ class YourOrder extends StatelessWidget {
         ),
         body: Container(
           child: Container(
-              child: Obx(() => GridView.count(
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 0.58,
-                    crossAxisCount: 2,
-                    children: [
-                      // ignore: invalid_use_of_protected_member
-                      for (var orderData in _yourOrderController.myOrders.value)
-                        MyOrderWidget(
-                          status: orderData['status'],
-                          image: orderData['productDisplayImage'],
-                          title: orderData['productName'],
-                          onTap: () {
-                            _yourOrderController
-                                .setTrackOrderDetails(orderData);
-                            print(orderData);
-                            Get.to(TrackOrder(),
-                                transition: Transition.cupertino,
-                                duration: Duration(milliseconds: 500));
-                          },
-                        )
-                    ],
-                  ))),
+              child: GridView.count(
+            mainAxisSpacing: 10,
+            childAspectRatio: 0.58,
+            crossAxisCount: 2,
+            children: [
+              // ignore: invalid_use_of_protected_member
+              for (var orderData in _yourOrderController.myOrders.value)
+                MyOrderWidget(
+                  status: orderData['status'],
+                  image: orderData['productDisplayImage'],
+                  title: orderData['productName'],
+                  onTap: () {
+                    _yourOrderController.setTrackOrderDetails(orderData);
+                    print(orderData);
+                    Get.to(TrackOrder(),
+                        transition: Transition.cupertino,
+                        duration: Duration(milliseconds: 500));
+                  },
+                ),
+            ],
+          )),
         ));
   }
 }

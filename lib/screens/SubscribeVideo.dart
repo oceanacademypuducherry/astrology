@@ -124,7 +124,7 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
               child: Text(
-                'Access all Premium Videos on Astro',
+                'Access all Premium Videos on Makarajothi',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
@@ -139,7 +139,7 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
               child: Text(
-                'Choose from hundreds of guided meditations, inspirational speeches, binaural tracks and much, much more.',
+                'Get access to our all premium videos, inspirational speeches and much, much more.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
@@ -207,9 +207,8 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
                     Container(
                       margin: EdgeInsets.all(15),
                       child: Text(
-                        "YouTube Premium is a paid membership, available in certain countries, that gives you an ad-free, "
-                        "feature-rich (offline viewing), and enhanced experience across many of Google's video and music services, "
-                        "like YouTube, YouTube Music, YouTube Gaming, and YouTube Kids",
+                        "Makarajothi Premium is a paid membership, available in certain countries, that gives you an ad-free, "
+                        "feature-rich offline viewing.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.w900,

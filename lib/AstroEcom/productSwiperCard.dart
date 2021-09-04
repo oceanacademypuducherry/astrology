@@ -35,7 +35,7 @@ class ProductSwiperCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    height: 180,
+                    height: context.screenWidth / 2,
                     width: context.screenWidth,
                     imageUrl: '$image',
                     placeholder: (context, url) => Center(
@@ -54,7 +54,10 @@ class ProductSwiperCard extends StatelessWidget {
                     title!.length > 34
                         ? '${title!.substring(0, 35)}...'
                             .text
-                            .size(20)
+                            .size(30)
+                            .make()
+                            .box
+                            .height(60)
                             .make()
                             .py8()
                         : '${title!}'.text.size(20).make().py8(),

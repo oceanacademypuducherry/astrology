@@ -245,12 +245,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           0.1),
                                                                   blurRadius: 5)
                                                             ]),
-                                                        // margin: EdgeInsets.symmetric(horizontal: 10),
-                                                        // child: Image.network(
-                                                        //   article[
-                                                        //       'articleImage'],
-                                                        //   fit: BoxFit.cover,
-                                                        // ),
                                                         child:
                                                             CachedNetworkImage(
                                                           imageUrl: article[
@@ -332,10 +326,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                       //Slider Container properties
                                       options: CarouselOptions(
-                                        enableInfiniteScroll: false,
+                                        enableInfiniteScroll: true,
                                         // height: 300.0,
                                         enlargeCenterPage: true,
-                                        // autoPlay: true,
+                                        autoPlay: true,
                                         aspectRatio: 17 / 15,
                                         autoPlayCurve: Curves.fastOutSlowIn,
                                         autoPlayAnimationDuration:
@@ -415,15 +409,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ],
                               ).marginSymmetric(horizontal: 15, vertical: 25),
-                              VxSwiper(
-                                height: 400,
-                                enableInfiniteScroll: false,
-                                autoPlay: true,
-                                aspectRatio: 1,
-                                viewportFraction: 0.6,
-                                autoPlayCurve: Curves.easeInOut,
-                                autoPlayAnimationDuration:
-                                    Duration(milliseconds: 500),
+                              CarouselSlider(
+                                options: CarouselOptions(
+                                  enableInfiniteScroll: true,
+                                  height: 400.0,
+                                  enlargeCenterPage: false,
+                                  autoPlay: true,
+                                  aspectRatio: 17 / 15,
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                  autoPlayAnimationDuration:
+                                      Duration(milliseconds: 800),
+                                  viewportFraction: 0.7,
+                                ),
+                                // height: 400,
+                                // enableInfiniteScroll: true,
+                                // autoPlay: true,
+                                // aspectRatio: 1,
+                                // viewportFraction: 0.6,
+                                // autoPlayCurve: Curves.easeInOut,
+                                // autoPlayAnimationDuration:
+                                //     Duration(milliseconds: 700),
                                 items: [
                                   for (var i
                                       in _productController.swiperList.value)
@@ -559,32 +564,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                     ),
-                                    Positioned(
-                                        left: 13,
-                                        top: 13,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(40),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  Colors.black.withOpacity(0.6),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    offset: Offset(2, 2),
-                                                    blurRadius: 10,
-                                                    spreadRadius: 2,
-                                                    color: Colors.grey),
-                                              ],
-                                            ),
-                                            padding: EdgeInsets.all(10),
-                                            child: Icon(
-                                              Icons.lock,
-                                              color: Colors.white,
-                                              size: 18,
-                                            ),
-                                          ),
-                                        )),
+                                    _forumContreller
+                                            .sessionUserInfo.value['subscribe']
+                                        ? Text('')
+                                        : Positioned(
+                                            left: 13,
+                                            top: 13,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(40),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black
+                                                      .withOpacity(0.6),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        offset: Offset(2, 2),
+                                                        blurRadius: 10,
+                                                        spreadRadius: 2,
+                                                        color: Colors.grey),
+                                                  ],
+                                                ),
+                                                padding: EdgeInsets.all(10),
+                                                child: Icon(
+                                                  Icons.lock,
+                                                  color: Colors.white,
+                                                  size: 18,
+                                                ),
+                                              ),
+                                            )),
                                   ],
                                 ),
                               ),
