@@ -99,6 +99,7 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -123,10 +124,13 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
               margin: EdgeInsets.symmetric(horizontal: 30),
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
+              height: h / 5,
               child: Text(
                 'Access all Premium Videos on Makarajothi',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                  height: 1.3,
+                  letterSpacing: 1,
                   fontWeight: FontWeight.w900,
                   fontFamily: 'Ubuntu',
                   fontSize: 25,
@@ -138,13 +142,14 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
               margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
+              height: h / 15,
               child: Text(
                 'Get access to our all premium videos, inspirational speeches and much, much more.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
-                  height: 1.2,
+                  height: 1.3,
                   fontFamily: 'Ubuntu',
                   fontSize: 15,
                   color: Colors.white,
@@ -153,73 +158,77 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
+              height: h / 2.8,
               child: Image(
                 image: AssetImage('images/s.jpg'),
+                fit: BoxFit.cover,
               ),
             ),
-            Expanded(
-              child: Container(
-                color: Colors.white,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      width: 270,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          openCheckout();
-                          // Get.to(() => PaidVedios(),
-                          //     // transition: Transition.cupertinoDialog,
-                          //     fullscreenDialog: true,
-                          //     curve: Curves.easeInToLinear,
-                          //     duration: Duration(milliseconds: 600));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Start Your lifetime access video',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Ubuntu',
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
+            Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              height: h / 5,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                    width: 270,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        openCheckout();
+                        // Get.to(() => PaidVedios(),
+                        //     // transition: Transition.cupertinoDialog,
+                        //     fullscreenDialog: true,
+                        //     curve: Curves.easeInToLinear,
+                        //     duration: Duration(milliseconds: 600));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Start Your lifetime access video',
+                              style: TextStyle(
+                                height: 1.3,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 15,
+                                color: Colors.white,
                               ),
-                              Text(
-                                'Then 5,400.00/lifeTime',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: 'Ubuntu',
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                ),
+                            ),
+                            Text(
+                              'Then 5,400.00 /lifeTime',
+                              style: TextStyle(
+                                height: 1.6,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: 'Ubuntu',
+                                fontSize: 12,
+                                color: Colors.white,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.all(15),
-                      child: Text(
-                        "Makarajothi Premium is a paid membership, available in certain countries, that gives you an ad-free, "
-                        "feature-rich offline viewing.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Ubuntu',
-                          fontSize: 10,
-                          color: Colors.black54,
-                        ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(15),
+                    child: Text(
+                      "Makarajothi Premium is a paid membership, available in certain countries, that gives you an ad-free, "
+                      "feature-rich offline viewing.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        height: 1.3,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Ubuntu',
+                        fontSize: 11,
+                        color: Colors.black54,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
