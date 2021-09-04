@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:astrology_app/widgets/countrycode.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/style.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Login extends StatefulWidget {
@@ -47,10 +49,8 @@ class _LoginState extends State<Login> {
           child: Container(
             color: Vx.white,
             child: ListView(
+              reverse: true,
               children: [
-                SizedBox(
-                  height: 50,
-                ),
                 Image.asset(
                   'images/login 1.png',
                   width: MediaQuery.of(context).size.width / 1.3,
@@ -58,8 +58,22 @@ class _LoginState extends State<Login> {
                 SizedBox(
                   height: 20,
                 ),
-                "Enter your Phone Number".text.size(22).blue400.make().box.p4.alignCenter.make(),
-                "we will send you the 6 digit verification code".text.gray400.make().box.alignCenter.make(),
+                "Enter your Phone Number"
+                    .text
+                    .size(22)
+                    .blue400
+                    .make()
+                    .box
+                    .p4
+                    .alignCenter
+                    .make(),
+                "we will send you the 6 digit verification code"
+                    .text
+                    .gray400
+                    .make()
+                    .box
+                    .alignCenter
+                    .make(),
                 SizedBox(
                   height: 25,
                 ),
@@ -81,7 +95,8 @@ class _LoginState extends State<Login> {
                         print('object $object');
                         _otpController.getCountryCode.value = object.toString();
                       },
-                      initialSelection: getCountryCode()[getCountryCode().indexOf('IN')],
+                      initialSelection:
+                          getCountryCode()[getCountryCode().indexOf('IN')],
                       showFlagDialog: true,
                       showDropDownButton: true,
                       dialogBackgroundColor: Colors.white,
@@ -96,22 +111,31 @@ class _LoginState extends State<Login> {
                       boxDecoration: BoxDecoration(
                         color: Colors.white,
                       ),
-                    ).box.border(color: Vx.blue400).leftRounded(value: 8).make(),
+                    )
+                        .box
+                        .border(color: Vx.blue400)
+                        .leftRounded(value: 8)
+                        .make(),
                     SizedBox(
                       width: 5,
                     ),
                     Container(
-                        width: MediaQuery.of(context).size.width / 1.5,
-                        child: VxTextField(
-                          focusNode: messageFocusNode1,
-                          fillColor: Vx.white,
-                          controller: _phoneNumber,
-                          borderType: VxTextFieldBorderType.none,
-                          hint: 'Phone Number',
-                          borderRadius: 5,
-                          keyboardType: TextInputType.number,
-                          contentPaddingLeft: 10,
-                        )).box.px3.border(color: Vx.blue400).rightRounded(value: 8).make(),
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            child: VxTextField(
+                              focusNode: messageFocusNode1,
+                              fillColor: Vx.white,
+                              controller: _phoneNumber,
+                              borderType: VxTextFieldBorderType.none,
+                              hint: 'Phone Number',
+                              borderRadius: 5,
+                              keyboardType: TextInputType.number,
+                              contentPaddingLeft: 10,
+                            ))
+                        .box
+                        .px3
+                        .border(color: Vx.blue400)
+                        .rightRounded(value: 8)
+                        .make(),
                   ],
                 ),
                 SizedBox(
@@ -135,12 +159,18 @@ class _LoginState extends State<Login> {
                     .px2()
                     .onInkTap(() {
                   messageFocusNode1.unfocus();
-                  _otpController.setUserPhoneNumber('${_otpController.getCountryCode.value} ${_phoneNumber.text}');
-                  print('.........................${_otpController.userPhoneNumber.value} ........................');
-                  _otpController.verifyPhoneNumber(_otpController.userPhoneNumber.value.toString(), context);
+                  _otpController.setUserPhoneNumber(
+                      '${_otpController.getCountryCode.value} ${_phoneNumber.text}');
+                  print(
+                      '.........................${_otpController.userPhoneNumber.value} ........................');
+                  _otpController.verifyPhoneNumber(
+                      _otpController.userPhoneNumber.value.toString(), context);
                   // Removes toast after 2 seconds
                 }).p12(),
-              ],
+                SizedBox(
+                  height: 10,
+                ),
+              ].reversed.toList(),
             ),
           ),
         ),

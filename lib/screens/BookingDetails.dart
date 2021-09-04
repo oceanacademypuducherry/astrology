@@ -134,7 +134,83 @@ class _BookingDetailsState extends State<BookingDetails> {
 
     var generalNotificationDetails =
         new NotificationDetails(android: androidDetails);
-    await localNotification.show(0, 'Hi User', 'You have booked the meeting ',
+    await localNotification.show(
+        0,
+        'Hi ${_forumContreller.sessionUserInfo.value['name']}',
+        'You have booked the meeting at ${newDate.day.toString()} ${monthFormat} ${newDate.year.toString()}@${hour}:${minute} ${dayTime}',
+        generalNotificationDetails);
+  }
+
+  Future _scheduleHourNotification() async {
+    print(Get.arguments.second);
+    print(Get.arguments.year);
+    print('${monthForSchedule}mmmmmpommm');
+    print('${dayForSchedule}dayyyy');
+    print('${hourForSchedule}jhhhhhhhhhhhh');
+    print(Get.arguments.minute);
+    print(Get.arguments.second);
+
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "channelName", "you booked",
+        importance: Importance.max);
+
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+    var scheduledTime = DateTime.now().add(Duration(minutes: (diff * -1) - 60));
+    await localNotification.schedule(
+        0,
+        'Hi ${_forumContreller.sessionUserInfo.value['name']}',
+        'You have booked the meeting at today @${hour}:${minute} ${dayTime}',
+        scheduledTime,
+        generalNotificationDetails);
+  }
+
+  Future _scheduleDayNotification() async {
+    print(Get.arguments.year.toString().runtimeType);
+    print(Get.arguments.year);
+    print('${monthForSchedule}mmmmmpommm');
+    print('${dayForSchedule}dayyyy');
+    print('${hourForSchedule}jhhhhhhhhhhhh');
+    print(Get.arguments.minute);
+    print(Get.arguments.second);
+
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "channelName", "you booked",
+        importance: Importance.max);
+
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+    var scheduledTime = DateTime.parse(
+        '${Get.arguments.year.toString()}-${monthForSchedule.toString()}-${dayForSchedule.toString()} 08:00:00');
+    await localNotification.schedule(
+        0,
+        'Hi ${_forumContreller.sessionUserInfo.value['name']}',
+        'You have booked the meeting at ${newDate.day.toString()} ${monthFormat} ${newDate.year.toString()}@${hour}:${minute} ${dayTime}',
+        scheduledTime,
+        generalNotificationDetails);
+  }
+
+  Future _scheduleMinutesNotification() async {
+    print(Get.arguments.year.toString().runtimeType);
+    print(Get.arguments.year);
+    print('${monthForSchedule}mmmmmpommm');
+    print('${dayForSchedule}dayyyy');
+    print('${hourForSchedule}jhhhhhhhhhhhh');
+    print(Get.arguments.minute);
+    print(Get.arguments.second);
+
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "channelName", "you booked",
+        importance: Importance.max);
+
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+    var scheduledTime = DateTime.now().add(Duration(minutes: (diff * -1) - 2));
+    await localNotification.schedule(
+        0,
+        'Hi ${_forumContreller.sessionUserInfo.value['name']}',
+        'You have booked the meeting at today @${hour}:${minute} ${dayTime}',
+        scheduledTime,
         generalNotificationDetails);
   }
 
@@ -176,6 +252,9 @@ class _BookingDetailsState extends State<BookingDetails> {
         msg: "SUCCESS: " + response.paymentId!,
         toastLength: Toast.LENGTH_SHORT);
     _showNotification();
+    _scheduleDayNotification();
+    _scheduleHourNotification();
+    _scheduleMinutesNotification();
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -220,8 +299,15 @@ class _BookingDetailsState extends State<BookingDetails> {
   String? monthFormat;
   var hour;
   var dayTime;
+  var monthForSchedule = Get.arguments.month;
+  var dayForSchedule = Get.arguments.day;
+  var hourForSchedule = Get.arguments.hour;
+  var minuteForSchedule = Get.arguments.minute;
   var month = DateFormat('MMMM');
+  var diff;
   void getTime() {
+    print('$monthForSchedule llllllllllllllllllllllllll');
+
     DateTime newDate = Get.arguments;
 
     if (newDate.hour > 12) {
@@ -234,10 +320,21 @@ class _BookingDetailsState extends State<BookingDetails> {
       dayTime = 'AM';
       minute = newDate.minute;
     }
-    hour = hour < 9 ? '0$hour' : hour;
-    minute = minute < 9 ? '0$minute' : minute;
+    hour = hour < 10 ? '0$hour' : hour;
+    minute = minute < 10 ? '0$minute' : minute;
+    monthForSchedule =
+        monthForSchedule < 10 ? '0$monthForSchedule' : monthForSchedule;
+    dayForSchedule =
+        dayForSchedule < 10 ? '0$dayForSchedule' : monthForSchedule;
+    hourForSchedule =
+        hourForSchedule < 10 ? '0${hourForSchedule - 1}' : hourForSchedule - 1;
+    hourForSchedule =
+        minuteForSchedule < 10 ? '0${minuteForSchedule}' : hourForSchedule - 1;
     monthFormat = month.format(newDate);
     print(monthFormat);
+    diff = DateTime.now().difference(newDate).inMinutes;
+    print('${diff * -1} hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+    print('${(diff * -1) - 2} hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
   }
 
   ///RAZORPAY END
@@ -265,6 +362,13 @@ class _BookingDetailsState extends State<BookingDetails> {
               margin: EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
+                  TextButton(
+                      onPressed: () {
+                        _showNotification();
+                        _scheduleMinutesNotification();
+                      },
+                      child: Text('jihiuoi')),
+
                   ///date and time
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),

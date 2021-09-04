@@ -1,3 +1,4 @@
+import 'package:astrology_app/AstroEcom/productController.dart';
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,11 @@ class YourOrderController extends GetxController {
   ForumContreller _forumContreller = Get.find<ForumContreller>();
   final myOrders = [].obs;
   final trackOrderDetails = {}.obs;
+  final userAuth = ''.obs;
+
+  setUserAuth(user) {
+    userAuth(user);
+  }
 
   setTrackOrderDetails(track) {
     trackOrderDetails(track);
@@ -18,14 +24,13 @@ class YourOrderController extends GetxController {
   }
 
   getMyOrderDetails() async {
+    printWarning(userAuth.toString());
+    String authNember = userAuth.value.toString().trim();
     final getOrderData = await _firestore
         .collection('buyer')
 
         ///TODO Product userNumber
-        .where('userAuth', isEqualTo: '+91 8015122373'
-            // _forumContreller.sessionUserInfo.value['phoneNumber']
-            //     .toString()
-            )
+        .where('userAuth', isEqualTo: authNember)
         .get();
     var allProducts = [];
     for (var i in getOrderData.docs) {
@@ -39,8 +44,8 @@ class YourOrderController extends GetxController {
 
   @override
   void onInit() {
+    getMyOrderDetails();
     // TODO: implement onInit
     super.onInit();
-    getMyOrderDetails();
   }
 }

@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'package:astrology_app/AstroEcom/YourOrders.dart';
 import 'package:astrology_app/AstroEcom/astro_ecom.dart';
+import 'package:astrology_app/Forum/forumController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -18,6 +21,7 @@ class CheckoutDetails extends StatefulWidget {
 
 class _CheckoutDetailsState extends State<CheckoutDetails> {
   late Razorpay _razorpay;
+  late FlutterLocalNotificationsPlugin localNotification;
   OrderController _orderController = Get.find<OrderController>();
   ProductController _productController = Get.find<ProductController>();
   YourOrderController _yourOrderController = Get.find<YourOrderController>();
@@ -30,6 +34,13 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    var androidInitialize =
+        new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
+    var initialzationSetting =
+        new InitializationSettings(android: androidInitialize);
+    localNotification = new FlutterLocalNotificationsPlugin();
+    localNotification.initialize(initialzationSetting,
+        onSelectNotification: notificationSelected);
   }
 
   @override
@@ -60,6 +71,29 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
     }
   }
 
+  showNotification() async {
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "channelName", "Your Order Confirmed",
+        importance: Importance.max);
+    ForumContreller _forumContreller = Get.find<ForumContreller>();
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+    await localNotification.show(
+        0,
+        'Hi ${_forumContreller.sessionUserInfo.value['name']}',
+        'We received your order, let you know once packed!',
+        generalNotificationDetails);
+  }
+
+  Future notificationSelected(String? payload) async {
+    Get.to(
+      () => YourOrder(),
+      transition: Transition.rightToLeft,
+      curve: Curves.easeInToLinear,
+      duration: Duration(milliseconds: 600),
+    );
+  }
+
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     VxToast.show(
       context,
@@ -81,6 +115,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
     _productController.clearCartProductList();
     _yourOrderController.getMyOrderDetails();
     Get.offAll(AstroEcom());
+    showNotification();
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

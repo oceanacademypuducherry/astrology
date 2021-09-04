@@ -4,6 +4,7 @@ import 'package:astrology_app/AstroEcom/productController.dart';
 import 'package:astrology_app/AstroEcom/yourOrderController.dart';
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/atentication/otp_controller.dart';
+import 'package:astrology_app/atentication/otp_page.dart';
 import 'package:astrology_app/controller/article_controller.dart';
 import 'package:astrology_app/controller/otp_controller.dart';
 import 'package:astrology_app/screens/htmlpage.dart';
@@ -44,6 +45,7 @@ void main() async {
   for (var i in userDatas.docs) {
     if (i['phoneNumber'] == userNumber) {
       Get.find<ForumContreller>().setUserSession(userNumber.toString());
+      Get.find<YourOrderController>().userAuth(userNumber.toString());
       Get.find<ForumContreller>().setUserInfo(i.data());
       Get.find<ForumContreller>().setUserDocumentId(i.id.toString());
     }

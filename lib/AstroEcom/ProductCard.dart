@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -23,7 +24,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        height: 300,
+        color: Colors.white,
         child: Padding(
           padding: EdgeInsets.all(5.0),
           child: Column(
@@ -31,13 +32,13 @@ class ProductCard extends StatelessWidget {
               GestureDetector(
                 onTap: productView,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Image.network(
-                    '$image',
-                    fit: BoxFit.cover,
-                    height: 180,
-                  ),
-                ),
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.network(
+                      '$image',
+                      fit: BoxFit.cover,
+                      width: context.screenWidth,
+                      height: 180,
+                    )),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
@@ -48,7 +49,7 @@ class ProductCard extends StatelessWidget {
                     title!.length > 33
                         ? '${title!.substring(0, 34)}...'
                             .text
-                            .size(19)
+                            .size(context.screenWidth * 0.045)
                             .make()
                             .py8()
                         : '${title!}'.text.size(20).make().py8(),

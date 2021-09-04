@@ -188,7 +188,6 @@ class _BooksDescriptionState extends State<BooksDescription> {
                       children: [
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 15),
-                          height: 55,
                           width: 140,
                           child: Column(
                             children: [
@@ -224,22 +223,22 @@ class _BooksDescriptionState extends State<BooksDescription> {
                                   maxLines: 2,
                                 ),
                               ),
-                              SizedBox(height: 8),
+                              // SizedBox(height: 8),
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   widget.bookType == 'free'
-                                      ? widget.bookType
-                                      : "₹ ${widget.bookType}",
+                                      ? widget.bookType.toUpperCase()
+                                      : "₹ ${widget.bookType.toUpperCase()}",
                                   style: TextStyle(
                                     color: Colors.blue,
                                     fontSize: 10,
                                     fontFamily: "Ubuntu",
                                     letterSpacing: 0.4,
-                                    height: 1,
+                                    height: 2,
                                   ),
                                   overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
+                                  maxLines: 1,
                                 ),
                               ),
                             ],

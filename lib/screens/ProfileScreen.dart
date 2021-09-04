@@ -207,7 +207,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         fontSize: 14,
         color: Colors.black54,
       ),
-      inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s")),
+        LengthLimitingTextInputFormatter(40),
+      ],
       // ignore: deprecated_member_use
       autovalidate: validation,
       validator: (value) =>

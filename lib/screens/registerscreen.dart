@@ -161,7 +161,10 @@ class _RegisterState extends State<Register> {
   Widget _buildBirthPlace() {
     return TextFormField(
       focusNode: messageFocusNode3,
-      inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r"\s"))],
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s")),
+        LengthLimitingTextInputFormatter(40),
+      ],
       // ignore: deprecated_member_use
       autovalidate: validation,
       validator: (value) =>
@@ -935,7 +938,7 @@ class _RegisterState extends State<Register> {
 
     final snapshot = await task!.whenComplete(() {
       Get.snackbar(
-        "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
+        "Hello User!",
         "Jadhagam uploaded successfully",
         icon: Icon(Icons.person, color: Colors.white),
         snackPosition: SnackPosition.TOP,
@@ -983,7 +986,7 @@ class _RegisterState extends State<Register> {
     final snapshot = await task!.whenComplete(() {
       print('profile picture uploaded');
       Get.snackbar(
-        "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
+        "Hello user!",
         "profile uploaded successfully",
         icon: Icon(Icons.person, color: Colors.white),
         snackPosition: SnackPosition.TOP,

@@ -129,7 +129,7 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                           ),
                         ],
                         image: DecorationImage(
-                            image: AssetImage("images/client.jpg"),
+                            image: AssetImage("images/admin.jpg"),
                             fit: BoxFit.cover),
                       ),
                     ),

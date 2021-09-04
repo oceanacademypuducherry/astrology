@@ -155,7 +155,7 @@ class OrderDetails extends StatelessWidget {
                   ///state
                   Obx(() {
                     Color color =
-                        _orderController.selectedCity.value == 'Select City'
+                        _orderController.selectedCity.value == 'Select area'
                             ? Colors.grey
                             : Vx.gray700;
 
@@ -202,11 +202,12 @@ class OrderDetails extends StatelessWidget {
   fieldValidation(context) {
     if ("${_name.text.toString}".isNotEmpty &&
         "${_mobile.text}".isNumericOnly &&
+        _mobile.text.length > 9 &&
         _adress.text.length > 10 &&
         _landMark.text.length > 5 &&
         _orderController.wrongPinCode.value &&
         _orderController.selectedState.value != 'Select State' &&
-        _orderController.selectedCity.value != 'Select City') {
+        _orderController.selectedCity.value != 'Select area') {
       print('success');
 
       Map orderInfo = {

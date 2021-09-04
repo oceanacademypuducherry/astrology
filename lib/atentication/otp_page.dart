@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/style.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class OTP extends StatefulWidget {
@@ -49,9 +51,9 @@ class _OTPState extends State<OTP> {
             reverse: true,
             child: Container(
               color: Vx.white,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+              width: context.screenWidth,
+              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
                       'images/otp 2.png',
@@ -82,28 +84,45 @@ class _OTPState extends State<OTP> {
                     SizedBox(
                       height: 30,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        VxPinView(
-                          focusNode: messageFocusNode1,
-                          keyboardType: TextInputType.number,
-                          color: Vx.blue400,
-                          size: 40,
-                          obscureText: false,
-                          onChanged: (value) async {
-                            smsCode.value = value;
+                    // VxPinView(
+                    //   focusNode: messageFocusNode1,
+                    //   keyboardType: TextInputType.number,
+                    //   color: Vx.blue400,
+                    //   size: 40,
+                    //   obscureText: false,
+                    //   onChanged: (value) async {
+                    //     smsCode.value = value;
+                    //
+                    //     if (smsCode.value.length == 6) {
+                    //       dynamic close =
+                    //           context.showLoading(msg: "Loading");
+                    //       Future.delayed(1.seconds, close);
+                    //       await _otpController.signWithPhoneNumber(
+                    //           smsCode.value, context);
+                    //     }
+                    //   },
+                    // ),
+                    Container(
+                      width: context.screenWidth,
+                      child: OTPTextField(
+                        length: 6,
+                        fieldWidth: context.screenWidth / 7,
+                        outlineBorderRadius: 5,
+                        style: TextStyle(fontSize: 17),
+                        textFieldAlignment: MainAxisAlignment.center,
+                        fieldStyle: FieldStyle.box,
+                        onCompleted: (value) async {
+                          smsCode.value = value;
 
-                            if (smsCode.value.length == 6) {
-                              dynamic close =
-                                  context.showLoading(msg: "Loading");
-                              Future.delayed(1.seconds, close);
-                              await _otpController.signWithPhoneNumber(
-                                  smsCode.value, context);
-                            }
-                          },
-                        ),
-                      ],
+                          if (smsCode.value.length == 6) {
+                            FocusScope.of(context).unfocus();
+                            dynamic close = context.showLoading(msg: "Loading");
+                            Future.delayed(1.seconds, close);
+                            await _otpController.signWithPhoneNumber(
+                                smsCode.value, context);
+                          }
+                        },
+                      ),
                     ),
                     SizedBox(
                       height: 15,

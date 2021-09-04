@@ -46,6 +46,7 @@ class ProductController extends GetxController {
 
   clearCartProductList() {
     cartProductList.clear();
+    setSession(cartProductList);
   }
 
   removeCartProductList(index) {
@@ -63,6 +64,7 @@ class ProductController extends GetxController {
 
   updateCartProductList({index, key, value}) {
     cartProductList[index][key] = value;
+    setSession(cartProductList);
   }
 
   setSession(cartList) async {

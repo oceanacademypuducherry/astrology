@@ -56,7 +56,7 @@ class _CartEditState extends State<CartEdit> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      '${widget.title}'
+                      '${widget.title!.substring(0, 75)}...'
                           .text
                           .size(20)
                           .make()

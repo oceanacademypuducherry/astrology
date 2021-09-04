@@ -3,6 +3,7 @@ import 'package:astrology_app/AstroEcom/ViewCart.dart';
 import 'package:astrology_app/AstroEcom/ViewProduct.dart';
 import 'package:astrology_app/AstroEcom/YourOrders.dart';
 import 'package:astrology_app/AstroEcom/productController.dart';
+import 'package:astrology_app/AstroEcom/yourOrderController.dart';
 
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/widgets/BottomNavigation.dart';
@@ -24,6 +25,7 @@ class _AstroEcomState extends State<AstroEcom> {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   ProductController _productController = Get.find<ProductController>();
   ForumContreller _forumContreller = Get.find<ForumContreller>();
+  YourOrderController _yourOrderController = Get.find<YourOrderController>();
 
   setProductSession(List<dynamic> cartList) async {
     final encodeData = json.encode(cartList);
@@ -138,6 +140,7 @@ class _AstroEcomState extends State<AstroEcom> {
                   title: Text("My Order").text.xl.coolGray500.make(),
                   onTap: () {
                     Get.back();
+                    _yourOrderController.getMyOrderDetails();
                     Get.to(YourOrder(),
                         transition: Transition.cupertino,
                         duration: Duration(milliseconds: 500));
@@ -173,10 +176,17 @@ class _AstroEcomState extends State<AstroEcom> {
                   productDatasList.add(convertData);
                 }
                 _productController.setProductList(productDatasList);
+                var size = context.screenWidth;
+                printWarning(context.screenWidth.toString());
+                printWarning((context.screenWidth / context.screenWidth * 0.4)
+                    .toString());
                 return GridView.count(
                   mainAxisSpacing: 10,
-                  childAspectRatio: 0.55,
                   crossAxisCount: 2,
+                  physics: ScrollPhysics(),
+                  // shrinkWrap: true,
+                  controller: new ScrollController(keepScrollOffset: true),
+                  childAspectRatio: size < 360 ? 49 : 0.56,
                   children: [
                     // ignore: invalid_use_of_protected_member
                     for (var i in _productController.productList.value)

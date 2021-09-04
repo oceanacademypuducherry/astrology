@@ -147,24 +147,25 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 child: Icon(Icons.shopping_cart),
                 animationType: BadgeAnimationType.slide,
               ),
-            ).onInkTap(() {
-              _productController.setCheckoutPrice();
-              if (_productController.cartProductList.value.length == 0) {
-                Get.to(
-                  // CheckoutDetails(),
-                  AstroEcom(),
-                  transition: Transition.cupertino,
-                  duration: Duration(milliseconds: 500),
-                );
-              } else {
-                Get.to(
-                  // CheckoutDetails(),
-                  ViewCart(),
-                  transition: Transition.cupertino,
-                  duration: Duration(milliseconds: 500),
-                );
-              }
-            }),
+            ),
+            //     .onInkTap(() {
+            //   _productController.setCheckoutPrice();
+            //   if (_productController.cartProductList.value.length == 0) {
+            //     Get.to(
+            //       // CheckoutDetails(),
+            //       AstroEcom(),
+            //       transition: Transition.cupertino,
+            //       duration: Duration(milliseconds: 500),
+            //     );
+            //   } else {
+            //     Get.to(
+            //       // CheckoutDetails(),
+            //       ViewCart(),
+            //       transition: Transition.cupertino,
+            //       duration: Duration(milliseconds: 500),
+            //     );
+            //   }
+            // }),
             label: 'Shop',
             activeIcon: Padding(
               padding: const EdgeInsets.all(3.0),

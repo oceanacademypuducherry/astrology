@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -32,11 +33,15 @@ class ProductSwiperCard extends StatelessWidget {
                 onTap: productView,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
-                  child: Image.network(
-                    '$image',
+                  child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    height: 150,
+                    height: 180,
                     width: context.screenWidth,
+                    imageUrl: '$image',
+                    placeholder: (context, url) => Center(
+                        child: Container(child: CircularProgressIndicator())),
+                    errorWidget: (context, url, error) =>
+                        Icon(Icons.wifi_off_rounded),
                   ),
                 ),
               ),
