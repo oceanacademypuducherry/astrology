@@ -30,7 +30,6 @@ import 'package:get/get.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -134,18 +133,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 return KeyboardDismisser(
                   child: Column(
                     children: [
-                      // TextButton(
-                      //     onPressed: () async {
-                      //       Get.to(ArticleView());
-                      //       // print('checking');
-                      //       // // print(_articleController.allBlog.value);
-                      //       // for (var i in _articleController.allBlog.value) {
-                      //       //   print(i['kind']);
-                      //       //   print(i);
-                      //       //   print('%%%%%%%%%%%%(((((((((((((((');
-                      //       // }
-                      //     },
-                      //     child: Text('checking')),
+                      TextButton(
+                          onPressed: () {
+                            print('ooooooooooooooooo');
+                            // smsData();
+                          },
+                          child: Text('checking')),
                       // TextButton(
                       //   child: Text('pdf'),
                       //   onPressed: () {

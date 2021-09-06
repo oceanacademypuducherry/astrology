@@ -8,6 +8,9 @@ import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 class BooksDescription extends StatefulWidget {
   String bookImage;
   String bookName;
@@ -30,11 +33,27 @@ class _BooksDescriptionState extends State<BooksDescription> {
   late Razorpay _razorpay;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String? getId;
+  var smsNumber;
+
+  smsData(String number, String message) async {
+    final response = await http.get(
+      Uri.parse(
+          'https://sms.nettyfish.com/vendorsms/pushsms.aspx?apikey=6b980394-3890-4102-a739-c43c8548801f&clientId=a0b0e595-2cfb-4dc6-bba1-641ad1af1c1c&msisdn=${number}&sid=AKSPDY&msg=${message}&fl=0&gwid=2'),
+    );
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed *********************');
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     book_id();
+    var alteredPhone = _forumContreller.userSession.value;
+    smsNumber = (alteredPhone.substring(1, 3) + alteredPhone.substring(4, 14));
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -85,6 +104,9 @@ class _BooksDescriptionState extends State<BooksDescription> {
         .get();
     _forumContreller.setUserInfo(updateUser.data());
     print('uploaded successfully');
+    var message =
+        "Hi ${_forumContreller.sessionUserInfo.value['name']} you have purched ${widget.bookName} book";
+    smsData(smsNumber, message);
     Get.to(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
         curve: Curves.easeInToLinear,

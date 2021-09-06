@@ -14,6 +14,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
 enum Appointment { MySelf, others }
 enum Purpose { Marriage, Astrology, Other }
@@ -102,12 +103,15 @@ class _BookingDetailsState extends State<BookingDetails> {
 
   bool value = false;
   String rupees = "100";
+  var smsNumber;
   @override
   void initState() {
     // TODO: implement initState
     print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
     print('${_forumContreller.startUrl.value}');
     super.initState();
+    var alteredPhone = _forumContreller.userSession.value;
+    smsNumber = (alteredPhone.substring(1, 3) + alteredPhone.substring(4, 14));
     var androidInitialize =
         new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
     var initialzationSetting =
@@ -125,6 +129,19 @@ class _BookingDetailsState extends State<BookingDetails> {
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     print('************************************************');
     print(_forumContreller.userSession.value);
+  }
+
+  smsData(String number, String message) async {
+    final response = await http.get(
+      Uri.parse(
+          'https://sms.nettyfish.com/vendorsms/pushsms.aspx?apikey=6b980394-3890-4102-a739-c43c8548801f&clientId=a0b0e595-2cfb-4dc6-bba1-641ad1af1c1c&msisdn=${number}&sid=AKSPDY&msg=${message}&fl=0&gwid=2'),
+    );
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed *********************');
+    }
   }
 
   Future _showNotification() async {
@@ -238,6 +255,9 @@ class _BookingDetailsState extends State<BookingDetails> {
       'userZoomLink': '${_forumContreller.joinUrl.value}',
     });
     print('uploaded successfully');
+    var message =
+        "Hi ${_forumContreller.sessionUserInfo.value['name']} You have booked the meeting at ${newDate.day.toString()} ${monthFormat} ${newDate.year.toString()}@${hour}:${minute} ${dayTime}";
+    smsData(smsNumber, message);
 
     Get.off(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
