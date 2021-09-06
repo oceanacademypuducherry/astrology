@@ -15,6 +15,11 @@ class ForumContreller extends GetxController {
   final freeTime = [].obs;
   final articleData = [].obs;
   final userName = ''.obs;
+  final appointmentCompleted = false.obs;
+
+  setAppointmentCompleted(isCompleted) {
+    appointmentCompleted(isCompleted);
+  }
 
   setUserName(name) {
     userName(name);

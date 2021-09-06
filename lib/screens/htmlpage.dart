@@ -106,7 +106,12 @@ class _HtmlPageArticleState extends State<HtmlPageArticle> {
             }
 
             // By default, show a loading spinner.
-            return CircularProgressIndicator();
+            return SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
           },
         ),
       ),

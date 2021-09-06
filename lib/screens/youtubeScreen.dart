@@ -31,7 +31,16 @@ class _YoutubeScreenState extends State<YoutubeScreen> {
       builder: (context, player) {
         return Scaffold(
           appBar: AppBar(
-            title: Text("Youtube Video Player"),
+            centerTitle: true,
+            title: Text(
+              "Free Videos",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontFamily: 'Ubuntu',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
           body: Column(
             children: [
@@ -58,7 +67,7 @@ class _YoutubeScreenState extends State<YoutubeScreen> {
                         '${widget.vedioName}',
                         style: TextStyle(
                           color: Colors.black54,
-                          fontSize: 18,
+                          fontSize: 17,
                           fontFamily: 'Ubuntu',
                           fontWeight: FontWeight.w600,
                         ),

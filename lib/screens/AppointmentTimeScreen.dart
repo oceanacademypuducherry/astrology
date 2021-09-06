@@ -69,6 +69,8 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
     print(_forumContreller.freeTime.value);
   }
 
+  dynamic close;
+
   ///zoom link
   ForumContreller _forumContreller = Get.find<ForumContreller>();
   createZoomToken(startTime) async {
@@ -78,7 +80,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IlFFMlNaTGhCUUhLX1BwUDI1dEl6ZnciLCJleHAiOjE2MzA4MjU5NzAsImlhdCI6MTYzMDIyMTE3MH0.Q1m0yG52SMRXBBxQSUp7Njr1gqf9r88dcnR82WwAh8U'
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IlFFMlNaTGhCUUhLX1BwUDI1dEl6ZnciLCJleHAiOjE2MzE1MTIxMjcsImlhdCI6MTYzMDkwNzMyNn0.sUkG1JQSIvBi4HTUEj4uSjIivaXz2k3Vw7WhS06kcWo'
       },
       body: jsonEncode(
         <String, dynamic>{
@@ -95,11 +97,6 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
             "end_date_time": ""
           }
         },
-
-        //     headers: {
-        //       'Authorization':
-        //           'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IlFFMlNaTGhCUUhLX1BwUDI1dEl6ZnciLCJleHAiOjE2MzAxNjEzNDQsImlhdCI6MTYzMDE1NTk0NH0.S2SIOi9D34YOUUKJ5COyp0Pj0uRsiqSiEzT_ducS7UY'
-        //     }
       ),
     );
 
@@ -114,6 +111,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
       print("///////////////////////joinurl ${_forumContreller.joinUrl.value}");
       print(
           "///////////////////////starturl ${_forumContreller.startUrl.value}");
+      Future.delayed(1.seconds, close);
       print('0000000000000000000000000000000000000000000000');
     } else {
       print(response.statusCode);
@@ -624,9 +622,8 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                       // onPressed: () {},
                       onPressed: isOpen
                           ? () async {
-                              dynamic close =
-                                  context.showLoading(msg: "Loading");
-                              Future.delayed(2.seconds, close);
+                              close = context.showLoading(msg: "Loading");
+
                               print(orderTime);
                               print('>>>>>>>>>>>>>>>>>>>>>>>');
                               await createZoomToken(orderTime);

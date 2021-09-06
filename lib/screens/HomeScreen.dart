@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:astrology_app/AstroEcom/ProductCard.dart';
 import 'package:astrology_app/AstroEcom/ViewProduct.dart';
+import 'package:astrology_app/AstroEcom/astro_ecom.dart';
 import 'package:astrology_app/AstroEcom/productController.dart';
 import 'package:astrology_app/AstroEcom/productSwiperCard.dart';
 import 'package:astrology_app/Forum/forumController.dart';
@@ -94,14 +95,14 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 25,
                   fontFamily: 'Ubuntu'),
-            ),
+            ).paddingOnly(top: 10, bottom: 10),
             floating: false,
             expandedHeight: 160,
-            toolbarHeight: 40,
+            toolbarHeight: 50,
             // pinned: true,
-            collapsedHeight: 50,
+            collapsedHeight: 80,
             backwardsCompatibility: true,
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
@@ -377,7 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: context.screenWidth,
                                 height: 170,
                                 child: Image.asset(
-                                  "images/marriage.png",
+                                  "images/tp2.jpg",
                                   fit: BoxFit.cover,
                                 ).cornerRadius(10),
                               ),
@@ -397,7 +398,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           () => Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "New Products",
@@ -407,6 +409,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                         fontSize: 15,
                                         fontFamily: 'Ubuntu'),
                                   ),
+                                  TextButton(
+                                      onPressed: () {
+                                        Get.to(
+                                          () => AstroEcom(),
+                                          transition: Transition.rightToLeft,
+                                          curve: Curves.easeInToLinear,
+                                          duration: Duration(milliseconds: 600),
+                                        );
+                                      },
+                                      child: Text(
+                                        'See All',
+                                        style: TextStyle(
+                                            color: Colors.blue,
+                                            fontSize: 15,
+                                            fontFamily: 'Ubuntu'),
+                                      ))
                                 ],
                               ).marginSymmetric(horizontal: 15, vertical: 25),
                               CarouselSlider(

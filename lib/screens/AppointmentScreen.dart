@@ -312,15 +312,51 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                           EdgeInsets.symmetric(horizontal: 10),
                                       width: MediaQuery.of(context).size.width,
                                       decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomRight,
-                                            colors: [
-                                              Colors.blue.shade700,
-                                              Colors.blue.shade600,
-                                              Colors.blue.shade500,
-                                              Colors.blue.shade200,
-                                            ]),
+                                        gradient: book['time']
+                                                        .toDate()
+                                                        .difference(
+                                                            DateTime.now())
+                                                        .inSeconds <
+                                                    600 &&
+                                                book['time']
+                                                        .toDate()
+                                                        .difference(
+                                                            DateTime.now())
+                                                        .inSeconds >
+                                                    -60 * 60
+                                            ? LinearGradient(
+                                                begin: Alignment.topCenter,
+                                                end: Alignment.bottomRight,
+                                                colors: [
+                                                    Colors.green.shade700,
+                                                    Colors.green.shade600,
+                                                    Colors.green.shade500,
+                                                    Colors.green.shade200,
+                                                  ])
+                                            : book['time']
+                                                        .toDate()
+                                                        .difference(
+                                                            DateTime.now())
+                                                        .inSeconds >
+                                                    0
+                                                ? LinearGradient(
+                                                    begin: Alignment.topCenter,
+                                                    end: Alignment.bottomRight,
+                                                    colors: [
+                                                        Colors.blue.shade700,
+                                                        Colors.blue.shade600,
+                                                        Colors.blue.shade500,
+                                                        Colors.blue.shade200,
+                                                      ])
+                                                : LinearGradient(
+                                                    begin: Alignment.topCenter,
+                                                    end: Alignment.bottomRight,
+                                                    colors: [
+                                                        Colors.grey.shade700,
+                                                        Colors.grey.shade600,
+                                                        Colors.grey.shade500,
+                                                        Colors.grey.shade200,
+                                                      ]),
                                         borderRadius: BorderRadius.circular(10),
                                         boxShadow: [
                                           BoxShadow(
@@ -353,13 +389,13 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                       fontFamily: 'Ubuntu'),
                                                 ),
                                               ),
-                                              Icon(
-                                                Icons.celebration,
-                                                color: Colors.blue.shade900,
-                                              )
                                             ],
                                           ),
-                                          book['time'].toDate().difference(DateTime.now()).inSeconds <
+                                          book['time']
+                                                          .toDate()
+                                                          .difference(
+                                                              DateTime.now())
+                                                          .inSeconds <
                                                       600 &&
                                                   book['time']
                                                           .toDate()
@@ -388,13 +424,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                               FontWeight.w500,
                                                           fontSize: 13,
                                                           fontFamily: 'Ubuntu'))
-                                                  : Text("Completed",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 13,
-                                                          fontFamily: 'Ubuntu')),
+                                                  : CompletedWidget(),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -445,17 +475,68 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                         fontSize: 10,
                                                         fontFamily: 'Ubuntu'),
                                                     children: [
-                                                      TextSpan(
-                                                        text:
-                                                            " Zoom link will be updated before 10 minutes",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight.w300,
-                                                            fontSize: 10,
-                                                            fontFamily:
-                                                                'Ubuntu'),
-                                                      ),
+                                                      book['time']
+                                                                      .toDate()
+                                                                      .difference(
+                                                                          DateTime
+                                                                              .now())
+                                                                      .inSeconds <
+                                                                  600 &&
+                                                              book['time']
+                                                                      .toDate()
+                                                                      .difference(
+                                                                          DateTime
+                                                                              .now())
+                                                                      .inSeconds >
+                                                                  -60 * 60
+                                                          ? TextSpan(
+                                                              text:
+                                                                  " join live",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
+                                                                  fontSize: 10,
+                                                                  fontFamily:
+                                                                      'Ubuntu'),
+                                                            )
+                                                          : book['time']
+                                                                      .toDate()
+                                                                      .difference(
+                                                                          DateTime
+                                                                              .now())
+                                                                      .inSeconds >
+                                                                  0
+                                                              ? TextSpan(
+                                                                  text:
+                                                                      " Zoom link will be updated before 10 minutes",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      fontSize:
+                                                                          10,
+                                                                      fontFamily:
+                                                                          'Ubuntu'),
+                                                                )
+                                                              : TextSpan(
+                                                                  text:
+                                                                      " Zoom completed",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      fontSize:
+                                                                          10,
+                                                                      fontFamily:
+                                                                          'Ubuntu'),
+                                                                ),
                                                     ]),
                                               ))
                                         ],
@@ -488,5 +569,15 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         ),
       ),
     );
+  }
+
+  Text CompletedWidget() {
+    // _forumContreller.setAppointmentCompleted(true);
+    return Text("Completed",
+        style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 13,
+            fontFamily: 'Ubuntu'));
   }
 }

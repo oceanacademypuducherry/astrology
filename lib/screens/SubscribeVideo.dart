@@ -113,6 +113,7 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
               Color(0xff045de9),
               Colors.blue,
               Colors.white,
+              Colors.white,
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -124,7 +125,7 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
               margin: EdgeInsets.symmetric(horizontal: 30),
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
-              height: h / 5,
+              height: 80,
               child: Text(
                 'Access all Premium Videos on Makarajothi',
                 textAlign: TextAlign.center,
@@ -142,7 +143,7 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
               margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
-              height: h / 15,
+              height: h / 10,
               child: Text(
                 'Get access to our all premium videos, inspirational speeches and much, much more.',
                 textAlign: TextAlign.center,
@@ -158,7 +159,7 @@ class _SubscribeVideoScreenState extends State<SubscribeVideoScreen> {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: h / 2.8,
+              height: h / 2.5,
               child: Image(
                 image: AssetImage('images/s.jpg'),
                 fit: BoxFit.cover,

@@ -61,7 +61,6 @@ class _ForumState extends State<Forum> {
   likesToggle(forum) async {
     var isLikes = await _firestore.collection('forums').doc(forum.id).get();
     var localLikesList = isLikes['likesFlag'];
-    print(localLikesList[_forumContreller.sessionUserInfo.value['email']]);
     if (_forumContreller.userSession.value.isNotEmpty) {
       if (localLikesList[_forumContreller.sessionUserInfo.value['email']] ==
           null) {
@@ -149,68 +148,6 @@ class _ForumState extends State<Forum> {
                             _forumContreller.setIsShow(val);
                             print(_forumContreller.isShow.value);
                           },
-                          // trailing: _forumContreller
-                          //             .sessionUserInfo.value['email'] ==
-                          //         forum['auth']
-                          //     ? GestureDetector(
-                          //         child: ClipRRect(
-                          //           borderRadius: BorderRadius.circular(50),
-                          //           child: Container(
-                          //             color: Colors.blue,
-                          //             padding: EdgeInsets.all(5),
-                          //             child: Icon(
-                          //               Icons.edit,
-                          //               color: Colors.white,
-                          //               size: 20,
-                          //             ),
-                          //           ),
-                          //         ),
-                          //         onTap: () {
-                          //           Get.defaultDialog(
-                          //             title: 'Edit Your Qusetion',
-                          //             titleStyle: TextStyle(fontSize: 20),
-                          //             content: Container(
-                          //               width:
-                          //                   MediaQuery.of(context).size.width,
-                          //               child: TextField(
-                          //                 autofocus: true,
-                          //                 controller: questionController,
-                          //                 decoration: InputDecoration(
-                          //                   border: OutlineInputBorder(),
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //             actions: [
-                          //               ElevatedButton(
-                          //                 child: Text('Close'),
-                          //                 onPressed: () {
-                          //                   Get.back();
-                          //                 },
-                          //               ),
-                          //               ElevatedButton(
-                          //                 child: Text('Save'),
-                          //                 onPressed: () {
-                          //                   if (_forumContreller
-                          //                       .userSession.value.isNotEmpty) {
-                          //                     _firestore
-                          //                         .collection('forums')
-                          //                         .doc(forum.id)
-                          //                         .update({
-                          //                       'question':
-                          //                           questionController.text
-                          //                     });
-                          //                     Get.back();
-                          //                   } else {
-                          //                     Get.snackbar(
-                          //                         'Failed', 'Login First');
-                          //                   }
-                          //                 },
-                          //               ),
-                          //             ],
-                          //           );
-                          //         },
-                          //       )
-                          //     : Icon(Icons.keyboard_arrow_down_sharp),
                           title: Container(
                             child: Column(
                               children: [

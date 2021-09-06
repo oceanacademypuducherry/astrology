@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:astrology_app/Forum/forumController.dart';
+import 'package:astrology_app/SupportPage/SupportPage.dart';
 import 'package:astrology_app/atentication/login.dart';
 import 'package:astrology_app/screens/HomeScreen.dart';
 import 'package:astrology_app/services/storage_service.dart';
@@ -20,6 +21,8 @@ import 'package:path/path.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:velocity_x/src/extensions/string_ext.dart';
+import 'package:velocity_x/src/flutter/gesture.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -285,7 +288,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
                       background: Image.asset(
-                        'images/profile1.jpg',
+                        'images/profile.png',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -1198,6 +1201,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   primary: Colors.pink[200],
                                                   fixedSize: Size(
                                                       double.infinity, 50))),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              'Support'
+                                                  .text
+                                                  .xl
+                                                  .blue400
+                                                  .make()
+                                                  .onInkTap(() {
+                                                Get.to(
+                                                  SupportPage(),
+                                                  transition:
+                                                      Transition.cupertino,
+                                                  duration: Duration(
+                                                      milliseconds: 500),
+                                                );
+                                              }),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),

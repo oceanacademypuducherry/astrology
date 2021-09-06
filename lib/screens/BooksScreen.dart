@@ -63,31 +63,6 @@ class _BooksScreenState extends State<BooksScreen> {
                             SizedBox(width: 6),
                           ],
                         ),
-                        SizedBox(
-                          height: 25,
-                          child: Column(
-                            // mainAxisAlignment:
-                            //     MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                height: 10,
-                                child: Icon(
-                                  Icons.arrow_drop_up_outlined,
-                                  size: 15,
-                                  color: Colors.blue.withOpacity(0.8),
-                                ),
-                              ),
-                              Container(
-                                height: 10,
-                                child: Icon(
-                                  Icons.arrow_drop_down_outlined,
-                                  size: 15,
-                                  color: Colors.blue.withOpacity(0.8),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -400,7 +375,27 @@ class _BooksDbState extends State<BooksDb> {
                           )
                         : widget.bookType != 'free' &&
                                 widget.userPurchased == 'success'
-                            ? Text('')
+                            ? Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 5.0, horizontal: 5.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                padding: EdgeInsets.all(5.0),
+                                height: 23,
+                                // width: 40,
+                                child: Text(
+                                  'UNLOCKED',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.blue.withOpacity(0.8),
+                                    fontSize: 9,
+                                    fontFamily: 'Ubuntu',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )
                             : Positioned(
                                 left: 3,
                                 top: 3,
