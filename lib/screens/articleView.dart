@@ -11,6 +11,26 @@ class ArticleView extends StatefulWidget {
 }
 
 class _ArticleViewState extends State<ArticleView> {
+  Widget _createHeader() {
+    return DrawerHeader(
+        margin: EdgeInsets.zero,
+        padding: EdgeInsets.zero,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage('path/to/header_background.png'))),
+        child: Stack(children: <Widget>[
+          Positioned(
+              bottom: 12.0,
+              left: 16.0,
+              child: Text("Flutter Step-by-Step",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500))),
+        ]));
+  }
+
   ArticleController _articleController = Get.find<ArticleController>();
   ForumContreller _forumContreller = Get.find<ForumContreller>();
   @override
@@ -27,51 +47,64 @@ class _ArticleViewState extends State<ArticleView> {
         ),
         endDrawer: Drawer(
           child: SingleChildScrollView(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: Column(
-                children: [
-                  for (var article in _forumContreller.articleData.value)
-                    Column(
-                      children: [
-                        ListTile(
-                          onTap: () {
-                            print(article['postId']);
-                            _articleController.setPostId(article['postId']);
-                            Get.back();
-                          },
-                          title: Text(
-                            article['articleName'],
-                            maxLines: 2,
-                            style: TextStyle(
-                              color: Colors.grey,
-                              // height: 2,
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.blue,
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                      child: Text(
+                    "Related Articles",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        fontFamily: 'Ubuntu'),
+                  )),
+                ),
+                for (var article in _forumContreller.articleData.value)
+                  Column(
+                    children: [
+                      ListTile(
+                        onTap: () {
+                          print(article['postId']);
+                          _articleController.setPostId(article['postId']);
+                          Get.back();
+                        },
+                        title: Text(
+                          article['articleName'],
+                          maxLines: 2,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            // height: 2,
 
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15,
-                              fontFamily: 'Ubuntu',
-                            ),
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                            fontFamily: 'Ubuntu',
                           ),
-                          leading: Container(
-                            width: 50,
-                            height: 50,
-                            child: CachedNetworkImage(
-                              imageUrl: article['articleImage'],
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      CircularProgressIndicator(
-                                          value: downloadProgress.progress),
-                              fit: BoxFit.cover,
-                            ),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        leading: Container(
+                          width: 50,
+                          height: 50,
+                          child: CachedNetworkImage(
+                            imageUrl: article['articleImage'],
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        Divider()
-                      ],
-                    ),
-                ],
-              ),
+                      ).marginSymmetric(vertical: 5),
+                      Divider(
+                        color: Colors.grey,
+                      )
+                    ],
+                  ),
+              ],
             ),
           ),
         ),
@@ -93,7 +126,7 @@ class _ArticleViewState extends State<ArticleView> {
                                     fontSize: 20,
                                     color: Colors.blueAccent),
                               ),
-                            ),
+                            ).marginSymmetric(horizontal: 10),
                             Html(
                               data: i['content'].toString().trim(),
                               style: {
@@ -103,7 +136,7 @@ class _ArticleViewState extends State<ArticleView> {
                                   fontFamily: 'st_137',
                                 )
                               },
-                            ),
+                            ).marginSymmetric(horizontal: 10),
                           ],
                         )
                   ],

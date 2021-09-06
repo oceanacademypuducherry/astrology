@@ -136,36 +136,44 @@ class SeeAllArticlesDb extends StatelessWidget {
             ],
             color: Colors.white,
           ),
-          child: Container(
-            child: Column(
-              children: [
-                CachedNetworkImage(
-                  imageUrl: articleImage,
-                  placeholder: (context, url) => Center(
-                    child: Container(
-                      child: CircularProgressIndicator(),
-                      height: 50,
-                      width: 50,
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width - 80,
+                child: Column(
+                  children: [
+                    Container(
+                      child: CachedNetworkImage(
+                        imageUrl: articleImage,
+                        placeholder: (context, url) => Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, error, url) =>
+                            Icon(Icons.wifi_off_rounded),
+                        fit: BoxFit.cover,
+                      ),
+                      width: MediaQuery.of(context).size.width,
+                      height: 280,
+                    ).marginSymmetric(vertical: 13),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      child: Text(
+                        articleName,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontFamily: 'Ubuntu',
+                          fontSize: 16,
+                          color: Colors.grey,
+                        ),
+                      ),
                     ),
-                  ),
-                  fit: BoxFit.cover,
+                  ],
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                  child: Text(
-                    articleName,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontFamily: 'Ubuntu',
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              )
+            ],
           )),
     );
   }

@@ -286,7 +286,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Boy Name ',
+                                        text: 'Groom Name ',
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
@@ -336,7 +336,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Boy Nachathuram',
+                                        text: 'Groom Natchathiram',
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
@@ -415,7 +415,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Boy Pada',
+                                        text: 'Groom Pada',
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
@@ -506,7 +506,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Girl Name ',
+                                        text: 'Bride Name ',
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
@@ -555,7 +555,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Girl Nachathuram',
+                                        text: 'Bride Natchathiram',
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
@@ -634,7 +634,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Girl Pada',
+                                        text: 'Bride Pada',
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
@@ -765,7 +765,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              child: const Text('Matches'),
+                              child: const Text('Find Matches'),
                             ),
                           ),
                         ],

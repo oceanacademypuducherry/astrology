@@ -1,3 +1,4 @@
+// ignore: file_names
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:io';
@@ -28,6 +29,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -43,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ForumContreller _forumContreller = Get.find<ForumContreller>();
   ArticleController _articleController = Get.find<ArticleController>();
   ProductController _productController = Get.find<ProductController>();
+  bool _visible = true;
 
   late FlutterLocalNotificationsPlugin localNotification;
 
@@ -81,8 +85,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   var hour = DateTime.now().hour;
 
+  late double height = 70;
+
   @override
   Widget build(BuildContext context) {
+    print("${widget} ///////////////////////////colapsed");
     return SafeArea(
       child: Scaffold(
           body: CustomScrollView(
@@ -93,15 +100,15 @@ class _HomeScreenState extends State<HomeScreen> {
               "Makarajothi",
               style: TextStyle(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  fontFamily: 'Ubuntu'),
-            ).paddingOnly(top: 10, bottom: 10),
+                  fontWeight: FontWeight.normal,
+                  fontSize: 32,
+                  fontFamily: 'Berlin Sans FB'),
+            ),
             floating: false,
             expandedHeight: 160,
-            toolbarHeight: 50,
+            toolbarHeight: 40,
             // pinned: true,
-            collapsedHeight: 80,
+            collapsedHeight: 50,
             backwardsCompatibility: true,
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
@@ -133,12 +140,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 return KeyboardDismisser(
                   child: Column(
                     children: [
-                      TextButton(
-                          onPressed: () {
-                            print('ooooooooooooooooo');
-                            // smsData();
-                          },
-                          child: Text('checking')),
+                      // TextButton(
+                      //     onPressed: () {
+                      //       print('ooooooooooooooooo');
+                      //       // smsData();
+                      //     },
+                      //     child: Text('checking')),
                       // TextButton(
                       //   child: Text('pdf'),
                       //   onPressed: () {
@@ -577,7 +584,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     _forumContreller
                                             .sessionUserInfo.value['subscribe']
-                                        ? Text('')
+                                        ? Positioned(
+                                            left: 13,
+                                            top: 13,
+                                            child: Container(
+                                              // margin: EdgeInsets.symmetric(
+                                              //     vertical: 5.0,
+                                              //     horizontal: 5.0),
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              padding: EdgeInsets.all(5.0),
+                                              height: 23,
+                                              // width: 40,
+                                              child: Text(
+                                                'UNLOCKED',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.blue.shade900,
+                                                  fontSize: 9,
+                                                  fontFamily: 'Ubuntu',
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          )
                                         : Positioned(
                                             left: 13,
                                             top: 13,

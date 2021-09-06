@@ -262,7 +262,10 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     ),
                   ),
                   StreamBuilder<QuerySnapshot>(
-                    stream: firestore.collection('booking').snapshots(),
+                    stream: firestore
+                        .collection('booking')
+                        .orderBy("time", descending: true)
+                        .snapshots(),
                     // ignore: missing_return
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
@@ -352,10 +355,10 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                     begin: Alignment.topCenter,
                                                     end: Alignment.bottomRight,
                                                     colors: [
-                                                        Colors.grey.shade700,
-                                                        Colors.grey.shade600,
+                                                        // Colors.grey.shade700,
                                                         Colors.grey.shade500,
-                                                        Colors.grey.shade200,
+                                                        Colors.grey.shade500,
+                                                        Colors.grey.shade500,
                                                       ]),
                                         borderRadius: BorderRadius.circular(10),
                                         boxShadow: [

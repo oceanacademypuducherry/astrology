@@ -22,7 +22,7 @@ class FreeVideos extends StatelessWidget {
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
                 background: Image.asset(
-                  'images/unlockedvideo.jpg',
+                  'images/freevideo.jpg',
                   fit: BoxFit.cover,
                 ),
               ),

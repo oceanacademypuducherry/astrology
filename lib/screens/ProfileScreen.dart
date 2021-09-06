@@ -1,5 +1,5 @@
 // ignore_for_file: file_names
-
+import 'package:velocity_x/velocity_x.dart';
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/SupportPage/SupportPage.dart';
 import 'package:astrology_app/atentication/login.dart';
@@ -23,6 +23,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/src/extensions/string_ext.dart';
 import 'package:velocity_x/src/flutter/gesture.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -44,7 +45,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? email;
   String? updatedProfile;
   String? updatedJadhagam;
-
+  dynamic close;
+  dynamic loadingJadhagam;
   String? phoneNumber;
 
   String? fullname;
@@ -405,6 +407,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                               null
                                                           ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
                                                           : '${_forumContreller.sessionUserInfo.value['profile'].toString()}',
+                                                      placeholder:
+                                                          (context, url) =>
+                                                              Center(
+                                                        child:
+                                                            CircularProgressIndicator(),
+                                                      ),
                                                       errorWidget: (context,
                                                               url, error) =>
                                                           Container(
@@ -453,8 +461,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   ),
                                                   SizedBox(height: 13),
                                                   ElevatedButton(
-                                                    onPressed:
-                                                        selectProfileFile,
+                                                    onPressed: () {
+                                                      selectProfileFile(
+                                                          context);
+                                                    },
                                                     style: ElevatedButton
                                                         .styleFrom(
                                                       shape:
@@ -494,6 +504,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                               null
                                                           ? '${getJadhagam}'
                                                           : '${_forumContreller.sessionUserInfo.value['jadhagam']}',
+                                                      placeholder:
+                                                          (context, url) =>
+                                                              Center(
+                                                        child:
+                                                            CircularProgressIndicator(),
+                                                      ),
                                                       errorWidget: (context,
                                                               url, error) =>
                                                           Container(
@@ -542,8 +558,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   ),
                                                   SizedBox(height: 13),
                                                   ElevatedButton(
-                                                    onPressed:
-                                                        selectJadhagamFile,
+                                                    onPressed: () {
+                                                      selectJadhagamFile(
+                                                          context);
+                                                    },
                                                     style: ElevatedButton
                                                         .styleFrom(
                                                       shape:
@@ -656,13 +674,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 width: MediaQuery.of(context)
                                                     .size
                                                     .width,
-                                                child: const Text(
-                                                  'Mobile Phone',
-                                                  style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 15,
-                                                    fontFamily: 'Ubuntu',
-                                                    fontWeight: FontWeight.w700,
+                                                child: RichText(
+                                                  text: const TextSpan(
+                                                    text: 'Phone Number ',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Ubuntu',
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.blue,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -750,8 +771,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                             ),
                                                             children: [
                                                               TextSpan(
-                                                                text:
-                                                                    "(Editable)",
+                                                                text: "*",
                                                                 style:
                                                                     TextStyle(
                                                                   fontFamily:
@@ -761,7 +781,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                                       FontWeight
                                                                           .bold,
                                                                   color: Colors
-                                                                      .lightBlue,
+                                                                      .redAccent,
                                                                 ),
                                                               )
                                                             ]),
@@ -861,15 +881,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                           bottom: 15),
                                                       alignment:
                                                           Alignment.topLeft,
-                                                      child: Text(
-                                                        'DOB',
-                                                        style: TextStyle(
-                                                          fontFamily: 'Ubuntu',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.blue,
-                                                        ),
+                                                      child: RichText(
+                                                        text: const TextSpan(
+                                                            text: 'DOB ',
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.blue,
+                                                            ),
+                                                            children: [
+                                                              TextSpan(
+                                                                text: "*",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'Ubuntu',
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .redAccent,
+                                                                ),
+                                                              )
+                                                            ]),
                                                       ),
                                                     ),
                                                     Container(
@@ -1209,12 +1249,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              'Support'
+                                              'Note : '
                                                   .text
-                                                  .xl
                                                   .blue400
-                                                  .make()
-                                                  .onInkTap(() {
+                                                  .bold
+                                                  .make(),
+                                              HStack([
+                                                'For more Information reach us '
+                                                    .text
+                                                    .blue400
+                                                    .make(),
+                                                'Click here'
+                                                    .text
+                                                    .underline
+                                                    .blue400
+                                                    .make()
+                                              ]).onInkTap(() {
                                                 Get.to(
                                                   SupportPage(),
                                                   transition:
@@ -1247,7 +1297,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Future selectJadhagamFile() async {
+  Future selectJadhagamFile(BuildContext context) async {
+    loadingJadhagam = VxToast.showLoading(context,
+        msg: "Loading", bgColor: Colors.transparent);
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
@@ -1298,7 +1350,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .doc(Get.find<ForumContreller>().userDocumentId.toString())
         .get();
     _forumContreller.setUserInfo(update.data());
-
+    Future.delayed(0.100.seconds, loadingJadhagam);
     setState(() {
       updatedJadhagam = urlDownload;
     });
@@ -1306,7 +1358,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     print('Download-Link: $urlDownload');
   }
 
-  Future selectProfileFile() async {
+  Future selectProfileFile(BuildContext context) async {
+    close = context.showLoading(msg: "Uploading", bgColor: Colors.transparent);
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
@@ -1333,7 +1386,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ///Todo snakbar upload
       Get.snackbar(
         "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
-        "profile uploaded successfully",
+        "Profile uploaded successfully",
         icon: Icon(Icons.person, color: Colors.white),
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.blue[500],
@@ -1357,6 +1410,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .doc(Get.find<ForumContreller>().userDocumentId.toString())
         .get();
     _forumContreller.setUserInfo(update.data());
+    Future.delayed(0.100.seconds, close);
 
     for (var i in bookIds) {
       _firestore.collection('booking').doc(i).update({'profile': urlDownload});
