@@ -622,6 +622,10 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                       // onPressed: () {},
                       onPressed: isOpen
                           ? () async {
+                              setState(() {
+                                isOpen = false;
+                              });
+
                               close = context.showLoading(msg: "Loading");
 
                               print(orderTime);

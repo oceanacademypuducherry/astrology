@@ -23,25 +23,24 @@ class SeeAllArticle extends StatelessWidget {
             slivers: [
               SliverAppBar(
                 floating: false,
-                expandedHeight: 150,
-                // automaticallyImplyLeading: true,
+                expandedHeight: 140,
                 toolbarHeight: 50,
-                // stretch: true,
                 pinned: true,
                 collapsedHeight: 50,
                 flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.pin,
                   centerTitle: true,
                   title: Text(
-                    'See all Article',
+                    'Articles',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 15,
+                      fontSize: 18,
                       fontFamily: 'Ubuntu',
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   background: Image.asset(
-                    'images/background_image.png',
+                    'images/see_all_article.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -166,7 +165,7 @@ class SeeAllArticlesDb extends StatelessWidget {
                           fontWeight: FontWeight.normal,
                           fontFamily: 'Ubuntu',
                           fontSize: 16,
-                          color: Colors.grey,
+                          color: Colors.grey[600],
                         ),
                       ),
                     ),

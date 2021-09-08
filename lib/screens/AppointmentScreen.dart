@@ -307,7 +307,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                             : () => {
                                                   VxToast.show(context,
                                                       msg:
-                                                          'this meeting was completed',
+                                                          'Meeting was completed',
                                                       showTime: 2000)
                                                 },
                                     child: Container(
@@ -382,7 +382,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                 margin: EdgeInsets.symmetric(
                                                     vertical: 10),
                                                 child: Text(
-                                                  "Your Booking is Confirmed ",
+                                                  "Your booking is confirmed ",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Colors.white,
@@ -420,7 +420,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                           .inSeconds >
                                                       0
                                                   ? Text(
-                                                      'Wait for ur time to join zoom',
+                                                      'Wait for your time to join zoom',
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight:

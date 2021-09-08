@@ -54,6 +54,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'Ubuntu'),
       home: Scaffold(body: MyApp()),
     ),
   );

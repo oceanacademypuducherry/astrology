@@ -38,8 +38,8 @@ class ProductSwiperCard extends StatelessWidget {
                     height: context.screenWidth / 2,
                     width: context.screenWidth,
                     imageUrl: '$image',
-                    placeholder: (context, url) => Center(
-                        child: Container(child: CircularProgressIndicator())),
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
                     errorWidget: (context, url, error) =>
                         Icon(Icons.wifi_off_rounded),
                   ),
@@ -54,7 +54,7 @@ class ProductSwiperCard extends StatelessWidget {
                     title!.length > 34
                         ? '${title!.substring(0, 35)}...'
                             .text
-                            .size(30)
+                            .size(20)
                             .make()
                             .box
                             .height(60)

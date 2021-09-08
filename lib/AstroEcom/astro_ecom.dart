@@ -203,6 +203,8 @@ class _AstroEcomState extends State<AstroEcom> {
                                     'you already added this product in you cart');
                           } else {
                             _productController.setCartProductList(i);
+                            VxToast.show(context,
+                                msg: 'This product added in your cart');
                           }
                         },
                         productView: () {

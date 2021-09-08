@@ -1,12 +1,18 @@
+// ignore_for_file: file_names
+
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/payment%20info/payment_successfuly.dart';
+import 'package:astrology_app/screens/AppointmentScreen.dart';
 import 'package:astrology_app/services/storage_service.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -16,6 +22,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class SomeoneElseScreen extends StatefulWidget {
   String appointmentFor;
@@ -34,6 +41,7 @@ class SomeoneElseScreen extends StatefulWidget {
 class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
   late Razorpay _razorpay;
   FocusNode messageFocusNode1 = FocusNode();
+  late FlutterLocalNotificationsPlugin localNotification;
   FocusNode messageFocusNode2 = FocusNode();
   FocusNode messageFocusNode3 = FocusNode();
   FocusNode messageFocusNode4 = FocusNode();
@@ -59,6 +67,7 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
   String? monthFormat;
   String? dayTime;
   int? dayFormat;
+  var message;
   int? hourFormat;
   int? minuteFormat;
   int? yearFormat;
@@ -232,20 +241,128 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
     );
   }
 
+  smsData(String number, String message) async {
+    print(
+        '$number 7777777777777777777777777777777777777777777777777777777777777777');
+    final response = await http.get(
+      Uri.parse(
+          'https://sms.nettyfish.com/vendorsms/pushsms.aspx?apikey=6b980394-3890-4102-a739-c43c8548801f&clientId=a0b0e595-2cfb-4dc6-bba1-641ad1af1c1c&msisdn=${number}&sid=AKSPDY&msg=${message}&fl=0&gwid=2'),
+    );
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed *********************');
+    }
+  }
+
+  Future _showNotification() async {
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "channelName", "you booked",
+        importance: Importance.max);
+
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+    await localNotification.show(
+        0,
+        'Hi ${_forumContreller.sessionUserInfo.value['name']}',
+        'You have booked the meeting at ${widget.time.day.toString()} ${monthFormat} ${widget.time.year.toString()}@${hour}:${minute} ${dayTime}',
+        generalNotificationDetails);
+  }
+
+  Future _scheduleHourNotification() async {
+    print(Get.arguments.second);
+    print(Get.arguments.year);
+    print('${monthForSchedule}mmmmmpommm');
+    print('${dayForSchedule}dayyyy');
+    print('${hourForSchedule}jhhhhhhhhhhhh');
+    print(Get.arguments.minute);
+    print(Get.arguments.second);
+
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "channelName", "you booked",
+        importance: Importance.max);
+
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+    var scheduledTime = DateTime.now().add(Duration(minutes: (diff * -1) - 60));
+    await localNotification.schedule(
+        0,
+        'Hi ${_forumContreller.sessionUserInfo.value['name']}',
+        'You have booked the meeting at today @${hour}:${minute} ${dayTime}',
+        scheduledTime,
+        generalNotificationDetails);
+  }
+
+  Future _scheduleDayNotification() async {
+    print(Get.arguments.year.toString().runtimeType);
+    print(Get.arguments.year);
+    print('${monthForSchedule}mmmmmpommm');
+    print('${dayForSchedule}dayyyy');
+    print('${hourForSchedule}jhhhhhhhhhhhh');
+    print(Get.arguments.minute);
+    print(Get.arguments.second);
+
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "channelName", "you booked",
+        importance: Importance.max);
+
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+    var scheduledTime = DateTime.parse(
+        '${widget.time.year.toString()}-${monthForSchedule.toString()}-${dayForSchedule.toString()} 08:00:00');
+    await localNotification.schedule(
+        0,
+        'Hi ${_forumContreller.sessionUserInfo.value['name']}',
+        'You have booked the meeting at ${widget.time.day.toString()} ${monthFormat} ${widget.time.year.toString()}@${hour}:${minute} ${dayTime}',
+        scheduledTime,
+        generalNotificationDetails);
+  }
+
+  Future _scheduleMinutesNotification() async {
+    print(widget.time.year.toString().runtimeType);
+    print(widget.time.year);
+    print('${monthForSchedule}mmmmmpommm');
+    print('${dayForSchedule}dayyyy');
+    print('${hourForSchedule}jhhhhhhhhhhhh');
+    print(widget.time.minute);
+    print(widget.time.second);
+
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "channelName", "you booked",
+        importance: Importance.max);
+
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails);
+    var scheduledTime = DateTime.now().add(Duration(minutes: (diff * -1) - 2));
+    await localNotification.schedule(
+        0,
+        'Hi ${_forumContreller.sessionUserInfo.value['name']}',
+        'You have booked the meeting at today @${hour}:${minute} ${dayTime}',
+        scheduledTime,
+        generalNotificationDetails);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    var alteredPhone = _forumContreller.userSession.value;
+    smsNumber = (alteredPhone.substring(1, 3) + alteredPhone.substring(4, 14));
+    getTime();
     username = _forumContreller.sessionUserInfo.value['name'];
     _razorpay = Razorpay();
     phoneNumberController.text = _forumContreller.userSession.value;
-    print(_forumContreller.userSession.value);
-    print(_forumContreller.sessionUserInfo.value);
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-    print('************************************************');
-    print(_forumContreller.userSession.value);
+    var androidInitialize =
+        new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
+    var initialzationSetting =
+        new InitializationSettings(android: androidInitialize);
+    localNotification = new FlutterLocalNotificationsPlugin();
+    localNotification.initialize(initialzationSetting,
+        onSelectNotification: notificationSelected);
   }
 
   @override
@@ -253,6 +370,10 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
     super.dispose();
     _razorpay.clear();
   }
+
+  var smsNumber;
+
+  var diff;
 
   ///RAZORPAY START
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
@@ -273,6 +394,13 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
       'adminZoomLink': '${_forumContreller.startUrl.value}',
       'userZoomLink': '${_forumContreller.joinUrl.value}',
     });
+    message =
+        "Hi ${_forumContreller.sessionUserInfo.value['name']} You have booked the meeting at ${widget.time.day.toString()} ${monthFormat} ${widget.time..toString()}@${hour}:${minute} ${dayTime}";
+    smsData(smsNumber, message);
+    _showNotification();
+    _scheduleHourNotification();
+    _scheduleDayNotification();
+    _scheduleMinutesNotification();
 
     Get.to(() => PaymentSuccessfully(),
         transition: Transition.rightToLeft,
@@ -351,6 +479,48 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
     print(DateFormat.yMMMd().format(textDate));
   }
 
+  var hour;
+  var minute;
+  var monthForSchedule;
+  var dayForSchedule;
+  var hourForSchedule;
+  var minuteForSchedule;
+  var month = DateFormat('MMMM');
+
+  void getTime() {
+    monthForSchedule = widget.time.month;
+    dayForSchedule = widget.time.day;
+    hourForSchedule = widget.time.hour;
+    minuteForSchedule = widget.time.minute;
+    DateTime newDate = widget.time;
+
+    if (newDate.hour > 12) {
+      hour = newDate.hour - 12;
+
+      dayTime = 'PM';
+      minute = newDate.minute;
+    } else {
+      hour = newDate.hour;
+      dayTime = 'AM';
+      minute = newDate.minute;
+    }
+    hour = hour < 10 ? '0$hour' : hour;
+    minute = minute < 10 ? '0$minute' : minute;
+    monthForSchedule =
+        monthForSchedule < 10 ? '0$monthForSchedule' : monthForSchedule;
+    dayForSchedule =
+        dayForSchedule < 10 ? '0$dayForSchedule' : monthForSchedule;
+    hourForSchedule =
+        hourForSchedule < 10 ? '0${hourForSchedule - 1}' : hourForSchedule - 1;
+    hourForSchedule =
+        minuteForSchedule < 10 ? '0${minuteForSchedule}' : hourForSchedule - 1;
+    monthFormat = month.format(newDate);
+    print(monthFormat);
+    diff = DateTime.now().difference(newDate).inMinutes;
+    print('${diff * -1} hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+    print('${(diff * -1) - 2} hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+  }
+
   @override
   Widget build(BuildContext context) {
     ///mediaQuery width
@@ -367,6 +537,12 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
               // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               reverse: true,
               children: [
+                // TextButton(
+                //   child: Text('chhhjjkkkk'),
+                //   onPressed: () {
+                //
+                //   },
+                // ),
                 Container(
                   alignment: Alignment.center,
                   height: m,
@@ -409,42 +585,84 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                 children: [
                                   Container(
                                     height: 100,
+                                    width: 100,
                                     // color: Colors.amberAccent,
                                     alignment: Alignment.center,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.blue[900],
-                                      maxRadius: 55,
-                                      child: Container(
-                                        decoration: const BoxDecoration(
+                                    child: CachedNetworkImage(
+                                      imageUrl: profilePictureLink == null
+                                          ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
+                                          : '${profilePictureLink.toString()}',
+                                      placeholder: (context, url) => Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          Container(
+                                        height: 150.0,
+                                        child: Icon(Icons.error),
+                                      ),
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                        height: 150.0,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover),
+                                            border: Border.all(
+                                              width: 2,
+                                              color: Colors.blue.shade900,
+                                            ),
+                                            color: Colors.white,
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(40)),
+                                                Radius.circular(10)),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: Colors.black26,
-                                                blurRadius: 5,
+                                                blurRadius: 10,
                                                 spreadRadius: 0,
                                                 offset: Offset(
-                                                  3.0,
-                                                  4.0,
+                                                  5.0,
+                                                  5.0,
                                                 ),
                                               ),
                                             ]),
-                                        child: CircleAvatar(
-                                          maxRadius: 48,
-                                          backgroundColor: Colors.white,
-                                          backgroundImage: profilePictureLink ==
-                                                  null
-                                              ? NetworkImage(
-                                                  'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png')
-                                              : NetworkImage(
-                                                  "${profilePictureLink.toString()}"),
-                                        ),
                                       ),
                                     ),
+                                    // CircleAvatar(
+                                    //   backgroundColor: Colors.blue[900],
+                                    //   maxRadius: 55,
+                                    //   child: Container(
+                                    //     decoration: const BoxDecoration(
+                                    //         borderRadius: BorderRadius.all(
+                                    //             Radius.circular(40)),
+                                    //         boxShadow: [
+                                    //           BoxShadow(
+                                    //             color: Colors.black26,
+                                    //             blurRadius: 5,
+                                    //             spreadRadius: 0,
+                                    //             offset: Offset(
+                                    //               3.0,
+                                    //               4.0,
+                                    //             ),
+                                    //           ),
+                                    //         ]),
+                                    //     child: CircleAvatar(
+                                    //       maxRadius: 48,
+                                    //       backgroundColor: Colors.white,
+                                    //       backgroundImage: profilePictureLink ==
+                                    //               null
+                                    //           ? NetworkImage(
+                                    //               'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png')
+                                    //           : NetworkImage(
+                                    //               "${profilePictureLink.toString()}"),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ),
                                   SizedBox(height: 10),
                                   ElevatedButton(
-                                    onPressed: selectProfileFile,
+                                    onPressed: () {
+                                      selectProfileFile(context);
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(2),
@@ -468,37 +686,51 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                                   Container(
                                     height: 100,
                                     width: 100,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: jadhagamLink == null
-                                              ? NetworkImage(
-                                                  'https://cdn.dribbble.com/users/376964/screenshots/2456984/information.png?compress=1&resize=800x600',
-                                                )
-                                              : NetworkImage(
-                                                  "$jadhagamLink",
-                                                ),
-                                        ),
-                                        border: Border.all(
-                                            color: Colors.blue.shade900,
-                                            width: 1.2),
-                                        borderRadius: BorderRadius.circular(12),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.shade300,
-                                            blurRadius: 5,
-                                            spreadRadius: 0,
-                                            offset: Offset(
-                                              3.0,
-                                              4.0,
+                                    child: CachedNetworkImage(
+                                      imageUrl: jadhagamLink == null
+                                          ? 'https://cdn.dribbble.com/users/376964/screenshots/2456984/information.png?compress=1&resize=800x600'
+                                          : '${jadhagamLink}',
+                                      placeholder: (context, url) => Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          Container(
+                                        height: 150.0,
+                                        child: Icon(Icons.error),
+                                      ),
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                        height: 150.0,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover),
+                                            border: Border.all(
+                                              width: 2,
+                                              color: Colors.blue.shade900,
                                             ),
-                                          ),
-                                        ]),
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                blurRadius: 10,
+                                                spreadRadius: 0,
+                                                offset: Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
                                   ),
                                   SizedBox(height: 13),
                                   ElevatedButton(
-                                    onPressed: selectJadhagamFile,
+                                    onPressed: () {
+                                      selectJadhagamFile(context);
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -928,18 +1160,20 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
   }
 
   ///upload functions
-  Future selectJadhagamFile() async {
+  Future selectJadhagamFile(BuildContext context) async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
     setState(() => file = File(path));
     setState(() {
-      uploadJadhagam();
+      uploadJadhagam(context);
     });
   }
 
-  Future uploadJadhagam() async {
+  Future uploadJadhagam(BuildContext context) async {
     if (file == null) return;
+    dynamic loadingJadhagam = VxToast.showLoading(context,
+        msg: "Loading", bgColor: Colors.transparent);
 
     final fileName = basename(file!.path);
     final destination = 'jadhagam/$fileName';
@@ -953,7 +1187,7 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
       print('profile picture uploaded');
     });
     final urlDownload = await snapshot.ref.getDownloadURL();
-
+    Future.delayed(0.100.seconds, loadingJadhagam);
     setState(() {
       jadhagamLink = urlDownload;
     });
@@ -961,18 +1195,20 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
     print('Download-Link: $urlDownload');
   }
 
-  Future selectProfileFile() async {
+  Future selectProfileFile(BuildContext context) async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
     setState(() => file = File(path));
     setState(() {
-      uploadProfile();
+      uploadProfile(context);
     });
   }
 
-  Future uploadProfile() async {
+  Future uploadProfile(BuildContext context) async {
     if (file == null) return;
+    dynamic close =
+        context.showLoading(msg: "Uploading", bgColor: Colors.transparent);
 
     final fileName = basename(file!.path);
     final destination = 'profile/$fileName';
@@ -988,11 +1224,20 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
       ///Todo snakbar upload
     });
     final urlDownload = await snapshot.ref.getDownloadURL();
-
+    Future.delayed(0.100.seconds, close);
     setState(() {
       profilePictureLink = urlDownload;
     });
 
     print('Download-Link: $urlDownload');
+  }
+
+  Future notificationSelected(String? payload) async {
+    Get.to(
+      () => AppointmentScreen(),
+      transition: Transition.rightToLeft,
+      curve: Curves.easeInToLinear,
+      duration: Duration(milliseconds: 600),
+    );
   }
 }

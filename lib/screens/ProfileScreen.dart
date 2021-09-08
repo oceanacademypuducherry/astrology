@@ -288,6 +288,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     pinned: false,
                     collapsedHeight: 50,
                     flexibleSpace: FlexibleSpaceBar(
+                      collapseMode: CollapseMode.pin,
                       centerTitle: true,
                       background: Image.asset(
                         'images/profile.png',
@@ -1298,19 +1299,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future selectJadhagamFile(BuildContext context) async {
-    loadingJadhagam = VxToast.showLoading(context,
-        msg: "Loading", bgColor: Colors.transparent);
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
     setState(() => file = File(path));
     setState(() {
-      uploadJadhagam();
+      uploadJadhagam(context);
     });
   }
 
-  Future uploadJadhagam() async {
+  Future uploadJadhagam(BuildContext context) async {
     if (file == null) return;
+    loadingJadhagam = VxToast.showLoading(context,
+        msg: "Loading", bgColor: Colors.transparent);
 
     final fileName = basename(file!.path);
     final destination = 'jadhagam/$fileName';
@@ -1359,19 +1360,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future selectProfileFile(BuildContext context) async {
-    close = context.showLoading(msg: "Uploading", bgColor: Colors.transparent);
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path!;
     setState(() => file = File(path));
     setState(() {
-      uploadProfile();
+      uploadProfile(context);
     });
   }
 
-  Future uploadProfile() async {
+  Future uploadProfile(BuildContext context) async {
     if (file == null) return;
-
+    close = context.showLoading(msg: "Uploading", bgColor: Colors.transparent);
     final fileName = basename(file!.path);
     final destination = 'profile/$fileName';
 

@@ -323,8 +323,9 @@ class _BookingDetailsState extends State<BookingDetails> {
   var dayForSchedule = Get.arguments.day;
   var hourForSchedule = Get.arguments.hour;
   var minuteForSchedule = Get.arguments.minute;
-  var month = DateFormat('MMMM');
   var diff;
+  var month = DateFormat('MMMM');
+
   void getTime() {
     print('$monthForSchedule llllllllllllllllllllllllll');
 
@@ -383,6 +384,12 @@ class _BookingDetailsState extends State<BookingDetails> {
               child: Column(
                 children: [
                   ///date and time
+                  // TextButton(
+                  //   onPressed: () {
+                  //     _scheduleMinutesNotification();
+                  //   },
+                  //   child: Text('chhhhhh'),
+                  // ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     alignment: Alignment.centerLeft,

@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:astrology_app/AstroEcom/ViewCart.dart';
 import 'package:astrology_app/AstroEcom/productController.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -23,10 +24,16 @@ class ViewProduct extends StatelessWidget {
                   ///image
                   Stack(
                     children: [
-                      Image.network(
-                        _productController
+                      CachedNetworkImage(
+                        imageUrl: _productController
                             .productView.value['productDisplayImage'],
                         fit: BoxFit.cover,
+                        placeholder: (context, url) => Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) => Center(
+                          child: Icon(Icons.wifi_off_rounded),
+                        ),
                       )
                           .box
                           .height(
@@ -106,7 +113,7 @@ class ViewProduct extends StatelessWidget {
                         _productController.productView.value['productName']
                             .toString()
                             .text
-                            .size(25)
+                            .size(20)
                             .make()
                             .marginOnly(top: 20),
 
@@ -168,6 +175,8 @@ class ViewProduct extends StatelessWidget {
                   } else {
                     _productController.setCartProductList(
                         _productController.productView.value);
+                    VxToast.show(context,
+                        msg: 'This product added in your cart');
                   }
 
                   // Get.to(TrackOrder());

@@ -21,11 +21,27 @@ class _BooksScreenState extends State<BooksScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          centerTitle: true,
-          flexibleSpace: Image.asset(
-            'images/background_image.png',
-            fit: BoxFit.cover,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.blue.shade900,
+                  Colors.blue.shade800,
+                  Colors.blue.shade600,
+                  // Colors.cyan.shade500,
+                  // Colors.blue,
+                ],
+                // stops: [0.5, 1.0],
+              ),
+            ),
           ),
+          centerTitle: true,
+          // flexibleSpace: Image.asset(
+          //   'images/background_image.png',
+          //   fit: BoxFit.cover,
+          // ),
           title: Text(
             'Books',
             style: TextStyle(
@@ -52,7 +68,7 @@ class _BooksScreenState extends State<BooksScreen> {
                           children: [
                             IconSample(),
                             Text(
-                              'Books Collection',
+                              'Book Collections',
                               style: TextStyle(
                                 color: Colors.blue.withOpacity(0.8),
                                 fontSize: 18,

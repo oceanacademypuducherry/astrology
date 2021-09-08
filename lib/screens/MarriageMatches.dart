@@ -236,7 +236,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                 background: Hero(
                   tag: "animation",
                   child: Image.asset(
-                    'images/tp2.jpg',
+                    'images/marriage.png',
                     fit: BoxFit.cover,
                   ),
                 ),

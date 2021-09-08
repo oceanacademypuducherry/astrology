@@ -33,12 +33,25 @@ class ProductCard extends StatelessWidget {
                 onTap: productView,
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
-                    child: Image.network(
-                      '$image',
-                      fit: BoxFit.cover,
+                    child: CachedNetworkImage(
+                      imageUrl: '$image',
                       width: context.screenWidth,
+                      fit: BoxFit.cover,
                       height: 180,
-                    )),
+                      placeholder: (context, url) => Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                      errorWidget: (context, url, error) => Center(
+                        child: Icon(Icons.wifi_off_rounded),
+                      ),
+                    )
+                    // Image.network(
+                    //   '$image',
+                    //   fit: BoxFit.cover,
+                    //   width: context.screenWidth,
+                    //   height: 180,
+                    // ),
+                    ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),

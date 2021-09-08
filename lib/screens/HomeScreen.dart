@@ -1,5 +1,5 @@
 // ignore: file_names
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, file_names
 
 import 'dart:io';
 
@@ -109,13 +109,17 @@ class _HomeScreenState extends State<HomeScreen> {
             toolbarHeight: 40,
             // pinned: true,
             collapsedHeight: 50,
-            backwardsCompatibility: true,
+            // backwardsCompatibility: true,
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
               titlePadding: EdgeInsets.symmetric(vertical: 45),
               title: Obx(
                 () => Text(
-                  "${hour < 12 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Morning !" : hour < 17 ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Afternoon !" : "Hi ${_forumContreller.sessionUserInfo['name']}, Good Evening !"}",
+                  hour < 12
+                      ? "Hi ${_forumContreller.sessionUserInfo['name'].toString().substring(0, 1).toUpperCase()}${_forumContreller.sessionUserInfo['name'].toString().substring(1, _forumContreller.sessionUserInfo['name'].length).toLowerCase()}, Good Morning !"
+                      : hour < 17
+                          ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Afternoon !"
+                          : "Hi ${_forumContreller.sessionUserInfo['name']}, Good Evening !",
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.8),
                     fontWeight: FontWeight.normal,
@@ -178,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Article Collection",
+                                    "Articles",
                                     style: TextStyle(
                                         color: Colors.blue,
                                         fontWeight: FontWeight.bold,
@@ -195,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         );
                                       },
                                       child: Text(
-                                        'See All',
+                                        'See all',
                                         style: TextStyle(
                                             color: Colors.blue,
                                             fontSize: 15,
@@ -256,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   child:
                                                                       CircularProgressIndicator()),
                                                           fit: BoxFit.cover,
-                                                        ),
+                                                        ).cornerRadius(10),
                                                       ),
                                                     ),
                                                     Expanded(
@@ -283,15 +287,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       10)
                                                             ]),
                                                         child: Text(
-                                                          article['articleName']
-                                                              .toUpperCase(),
+                                                          article[
+                                                              'articleName'],
                                                           maxLines: 2,
                                                           style: TextStyle(
-                                                            color: Colors.grey,
+                                                            color: Colors
+                                                                .grey[600],
                                                             // height: 2,
 
                                                             fontWeight:
-                                                                FontWeight.w500,
+                                                                FontWeight
+                                                                    .normal,
                                                             fontSize: 15,
                                                             fontFamily:
                                                                 'Ubuntu',
@@ -305,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     )
                                                   ],
                                                 ),
-                                              ),
+                                              ).cornerRadius(10),
                                               onTap: () {
                                                 _articleController.setPostId(
                                                     article['postId']);
@@ -378,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: context.screenWidth,
                                 height: 170,
                                 child: Image.asset(
-                                  "images/tp2.jpg",
+                                  "images/marriage.png",
                                   fit: BoxFit.cover,
                                 ).cornerRadius(10),
                               ),
@@ -465,6 +471,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         } else {
                                           _productController
                                               .setCartProductList(i);
+                                          VxToast.show(context,
+                                              msg:
+                                                  'This product added in your cart');
                                         }
                                       },
                                       productView: () {
@@ -490,7 +499,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                "Query",
+                                "Queries",
                                 style: TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold,
@@ -539,7 +548,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Videos Collection",
+                                "Video Collections",
                                 style: TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold,
@@ -577,7 +586,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
                                         child: Image.asset(
-                                          "images/paid video.jpg",
+                                          "images/paid video.png",
                                           fit: BoxFit.cover,
                                         ),
                                       ),

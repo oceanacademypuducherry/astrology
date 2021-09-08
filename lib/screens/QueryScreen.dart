@@ -31,14 +31,12 @@ class _QueryScreenState extends State<QueryScreen> {
             SliverAppBar(
               pinned: true,
               floating: false,
-              expandedHeight: 160.0,
+              expandedHeight: 155.0,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
-                background: Positioned(
-                  child: Image.asset(
-                    'images/query.jpg',
-                    fit: BoxFit.cover,
-                  ),
+                background: Image.asset(
+                  'images/query.jpg',
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

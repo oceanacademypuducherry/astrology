@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,15 +21,27 @@ class MyOrderWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            // width: context.screenWidth ),
-            // height: context.screenWidth / (screenSize! * 1.5),
-            child: Image.network(
-              image!,
-              height: context.screenWidth / 2,
-              width: context.screenWidth,
-              fit: BoxFit.cover,
+              // width: context.screenWidth ),
+              // height: context.screenWidth / (screenSize! * 1.5),
+              child: CachedNetworkImage(
+            imageUrl: image!,
+            height: context.screenWidth / 2,
+            width: context.screenWidth,
+            fit: BoxFit.cover,
+            placeholder: (context, url) => Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
+            errorWidget: (context, url, error) => Center(
+              child: Icon(Icons.wifi_off_rounded),
+            ),
+          )
+              // Image.network(
+              //   image!,
+              //   height: context.screenWidth / 2,
+              //   width: context.screenWidth,
+              //   fit: BoxFit.cover,
+              // ),
+              ),
           '${title!.substring(0, 30)}...'
               .text
               .size(18)
