@@ -150,97 +150,62 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
-      body: Center(
-        child: Container(
-          color: Vx.white,
-          // padding: EdgeInsets.symmetric(horizontal: 20),
-
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: Icon(Icons.close))
-                      ],
-                    ),
-                    Text('Check Your Order Info')
-                        .text
-                        .xl2
-                        .make()
-                        .marginOnly(top: 20, bottom: 20),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            for (var userInfo
-                                in _orderController.orderDelivery.value.entries)
-                              if (userInfo.key != 'cartList' &&
-                                  userInfo.key != "orderTime" &&
-                                  userInfo.key != "userAuth" &&
-                                  userInfo != 'orderStatus')
-                                Container(
-                                  margin: EdgeInsets.symmetric(vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      Text(userInfo.key)
-                                          .text
-                                          .size(20)
-                                          .make()
-                                          .box
-                                          .width(context.screenWidth / 3)
-                                          .make(),
-                                      Text(userInfo.value.toString())
-                                          .text
-                                          .size(20)
-                                          .make()
-                                          .box
-                                          // .alignCenter
-                                          .width(context.screenWidth / 2)
-                                          .make(),
-                                    ],
-                                  ),
-                                )
-                          ],
-                        ).scrollVertical(),
-                      ),
-                    ),
-                  ],
-                ),
-                MaterialButton(
-                  minWidth: context.screenWidth,
-                  height: 50,
-                  color: Colors.blueAccent,
-                  child: Text('Okay').text.white.xl2.make(),
-                  onPressed: () {
-                    VxDialog.showTicker(
-                      context,
-                      barrierDismissible: true,
-                      confirm: 'Proceed',
-                      showClose: true,
-                      // title:
-                      //     'Rs. ${_productController.checkoutPrice.value.toString()}',
-                      content:
-                          'Proceed to pay Rs. ${_productController.checkoutPrice.value.toString()}',
-                      onConfirmPress: openCheckout,
-                    );
-                    // Get.to(TrackOrder());
-                  },
-                ).cornerRadius(5),
-              ],
-            ),
+        body: SafeArea(
+      child: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              for (var userInfo in _orderController.orderDelivery.value.entries)
+                if (userInfo.key != 'cartList' &&
+                    userInfo.key != "orderTime" &&
+                    userInfo.key != "userAuth" &&
+                    userInfo.key != 'orderStatus')
+                  UserDetailsWdget(
+                      field: userInfo.key.toString().firstLetterUpperCase(),
+                      value: userInfo.key == "totalPrice"
+                          ? "Rs. ${userInfo.value.toString().firstLetterUpperCase()}"
+                          : userInfo.value.toString().firstLetterUpperCase()),
+              MaterialButton(
+                minWidth: context.screenWidth,
+                height: 50,
+                color: Colors.blueAccent,
+                child: Text('Place your order').text.white.xl2.make(),
+                onPressed: () {
+                  VxDialog.showTicker(
+                    context,
+                    barrierDismissible: true,
+                    confirm: 'Proceed',
+                    showClose: true,
+                    content:
+                        'Proceed to pay Rs. ${_productController.checkoutPrice.value.toString()}',
+                    onConfirmPress: openCheckout,
+                  );
+                },
+              ).marginOnly(top: 10),
+            ],
           ),
-        ).cornerRadius(15),
+        ),
+      ),
+    ));
+  }
+
+  Container UserDetailsWdget({field, value}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      width: context.screenWidth - 40,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+          borderRadius: BorderRadius.circular(5)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('$field').text.xl.gray400.make().marginOnly(bottom: 5),
+          Text('$value').text.xl2.gray700.make(),
+        ],
       ),
     );
   }

@@ -106,9 +106,9 @@ class OrderDetails extends StatelessWidget {
                   ///city
                   Obx(() {
                     Color color =
-                        _orderController.selectedCity.value == 'Select area'
-                            ? Colors.grey
-                            : Vx.gray700;
+                    _orderController.selectedCity.value == 'Select area'
+                        ? Colors.grey
+                        : Vx.gray700;
 
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,9 +155,9 @@ class OrderDetails extends StatelessWidget {
                   ///state
                   Obx(() {
                     Color color =
-                        _orderController.selectedCity.value == 'Select area'
-                            ? Colors.grey
-                            : Vx.gray700;
+                    _orderController.selectedCity.value == 'Select area'
+                        ? Colors.grey
+                        : Vx.gray700;
 
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -211,8 +211,7 @@ class OrderDetails extends StatelessWidget {
       print('success');
 
       Map orderInfo = {
-        "username": _name.text.toString().substring(0, 1).toUpperCase() +
-            _name.text.toString().substring(1),
+        "username": _name.text.toString(),
         "number": _mobile.text.toString(),
         "address": _adress.text.toString(),
         "landmark": _landMark.text.toString(),
@@ -226,7 +225,7 @@ class OrderDetails extends StatelessWidget {
 
         ///TODO Product userNumber
         "userAuth":
-            _forumContreller.sessionUserInfo.value['phoneNumber'].toString(),
+        _forumContreller.sessionUserInfo.value['phoneNumber'].toString(),
       };
       _orderController.setOrderDelivery(orderInfo);
       Get.to(
