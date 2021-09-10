@@ -25,6 +25,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
   OrderController _orderController = Get.find<OrderController>();
   ProductController _productController = Get.find<ProductController>();
   YourOrderController _yourOrderController = Get.find<YourOrderController>();
+
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
@@ -35,9 +36,9 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     var androidInitialize =
-        new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
+    new AndroidInitializationSettings("@mipmap/ic_launcher_foreground");
     var initialzationSetting =
-        new InitializationSettings(android: androidInitialize);
+    new InitializationSettings(android: androidInitialize);
     localNotification = new FlutterLocalNotificationsPlugin();
     localNotification.initialize(initialzationSetting,
         onSelectNotification: notificationSelected);
@@ -77,7 +78,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
         importance: Importance.max);
     ForumContreller _forumContreller = Get.find<ForumContreller>();
     var generalNotificationDetails =
-        new NotificationDetails(android: androidDetails);
+    new NotificationDetails(android: androidDetails);
     await localNotification.show(
         0,
         'Hi ${_forumContreller.sessionUserInfo.value['name']}',
@@ -87,7 +88,7 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
 
   Future notificationSelected(String? payload) async {
     Get.to(
-      () => YourOrder(),
+          () => YourOrder(),
       transition: Transition.rightToLeft,
       curve: Curves.easeInToLinear,
       duration: Duration(milliseconds: 600),
@@ -131,8 +132,8 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
         confirm: "Retry",
         cancel: "Back To Home",
         title: "Payment Failed", onCancelPress: () {
-      Get.offAll(AstroEcom());
-    }, onConfirmPress: openCheckout);
+          Get.offAll(AstroEcom());
+        }, onConfirmPress: openCheckout);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -150,63 +151,171 @@ class _CheckoutDetailsState extends State<CheckoutDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              for (var userInfo in _orderController.orderDelivery.value.entries)
-                if (userInfo.key != 'cartList' &&
-                    userInfo.key != "orderTime" &&
-                    userInfo.key != "userAuth" &&
-                    userInfo.key != 'orderStatus')
-                  UserDetailsWdget(
-                      field: userInfo.key.toString().firstLetterUpperCase(),
-                      value: userInfo.key == "totalPrice"
-                          ? "Rs. ${userInfo.value.toString().firstLetterUpperCase()}"
-                          : userInfo.value.toString().firstLetterUpperCase()),
-              MaterialButton(
-                minWidth: context.screenWidth,
-                height: 50,
-                color: Colors.blueAccent,
-                child: Text('Place your order').text.white.xl2.make(),
-                onPressed: () {
-                  VxDialog.showTicker(
-                    context,
-                    barrierDismissible: true,
-                    confirm: 'Proceed',
-                    showClose: true,
-                    content:
-                        'Proceed to pay Rs. ${_productController.checkoutPrice.value.toString()}',
-                    onConfirmPress: openCheckout,
-                  );
-                },
-              ).marginOnly(top: 10),
-            ],
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/dbg.jpg'), fit: BoxFit.cover),
           ),
-        ),
-      ),
-    ));
+          child: Center(
+            child: Container(
+              width: context.screenWidth - 15,
+              height: context.screenWidth / 1.8,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                  boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)]),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          'Your order will be delivered to:'.text.xl2.make(),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          "${_orderController.orderDelivery.value['username']},"
+                              .firstLetterUpperCase()
+                              .text
+                              .xl2
+                              .make(),
+                          "${_orderController.orderDelivery.value['address']}, (${_orderController.orderDelivery.value['landmark']}), ${_orderController.orderDelivery.value['area']}, ${_orderController.orderDelivery.value['state']}, ${_orderController.orderDelivery.value['pinCode']}."
+                              .firstLetterUpperCase()
+                              .text
+                              .xl
+                              .make(),
+                          "Ph: ${_orderController.orderDelivery.value['number']}"
+                              .firstLetterUpperCase()
+                              .text
+                              .xl
+                              .make(),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        'Pay: Rs ${_orderController.orderDelivery.value['totalPrice']}'
+                            .text
+                            .xl2
+                            .make(),
+
+                        'Proceed'
+                            .text
+                            .white
+                            .xl
+                            .make()
+                            .p8()
+                            .box
+                            .px8
+                            .blue500
+                            .make()
+                            .cornerRadius(5)
+                            .onInkTap(() {
+                          VxDialog.showTicker(
+                            context,
+                            barrierDismissible: true,
+                            confirm: 'Proceed',
+                            showClose: true,
+                            content:
+                            'Proceed to pay Rs. ${_productController.checkoutPrice.value.toString()}',
+                            onConfirmPress: openCheckout,
+                          );
+                        }),
+                        // MaterialButton(
+                        //   height: 50,
+                        //   color: Colors.blueAccent,
+                        //   child: Text('Place your order').text.white.xl.make(),
+                        //   onPressed: () {
+                        //     VxDialog.showTicker(
+                        //       context,
+                        //       barrierDismissible: true,
+                        //       confirm: 'Proceed',
+                        //       showClose: true,
+                        //       content:
+                        //           'Proceed to pay Rs. ${_productController.checkoutPrice.value.toString()}',
+                        //       onConfirmPress: openCheckout,
+                        //     );
+                        //   },
+                        // ).marginOnly(top: 10).cornerRadius(10),
+                      ],
+                    ),
+                  ),
+
+                  // 'Post'
+                  //     .text
+                  //     .white
+                  //     .xl2
+                  //     .makeCentered()
+                  //     .box
+                  //     .py8
+                  //     .blue500
+                  //     .width(context.screenWidth)
+                  //     .make()
+                  //     .cornerRadius(10)
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 
-  Container UserDetailsWdget({field, value}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-      width: context.screenWidth - 40,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
-          borderRadius: BorderRadius.circular(5)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('$field').text.xl.gray400.make().marginOnly(bottom: 5),
-          Text('$value').text.xl2.gray700.make(),
-        ],
-      ),
-    );
-  }
+// MaterialButton(
+// minWidth: context.screenWidth,
+// height: 50,
+// color: Colors.blueAccent,
+// child: Text('Place your order').text.white.xl2.make(),
+// onPressed: () {
+// VxDialog.showTicker(
+// context,
+// barrierDismissible: true,
+// confirm: 'Proceed',
+// showClose: true,
+// content:
+// 'Proceed to pay Rs. ${_productController.checkoutPrice.value.toString()}',
+// onConfirmPress: openCheckout,
+// );
+// },
+// ).marginOnly(top: 10),
+
+// for (var userInfo in _orderController.orderDelivery.value.entries)
+// if (userInfo.key != 'cartList' &&
+// userInfo.key != "orderTime" &&
+// userInfo.key != "userAuth" &&
+// userInfo.key != 'orderStatus')
+
+// Container UserDetailsWdget({field, value}) {
+//   return Container(
+//     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+//     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+//     width: context.screenWidth - 40,
+//     decoration: BoxDecoration(
+//         color: Colors.white,
+//         boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+//         borderRadius: BorderRadius.circular(5)),
+//     child: Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Text('$field').text.xl.gray400.make().marginOnly(bottom: 5),
+//         Text('$value').text.xl2.gray700.make(),
+//       ],
+//     ),
+//   );
+// }
 }
