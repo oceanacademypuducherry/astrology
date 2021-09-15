@@ -42,12 +42,21 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
   }
 
   int count = 0;
+  int mukiyaPorutham = 0;
   getCount() {
     for (var i in _forumContreller.jadhagamDetail.value.entries) {
       if (i.value == 'YES') {
         count++;
+        if (i.key == "ஸ்திரி தீர்க்கம் பொருத்தம்" &&
+            i.key == "யோனி பொருத்தம" &&
+            i.key == "வசியம் பொருத்தம்" &&
+            i.key == "ரஜ்ஜி  பொருத்தம்" &&
+            i.key == "ராசி பொருத்தம்") {
+          mukiyaPorutham++;
+        }
       }
     }
+    print("${mukiyaPorutham} ///////mukiyaPorutham");
     print(count);
   }
 
@@ -369,12 +378,38 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
             ),
 
             ///last content
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              width: MediaQuery.of(context).size.width,
+              child: Text(
+                "மேலே கொடுக்கப்பட்ட 5 முக்கிய பொருத்தத்தில் --- பொருத்தம் உள்ளது",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.pinkAccent,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                  fontFamily: 'Ubuntu',
+                ),
+              ),
+            ),
 
             Container(
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
-              child: count > 6
+              child: _forumContreller.jadhagamDetail.value["ராசி பொருத்தம்"] ==
+                          'YES' &&
+                      _forumContreller.jadhagamDetail
+                              .value["ஸ்திரி தீர்க்கம் பொருத்தம்"] ==
+                          'YES' &&
+                      _forumContreller.jadhagamDetail.value["யோனி பொருத்தம்"] ==
+                          'YES' &&
+                      _forumContreller
+                              .jadhagamDetail.value["ரஜ்ஜி  பொருத்தம்"] ==
+                          'YES' &&
+                      _forumContreller
+                              .jadhagamDetail.value["வசியம் பொருத்தம்"] ==
+                          'YES'
                   ? Text(
                       "இருவருக்கும் திருமண பொருத்தம் இருக்கு",
                       textAlign: TextAlign.center,
@@ -396,9 +431,29 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                       ),
                     ),
             ),
+            // ElevatedButton(
+            //             //     onPressed: () {
+            //             //       print(
+            //             //           '${_forumContreller.jadhagamDetail.value}  controller//');
+            //             //     },
+            //             //     child: Text("Print")),
 
             Container(
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              width: MediaQuery.of(context).size.width,
+              child: Text(
+                "* மேலும் தகவல்களுக்கு உங்கள் குடும்ப ஜோதிடரை அணுகவும் *",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 10,
+                  fontFamily: 'Ubuntu',
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               alignment: Alignment.topLeft,
               width: MediaQuery.of(context).size.width,
               child: Text(
@@ -407,7 +462,7 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
-                  fontSize: 11,
+                  fontSize: 8,
                   fontFamily: 'Ubuntu',
                 ),
               ),

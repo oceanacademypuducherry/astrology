@@ -126,7 +126,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
     "Virichigam": ["Select", "விசாகம்", "அனுஷம்", "கேட்டை"],
     "Dhanusu": ["Select", "மூலம்", "பூராடம்", "உத்ராடம்"],
     "Magaram": ["Select", "உத்ராடம்", "திருவோணம்", "அவிட்டம்"],
-    "Kumbam": ["Select", "அவிட்டம்", "சாதயம்", "பூரட்டாதி"],
+    "Kumbam": ["Select", "அவிட்டம்", "சதயம்", "பூரட்டாதி"],
     "Meenam": ["Select", "பூரட்டாதி", "உத்திரட்டாதி", "ரேவதி"],
   };
   rasiListDropdown() {
@@ -277,15 +277,15 @@ class _MarriageMatchesState extends State<MarriageMatches> {
     if (response.statusCode == 200) {
       List joinig = [];
       List porutham = [
-        'தின பொருத்தம்',
-        'கன பொருத்தம்',
-        'மகேந்திர பொருத்தம்',
-        'ஸ்திரி பொருத்தம்',
+        'தினம் பொருத்தம்',
+        'கணம் பொருத்தம்',
+        'மகேந்திரம் பொருத்தம்',
+        'ஸ்திரி தீர்க்கம் பொருத்தம்',
         'யோனி பொருத்தம்',
         'ராசி பொருத்தம்',
         'ராசி அதிபதி பொருத்தம்',
-        'வசிய பொருத்தம்',
-        'ராஜ்ஜி பொருத்தம்',
+        'வசியம் பொருத்தம்',
+        'ரஜ்ஜி  பொருத்தம்',
         'நாடி பொருத்தம்',
       ];
       print(response.statusCode);
@@ -914,7 +914,7 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   : null,
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)),
+                                    borderRadius: BorderRadius.circular(0)),
                                 elevation: 2,
                                 primary: Color(0xff045de9),
                                 onPrimary: Colors.white,
@@ -924,7 +924,14 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              child: const Text('Find Matches'),
+                              child: const Text(
+                                'பொருத்தம் பார்',
+                                style: const TextStyle(
+                                  fontFamily: 'Ubuntu',
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           ),
                         ],

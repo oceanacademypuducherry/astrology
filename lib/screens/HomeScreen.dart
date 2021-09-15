@@ -27,12 +27,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -70,6 +72,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String urlPDFPath = "";
+
+  _launchURL(link) async {
+    var url = link;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -121,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? "Hi ${_forumContreller.sessionUserInfo['name'].toString().substring(0, 1).toUpperCase()}${_forumContreller.sessionUserInfo['name'].toString().substring(1, _forumContreller.sessionUserInfo['name'].length).toLowerCase()}, Good Afternoon !"
                           : "Hi ${_forumContreller.sessionUserInfo['name'].toString().substring(0, 1).toUpperCase()}${_forumContreller.sessionUserInfo['name'].toString().substring(1, _forumContreller.sessionUserInfo['name'].length).toLowerCase()}, Good Evening !",
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white,
                     fontWeight: FontWeight.normal,
                     fontSize: 13,
                     fontFamily: 'Ubuntu',
@@ -133,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
               centerTitle: true,
               background: Image.asset(
-                'images/background_image.png',
+                'images/background_image.jpg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -736,6 +748,40 @@ class _HomeScreenState extends State<HomeScreen> {
                           // ),
                         ),
                       ),
+                      Container(
+                          color: Color(0xff206DF9),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  _launchURL("https://www.facebook.com/");
+                                },
+                                icon: Icon(
+                                  FontAwesomeIcons.facebookSquare,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  _launchURL("https://www.youtube.com/");
+                                },
+                                icon: Icon(
+                                  FontAwesomeIcons.youtube,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  _launchURL("https://makarajothi.com/");
+                                },
+                                icon: Icon(
+                                  FontAwesomeIcons.globe,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ))
                     ],
                   ),
                 );
