@@ -67,6 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var getJadhagam;
 
   String? monthFormat;
+  String? dateMonth;
   String? dayTime;
   int? dayFormat;
   int? hourFormat;
@@ -244,29 +245,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var date;
 
   ///select date picker function
-  DateTime selectedDate = DateTime.now();
+
   _selectDate(BuildContext context) async {
+    TimeOfDay _time = TimeOfDay(hour: newHour, minute: newMinute);
+    DateTime selectedDate = DateTime.parse(
+        '${yearFormat.toString()}-${dateMonth}-${dayFormat.toString()} ${newHour.toString()}:${newMinute.toString()}');
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate, // Refer step 1
       firstDate: DateTime(1950),
       lastDate: DateTime(2050),
     );
-    if (picked != null && picked != selectedDate)
+    print('$picked uuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
+    print('$selectedDate iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
         print('selectedDate////////////////// ${selectedDate}');
       });
+      onTimeChanged(newTime) {
+        setState(() {
+          _time = newTime;
+        });
+        print('_time////////////////// ${_time}');
+      }
+
+      await Navigator.of(context).push(
+        showPicker(
+          context: context,
+          value: _time,
+          onChange: onTimeChanged,
+        ),
+      );
+      date = DateTime(selectedDate.year, selectedDate.month, selectedDate.day,
+          _time.hour, _time.minute);
+
+      ///update only date and time
+      _firestore
+          .collection("newusers")
+          .doc(Get.find<ForumContreller>().userDocumentId.toString())
+          .update({
+        "birthTime": date,
+      });
+    }
   }
 
   ///select time onPress
-  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
-  onTimeChanged(newTime) {
-    setState(() {
-      _time = newTime;
-    });
-    print('_time////////////////// ${_time}');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -350,11 +374,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       date = message['birthTime'];
 
                                       var month = DateFormat('MMMM');
+                                      var monthDate = DateFormat('MM');
                                       var year = DateFormat('yyyy');
                                       var day = DateFormat('d');
                                       var hour = DateFormat('hh');
                                       var minute = DateFormat('mm');
                                       var daytime = DateFormat('a');
+                                      dateMonth =
+                                          monthDate.format(date.toDate());
 
                                       monthFormat = month.format(date.toDate());
                                       yearFormat =
@@ -367,10 +394,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           minute.format(date.toDate()));
                                       dayTime = daytime.format(date.toDate());
 
-                                      newHour = hourFormat! < 9
+                                      newHour = hourFormat! < 10
                                           ? '0$hourFormat'
                                           : hourFormat;
-                                      newMinute = minuteFormat! < 9
+                                      newMinute = minuteFormat! < 10
                                           ? '0$minuteFormat'
                                           : minuteFormat;
                                     }
@@ -816,31 +843,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             }
 
                                             await _selectDate(context);
-                                            await Navigator.of(context).push(
-                                              showPicker(
-                                                context: context,
-                                                value: _time,
-                                                onChange: onTimeChanged,
-                                              ),
-                                            );
-
-                                            date = DateTime(
-                                                selectedDate.year,
-                                                selectedDate.month,
-                                                selectedDate.day,
-                                                _time.hour,
-                                                _time.minute);
-                                            print('date in button  ${date}');
-
-                                            ///update only date and time
-                                            _firestore
-                                                .collection("newusers")
-                                                .doc(Get.find<ForumContreller>()
-                                                    .userDocumentId
-                                                    .toString())
-                                                .update({
-                                              "birthTime": date,
-                                            });
                                           },
                                           child: Container(
                                             alignment: Alignment.topLeft,
@@ -955,34 +957,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     }
 
                                                     await _selectDate(context);
-                                                    await Navigator.of(context)
-                                                        .push(
-                                                      showPicker(
-                                                        context: context,
-                                                        value: _time,
-                                                        onChange: onTimeChanged,
-                                                      ),
-                                                    );
-
-                                                    date = DateTime(
-                                                        selectedDate.year,
-                                                        selectedDate.month,
-                                                        selectedDate.day,
-                                                        _time.hour,
-                                                        _time.minute);
-                                                    print(
-                                                        'date in button  ${date}');
-
-                                                    ///update only date and time
-                                                    _firestore
-                                                        .collection("newusers")
-                                                        .doc(Get.find<
-                                                                ForumContreller>()
-                                                            .userDocumentId
-                                                            .toString())
-                                                        .update({
-                                                      "birthTime": date,
-                                                    });
+                                                    // await Navigator.of(context)
+                                                    //     .push(
+                                                    //   showPicker(
+                                                    //     context: context,
+                                                    //     value: _time,
+                                                    //     onChange: onTimeChanged,
+                                                    //   ),
+                                                    // );
                                                   },
                                                 )
                                               ],
@@ -1024,7 +1006,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                         .userDocumentId
                                                         .toString())
                                                     .update({
-                                                  "name": nameController!.text,
+                                                  "name": nameController!.text
+                                                      .toLowerCase(),
                                                   "birthPlace":
                                                       birthPlaceController!
                                                           .text,
@@ -1046,7 +1029,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       .doc(i)
                                                       .update({
                                                     "userName":
-                                                        nameController!.text,
+                                                        "${nameController!.text.toLowerCase()}",
                                                     "birthPlace":
                                                         birthPlaceController!
                                                             .text,
@@ -1073,8 +1056,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 _forumContreller
                                                     .setUserInfo(update.data());
                                                 Get.snackbar(
-                                                  "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
-                                                  "Docuemnts are Updated",
+                                                  "Hello ${_forumContreller.sessionUserInfo['name'].toString().substring(0, 1).toUpperCase()}${_forumContreller.sessionUserInfo['name'].toString().substring(1, _forumContreller.sessionUserInfo['name'].length).toLowerCase()}",
+                                                  "Documents are updated",
                                                   icon: Icon(Icons.person,
                                                       color: Colors.white),
                                                   snackPosition:
@@ -1095,7 +1078,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 );
                                               } else {
                                                 Get.snackbar(
-                                                  "Hello ${_forumContreller.sessionUserInfo.value['name']}!",
+                                                  "Hello ${_forumContreller.sessionUserInfo['name'].toString().substring(0, 1).toUpperCase()}${_forumContreller.sessionUserInfo['name'].toString().substring(1, _forumContreller.sessionUserInfo['name'].length).toLowerCase()}",
                                                   "Please provide your documents",
                                                   icon: Icon(Icons.person,
                                                       color: Colors.white),
@@ -1139,7 +1122,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           color: Colors.black54,
                                           thickness: 0.2,
                                         ),
-
                                         Container(
                                           width:
                                               MediaQuery.of(context).size.width,
@@ -1169,7 +1151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     child: Column(
                                                       children: [
                                                         Text(
-                                                          "Are you sure Want to logout",
+                                                          "Are you sure want to logout ?",
                                                         ),
                                                         // SizedBox(
                                                         //   height: 10,

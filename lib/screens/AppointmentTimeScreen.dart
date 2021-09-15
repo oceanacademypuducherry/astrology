@@ -80,7 +80,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IlFFMlNaTGhCUUhLX1BwUDI1dEl6ZnciLCJleHAiOjE2MzE1MTIxMjcsImlhdCI6MTYzMDkwNzMyNn0.sUkG1JQSIvBi4HTUEj4uSjIivaXz2k3Vw7WhS06kcWo'
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IlFFMlNaTGhCUUhLX1BwUDI1dEl6ZnciLCJleHAiOjE2MzIxMTk1NjAsImlhdCI6MTYzMTUxNDc1OX0.T8hn3GyDRv1lW2ooB0mPsnVUY7ci_5GXPEALJjrNDiY'
       },
       body: jsonEncode(
         <String, dynamic>{
@@ -603,9 +603,9 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                     width: MediaQuery.of(context).size.width / 1.1,
                     height: 50,
                     child: ElevatedButton(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         child: Text(
                           'Continue',
                           style: TextStyle(
@@ -641,7 +641,7 @@ class _AppointmentTimeScreenState extends State<AppointmentTimeScreen> {
                               Get.to(() => BookingDetails(),
                                   arguments: orderTime,
                                   transition: Transition.rightToLeft,
-                                  curve: Curves.easeInToLinear,
+                                  curve: Curves.easeIn,
                                   duration: Duration(milliseconds: 600));
                             }
                           : null,

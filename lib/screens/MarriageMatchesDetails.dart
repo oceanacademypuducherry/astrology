@@ -1,95 +1,54 @@
+// ignore_for_file: file_names
+
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-import 'package:http/http.dart' as http;
 
 ForumContreller _forumContreller = Get.find<ForumContreller>();
-Future<GetDataForPorutham> fetchLink(String boyNatchathiram,
-    String girlNatchathiram, String boyPada, String girlPada) async {
-  print(_forumContreller.matchingToken.value.toString());
-  final response = await http.get(
-    Uri.parse(
-        'https://api.prokerala.com/v2/astrology/thirumana-porutham?girl_nakshatra=${girlNatchathiram}&girl_nakshatra_pada=${girlPada}&boy_nakshatra=${boyNatchathiram}&boy_nakshatra_pada=${boyPada}'),
-    // Send authorization headers to the backend.
-
-    headers: {
-      // Authorization:
-      HttpHeaders.authorizationHeader:
-          'Bearer ${_forumContreller.matchingToken.value.toString().trim()}',
-    },
-  );
-
-  if (response.statusCode == 200) {
-    print(response.statusCode);
-    print('************************************');
-    Map valueMap = json.decode(response.body);
-    print(valueMap);
-    _forumContreller.setMaximumPoint(valueMap['data']['obtained_points']);
-    return GetDataForPorutham.fromJson(jsonDecode(response.body));
-  } else {
-    print(response.statusCode);
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-    throw Exception('Failed to load data');
-  }
-}
-
-class GetDataForPorutham {
-  List matches = [];
-  double maximumPoints;
-  double obtainPointrs;
-
-  GetDataForPorutham({
-    required this.matches,
-    required this.maximumPoints,
-    required this.obtainPointrs,
-  });
-
-  factory GetDataForPorutham.fromJson(Map<String, dynamic> json) {
-    print('^^^^^^^^^^^^^^^^^^^^^^^^^^');
-    return GetDataForPorutham(
-        matches: json['data']['matches'] as List,
-        maximumPoints: json['data']['maximum_points'],
-        obtainPointrs: json['data']['obtained_points']);
-  }
-}
 
 class MarriageMatchesDetails extends StatefulWidget {
   String boyName;
   String girlName;
-  String boyNatchathiram;
+
   String natchathiramBoyValue;
   String natchathiramGirlValue;
 
-  String girlNatchathiram;
-  String boyPada;
-  String girlPada;
+  String boyRasi;
+  String girlRasi;
 
-  MarriageMatchesDetails(
-      {required this.girlPada,
-      required this.natchathiramBoyValue,
-      required this.natchathiramGirlValue,
-      required this.girlName,
-      required this.boyPada,
-      required this.boyName,
-      required this.girlNatchathiram,
-      required this.boyNatchathiram});
+  MarriageMatchesDetails({
+    required this.girlRasi,
+    required this.natchathiramBoyValue,
+    required this.natchathiramGirlValue,
+    required this.girlName,
+    required this.boyRasi,
+    required this.boyName,
+  });
 
   @override
   _MarriageMatchesDetailsState createState() => _MarriageMatchesDetailsState();
 }
 
 class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
-  late Future<GetDataForPorutham> futureLink;
+  // late Future<GetDataForPorutham> futureLink;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    futureLink = fetchLink(widget.boyNatchathiram, widget.girlNatchathiram,
-        widget.boyPada, widget.girlPada);
+    getCount();
+    print(
+        ';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;${_forumContreller.jadhagamDetail.value}');
+  }
+
+  int count = 0;
+  getCount() {
+    for (var i in _forumContreller.jadhagamDetail.value.entries) {
+      if (i.value == 'YES') {
+        count++;
+      }
+    }
+    print(count);
   }
 
   @override
@@ -100,6 +59,13 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
         width: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
           child: Column(children: [
+            // TextButton(
+            //   onPressed: () {
+            //     getCount();
+            //   },
+            //   child: Text('llllllllll'),
+            // ),
+
             ///First content astrologer details
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
@@ -141,7 +107,7 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                          "Harichanran",
+                          "Arichandran",
                           style: TextStyle(
                             color: Colors.black54,
                             fontWeight: FontWeight.w500,
@@ -193,12 +159,38 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Marriage Matches",
+                  "திருமணப் பொருத்தங்கள்",
                   style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.w500,
+                    color: Colors.blue.shade400,
+                    fontWeight: FontWeight.bold,
                     fontSize: 18,
                     fontFamily: 'Ubuntu',
+                  ),
+                ).marginOnly(bottom: 10),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "மணமகன்",
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'Ubuntu',
+                        ),
+                      ),
+                      Text(
+                        "மணமகள்",
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'Ubuntu',
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Container(
@@ -207,7 +199,7 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${widget.boyName}",
+                        "${widget.boyName.toString().substring(0, 1).toUpperCase()}${widget.boyName.toString().substring(1, widget.boyName.length).toLowerCase()}",
                         style: TextStyle(
                           color: Colors.black54,
                           fontWeight: FontWeight.w500,
@@ -216,7 +208,33 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                         ),
                       ),
                       Text(
-                        "${widget.girlName}",
+                        "${widget.girlName.toString().substring(0, 1).toUpperCase()}${widget.girlName.toString().substring(1, widget.girlName.length).toLowerCase()}",
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          fontFamily: 'Ubuntu',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${widget.boyRasi}",
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          fontFamily: 'Ubuntu',
+                        ),
+                      ),
+                      Text(
+                        "${widget.girlRasi}",
                         style: TextStyle(
                           color: Colors.black54,
                           fontWeight: FontWeight.w500,
@@ -253,96 +271,72 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                     ],
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "${widget.boyPada}",
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          fontFamily: 'Ubuntu',
-                        ),
-                      ),
-                      Text(
-                        "${widget.girlPada}",
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          fontFamily: 'Ubuntu',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ],
-            ),
-            Divider(
-              thickness: 0.2,
-              color: Colors.grey,
             ),
 
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  height: 750,
+                  // height: 750,
                   // width: double.infinity,
-                  child: FutureBuilder<GetDataForPorutham>(
-                    future: futureLink,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        print('jjjjjjjjjjjjjjjjjjjjjj');
-
-                        return ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: snapshot.data!.matches.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(snapshot.data!.matches[index]['name']),
-                                    snapshot.data!.matches[index]
-                                            ['has_porutham']
-                                        ? Icon(
-                                            Icons.done_all_outlined,
-                                            color: Colors.green[300],
-                                          )
-                                        : Icon(
-                                            Icons.close_outlined,
-                                            color: Colors.red[300],
-                                          )
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      } else if (snapshot.hasError) {
-                        print('error${snapshot.error}');
-                        return Text('error${snapshot.error}');
-                      }
-
-                      // By default, show a loading spinner.
-                      return const CircularProgressIndicator();
-                    },
+                  child: Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        color: Colors.grey[200],
+                        alignment: Alignment.center,
+                        child: Text(
+                          "பொருத்தங்கள்",
+                          style: TextStyle(
+                            fontFamily: 'Ubuntu',
+                            fontSize: 15,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.blue.shade200,
+                          ),
+                        ),
+                      ).marginSymmetric(vertical: 15),
+                      for (var porutham
+                          in _forumContreller.jadhagamDetail.value.entries)
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "${porutham.key}",
+                                  style: TextStyle(
+                                    fontFamily: 'Ubuntu',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black54,
+                                  ),
+                                ).marginOnly(left: 30),
+                                porutham.value == "YES"
+                                    ? Icon(
+                                        Icons.done_all_outlined,
+                                        color: Colors.green,
+                                      ).marginOnly(right: 30)
+                                    : Icon(
+                                        Icons.clear,
+                                        color: Colors.red,
+                                      ).marginOnly(right: 30)
+                              ],
+                            ),
+                            Divider(
+                              thickness: 0.9,
+                              color: Colors.grey,
+                            )
+                          ],
+                        ).paddingAll(10),
+                    ],
                   ),
                 ),
               ],
             ),
 
             ///Result of marriage matches
-            Divider(
-              thickness: 0.2,
-              color: Colors.grey,
-            ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
               child: Row(
@@ -357,17 +351,15 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                       fontFamily: 'Ubuntu',
                     ),
                   ),
-                  Obx(
-                    () => Text(
-                      "(${_forumContreller.maximunPoint.value.toString().substring(0, 1)}/12)",
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        fontFamily: 'Ubuntu',
-                      ),
+                  Text(
+                    "(${count}/10)",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      fontFamily: 'Ubuntu',
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -377,64 +369,49 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
             ),
 
             ///last content
+
             Container(
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
-              child: Text(
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  fontFamily: 'Ubuntu',
-                ),
-              ),
-            ),
-            Obx(
-              () => Container(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
-                child: _forumContreller.maximunPoint.value > 6
-                    ? Text(
-                        "இருவருக்கும் திருமண பொருத்தம் இருக்கு",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                          fontFamily: 'Ubuntu',
-                        ),
-                      )
-                    : Text(
-                        "இருவருக்கும் திருமண பொருத்தம் இல்லை",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                          fontFamily: 'Ubuntu',
-                        ),
+              child: count > 6
+                  ? Text(
+                      "இருவருக்கும் திருமண பொருத்தம் இருக்கு",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        fontFamily: 'Ubuntu',
                       ),
-              ),
+                    )
+                  : Text(
+                      "இருவருக்கும் திருமண பொருத்தம் இல்லை",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        fontFamily: 'Ubuntu',
+                      ),
+                    ),
             ),
+
             Container(
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              alignment: Alignment.center,
+              alignment: Alignment.topLeft,
               width: MediaQuery.of(context).size.width,
               child: Text(
-                "** திருமணம் என்பது ஒரு ஆண், ஒரு பெண் சேர்ந்து வாழ்ந்து அனைத்து சுக, துக்கங்களைப் பகிர்ந்து கொண்டு வாழ்வதாகும். **",
+                "* மேலே கொடுக்கப்பட்ட பத்துப் பொருத்த தகவல்கள் நட்சத்திர அடிப்படையில் மட்டுமே கொடுக்க ப் பட்டுள்ளது.இதில் செவ்வாய் தோஷம், கால சர்ப்ப தோஷம், போன்றவை கணக்கில் எடுத்துக் கொள்ள வில்லை.இதில் மணமக்களின் ஆயுள், புத்திரம், தாம்பத்யம், வருமானம் போன்றவைகள் தெரியாது.மேற்கண்ட தகவலின் படி திருமணம் செய்வது அவரவர் விருப்பத்திற்கு ட் பட்டது.அனுகூலப்பொருத்தம் பார்ப்பதே நல்லது. *",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
-                  fontSize: 15,
+                  fontSize: 11,
                   fontFamily: 'Ubuntu',
                 ),
               ),
-            )
+            ),
           ]),
         ),
       ),

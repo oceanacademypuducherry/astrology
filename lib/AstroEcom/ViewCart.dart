@@ -48,6 +48,7 @@ class ViewCart extends StatelessWidget {
         ),
       ),
       body: Container(
+        padding: EdgeInsets.only(bottom: 50),
         child: Obx(() => ListView.builder(
             // ignore: invalid_use_of_protected_member
             itemCount: _productController.cartProductList.value.length,

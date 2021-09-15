@@ -50,7 +50,8 @@ class _BookingDetailsState extends State<BookingDetails> {
     'Health',
     'Character',
     'Wealth',
-    'Personal'
+    'Personal',
+    'Other'
   ];
   List userPurpose = [];
   Map checking = {};
@@ -239,6 +240,9 @@ class _BookingDetailsState extends State<BookingDetails> {
 
   ///RAZORPAY START
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    print('66666666666666666666666666666666666666666666666666');
+    print(Get.arguments);
+    print(newDate);
     _firestore.collection('booking').add({
       'time': Get.arguments,
       'phoneNumber': _forumContreller.userSession.value,
@@ -361,6 +365,8 @@ class _BookingDetailsState extends State<BookingDetails> {
   ///RAZORPAY END
   @override
   Widget build(BuildContext context) {
+    print('ooooooooooooooooooooooooooooooooooooo');
+    print(Get.arguments);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff045de9),
@@ -732,37 +738,48 @@ class _BookingDetailsState extends State<BookingDetails> {
                           )),
                       child: ElevatedButton(
                         ///checking For Me or SomeoneElse to Route to next Page
-                        onPressed: _appointment == Appointment.MySelf
+                        onPressed: _appointment == Appointment.MySelf &&
+                                checking.length > 0
                             ? () {
+                                print(
+                                    '${checking.length} ///////////////////////');
+
                                 ///payment page
                                 openCheckout();
-
-                                // _firestore.collection('booking').add({
-                                //   'time': Get.arguments,
-                                //   'purpose of appointment':
-                                //       _appointment.toString(),
-                                //   'appointment For': _purpose.toString(),
-                                // });
-                                //
-                                // Get.to(() => BottomNavigation(),
-                                //     transition: Transition.topLevel,
-                                //     // curve: Curves.ease,
-                                //     duration: Duration(milliseconds: 600));
                               }
-                            : () {
-                                ///someone else page
-                                Get.to(
-                                    () => SomeoneElseScreen(
-                                          appointmentFor:
-                                              _appointment.toString(),
-                                          purpose: _purpose.toString(),
-                                          time: newDate,
-                                          ruppess: rupees,
-                                        ),
-                                    transition: Transition.topLevel,
-                                    // curve: Curves.ease,
-                                    duration: Duration(milliseconds: 600));
-                              },
+                            : checking.length > 0
+                                ? () {
+                                    ///someone else page
+                                    Get.to(
+                                        () => SomeoneElseScreen(
+                                              appointmentFor:
+                                                  _appointment.toString(),
+                                              purpose: _purpose.toString(),
+                                              time: newDate,
+                                              ruppess: rupees,
+                                            ),
+                                        transition: Transition.topLevel,
+                                        // curve: Curves.ease,
+                                        duration: Duration(milliseconds: 600));
+                                  }
+                                : () {
+                                    Get.snackbar(
+                                      "Hello ${_forumContreller.sessionUserInfo['name'].toString().substring(0, 1).toUpperCase()}${_forumContreller.sessionUserInfo['name'].toString().substring(1, _forumContreller.sessionUserInfo['name'].length).toLowerCase()}",
+                                      "Choose any one purpose of appointments",
+                                      icon: Icon(Icons.person,
+                                          color: Colors.white),
+                                      snackPosition: SnackPosition.TOP,
+                                      backgroundColor: Colors.blue[500],
+                                      borderRadius: 10,
+                                      margin: EdgeInsets.all(12),
+                                      colorText: Colors.white,
+                                      duration: Duration(seconds: 4),
+                                      isDismissible: true,
+                                      dismissDirection:
+                                          SnackDismissDirection.HORIZONTAL,
+                                      forwardAnimationCurve: Curves.easeOutBack,
+                                    );
+                                  },
                         child: _appointment == Appointment.MySelf
                             ? Text('Proceed to Payment')
                             : Text('Update Their Document'),
