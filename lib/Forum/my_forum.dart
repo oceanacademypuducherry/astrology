@@ -56,7 +56,7 @@ class MyForums extends StatelessWidget {
                               VxDialog.showConfirmation(context,
                                   title: 'Are you sure?',
                                   content:
-                                      'Once deleted you will not able to recover this data',
+                                      'Once deleted, you will not recover this question',
                                   confirm: 'Delete It',
                                   confirmBgColor: Colors.redAccent,
                                   cancel: 'No', onConfirmPress: () {

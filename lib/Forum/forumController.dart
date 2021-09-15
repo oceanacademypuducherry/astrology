@@ -16,6 +16,11 @@ class ForumContreller extends GetxController {
   final articleData = [].obs;
   final userName = ''.obs;
   final appointmentCompleted = false.obs;
+  final jadhagamDetail = {}.obs;
+
+  setJadhagamDetails(data) {
+    jadhagamDetail(data);
+  }
 
   setAppointmentCompleted(isCompleted) {
     appointmentCompleted(isCompleted);

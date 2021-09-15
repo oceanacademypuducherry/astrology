@@ -54,7 +54,7 @@ class AddPost extends StatelessWidget {
                       Get.back();
                     } else {
                       Get.snackbar('Failed Post',
-                          'Field wil be grater then 10 character',
+                          'Minimum text limit is greater than 10 character',
                           backgroundColor: Colors.black,
                           colorText: Colors.white);
                     }

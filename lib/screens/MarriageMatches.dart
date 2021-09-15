@@ -1,5 +1,6 @@
-import 'dart:math';
+// ignore_for_file: file_names
 
+import 'dart:math';
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:astrology_app/screens/MarriageMatchesDetails.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:velocity_x/velocity_x.dart';
 
 class MarriageMatches extends StatefulWidget {
   const MarriageMatches({Key? key}) : super(key: key);
@@ -26,72 +29,116 @@ class _MarriageMatchesState extends State<MarriageMatches> {
   bool validation = false;
   var boyName;
   var girlName;
+  dynamic loadingJadhagam;
+  var selectedRasiIndex;
+  var englishSelectedGirlRasi;
+  var englishNatchathiramSelectedGirl;
+  bool isOpen = true;
 
-  List<String> natchatharam = [
+  List<String> rasiList = [
     'Select',
-    'Ashwini',
-    'Bharani',
-    'Krithika',
-    'Mrigashirsha',
-    'Ardra',
-    'Punarvasu',
-    'Pushya',
-    'Ashlesha',
-    'Magha',
-    'Purva Phalguni',
-    'Uttara Phalguni',
-    'Hastra',
-    'Chitra',
-    'Swati',
-    'Vishaka',
-    'Anuradha',
-    'Jyeshta',
-    'Moola',
-    'Purva Ashadha',
-    'Uttara Ashadha',
-    'Sharvana',
-    'Dhanishta',
-    'Shatabhisha',
-    'Uttara Bhadrapada',
-    'Purva Bhadrapada',
-    'Revati',
-  ];
-  List<String> pada = [
-    'Select',
-    '1',
-    '2',
-    '3',
-    '4',
+    'மேஷம்',
+    'ரிஷபம்',
+    'மிதுனம்',
+    'கடகம்',
+    'சிம்மம்',
+    'கன்னி',
+    'துலாம்',
+    'விருச்சிகம்',
+    'தனுசு',
+    'மகரம்',
+    'கும்பம்',
+    'மீனம்',
   ];
 
-  String boyValue = 'Select';
-  String boyPada = 'Select';
-  String girlPada = 'Select';
-  String girlValue = 'Select';
-  int? boySelectedNum;
-  int? girlSelectedNum;
+  List EnglishRasiList = [
+    'Select',
+    'Mesham',
+    'Rishabam',
+    'Mithunam',
+    'Kadagam',
+    'Simmam',
+    'Kanni',
+    'Thulam',
+    'Virichigam',
+    'Dhanusu',
+    'Magaram',
+    'Kumbam',
+    'Meenam',
+  ];
 
-  natchathiramDropdown() {
+  var boySelectedRasi = 'Select';
+  String girlSelectedRasi = 'Select';
+  var boySelectedNatchathiram;
+  var girlSelectedNatchathiram;
+  List<String> boyNatchathiram = [];
+  List<String> girlNatchathiram = [];
+
+  boyNatchathiramDropdown() {
     List<DropdownMenuItem<String>> dropList = [];
-
-    for (var enquerys in natchatharam) {
+    for (var natchathiram in boyNatchathiram) {
+      print("${boyNatchathiram} ///////////////////////////////");
       var newList = DropdownMenuItem(
-        child: Text(enquerys),
-        value: enquerys,
+        child: Text(natchathiram),
+        value: natchathiram,
       );
       dropList.add(newList);
     }
     return dropList;
   }
 
-  padaDropdown() {
+  girlNatchathiramDropdown() {
+    List<DropdownMenuItem<String>> dropList = [];
+    for (var natchathiram in girlNatchathiram) {
+      print("${girlNatchathiram} ///////////////////////////////");
+      var newList = DropdownMenuItem(
+        child: Text(natchathiram),
+        value: natchathiram,
+      );
+      dropList.add(newList);
+    }
+    return dropList;
+  }
+
+  Map a = {
+    "Mesham": ["Select", "Aswini", "Barani", "Karthigai"],
+    "Rishabam": ["Select", "Karthigai", "Rohini", "Mirugasirisham"],
+    "Mithunam": ["Select", "Mirugasirisham", "Thiruvathirai", "Punarpusam"],
+    "Kadagam": ["Select", "Punarpusam", "Pusam", "Aayilyam"],
+    "Simmam": ["Select", "Magam", "Pooram", "Uthiram"],
+    "Kanni": ["Select", "Uthiram", "Astham", "Chithirai"],
+    "Thulam": ["Select", "Chithirai", "Swathi", "Visagam"],
+    "Virichigam": ["Select", "Visagam", "Anusham", "Ketai"],
+    "Dhanusu": ["Select", "Moolam", "Pooradam", "Uthradam"],
+    "Magaram": ["Select", "Uthradam", "Thiruvonam", "Avitam"],
+    "Kumbam": ["Select", "Avitam", "Sadhayam", "Pooratathi"],
+    "Meenam": ["Select", "Pooratathi", "Uthiratathi", "Revathi"],
+  };
+
+  Map tamilNatchathiram = {
+    "Mesham": ["Select", "அஸ்வினி", "பரணி", "கார்த்திகை"],
+    "Rishabam": ["Select", "கார்த்திகை", "ரோகினி", "மிருகசிரிஷம்"],
+    "Mithunam": ["Select", "மிருகசிரிஷம்", "திருவாதிரை", "புனர்பூசம்"],
+    "Kadagam": ["Select", "புனர்பூசம்", "பூசம்", "ஆயில்யம்"],
+    "Simmam": ["Select", "மகம்", "பூரம்", "உத்திரம்"],
+    "Kanni": ["Select", "உத்திரம்", "ஹஸ்தம்", "சித்திரை"],
+    "Thulam": ["Select", "சித்திரை", "சுவாதி", "விசாகம்"],
+    "Virichigam": ["Select", "விசாகம்", "அனுஷம்", "கேட்டை"],
+    "Dhanusu": ["Select", "மூலம்", "பூராடம்", "உத்ராடம்"],
+    "Magaram": ["Select", "உத்ராடம்", "திருவோணம்", "அவிட்டம்"],
+    "Kumbam": ["Select", "அவிட்டம்", "சாதயம்", "பூரட்டாதி"],
+    "Meenam": ["Select", "பூரட்டாதி", "உத்திரட்டாதி", "ரேவதி"],
+  };
+  rasiListDropdown() {
     List<DropdownMenuItem<String>> dropList = [];
 
-    for (var enquerys in pada) {
+    for (var enquerys in rasiList) {
+      print("$boySelectedRasi rasiDisBlankropdown");
       var newList = DropdownMenuItem(
         child: Text(enquerys),
         value: enquerys,
       );
+
       dropList.add(newList);
     }
     return dropList;
@@ -219,10 +266,73 @@ class _MarriageMatchesState extends State<MarriageMatches> {
     }
   }
 
-  ///matches
+  var marriage;
+  marriageData(String boyNatchathiram, String girlNatchathiram) async {
+    print(boyNatchathiram);
+    print(girlNatchathiram);
+    final response = await http.get(
+      Uri.parse(
+          'https://dheivegam.com/wp-admin/admin-ajax.php?action=populate_natchathira_porutham&male_natchatra=$boyNatchathiram&female_natchatra=$girlNatchathiram'),
+    );
+    if (response.statusCode == 200) {
+      List joinig = [];
+      List porutham = [
+        'தின பொருத்தம்',
+        'கன பொருத்தம்',
+        'மகேந்திர பொருத்தம்',
+        'ஸ்திரி பொருத்தம்',
+        'யோனி பொருத்தம்',
+        'ராசி பொருத்தம்',
+        'ராசி அதிபதி பொருத்தம்',
+        'வசிய பொருத்தம்',
+        'ராஜ்ஜி பொருத்தம்',
+        'நாடி பொருத்தம்',
+      ];
+      print(response.statusCode);
+
+      print(response.body.runtimeType);
+      marriage = response.body.split(' ');
+      for (var i in marriage) {
+        i.contains('YES')
+            ? joinig.add('YES')
+            : i.contains('NO')
+                ? joinig.add('NO')
+                : null;
+      }
+
+      Map combination = {};
+
+      for (var i = 0; i <= porutham.length - 1; i++) {
+        combination[porutham[i]] = joinig[i];
+      }
+
+      _forumContreller.setJadhagamDetails(combination);
+
+      Future.delayed(0.100.seconds, loadingJadhagam);
+      print(
+          '================////////////////////////api//////////////////////////==============');
+      print(joinig);
+
+      print('=================api=============');
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed *********************');
+    }
+  }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj ');
+  }
+
+  ///matches
+  var englishSelectedRasi;
+  var englishNatchathiramSelectedBoy;
+  @override
   Widget build(BuildContext context) {
+    // isOpen = true;
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -256,11 +366,11 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                           SizedBox(height: 20),
                           Container(
                             child: Text(
-                              'Boy\'s Details ',
+                              'மணமகன் விவரம்',
                               style: TextStyle(
                                 fontFamily: 'Ubuntu',
                                 fontSize: 18,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.bold,
                                 color: Colors.lightBlue,
                               ),
                             ),
@@ -286,11 +396,11 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Groom Name ',
+                                        text: "மணமகன் பெயர்",
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.normal,
                                           color: Colors.blue,
                                         ),
                                         children: [
@@ -336,11 +446,11 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Groom Natchathiram',
+                                        text: 'மணமகன் ராசி',
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.normal,
                                           color: Colors.blue,
                                         ),
                                         children: [
@@ -375,17 +485,27 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                         fontFamily: 'Ubuntu',
                                         color: Colors.grey,
                                       ),
-                                      value: boyValue,
+                                      value: boySelectedRasi,
                                       isExpanded: true,
-                                      items: natchathiramDropdown(),
+                                      items: rasiListDropdown(),
                                       onChanged: (value) {
                                         setState(() {
-                                          boyValue = value!;
-                                          boySelectedNum =
-                                              natchatharam.indexOf(value) - 1;
+                                          boySelectedRasi = value!;
+                                          selectedRasiIndex =
+                                              rasiList.indexOf(value);
+                                          print(
+                                              '$selectedRasiIndex iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+                                          englishSelectedRasi = EnglishRasiList[
+                                              selectedRasiIndex];
+                                          print(englishSelectedRasi);
+                                          boyNatchathiram = tamilNatchathiram[
+                                              englishSelectedRasi];
+                                          boySelectedNatchathiram =
+                                              boyNatchathiram[0];
                                         });
-                                        print(value);
-                                        print(boySelectedNum);
+
+                                        print(
+                                            "$boySelectedRasi ☻☻☻boySelectedRasi");
                                       },
                                     ),
                                   ),
@@ -415,11 +535,11 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Groom Pada',
+                                        text: 'மணமகன் நட்சத்திரம்',
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.normal,
                                           color: Colors.blue,
                                         ),
                                         children: [
@@ -454,13 +574,25 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                         fontFamily: 'Ubuntu',
                                         color: Colors.grey,
                                       ),
-                                      value: boyPada,
+                                      value: boySelectedNatchathiram,
                                       isExpanded: true,
-                                      items: padaDropdown(),
+                                      items: boyNatchathiramDropdown(),
                                       onChanged: (value) {
                                         setState(() {
-                                          boyPada = value!;
+                                          boySelectedNatchathiram = value!;
+                                          var englishNatchathiramIndex =
+                                              tamilNatchathiram[
+                                                      englishSelectedRasi]
+                                                  .indexOf(value);
+                                          print(englishNatchathiramIndex);
+                                          englishNatchathiramSelectedBoy =
+                                              a[englishSelectedRasi]
+                                                  [englishNatchathiramIndex];
+                                          print(englishNatchathiramSelectedBoy);
                                         });
+
+                                        print(
+                                            "$boySelectedNatchathiram  selectedboySelectedNatchathiram");
                                       },
                                     ),
                                   ),
@@ -476,11 +608,11 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                           SizedBox(height: 10),
                           Container(
                             child: Text(
-                              'Girl\'s Details ',
+                              'மணமகள் விவரம்',
                               style: TextStyle(
                                 fontFamily: 'Ubuntu',
                                 fontSize: 18,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.bold,
                                 color: Colors.lightBlue,
                               ),
                             ),
@@ -506,11 +638,11 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Bride Name ',
+                                        text: 'மணமகள் பெயர்',
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.normal,
                                           color: Colors.blue,
                                         ),
                                         children: [
@@ -538,84 +670,6 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             margin: EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 10),
                             padding: const EdgeInsets.only(left: 15, top: 5),
-                            height: 70,
-                            decoration:
-                                BoxDecoration(color: Colors.white, boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0.3, 0.3),
-                                blurRadius: 5,
-                                spreadRadius: 3,
-                                color: Colors.black12,
-                              ),
-                            ]),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: RichText(
-                                    text: TextSpan(
-                                        text: 'Bride Natchathiram',
-                                        style: TextStyle(
-                                          fontFamily: 'Ubuntu',
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue,
-                                        ),
-                                        children: [
-                                          TextSpan(
-                                            text: " *",
-                                            style: TextStyle(
-                                              fontFamily: 'Ubuntu',
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.red[200],
-                                            ),
-                                          )
-                                        ]),
-                                  ),
-                                ),
-                                Container(
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    // color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton<String>(
-                                      onTap: () {
-                                        messageFocusNode1.unfocus();
-                                        messageFocusNode2.unfocus();
-                                      },
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Ubuntu',
-                                        color: Colors.grey,
-                                      ),
-                                      value: girlValue,
-                                      isExpanded: true,
-                                      items: natchathiramDropdown(),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          girlValue = value!;
-                                          girlSelectedNum =
-                                              natchatharam.indexOf(girlValue) -
-                                                  1;
-                                        });
-                                        print(value);
-                                        print(girlSelectedNum);
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 10),
-                            padding: const EdgeInsets.only(left: 15, top: 5),
                             height: 68,
                             decoration:
                                 BoxDecoration(color: Colors.white, boxShadow: [
@@ -634,11 +688,11 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                   alignment: Alignment.centerLeft,
                                   child: RichText(
                                     text: TextSpan(
-                                        text: 'Bride Pada',
+                                        text: 'மணமகள் ராசி',
                                         style: TextStyle(
                                           fontFamily: 'Ubuntu',
                                           fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.normal,
                                           color: Colors.blue,
                                         ),
                                         children: [
@@ -673,15 +727,117 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                                         fontFamily: 'Ubuntu',
                                         color: Colors.grey,
                                       ),
-                                      value: girlPada,
+                                      value: girlSelectedRasi,
                                       isExpanded: true,
-                                      items: padaDropdown(),
+                                      items: rasiListDropdown(),
                                       onChanged: (value) {
                                         setState(() {
-                                          girlPada = value!;
+                                          girlSelectedRasi = value!;
+                                          var selectedRasiGirlIndex =
+                                              rasiList.indexOf(value);
+                                          englishSelectedGirlRasi =
+                                              EnglishRasiList[
+                                                  selectedRasiGirlIndex];
+                                          print(
+                                              '$englishSelectedGirlRasi oooooooooooooooooooooooooooooooooooo');
+                                          girlNatchathiram = tamilNatchathiram[
+                                              englishSelectedGirlRasi];
+                                          girlSelectedNatchathiram =
+                                              girlNatchathiram[0];
+                                          print(
+                                              "$girlSelectedRasi  ☻☻☻girlSelectedRasi");
                                         });
-                                        print(value);
-                                        print(boySelectedNum);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
+                            padding: const EdgeInsets.only(left: 15, top: 5),
+                            height: 70,
+                            decoration:
+                                BoxDecoration(color: Colors.white, boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0.3, 0.3),
+                                blurRadius: 5,
+                                spreadRadius: 3,
+                                color: Colors.black12,
+                              ),
+                            ]),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: 'மணமகள் நட்சத்திரம்',
+                                        style: TextStyle(
+                                          fontFamily: 'Ubuntu',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.blue,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: " *",
+                                            style: TextStyle(
+                                              fontFamily: 'Ubuntu',
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.red[200],
+                                            ),
+                                          )
+                                        ]),
+                                  ),
+                                ),
+                                Container(
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    // color: Colors.grey[300],
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      onTap: () {
+                                        messageFocusNode1.unfocus();
+                                        messageFocusNode2.unfocus();
+                                      },
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Ubuntu',
+                                        color: Colors.grey,
+                                      ),
+                                      value: girlSelectedNatchathiram,
+                                      isExpanded: true,
+                                      items: girlNatchathiramDropdown(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          ///todo
+
+                                          ///todo
+                                          girlSelectedNatchathiram = value!;
+                                          var englishNatchathiramIndex =
+                                              tamilNatchathiram[
+                                                      englishSelectedGirlRasi]
+                                                  .indexOf(value);
+                                          print(englishNatchathiramIndex);
+
+                                          englishNatchathiramSelectedGirl =
+                                              a[englishSelectedGirlRasi]
+                                                  [englishNatchathiramIndex];
+
+                                          print(
+                                              englishNatchathiramSelectedGirl);
+
+                                          print(
+                                              "$girlSelectedNatchathiram  ☻☻☻girlSelectedNatchathiram");
+                                        });
                                       },
                                     ),
                                   ),
@@ -694,65 +850,68 @@ class _MarriageMatchesState extends State<MarriageMatches> {
                             height: 55,
                             margin: const EdgeInsets.only(top: 22),
                             child: ElevatedButton(
-                              onPressed: () async {
-                                print('uuuuuuuuuuuuuuuuuuuuuuuuuuu');
-                                print("${boyName}");
-                                print(boySelectedNum.toString());
-                                print(boyPada);
-                                print(girlName);
-                                print(girlValue);
-                                print(boyValue);
-                                print(girlPada);
-                                print(girlSelectedNum.toString());
-                                await createToken();
-
-                                print('uuuuuuuuuuuuuuuuuuuuuuuuuuu');
-                                Get.to(
-                                  MarriageMatchesDetails(
-                                    boyPada: boyPada,
-                                    natchathiramGirlValue: girlValue,
-                                    natchathiramBoyValue: boyValue,
-                                    girlPada: girlPada,
-                                    girlNatchathiram:
-                                        girlSelectedNum.toString(),
-                                    boyNatchathiram: boySelectedNum.toString(),
-                                    boyName: boyName,
-                                    girlName: girlName,
-                                  ),
-                                  transition: Transition.downToUp,
-                                  duration: Duration(milliseconds: 500),
-                                );
-
-                                // if (boyPada != "select" &&
-                                //         girlValue != "null" &&
-                                //         boyValue != "select" &&
-                                //         girlPada != "null" &&
-                                //         girlSelectedNum.toString() != -1 &&
-                                //         boySelectedNum.toString() != -1 ||
-                                //     boySelectedNum.toString() != null && boyName != null && girlName != "select") {
-                                //   Get.to(
-                                //     MarriageMatchesDetails(
-                                //       boyPada: boyPada,
-                                //       natchathiramGirlValue: girlValue,
-                                //       natchathiramBoyValue: boyValue,
-                                //       girlPada: girlPada,
-                                //       girlNatchathiram: girlSelectedNum.toString(),
-                                //       boyNatchathiram: boySelectedNum.toString(),
-                                //       boyName: boyName,
-                                //       girlName: girlName,
-                                //     ),
-                                //     transition: Transition.downToUp,
-                                //     duration: Duration(milliseconds: 500),
-                                //   );
-                                // } else {
-                                //   Get.snackbar(
-                                //     "Thirumana Porutham",
-                                //     "You missed some fields",
-                                //     icon: Icon(Icons.person, color: Colors.white),
-                                //     snackPosition: SnackPosition.TOP,
-                                //   );
-                                // }
-                              },
+                              onPressed: isOpen == true
+                                  ? () async {
+                                      setState(() {
+                                        isOpen = false;
+                                      });
+                                      print('//////////////////////');
+                                      print(
+                                          '$boySelectedRasi ///☻☻boySelectedRasi');
+                                      print(
+                                          '$boySelectedNatchathiram ///☻☻boySelectedNatchathiram');
+                                      print(
+                                          '$girlSelectedRasi  ///☻☻girlSelectedRasi');
+                                      print(
+                                          '$girlSelectedNatchathiram ///☻☻girlSelectedNatchathiram');
+                                      print('$girlName ///☻☻girlName');
+                                      print('$boyName  ///☻☻boyName');
+                                      print('//////////////////////');
+                                      if (boySelectedRasi != "select" &&
+                                          boySelectedNatchathiram != null &&
+                                          girlSelectedRasi != "select" &&
+                                          girlSelectedNatchathiram != null &&
+                                          boyName != null &&
+                                          girlName != null) {
+                                        print(_forumContreller
+                                            .jadhagamDetail.value);
+                                        loadingJadhagam = VxToast.showLoading(
+                                            context,
+                                            msg: "Loading");
+                                        await marriageData(
+                                            englishNatchathiramSelectedBoy,
+                                            englishNatchathiramSelectedGirl);
+                                        setState(() {
+                                          isOpen = true;
+                                        });
+                                        Get.to(
+                                          MarriageMatchesDetails(
+                                            boyRasi: boySelectedRasi,
+                                            natchathiramGirlValue:
+                                                girlSelectedNatchathiram,
+                                            natchathiramBoyValue:
+                                                boySelectedNatchathiram,
+                                            girlRasi: girlSelectedRasi,
+                                            boyName: boyName,
+                                            girlName: girlName,
+                                          ),
+                                          transition: Transition.downToUp,
+                                          duration: Duration(milliseconds: 500),
+                                        );
+                                      } else {
+                                        setState(() {
+                                          isOpen = true;
+                                        });
+                                        Get.snackbar(
+                                          "Hi ${_forumContreller.sessionUserInfo.value['name']} !",
+                                          "You missed some fields",
+                                          icon: Icon(Icons.person,
+                                              color: Colors.white),
+                                          snackPosition: SnackPosition.TOP,
+                                        );
+                                      }
+                                    }
+                                  : null,
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5)),

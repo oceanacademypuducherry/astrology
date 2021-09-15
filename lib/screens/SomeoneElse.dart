@@ -547,14 +547,36 @@ class _SomeoneElseScreenState extends State<SomeoneElseScreen> {
                   alignment: Alignment.center,
                   height: m,
                   width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    "Upload Their Details",
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                      fontSize: 19,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.chevron_left,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              Get.back();
+                            },
+                          ),
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 100),
+                        child: Text(
+                          "Upload Their Details",
+                          style: TextStyle(
+                            fontFamily: 'Ubuntu',
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            fontSize: 19,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Container(

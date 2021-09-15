@@ -74,12 +74,51 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    subscribeEnd();
 
     print('.......................');
     print(_forumContreller.userSession.value);
     print(_forumContreller.sessionUserInfo.value);
 
     print('.......................');
+  }
+
+  var checking;
+  subscribeEnd() async {
+    try {
+      var subscribeDatas = await _firestore.collection('subscribeList').get();
+      for (var i in subscribeDatas.docs) {
+        if (i['phoneNumber'] == _forumContreller.userSession.value) {
+          checking = i['time'].toDate().difference(DateTime.now()).inSeconds;
+          print(
+              '${checking} iiiiiiiiiiiiiiiiiiiiiiiiiiissssssuuuubbbbbbbbbbbbiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+          if (i["plan"] != "Life Time Subscription") {
+            if (checking < 0) {
+              _firestore
+                  .collection('newusers')
+                  .doc(_forumContreller.userDocumentId.value)
+                  .update({'subscribe': false});
+              print('added successfully');
+
+              var userDatas = await _firestore.collection('newusers').get();
+              for (var i in userDatas.docs) {
+                if (i['phoneNumber'] == _forumContreller.userSession.value) {
+                  print(
+                      '88888888888888888888888888888888888888888888888888888888888888888');
+                  print(i.data());
+
+                  Get.find<ForumContreller>().setUserInfo(i.data());
+                  Get.find<ForumContreller>()
+                      .setUserDocumentId(i.id.toString());
+                }
+              }
+            }
+          }
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override

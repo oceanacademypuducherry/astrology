@@ -31,8 +31,9 @@ class _QueryScreenState extends State<QueryScreen> {
             SliverAppBar(
               pinned: true,
               floating: false,
-              expandedHeight: 155.0,
+              expandedHeight: 170.0,
               flexibleSpace: FlexibleSpaceBar(
+                collapseMode: CollapseMode.parallax,
                 centerTitle: true,
                 background: Image.asset(
                   'images/query.jpg',

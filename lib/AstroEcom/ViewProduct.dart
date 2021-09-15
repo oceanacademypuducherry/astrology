@@ -171,7 +171,7 @@ class ViewProduct extends StatelessWidget {
                   if (_productController.checkingCart(
                       _productController.productView.value['docId'])) {
                     VxToast.show(context,
-                        msg: 'you already added this product in you cart');
+                        msg: 'you already added this product in your cart');
                   } else {
                     _productController.setCartProductList(
                         _productController.productView.value);

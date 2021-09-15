@@ -33,7 +33,7 @@ class _YoutubeScreenState extends State<YoutubeScreen> {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              "Free Videos",
+              "Free Video",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 15,

@@ -118,8 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   hour < 12
                       ? "Hi ${_forumContreller.sessionUserInfo['name'].toString().substring(0, 1).toUpperCase()}${_forumContreller.sessionUserInfo['name'].toString().substring(1, _forumContreller.sessionUserInfo['name'].length).toLowerCase()}, Good Morning !"
                       : hour < 17
-                          ? "Hi ${_forumContreller.sessionUserInfo['name']}, Good Afternoon !"
-                          : "Hi ${_forumContreller.sessionUserInfo['name']}, Good Evening !",
+                          ? "Hi ${_forumContreller.sessionUserInfo['name'].toString().substring(0, 1).toUpperCase()}${_forumContreller.sessionUserInfo['name'].toString().substring(1, _forumContreller.sessionUserInfo['name'].length).toLowerCase()}, Good Afternoon !"
+                          : "Hi ${_forumContreller.sessionUserInfo['name'].toString().substring(0, 1).toUpperCase()}${_forumContreller.sessionUserInfo['name'].toString().substring(1, _forumContreller.sessionUserInfo['name'].length).toLowerCase()}, Good Evening !",
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.8),
                     fontWeight: FontWeight.normal,
@@ -559,94 +559,98 @@ class _HomeScreenState extends State<HomeScreen> {
                           ).marginSymmetric(horizontal: 15, vertical: 30),
                           CarouselSlider(
                             items: [
-                              GestureDetector(
-                                onTap: () {
-                                  print(_forumContreller
-                                      .sessionUserInfo.value['subscribe']);
-                                  _forumContreller
-                                          .sessionUserInfo.value['subscribe']
-                                      ? Get.to(() => PaidVedios(),
-                                          // transition: Transition.cupertinoDialog,
-                                          fullscreenDialog: true,
-                                          curve: Curves.easeInToLinear,
-                                          duration: Duration(milliseconds: 600))
-                                      : Get.to(() => SubscribeVideoScreen(),
-                                          // transition: Transition.cupertinoDialog,
-                                          fullscreenDialog: true,
-                                          curve: Curves.easeInToLinear,
-                                          duration:
-                                              Duration(milliseconds: 600));
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.asset(
-                                          "images/paid video.png",
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
+                              Obx(
+                                () => GestureDetector(
+                                  onTap: () {
+                                    print(_forumContreller
+                                        .sessionUserInfo.value['subscribe']);
                                     _forumContreller
                                             .sessionUserInfo.value['subscribe']
-                                        ? Positioned(
-                                            left: 13,
-                                            top: 13,
-                                            child: Container(
-                                              // margin: EdgeInsets.symmetric(
-                                              //     vertical: 5.0,
-                                              //     horizontal: 5.0),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              padding: EdgeInsets.all(5.0),
-                                              height: 23,
-                                              // width: 40,
-                                              child: Text(
-                                                'UNLOCKED',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: Colors.blue.shade900,
-                                                  fontSize: 9,
-                                                  fontFamily: 'Ubuntu',
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : Positioned(
-                                            left: 13,
-                                            top: 13,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(40),
+                                        ? Get.to(() => PaidVedios(),
+                                            transition: Transition.topLevel,
+                                            curve: Curves.easeInToLinear,
+                                            duration:
+                                                Duration(milliseconds: 600))
+                                        : Get.to(() => SubscribeVideoScreen(),
+                                            transition: Transition.downToUp,
+                                            // fullscreenDialog: true,
+                                            curve: Curves.easeInToLinear,
+                                            duration:
+                                                Duration(milliseconds: 700));
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.asset(
+                                            "images/paid video.png",
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      _forumContreller.sessionUserInfo
+                                              .value['subscribe']
+                                          ? Positioned(
+                                              left: 13,
+                                              top: 13,
                                               child: Container(
+                                                // margin: EdgeInsets.symmetric(
+                                                //     vertical: 5.0,
+                                                //     horizontal: 5.0),
                                                 decoration: BoxDecoration(
-                                                  color: Colors.black
-                                                      .withOpacity(0.6),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                        offset: Offset(2, 2),
-                                                        blurRadius: 10,
-                                                        spreadRadius: 2,
-                                                        color: Colors.grey),
-                                                  ],
-                                                ),
-                                                padding: EdgeInsets.all(10),
-                                                child: Icon(
-                                                  Icons.lock,
                                                   color: Colors.white,
-                                                  size: 18,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                                padding: EdgeInsets.all(5.0),
+                                                height: 23,
+                                                // width: 40,
+                                                child: Text(
+                                                  'UNLOCKED',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: Colors.blue.shade900,
+                                                    fontSize: 9,
+                                                    fontFamily: 'Ubuntu',
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
-                                            )),
-                                  ],
+                                            )
+                                          : Positioned(
+                                              left: 13,
+                                              top: 13,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(40),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.black
+                                                        .withOpacity(0.6),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          offset: Offset(2, 2),
+                                                          blurRadius: 10,
+                                                          spreadRadius: 2,
+                                                          color: Colors.grey),
+                                                    ],
+                                                  ),
+                                                  padding: EdgeInsets.all(10),
+                                                  child: Icon(
+                                                    Icons.lock,
+                                                    color: Colors.white,
+                                                    size: 18,
+                                                  ),
+                                                ),
+                                              )),
+                                    ],
+                                  ),
                                 ),
                               ),
                               GestureDetector(
@@ -654,9 +658,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   print('ontap');
                                   Get.to(() => FreeVideos(),
                                       transition: Transition.topLevel,
-                                      // fullscreenDialog: tr
-                                      //
-                                      // ue,
                                       curve: Curves.easeInToLinear,
                                       duration: Duration(milliseconds: 600));
                                 },
@@ -704,7 +705,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             //Slider Container properties
                             options: CarouselOptions(
                               enableInfiniteScroll: false,
-
                               // height: 230.0,
                               enlargeCenterPage: true,
                               autoPlay: false,

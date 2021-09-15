@@ -46,7 +46,7 @@ class SupportPage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           child: Image.asset('images/border.png'),
                         ),
-                        "For Query/information".text.xl3.make(),
+                        "For Query/Information".text.xl3.make(),
                         Container(
                           child: SingleChildScrollView(
                             child: Column(
