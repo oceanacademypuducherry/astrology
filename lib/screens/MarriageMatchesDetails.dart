@@ -2,6 +2,7 @@
 
 import 'package:astrology_app/Forum/forumController.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:get/get.dart';
 
 ForumContreller _forumContreller = Get.find<ForumContreller>();
@@ -36,6 +37,7 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
     getCount();
     getmukiyaPorutham();
     print(';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;${_forumContreller.jadhagamDetail.value}');
@@ -76,7 +78,7 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 30),
+          margin: EdgeInsets.only(top: 10),
           width: MediaQuery.of(context).size.width,
           child: SingleChildScrollView(
             child: Column(children: [
@@ -130,7 +132,7 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            "Harichandiran",
+                            "S.Arichandran",
                             style: TextStyle(
                               color: Colors.black54,
                               fontWeight: FontWeight.w500,
@@ -157,7 +159,7 @@ class _MarriageMatchesDetailsState extends State<MarriageMatchesDetails> {
                             ),
                           ),
                           Text(
-                            "9876543210",
+                            "9842855294",
                             style: TextStyle(
                               color: Colors.black54,
                               fontWeight: FontWeight.w500,
