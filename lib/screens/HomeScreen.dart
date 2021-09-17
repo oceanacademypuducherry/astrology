@@ -111,10 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Text(
               "Makarajothi",
               style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 32,
-                  fontFamily: 'Berlin Sans FB'),
+                  color: Colors.white, fontWeight: FontWeight.normal, fontSize: 32, fontFamily: 'Berlin Sans FB'),
             ),
             floating: false,
             expandedHeight: 160,
@@ -190,8 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 15),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "Articles",
@@ -212,17 +208,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       },
                                       child: Text(
                                         'See all',
-                                        style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 15,
-                                            fontFamily: 'Ubuntu'),
+                                        style: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Ubuntu'),
                                       ))
                                 ],
                               ),
                             ),
                             StreamBuilder<QuerySnapshot>(
-                              stream:
-                                  _firestore.collection('articles').snapshots(),
+                              stream: _firestore.collection('articles').snapshots(),
                               // ignore: missing_return
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
@@ -230,8 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 } else {
                                   final articles = snapshot.data!.docs;
                                   _forumContreller.setArticleData(articles);
-                                  print(
-                                      '-----------------------------------------');
+                                  print('-----------------------------------------');
                                   print(articles[0]['articleName']);
                                   return Container(
                                     padding: EdgeInsets.symmetric(vertical: 10),
@@ -246,78 +237,42 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       flex: 4,
                                                       child: Container(
                                                         width: 500,
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                vertical: 4,
-                                                                horizontal: 4),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                color: Colors
-                                                                    .white,
-                                                                boxShadow: [
-                                                              BoxShadow(
-                                                                  color: Colors
-                                                                      .black
-                                                                      .withOpacity(
-                                                                          0.1),
-                                                                  blurRadius: 5)
-                                                            ]),
-                                                        child:
-                                                            CachedNetworkImage(
-                                                          imageUrl: article[
-                                                              'articleImage'],
-                                                          placeholder: (context,
-                                                                  url) =>
-                                                              Center(
-                                                                  child:
-                                                                      CircularProgressIndicator()),
+                                                        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                                                        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                                          BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 5)
+                                                        ]),
+                                                        child: CachedNetworkImage(
+                                                          imageUrl: article['articleImage'],
+                                                          placeholder: (context, url) =>
+                                                              Center(child: CircularProgressIndicator()),
                                                           fit: BoxFit.cover,
                                                         ).cornerRadius(10),
                                                       ),
                                                     ),
                                                     Expanded(
                                                       child: Container(
-                                                        alignment:
-                                                            Alignment.center,
+                                                        alignment: Alignment.center,
                                                         // margin: EdgeInsets.symmetric(horizontal: 10),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 4),
+                                                        padding: EdgeInsets.symmetric(horizontal: 4),
                                                         width: double.infinity,
 
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                color: Colors
-                                                                    .white,
-                                                                boxShadow: [
-                                                              BoxShadow(
-                                                                  color: Colors
-                                                                      .black
-                                                                      .withOpacity(
-                                                                          0.1),
-                                                                  blurRadius:
-                                                                      10)
-                                                            ]),
+                                                        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+                                                          BoxShadow(
+                                                              color: Colors.black.withOpacity(0.1), blurRadius: 10)
+                                                        ]),
                                                         child: Text(
-                                                          article[
-                                                              'articleName'],
+                                                          article['articleName'],
                                                           maxLines: 2,
                                                           style: TextStyle(
-                                                            color: Colors
-                                                                .grey[600],
+                                                            color: Colors.grey[600],
                                                             // height: 2,
 
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
+                                                            fontWeight: FontWeight.normal,
                                                             fontSize: 15,
-                                                            fontFamily:
-                                                                'Ubuntu',
+                                                            fontFamily: 'Ubuntu',
                                                           ),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
+                                                          textAlign: TextAlign.center,
+                                                          overflow: TextOverflow.ellipsis,
                                                         ),
                                                       ),
                                                     )
@@ -325,8 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ),
                                               ).cornerRadius(10),
                                               onTap: () {
-                                                _articleController.setPostId(
-                                                    article['postId']);
+                                                _articleController.setPostId(article['postId']);
                                                 Get.to(() => ArticleView(),
                                                     // ArticleDescription(
                                                     // description:
@@ -335,12 +289,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     //     'articleName'],
                                                     // articlePostId:
                                                     //     article['postId']),
-                                                    transition:
-                                                        Transition.rightToLeft,
-                                                    curve:
-                                                        Curves.easeInToLinear,
-                                                    duration: Duration(
-                                                        milliseconds: 400));
+                                                    transition: Transition.rightToLeft,
+                                                    curve: Curves.easeInToLinear,
+                                                    duration: Duration(milliseconds: 400));
                                               }),
                                       ],
                                       //Slider Container properties
@@ -351,8 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         autoPlay: true,
                                         aspectRatio: 17 / 15,
                                         autoPlayCurve: Curves.fastOutSlowIn,
-                                        autoPlayAnimationDuration:
-                                            Duration(milliseconds: 800),
+                                        autoPlayAnimationDuration: Duration(milliseconds: 800),
                                         viewportFraction: 0.7,
                                       ),
                                     ),
@@ -416,8 +366,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           () => Column(
                             children: [
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "New Products",
@@ -438,10 +387,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       },
                                       child: Text(
                                         'See All',
-                                        style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 15,
-                                            fontFamily: 'Ubuntu'),
+                                        style: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Ubuntu'),
                                       ))
                                 ],
                               ).marginSymmetric(horizontal: 15, vertical: 25),
@@ -453,8 +399,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   autoPlay: true,
                                   aspectRatio: 17 / 15,
                                   autoPlayCurve: Curves.fastOutSlowIn,
-                                  autoPlayAnimationDuration:
-                                      Duration(milliseconds: 800),
+                                  autoPlayAnimationDuration: Duration(milliseconds: 800),
                                   viewportFraction: 0.7,
                                 ),
                                 // height: 400,
@@ -466,8 +411,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 // autoPlayAnimationDuration:
                                 //     Duration(milliseconds: 700),
                                 items: [
-                                  for (var i
-                                      in _productController.swiperList.value)
+                                  for (var i in _productController.swiperList.value)
                                     ProductSwiperCard(
                                       title: i['productName'],
                                       price: i['productPrice'],
@@ -475,26 +419,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                       rating: i['productRating'],
                                       addTocart: () async {
                                         // ignore: invalid_use_of_protected_member
-                                        if (_productController
-                                            .checkingCart(i['docId'])) {
-                                          VxToast.show(context,
-                                              msg:
-                                                  'you already added this product in you cart');
+                                        if (_productController.checkingCart(i['docId'])) {
+                                          VxToast.show(context, msg: 'you already added this product in you cart');
                                         } else {
-                                          _productController
-                                              .setCartProductList(i);
-                                          VxToast.show(context,
-                                              msg:
-                                                  'This product added in your cart');
+                                          _productController.setCartProductList(i);
+                                          VxToast.show(context, msg: 'This product added in your cart');
                                         }
                                       },
                                       productView: () {
                                         _productController.setProductView(i);
                                         print(i);
                                         Get.to(ViewProduct(),
-                                            transition: Transition.cupertino,
-                                            duration:
-                                                Duration(milliseconds: 500));
+                                            transition: Transition.cupertino, duration: Duration(milliseconds: 500));
                                       },
                                     ).marginSymmetric(horizontal: 10),
                                 ],
@@ -532,11 +468,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 170,
                               decoration: BoxDecoration(
                                 boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(2, 2),
-                                      blurRadius: 10,
-                                      spreadRadius: 2,
-                                      color: Colors.grey),
+                                  BoxShadow(offset: Offset(2, 2), blurRadius: 10, spreadRadius: 2, color: Colors.grey),
                                 ],
                                 image: DecorationImage(
                                   image: AssetImage("images/questions.jpg"),
@@ -574,40 +506,33 @@ class _HomeScreenState extends State<HomeScreen> {
                               Obx(
                                 () => GestureDetector(
                                   onTap: () {
-                                    print(_forumContreller
-                                        .sessionUserInfo.value['subscribe']);
-                                    _forumContreller
-                                            .sessionUserInfo.value['subscribe']
+                                    print(_forumContreller.sessionUserInfo.value['subscribe']);
+                                    _forumContreller.sessionUserInfo.value['subscribe']
                                         ? Get.to(() => PaidVedios(),
                                             transition: Transition.topLevel,
                                             curve: Curves.easeInToLinear,
-                                            duration:
-                                                Duration(milliseconds: 600))
+                                            duration: Duration(milliseconds: 600))
                                         : Get.to(() => SubscribeVideoScreen(),
                                             transition: Transition.downToUp,
                                             // fullscreenDialog: true,
                                             curve: Curves.easeInToLinear,
-                                            duration:
-                                                Duration(milliseconds: 700));
+                                            duration: Duration(milliseconds: 700));
                                   },
                                   child: Stack(
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(10),
                                         ),
                                         child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(10),
                                           child: Image.asset(
                                             "images/paid video.png",
                                             fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
-                                      _forumContreller.sessionUserInfo
-                                              .value['subscribe']
+                                      _forumContreller.sessionUserInfo.value['subscribe']
                                           ? Positioned(
                                               left: 13,
                                               top: 13,
@@ -617,8 +542,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 //     horizontal: 5.0),
                                                 decoration: BoxDecoration(
                                                   color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
+                                                  borderRadius: BorderRadius.circular(10),
                                                 ),
                                                 padding: EdgeInsets.all(5.0),
                                                 height: 23,
@@ -639,12 +563,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                               left: 13,
                                               top: 13,
                                               child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(40),
+                                                borderRadius: BorderRadius.circular(40),
                                                 child: Container(
                                                   decoration: BoxDecoration(
-                                                    color: Colors.black
-                                                        .withOpacity(0.6),
+                                                    color: Colors.black.withOpacity(0.6),
                                                     boxShadow: [
                                                       BoxShadow(
                                                           offset: Offset(2, 2),
@@ -692,8 +614,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         left: 13,
                                         top: 13,
                                         child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(10),
                                           child: Container(
                                             alignment: Alignment.center,
                                             color: Colors.white,
@@ -722,8 +643,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               autoPlay: false,
                               aspectRatio: 16 / 8,
                               autoPlayCurve: Curves.fastOutSlowIn,
-                              autoPlayAnimationDuration:
-                                  Duration(milliseconds: 800),
+                              autoPlayAnimationDuration: Duration(milliseconds: 800),
                               viewportFraction: 0.8,
                             ),
                           ),
@@ -734,7 +654,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         height: 210,
                         width: double.infinity,
-
                         // height: 200,
                         decoration: BoxDecoration(
                           image: DecorationImage(
@@ -750,36 +669,41 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Container(
                           color: Color(0xff206DF9),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          child: Column(
                             children: [
-                              IconButton(
-                                onPressed: () {
-                                  _launchURL("https://www.facebook.com/");
-                                },
-                                icon: Icon(
-                                  FontAwesomeIcons.facebookSquare,
-                                  color: Colors.white,
-                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      _launchURL("https://www.facebook.com/");
+                                    },
+                                    icon: Icon(
+                                      FontAwesomeIcons.facebookSquare,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      _launchURL("https://www.youtube.com/");
+                                    },
+                                    icon: Icon(
+                                      FontAwesomeIcons.youtube,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      _launchURL("https://makarajothi.com/");
+                                    },
+                                    icon: Icon(
+                                      FontAwesomeIcons.globe,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              IconButton(
-                                onPressed: () {
-                                  _launchURL("https://www.youtube.com/");
-                                },
-                                icon: Icon(
-                                  FontAwesomeIcons.youtube,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  _launchURL("https://makarajothi.com/");
-                                },
-                                icon: Icon(
-                                  FontAwesomeIcons.globe,
-                                  color: Colors.white,
-                                ),
-                              ),
+                              SizedBox(height: 20),
                             ],
                           ))
                     ],
